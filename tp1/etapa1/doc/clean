@@ -11,4 +11,10 @@ rm -f main.pdf
 # Borro los archivos temporales
 borrar
 
+cd arquitectura
+borrar
+cd ../descripcion_agente
+borrar
+
+cd ..
 ./makediffs clean
