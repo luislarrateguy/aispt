@@ -20,6 +20,7 @@ cd ../..
 mkdir $TEMP
 cp etapa1/arquitectura.png $TEMP
 cp etapa1/diagramaDeClases.png $TEMP
+cp etapa1/diagramaSecuencias.png $TEMP
 cp etapa1/doc/main.pdf $TEMP/documentacion.pdf
 
 cd $TEMP
