@@ -1,0 +1,3 @@
+#!/bin/bash
+tar -zcf ./grupoSieteEntrega1.tar.gz  etapa1/doc/arquitectura.png etapa1/doc/diagramaDeClases.png etapa1/doc/main.pdf
+
