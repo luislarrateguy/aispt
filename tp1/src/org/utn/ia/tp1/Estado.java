@@ -5,7 +5,7 @@ public class Estado {
 	private int energia;
 	private float energiaPromedio;
 	private VisionAmbiente visionAmb;
-	private Estado() {
+	public Estado() {
 		this.energia = 0;
 		this.energiaPromedio =  (float) 0.00;
 		this.visionAmb = new VisionAmbiente();
