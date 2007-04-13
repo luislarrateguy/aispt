@@ -56,6 +56,7 @@ public class Simulador {
 		// TODO Agregar la condición de fin de simulacion
 		System.out.println("SIM: Chequeando si termina...");
 		this.cont--;
+		// return pacman.cumplioObjetivo();
 		return (this.cont == 0);
 	}
 	public static Simulador GetInstancia() {

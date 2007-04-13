@@ -1,27 +1,48 @@
 package tpsia.tp1;
-
+import java.util.*;
 
 public class Agente {
 
 	private Estado est;
+	private IBusqueda bus;
+	private ArrayList<IAccion> acciones;
+	private IProblema p;
+	private Objetivo o;
 	
 	public Agente() {
-		est = new Estado();
+		this.est = new Estado();
+		this.bus = new BusquedaCostoUniforme();
 	}
 
 	public IAccion actuar(Percepcion p) {
-		// TODO actualizar visión del ambiente con la nueva percepcion
-		System.out.println("PACMAN: actualizar visión del ambiente con la nueva percepcion");
-		// TODO formular objetivo
-		System.out.println("PACMAN: formular objetivo");
-		// TODO buscar accion
-		System.out.println("PACMAN: buscar accion");
-		IAccion a = AvanzarArriba.getInstancia(); // Obtenida de búsqueda
-		// TODO ejecutar accion
-		System.out.println("PACMAN: ejecutar accion");
+		this.actualizarEstado(p);
+		this.formularObjetivo(); //hace falta?
+		this.formularProblema(); //hace falta?
+		this.acciones = bus.buscarSolucion(this.p);
+		IAccion a = this.acciones.get(0);
 		a.ejecutar(est.getVAmbiente());
-		// TODO actualizar estado
+		/* TODO A esta altura del código podríamos guardar cosas 
+		 * como	última acción ejecutada y demás. */
 		return a;
 	}
+
+	private void actualizarEstado(Percepcion p2) {
+		// TODO actualizar visión del ambiente con la nueva percepcion
+		System.out.println("PACMAN: actualizar visión del ambiente con la nueva percepcion");
+		
+	}
+
+	private void formularObjetivo() {
+		// TODO formular objetivo
+		System.out.println("PACMAN: formular objetivo");
+		this.o = new Objetivo(this.est);
+	}
+
+	private void formularProblema() {
+		// TODO formular problema;
+		System.out.println("PACMAN: formular problema");
+		this.p = new Problema(this.est,this.o);
+	}
+
 
 }
