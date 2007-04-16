@@ -16,3 +16,20 @@ Sino
 
 retornar FRACASO
 \end{verbatim}
+propongo escribirlo de esta forma
+\begin{verbatim}
+energiaSuficiente = energia > 0
+
+Si energiaSuficiente entonces
+  Si (No visionAmbiente.HayAlimentos)
+    AND (No visionAmbiente.HayEnemigos)
+     retornar EXITO
+  Sino
+     retornar FRACASO
+
+Sino
+  retornar EXITO
+
+retornar FRACASO
+\end{verbatim}
+
