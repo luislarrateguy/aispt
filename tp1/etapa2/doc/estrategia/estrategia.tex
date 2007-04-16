@@ -1,36 +1,10 @@
 \section{Estrategia}
 
 Hemos escogido la estrategia de costo uniforme para nuestro agente. Un nodo se
-descarta si se pronostica la muerte del agente. Si todos los nodos implican su
+descarta si se pronostica la muerte del Pac-Man. Si todos los nodos implican su
 muerte, entonces el agente finaliza.
 
 La función de costo prioriza comer primero los alimentos (les daría un mayor
-valor a los caminos que realizan esta accion).
+valor a los caminos que realizan esta accion). También se encargaría de premiar
+a aquellos caminos que hacen que el agente conozca más el tablero.
 
-\begin{verbatim}
-funcionDeCosto (Accion accion) {
-  accion.costo = accion.padre.costo
-
-  Si accion = COMER
-    accion.costo += 0
-
-  Si accion = PELEAR
-    Si EnergiaSuficiente
-      accion.costo += 0.10
-    Si EnergiaInsuficiente
-      accion.invalida = true
-
-  /* Esta acción no se bien como tratarla. Esto es una prueba nomas. */
-  Si accion = MOVER
-    Si visionAmbiente.ConocimientoTotal
-      a = NuevasCeldasDescubiertas(posicionLuegoDeMover)
-      b = DistanciaAlimento(posicionLuegoDeMover)
-
-      accion.costo += (0.10 * b) / d
-}
-\end{verbatim}
-
-Como se puede ver, se prioriza el comer los alimentos, y se marca una acción
-como inválida si esta compromete seriamente la supervivencia del agente.
-
-\FIXME{Fijate Nacho que la acción MOVER no se trata bien. Después la discutimos.}
