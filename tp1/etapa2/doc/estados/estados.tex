@@ -1,0 +1,28 @@
+\section{Estado del agente}
+
+\subsection{Representación del estado}
+\incluirimagen{scale=0.7}{estados/diagramaClases.png}
+
+\subsection{Estado inicial}
+
+\begin{itemize}
+\item Ubicado en una celda aleatoria del tablero.
+\item Energía inicial: 50.
+\item Enemigos en celdas adyacentes: aleatorio.
+\item Alimento en celdas adyacentes: aleatorio.
+\item No percibe qué hay en la celda en la que inicialmente está parado.
+\end{itemize}
+
+\subsection{Estado final}
+
+\begin{itemize}
+\item Ubicado en una celda aleatoria del tablero.
+\item Energía mayor a 0.
+\item Todo el tablero es conocido.
+\item Si tiene energía suficiente para pelear (según el promedio de pérdida en
+luchas), no hay enemigos en el tablero. En caso contrario (al priorizar su
+supervivencia) podrían quedar algunos de ellos en el mismo.
+\item Si tiene energía suficiente para moverse (según el promedio de pérdida
+por movimiento), no hay alimentos en el tablero. En caso contrario (al priorizar
+su supervivencia) podrían quedar alimentos presentes.
+\end{itemize}

@@ -11,4 +11,16 @@ rm -f main.pdf
 # Borro los archivos temporales
 borrar
 
+cd prueba_meta
+borrar
+cd ../estados
+borrar
+cd ../operadores
+borrar
+cd ../objetivos
+borrar
+cd ../estrategia
+borrar
+
+cd ..
 ./makediffs clean
