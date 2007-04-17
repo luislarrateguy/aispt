@@ -2,6 +2,9 @@ package tpsia.tp1;
 
 import java.util.Vector;
 
+import tpsia.tp1.acciones.IAccion;
+import tpsia.tp1.agente.Agente;
+
 public class Simulador {
 	
 	private static Simulador instancia = null;
@@ -17,7 +20,7 @@ public class Simulador {
 		this.cont = 5;
 	}
 	public void comenzarSimulacion() {
-	System.out.println("SIM: Iniciando simulacion...");
+	System.out.println("SIM: Iniciando simulaci贸n...");
 		this.inicializarSimulacion();
 
 		IAccion a;
@@ -34,11 +37,11 @@ public class Simulador {
 			// avisar al calculador
 		System.out.println("SIM: Calculando energia pacman");
 			enePacman = calc.calcularEnergiaPacman(a.getTipoAccion());
-		System.out.print("SIM: Calculando desempe駉 al efectuar ");
+		System.out.print("SIM: Calculando desempe帽o al efectuar ");
 		System.out.println(a.getTipoAccion());
 			calc.calcularPerformance(a.getTipoAccion());
 			
-			// ejecutar la acci髇 y actualizar el ambiente
+			// ejecutar la acci贸n y actualizar el ambiente
 		System.out.println("SIM: Ejecutando accion en ambiente");
 			a.ejecutar(amb);
 		System.out.println("SIM: Actualizando ambiente");
@@ -53,7 +56,7 @@ public class Simulador {
 		//TODO Inicializar el ambiente del simulador
 	}
 	private boolean finSimulacion() {
-		// TODO Agregar la condici髇 de fin de simulacion
+		// TODO Agregar la condici贸n de fin de simulacion
 		System.out.println("SIM: Chequeando si termina...");
 		this.cont--;
 		// return pacman.cumplioObjetivo();
@@ -66,8 +69,8 @@ public class Simulador {
 		return instancia;
 	}
 	public void mostrarPerformance() {
-		System.out.println("SIM: Mostrando desempe駉 del PACMAN");
+		System.out.println("SIM: Mostrando desempe帽o del PACMAN");
 		Float f = calc.getPerformance();
-		// TODO Agregar c骴igo para modificar la instancia
+		// TODO Agregar c贸digo para mostrar
 	}
 }

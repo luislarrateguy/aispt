@@ -1,4 +1,8 @@
-package tpsia.tp1;
+package tpsia.tp1.acciones;
+
+import tpsia.tp1.IAmbiente;
+import tpsia.tp1.OffsetX;
+import tpsia.tp1.OffsetY;
 
 
 public class AvanzarArriba extends Avanzar {

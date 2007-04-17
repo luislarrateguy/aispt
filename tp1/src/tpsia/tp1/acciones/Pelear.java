@@ -1,12 +1,14 @@
-package tpsia.tp1;
+package tpsia.tp1.acciones;
+
+import tpsia.tp1.IAmbiente;
 
 
 /*
  * Singleton Notice
  */
-public class Comer implements IAccion {
+public class Pelear implements IAccion {
 
-	private static Comer instancia;
+	private static Pelear instancia;
 
 	public void ejecutar(IAmbiente amb) {
 		//TODO Modificar el ambiente de acuerdo a la
@@ -14,12 +16,12 @@ public class Comer implements IAccion {
 	}
 
 	public String getTipoAccion() {
-		return "comer";
+		return "pelear";
 	}
 
 	static public IAccion getInstancia() {
 		if (instancia == null) {
-			instancia = new Comer();
+			instancia = new Pelear();
 		}
 		return instancia;
 	}
