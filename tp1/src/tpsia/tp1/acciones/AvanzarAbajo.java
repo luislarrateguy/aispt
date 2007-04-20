@@ -22,4 +22,8 @@ public class AvanzarAbajo extends Avanzar {
 		}
 		return instancia;
 	}
+	@Override
+	public String getTipoAccion() {
+		return "abajo";
+	}
 }

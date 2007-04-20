@@ -2,6 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/home/nacho/documentos/UTN/TPIA/tp1/lib/calculador.jar"/>
+	<classpathentry kind="lib" path="lib/calculador.jar"/>
 	<classpathentry kind="output" path="src"/>
 </classpath>

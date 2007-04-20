@@ -22,4 +22,9 @@ public class AvanzarIzquierda extends Avanzar {
 		}
 		return instancia;
 	}
+
+	@Override
+	public String getTipoAccion() {
+		return "izquierda";
+	}
 }

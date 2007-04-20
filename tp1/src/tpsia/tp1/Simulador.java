@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import tpsia.tp1.acciones.IAccion;
 import tpsia.tp1.agente.Agente;
+import calculador.*;
 
 public class Simulador {
 	
@@ -36,10 +37,10 @@ public class Simulador {
 			
 			// avisar al calculador
 		System.out.println("SIM: Calculando energia pacman");
-			enePacman = calc.calcularEnergiaPacman(a.getTipoAccion());
+			enePacman = calc.calcularEnergiaPacMan(a.getTipoAccion());
 		System.out.print("SIM: Calculando desempeño al efectuar ");
 		System.out.println(a.getTipoAccion());
-			calc.calcularPerformance(a.getTipoAccion());
+		// No se usa más calc.calcularPerformance(a.getTipoAccion());
 			
 			// ejecutar la acción y actualizar el ambiente
 		System.out.println("SIM: Ejecutando accion en ambiente");
@@ -52,7 +53,8 @@ public class Simulador {
 	private void inicializarSimulacion() {
 		pacman = new Agente();
 		Vector pene = calc.inicializarEnemigo();
-		Vector ppac = calc.inicializarPacman();
+		Pair ppac 	= calc.getPosicionInicial();
+		Vector pcom = calc.inicializarComida();
 		//TODO Inicializar el ambiente del simulador
 	}
 	private boolean finSimulacion() {
@@ -70,7 +72,7 @@ public class Simulador {
 	}
 	public void mostrarPerformance() {
 		System.out.println("SIM: Mostrando desempeño del PACMAN");
-		Float f = calc.getPerformance();
+		int f = calc.getPerformance();
 		// TODO Agregar código para mostrar
 	}
 }
