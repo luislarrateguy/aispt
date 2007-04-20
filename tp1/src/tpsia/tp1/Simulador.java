@@ -38,10 +38,7 @@ public class Simulador {
 			// avisar al calculador
 		System.out.println("SIM: Calculando energia pacman");
 			enePacman = calc.calcularEnergiaPacMan(a.getTipoAccion());
-		System.out.print("SIM: Calculando desempeño al efectuar ");
-		System.out.println(a.getTipoAccion());
-		// No se usa más calc.calcularPerformance(a.getTipoAccion());
-			
+
 			// ejecutar la acción y actualizar el ambiente
 		System.out.println("SIM: Ejecutando accion en ambiente");
 			a.ejecutar(amb);
@@ -57,6 +54,7 @@ public class Simulador {
 		Vector pcom = calc.inicializarComida();
 		//TODO Inicializar el ambiente del simulador
 	}
+	
 	private boolean finSimulacion() {
 		// TODO Agregar la condición de fin de simulacion
 		System.out.println("SIM: Chequeando si termina...");
