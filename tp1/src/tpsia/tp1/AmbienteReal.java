@@ -12,7 +12,7 @@ public class AmbienteReal implements IAmbiente {
 
 	public int energiaPacmanActual() {
 		// TODO Auto-generated method stub
-		return 0;
+		return energiaPacman;
 	}
 
 	public int getPosXIniPacman() {
