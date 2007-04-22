@@ -1,3 +1,24 @@
+/*
+
+ Copyright (c) 2007 by Luis I. Larrateguy y Milton Pividori
+ All Rights Reserved
+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+ */
+
 package tpsia.tp1;
 
 import java.util.Vector;
@@ -20,56 +41,59 @@ public class Simulador {
 		this.amb = new AmbienteReal();
 		this.cont = 5;
 	}
+	
 	public void comenzarSimulacion() {
-	System.out.println("SIM: Iniciando simulación...");
+		Logging.logDebug("SIM: Iniciando simulación...");
 		this.inicializarSimulacion();
 
 		IAccion a;
 		Percepcion p;
 		int enePacman;
 		while (!this.finSimulacion()) {
-		System.out.println("SIM: Armando percepcion...");
+			Logging.logDebug("SIM: Armando percepcion...");
 			p = new Percepcion(amb.getCeldasAdyacentes(),
 					amb.getEnergiaIniPacman(), amb.getPosXIniPacman(),
 					amb.getPosYIniPacman());
-		System.out.println("SIM: Enviando percepcion a Pacman");
+			Logging.logDebug("SIM: Enviando percepcion a Pacman");
 			a = pacman.actuar(p);
 			
 			// avisar al calculador
-		System.out.println("SIM: Calculando energia pacman");
+			Logging.logDebug("SIM: Calculando energia pacman");
 			enePacman = calc.calcularEnergiaPacMan(a.getTipoAccion());
 
 			// ejecutar la acción y actualizar el ambiente
-		System.out.println("SIM: Ejecutando accion en ambiente");
+			Logging.logDebug("SIM: Ejecutando accion en ambiente");
 			a.ejecutar(amb);
-		System.out.println("SIM: Actualizando ambiente");
+			Logging.logDebug("SIM: Actualizando ambiente");
 			amb.actualizar(enePacman);
 		}
 	}
 
 	private void inicializarSimulacion() {
 		pacman = new Agente();
-		Vector pene = calc.inicializarEnemigo();
-		Pair ppac 	= calc.getPosicionInicial();
-		Vector pcom = calc.inicializarComida();
+		Vector posicionesEnemigos = calc.inicializarEnemigo();
+		Pair posicionPacMan 	= calc.getPosicionInicial();
+		Vector posicionesComida = calc.inicializarComida();
 		//TODO Inicializar el ambiente del simulador
 	}
 	
 	private boolean finSimulacion() {
 		// TODO Agregar la condición de fin de simulacion
-		System.out.println("SIM: Chequeando si termina...");
+		Logging.logDebug("SIM: Chequeando si termina...");
 		this.cont--;
 		// return pacman.cumplioObjetivo();
 		return (this.cont == 0);
 	}
+	
 	public static Simulador GetInstancia() {
 		if (instancia == null) {
 			instancia = new Simulador();
 		}
 		return instancia;
 	}
+	
 	public void mostrarPerformance() {
-		System.out.println("SIM: Mostrando desempeño del PACMAN");
+		Logging.logDebug("SIM: Mostrando desempeño del PACMAN");
 		int f = calc.getPerformance();
 		// TODO Agregar código para mostrar
 	}

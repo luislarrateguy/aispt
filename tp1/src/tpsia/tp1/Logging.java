@@ -19,8 +19,28 @@
 
  */
 
-package tpsia.tp1.agente;
+package tpsia.tp1;
 
-public interface IObjetivo {
-
+public class Logging {
+	private static boolean modoLoggingActivado = true;
+	
+	public static void logDebug(String mensaje) {
+		if (!modoLoggingActivado) return;
+		
+		System.out.println("DEBUG: " + mensaje);
+	}
+	
+	public static void logError(String mensaje) {
+		/* Los errores se loguean siempre, no importa si el modo
+		 * logging está activado o no. */
+		System.err.println("ERROR: " + mensaje);
+	}
+	
+	public static void activarModoLogging() {
+		modoLoggingActivado = true;
+	}
+	
+	public static void desactivarModoLogging() {
+		modoLoggingActivado = false;
+	}
 }
