@@ -23,10 +23,10 @@ package tpsia.tp1.busqueda;
 
 import java.util.ArrayList;
 
-import tpsia.tp1.Estado;
 import tpsia.tp1.Logging;
 import tpsia.tp1.acciones.AvanzarDerecha;
 import tpsia.tp1.acciones.IAccion;
+import tpsia.tp1.agente.Estado;
 
 public class BusquedaCostoUniforme implements IBusqueda {
 

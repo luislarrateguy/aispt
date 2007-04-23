@@ -20,7 +20,11 @@
  */
 
 package tpsia.tp1;
-
+/**
+ * 
+ * @author nacho
+ * @deprecated No la vamos a usar
+ */
 public class Matriz {
 
 }

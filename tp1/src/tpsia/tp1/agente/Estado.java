@@ -19,10 +19,19 @@
 
  */
 
-package tpsia.tp1;
+package tpsia.tp1.agente;
 
-public class Estado {
+import java.io.Serializable;
 
+import tpsia.tp1.IAmbiente;
+import tpsia.tp1.OffsetX;
+import tpsia.tp1.OffsetY;
+
+public class Estado implements IAmbiente {
+
+	/**
+	 * 
+	 */
 	private int energia;
 	private float energiaPromedio;
 	private VisionAmbiente visionAmb;
@@ -31,8 +40,9 @@ public class Estado {
 		this.energiaPromedio =  (float) 0.00;
 		this.visionAmb = new VisionAmbiente();
 	}
-	public IAmbiente getVAmbiente() {
+	public void moverPacman(OffsetX oX, OffsetY oY) {
 		// TODO Auto-generated method stub
-		return visionAmb;
+		
 	}
+	
 }

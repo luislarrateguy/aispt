@@ -21,8 +21,12 @@
 
 package tpsia.tp1.agente;
 
-import tpsia.tp1.Estado;
-
+/**
+ * 
+ * @author nacho
+ * @deprecated Demasiado complicado. A Eliminar en proximos
+ * COMMITs
+ */
 public class Objetivo implements IObjetivo {
 	public Objetivo(Estado e) {
 

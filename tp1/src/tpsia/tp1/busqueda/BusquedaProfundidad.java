@@ -23,8 +23,8 @@ package tpsia.tp1.busqueda;
 
 import java.util.ArrayList;
 
-import tpsia.tp1.Estado;
 import tpsia.tp1.acciones.IAccion;
+import tpsia.tp1.agente.Estado;
 
 public class BusquedaProfundidad implements IBusqueda {
 

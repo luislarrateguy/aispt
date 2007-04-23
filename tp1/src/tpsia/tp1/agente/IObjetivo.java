@@ -21,6 +21,11 @@
 
 package tpsia.tp1.agente;
 
+/**
+ * @author nacho
+ * @deprecated Demasiado complicado. A Eliminar en proximos
+ * COMMITs
+ */
 public interface IObjetivo {
 
 }

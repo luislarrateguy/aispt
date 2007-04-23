@@ -22,8 +22,10 @@
 package tpsia.tp1.agente;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
-import tpsia.tp1.Estado;
+import calculador.Pair;
+
 import tpsia.tp1.Logging;
 import tpsia.tp1.Percepcion;
 import tpsia.tp1.acciones.IAccion;
@@ -46,7 +48,7 @@ public class Agente {
 		this.actualizarEstado(p);
 		this.acciones = bus.buscarSolucion(this.est);
 		IAccion a = this.acciones.get(0);
-		a.ejecutar(est.getVAmbiente());
+		a.ejecutar(this.est);
 		/* TODO A esta altura del código podríamos guardar cosas 
 		 * como	última acción ejecutada y demás. */
 		return a;
@@ -55,12 +57,16 @@ public class Agente {
 	private void actualizarEstado(Percepcion p2) {
 		// TODO actualizar visión del ambiente con la nueva percepcion
 		Logging.logDebug("PACMAN: actualizar visión del ambiente con la nueva percepcion");
-		
 	}
 
 	private void formularObjetivo() {
 		// TODO formular objetivo
 		Logging.logDebug("PACMAN: formular objetivo");
 		this.o = new Objetivo(this.est);
+	}
+
+	public void inicializar(Vector pene, Vector pcom, Pair ppac) {
+		//est.getVAmbiente().
+		
 	}
 }
