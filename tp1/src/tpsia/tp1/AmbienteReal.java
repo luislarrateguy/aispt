@@ -62,4 +62,14 @@ public class AmbienteReal implements IAmbiente {
 		oY.valor();
 	}
 
+	public void comer() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void pelear() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -65,4 +65,12 @@ public class VisionAmbiente implements IAmbiente {
 		}
 		return tab;
 	}
+	public void comer() {
+		// TODO Auto-generated method stub
+		
+	}
+	public void pelear() {
+		// TODO Auto-generated method stub
+		
+	}
 }
