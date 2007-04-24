@@ -50,10 +50,8 @@ public class Simulador {
 		Percepcion p;
 		int enePacman;
 		while (!this.finSimulacion()) {
-			Logging.logDebug("SIM: Armando percepcion...");
 			p = new Percepcion(amb.getCeldasAdyacentes(),
-					amb.getEnergiaIniPacman(), amb.getPosXIniPacman(),
-					amb.getPosYIniPacman());
+					amb.energiaPacmanActual(), amb.getPosIniPacman());
 			Logging.logDebug("SIM: Enviando percepcion a Pacman");
 			a = pacman.actuar(p);
 			
@@ -74,7 +72,12 @@ public class Simulador {
 		Vector posicionesEnemigos = calc.inicializarEnemigo();
 		Pair posicionPacMan 	= calc.getPosicionInicial();
 		Vector posicionesComida = calc.inicializarComida();
-		//TODO Inicializar el ambiente del simulador
+		int enePacman = calc.calcularEnergiaPacMan("arriba");
+		this.amb.inicializar(enePacman,
+				posicionPacMan,
+				posicionesEnemigos,
+				posicionesComida);
+		Logging.logDebug(this.amb.draw());
 	}
 	
 	private boolean finSimulacion() {

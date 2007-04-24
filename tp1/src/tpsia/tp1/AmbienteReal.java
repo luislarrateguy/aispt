@@ -21,34 +21,80 @@
 
 package tpsia.tp1;
 
+import java.util.Vector;
+
+import calculador.Pair;
+
 public class AmbienteReal implements IAmbiente {
 
 	private int energiaPacman;
-	private Matriz tablero;
+	private EstCelda[][] tablero;
+	private int[] pos;
+	private boolean posicionInicial;
+	
 
-	public Matriz getCeldasAdyacentes() {
-		// TODO Auto-generated method stub
-		return null;
+	public AmbienteReal() {
+		super();
+		this.posicionInicial = false;	
+		this.tablero = new EstCelda[4][4];
+		for (int i=0;i<4;i++)
+			for (int j=0;j<4;j++)
+				this.tablero[i][j] = EstCelda.Vacia;
+		
+		this.energiaPacman = 0;
+		this.pos = new int[2];
+		this.pos[0] = 0;
+		this.pos[1] = 0;
 	}
 
+	public EstCelda[] getCeldasAdyacentes() {
+		EstCelda[] ady = new EstCelda[4];
+		/* arr[0] aba[1] der[2] izq[3] */ 
+		int x;
+		int y;
+
+		// arr
+		x = this.pos[0];
+		y = (this.pos[1]+1)%4;
+		ady[0] = this.tablero[x][y];
+		// aba
+		x = this.pos[0];
+		y = Math.abs(this.pos[1]-1)%4;
+		ady[1] = this.tablero[x][y];
+		// der
+		x = (this.pos[0]+1)%4;
+		y = this.pos[1];
+		ady[2] = this.tablero[x][y];
+		// izq
+		x = Math.abs(this.pos[0]-1) % 4;
+		y = this.pos[1];
+		ady[3] = this.tablero[x][y];
+		
+		return ady.clone();
+	}
+	public void inicializar(int enePacman, Pair posicionPacMan, 
+			Vector posicionesEnemigos, Vector posicionesComida) {
+		// Inicializando PacMan
+		this.energiaPacman = enePacman;
+		this.pos[0] = posicionPacMan.x()-1;
+		this.pos[1] = posicionPacMan.y()-1;
+		
+		//Inicializando enemigos
+		
+		//Inicializando comida
+		
+		
+	}
 	public int energiaPacmanActual() {
-		// TODO Auto-generated method stub
 		return energiaPacman;
 	}
 
-	public int getPosXIniPacman() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public Float getEnergiaIniPacman() {
-		// TODO Auto-generated method stub
+	public int[] getPosIniPacman() {
+		if (!posicionInicial) {
+			posicionInicial = true;
+			return pos.clone();
+		}
 		return null;
-	}
-
-	public int getPosYIniPacman() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	public void actualizar(int enePacman) {
@@ -56,20 +102,49 @@ public class AmbienteReal implements IAmbiente {
 	}
 
 	public void moverPacman(Offset o) {
-		// TODO Actualizar la posición del  pacman en el ambiente
-		// abajo ejemplo de como obtener el offset.
-		o.x();
-		o.y();
+		this.pos[0] = Math.abs((this.pos[0] + o.x()))%4;
+		this.pos[1] = Math.abs((this.pos[1] + o.y()))%4;
 	}
 
 	public void comer() {
-		// TODO Auto-generated method stub
+		// TODO ChequearPrecondición
+		// Si no se cumple (no hay comida) lanzar excepción o algo
+		// ejecutar la accion.
 		
 	}
 
 	public void pelear() {
-		// TODO Auto-generated method stub
-		
+		// TODO ChequearPrecondición
+		// Si no se cumple (no hay enemigo) lanzar excepción o algo
+		// ejecutar la accion.
 	}
+	public String toString() {
+		return null;
+	}
+	public String draw() {
+		String cuadro = new String("\n");
+		for (int j=0;j<4;j++) {
+			for (int i=0;i<4;i++) {
+				cuadro 	+= "[ "
+						+Integer.toString(this.tablero[i][j].valor()) 
+						//+ this.ambiente[i][j]
+						+	" ]";
+			}
+			cuadro += "\n";
+		}
+		cuadro += "posPacman: [" 
+				+ Integer.toString(pos[0]) +","
+				+ Integer.toString(pos[1]) + "]\n";
+		cuadro += "energia:" 
+			+ Integer.toString(this.energiaPacman) 	+"\n";
+		return cuadro;
+	}
+
+	public String toXML() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 }

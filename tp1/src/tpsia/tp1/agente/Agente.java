@@ -45,18 +45,14 @@ public class Agente {
 	}
 
 	public IAccion actuar(Percepcion p) {
-		this.actualizarEstado(p);
+		this.est.actualizarEstado(p);
+		Logging.logDebug(est.draw());
 		this.acciones = bus.buscarSolucion(this.est);
 		IAccion a = this.acciones.get(0);
 		a.ejecutar(this.est);
 		/* TODO A esta altura del código podríamos guardar cosas 
 		 * como	última acción ejecutada y demás. */
 		return a;
-	}
-
-	private void actualizarEstado(Percepcion p2) {
-		// TODO actualizar visión del ambiente con la nueva percepcion
-		Logging.logDebug("PACMAN: actualizar visión del ambiente con la nueva percepcion");
 	}
 
 	private void formularObjetivo() {

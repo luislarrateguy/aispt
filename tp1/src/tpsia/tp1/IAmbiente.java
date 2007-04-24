@@ -21,8 +21,12 @@
 
 package tpsia.tp1;
 
+
 public interface IAmbiente {
 	void moverPacman(Offset o);
 	void comer();
 	void pelear();
+	//string toTurtle();
+	String draw();
+	String toXML();
 }

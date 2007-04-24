@@ -23,15 +23,37 @@ package tpsia.tp1;
 
 public class Percepcion {
 
-	private Matriz celdasAdyacentes;
-	private Float energia;
+	private EstCelda[] celdasAdyacentes;
+	private int energia;
 	private int posx;
 	private int posy;
 
-	public Percepcion(Matriz m, Float e, int posx, int posy) {
-		this.celdasAdyacentes = m;
+
+	public Percepcion(EstCelda[] ady, int e, 
+			int[] posIniPacman) {
+		Logging.logDebug("SIM: Armando percepcion...");
+		this.celdasAdyacentes = ady;
 		this.energia = e;
-		this.posx = posx;
-		this.posy = posy;
+		if (posIniPacman != null) { 
+			this.posx = posIniPacman[0];
+			this.posy = posIniPacman[1];
+		}
+	}
+
+
+	public EstCelda[] celdasAdyacentes() {
+		return celdasAdyacentes.clone();
+	}
+
+
+	public int energia() {
+		// TODO Auto-generated method stub
+		return energia;
+	}
+
+
+	public int posXini() {
+		// TODO Auto-generated method stub
+		return posx;
 	}
 }

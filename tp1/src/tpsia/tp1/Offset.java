@@ -22,7 +22,7 @@
 package tpsia.tp1;
 
 public enum Offset {
-	Igual (0,0),
+	Igual (0,0), // no molesta.. Y sirve! Sirve para saber si hay alimento o enemigo donde estamos parados.
 	Izquierda (-1,0),
 	Derecha (1,0),
 	Arriba (0,1),
