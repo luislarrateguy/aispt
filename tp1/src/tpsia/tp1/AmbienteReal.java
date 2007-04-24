@@ -55,11 +55,11 @@ public class AmbienteReal implements IAmbiente {
 		energiaPacman = enePacman;
 	}
 
-	public void moverPacman(OffsetX oX, OffsetY oY) {
+	public void moverPacman(Offset o) {
 		// TODO Actualizar la posición del  pacman en el ambiente
 		// abajo ejemplo de como obtener el offset.
-		oX.valor();
-		oY.valor();
+		o.x();
+		o.y();
 	}
 
 	public void comer() {

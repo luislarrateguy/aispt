@@ -22,9 +22,7 @@
 package tpsia.tp1.acciones;
 
 import tpsia.tp1.IAmbiente;
-import tpsia.tp1.OffsetX;
-import tpsia.tp1.OffsetY;
-
+import tpsia.tp1.Offset;
 
 public class AvanzarArriba extends Avanzar {
 
@@ -34,7 +32,7 @@ public class AvanzarArriba extends Avanzar {
 	}
 
 	public void ejecutar(IAmbiente amb) {
-		amb.moverPacman(OffsetX.Igual, OffsetY.Arriba);
+		amb.moverPacman(Offset.Arriba);
 	}
 
 	static public IAccion getInstancia() {

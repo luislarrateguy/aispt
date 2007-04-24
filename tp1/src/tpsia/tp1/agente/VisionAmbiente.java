@@ -21,15 +21,11 @@
 
 package tpsia.tp1.agente;
 
-import java.text.Format;
 import java.util.HashMap;
-import java.util.Vector;
 
 import tpsia.tp1.EstCelda;
 import tpsia.tp1.IAmbiente;
-import tpsia.tp1.OffsetX;
-import tpsia.tp1.OffsetY;
-
+import tpsia.tp1.Offset;
 import calculador.Pair;
 /**
  * 
@@ -47,11 +43,12 @@ public class VisionAmbiente implements IAmbiente {
 		this.tablero = new HashMap<Pair, EstCelda>(16);
 		this.ppac = new Pair(0,0);
 	}
-	public void moverPacman(OffsetX oX, OffsetY oY) {
+	
+	public void moverPacman(Offset o) {
 		// TODO Actualizar la posición del pacman en la vision
 		// del ambiente
-		ppac.inicializar( (ppac.x() + oX.valor()) % 4 + 1, 
-				(ppac.y() + oY.valor()) % 4 + 1);
+		//ppac.inicializar( (ppac.x() + o.x()) % 4 + 1, 
+		//		(ppac.y() + oY.valor()) % 4 + 1);
 	}
 	public EstCelda getEstadoCelda(Pair cel) {
 		return this.tablero.get(cel);

@@ -21,16 +21,26 @@
 
 package tpsia.tp1;
 
-public enum OffsetX {
-	Igual (0),
-	Izquierda (-1),
-	Derecha (1);
+public enum Offset {
+	Igual (0,0),
+	Izquierda (-1,0),
+	Derecha (1,0),
+	Arriba (0,1),
+	Abajo (0,-1);
 	
-	private final int valor;
-	OffsetX(int x) {
-		this.valor = x;
+	private final int x;
+	private final int y;
+	
+	Offset(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}
-	public int valor() {
-		return this.valor;
+	
+	public int x() {
+		return this.x;
+	}
+	
+	public int y() {
+		return this.y;
 	}
 }
