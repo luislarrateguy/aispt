@@ -1,0 +1,9 @@
+#summary Organización de las consultas de IA.
+
+= Consultas =
+
+== Trabajo práctico Nro 1 ==
+
+=== Etapa 3 ===
+
+ * [Jueves26Abril Jueves 26 de Abril]
