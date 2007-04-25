@@ -1,0 +1,7 @@
+#summary Cuestiones sobre la documentación final del Trabajo práctico 1
+
+= Documentación - Etapa 3 (etapa final de entrega) =
+
+Algunas cuestiones a tener en cuenta al escribir la documentación:
+
+ * Mencionar la modificación de la clase Pair para uso en nuestro TP (simplemente se agregaron unos métodos simples).
