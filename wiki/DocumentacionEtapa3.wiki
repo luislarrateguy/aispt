@@ -4,4 +4,5 @@
 
 Algunas cuestiones a tener en cuenta al escribir la documentación:
 
- * Mencionar la modificación de la clase Pair para uso en nuestro TP (simplemente se agregaron unos métodos simples).
+ * Mencionar la modificación de la clase Pair para uso en nuestro TP (simplemente se agregaron unos métodos simples) (*PENDIENTE*).
+
