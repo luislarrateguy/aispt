@@ -35,26 +35,23 @@ import tpsia.tp1.busqueda.IBusqueda;
 public class Agente {
 
 	private Estado estado;
-	private VisionAmbiente visionAmbiente;
 	private IBusqueda busqueda;
 	private ArrayList<IAccion> acciones;
 	private Objetivo o;
 	
 	public Agente() {
 		this.estado = new Estado();
-		this.visionAmbiente = new VisionAmbiente();
 		this.busqueda = new BusquedaCostoUniforme();
 	}
 
 	public IAccion actuar(Percepcion p) {
 		this.estado.actualizarEstado(p);
-		this.visionAmbiente.actualizarEstado(p);
 		
-		Logging.logMensaje(this.visionAmbiente.draw());
+		Logging.logMensaje(this.estado.getAmbiente().draw());
 		
 		this.acciones = busqueda.buscarSolucion(this.estado);
 		IAccion a = this.acciones.get(0);
-		a.ejecutar(this.visionAmbiente);
+		a.ejecutar(this.estado.getAmbiente());
 		
 		/* TODO A esta altura del código podríamos guardar cosas 
 		 * como	última acción ejecutada y demás. */
@@ -63,12 +60,8 @@ public class Agente {
 
 	private void formularObjetivo() {
 		// TODO formular objetivo
-		Logging.logDebug("PACMAN: formular objetivo");
+		Logging.logDebug("PACMAN: formular objetivo (cuac.. deprecated)");
 		this.o = new Objetivo(this.estado);
 	}
 
-	public void inicializar(Vector pene, Vector pcom, Pair ppac) {
-		//est.getVAmbiente().
-		
-	}
 }

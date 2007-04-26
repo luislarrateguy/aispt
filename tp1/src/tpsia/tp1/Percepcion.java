@@ -29,6 +29,7 @@ public class Percepcion {
 	private int posY;
 
 
+
 	public Percepcion(EstadoCelda[] ady, int e, 
 			int[] posIniPacman) {
 		Logging.logDebug("SIM: Armando percepcion...");

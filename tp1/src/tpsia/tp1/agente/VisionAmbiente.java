@@ -31,7 +31,8 @@ import tpsia.tp1.Percepcion;
 import calculador.Pair;
 
 public class VisionAmbiente extends Ambiente {
-
+	public static boolean first = true;
+	
 	public VisionAmbiente() {
 		super();
 		
@@ -46,11 +47,8 @@ public class VisionAmbiente extends Ambiente {
 
 	@Override
 	public void moverPacman(Offset o) {
-		this.posicionPacman[0] = Math.abs(this.posicionPacman[0] + o.x())%4;
-		this.posicionPacman[1] = Math.abs(this.posicionPacman[1] + o.y())%4;
-		
-		this.posicionPacman[0] = Math.abs(this.posicionPacman[0] + o.x())%4;
-		this.posicionPacman[1] = Math.abs(this.posicionPacman[1] + o.y())%4;
+		this.posicionPacman[0] = FuncionesUtiles.sumarPosiciones(this.posicionPacman[0], o.x());
+		this.posicionPacman[1] = FuncionesUtiles.sumarPosiciones(this.posicionPacman[1], o.y());
 	}
 
 	@Override
@@ -65,7 +63,12 @@ public class VisionAmbiente extends Ambiente {
 	 * se realizan por medio de las acciones sobre VisionAmbiente.
 	 * @param p
 	 */
-	public void actualizarEstado(Percepcion p) {
+	public void actualizar(Percepcion p) {	
+		if (VisionAmbiente.first) {
+			this.posicionPacman[0] = p.getPosX();
+			this.posicionPacman[1] = p.getPosY();
+			VisionAmbiente.first = false;
+		}
 		int x,y;
 		EstadoCelda[] celdasAdyacentes = p.getCeldasAdyacentes();
 		
@@ -91,7 +94,8 @@ public class VisionAmbiente extends Ambiente {
 	}
 
 	public String draw() {
-		String aux = super.draw();
+		String aux = "Vision del ambiente:\n";
+		aux += super.draw();
 		
 		aux += "posPacman: [" 
 			+ Integer.toString(posicionPacman[0]) +","
