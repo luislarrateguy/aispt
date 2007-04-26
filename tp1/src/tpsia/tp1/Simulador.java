@@ -42,6 +42,13 @@ public class Simulador {
 		this.cont = 5;
 	}
 	
+	/**
+	 * Inicializa la simulación (ver inicializarSimulacion). Entra en un
+	 * bucle creando una percepción. Se la envía al pacman y espera una
+	 * acción que éste le devuelva. Calcula su nueva energía por medio
+	 * del Calculador. Ejecuta dicha acción en el ambiente real y actualiza
+	 * la energía del pacman en el mismo.
+	 */
 	public void comenzarSimulacion() {
 		Logging.logDebug("SIM: Iniciando simulación...");
 		this.inicializarSimulacion();
@@ -51,7 +58,7 @@ public class Simulador {
 		int enePacman;
 		while (!this.finSimulacion()) {
 			p = new Percepcion(amb.getCeldasAdyacentes(),
-					amb.energiaPacmanActual(), amb.getPosIniPacman());
+					amb.getEnergiaPacman(), amb.getPosIniPacman());
 			Logging.logDebug("SIM: Enviando percepcion a Pacman");
 			a = pacman.actuar(p);
 			
@@ -63,21 +70,32 @@ public class Simulador {
 			Logging.logDebug("SIM: Ejecutando accion en ambiente");
 			a.ejecutar(amb);
 			Logging.logDebug("SIM: Actualizando ambiente");
-			amb.actualizar(enePacman);
+			amb.setEnergiaPacman(enePacman);
 		}
 	}
-
+	
+	/**
+	 * Crea el agente e enicializa la posición de los enemigos, la del
+	 * pacman y la de la comida. Calcula la energía inicial de agente.
+	 * Con todo esto inicializa el ambiente real.
+	 */
 	private void inicializarSimulacion() {
 		pacman = new Agente();
 		Vector posicionesEnemigos = calc.inicializarEnemigo();
 		Pair posicionPacMan 	= calc.getPosicionInicial();
 		Vector posicionesComida = calc.inicializarComida();
-		int enePacman = calc.calcularEnergiaPacMan("arriba");
-		this.amb.inicializar(enePacman,
+		
+		/* FIXME: Esto no estaría bien. Tendría que haber un método
+		 * que retorne la energía inicial, ya que así le estamos quitando,
+		 * ¿o me equivoco? */
+		int energiaPacman = calc.calcularEnergiaPacMan("arriba");
+		
+		this.amb.inicializar(energiaPacman,
 				posicionPacMan,
 				posicionesEnemigos,
 				posicionesComida);
-		Logging.logDebug(this.amb.draw());
+		
+		Logging.logMensaje(this.amb.draw());
 	}
 	
 	private boolean finSimulacion() {

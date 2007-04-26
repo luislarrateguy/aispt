@@ -21,7 +21,7 @@
 
 package tpsia.tp1.acciones;
 
-import tpsia.tp1.IAmbiente;
+import tpsia.tp1.Ambiente;
 import tpsia.tp1.Offset;
 
 public class AvanzarAbajo extends Avanzar {
@@ -31,7 +31,7 @@ public class AvanzarAbajo extends Avanzar {
 	private AvanzarAbajo() {
 	}
 
-	public void ejecutar(IAmbiente amb) {
+	public void ejecutar(Ambiente amb) {
 		amb.moverPacman(Offset.Abajo);
 	}
 

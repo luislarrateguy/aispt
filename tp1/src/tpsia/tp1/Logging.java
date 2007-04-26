@@ -24,6 +24,10 @@ package tpsia.tp1;
 public class Logging {
 	private static boolean modoLoggingActivado = true;
 	
+	public static void logMensaje(String mensaje) {
+		System.out.println(mensaje);
+	}
+	
 	public static void logDebug(String mensaje) {
 		if (!modoLoggingActivado) return;
 		

@@ -21,8 +21,7 @@
 
 package tpsia.tp1.acciones;
 
-import tpsia.tp1.IAmbiente;
-
+import tpsia.tp1.Ambiente;
 
 /*
  * Singleton Notice
@@ -31,7 +30,7 @@ public class Comer implements IAccion {
 
 	private static Comer instancia;
 
-	public void ejecutar(IAmbiente amb) {
+	public void ejecutar(Ambiente amb) {
 		//TODO Modificar el ambiente de acuerdo a la
 		// interfaz que definamos
 	}

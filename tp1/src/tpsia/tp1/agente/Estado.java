@@ -21,49 +21,33 @@
 
 package tpsia.tp1.agente;
 
-import tpsia.tp1.EstCelda;
-import tpsia.tp1.IAmbiente;
+import tpsia.tp1.EstadoCelda;
 import tpsia.tp1.Offset;
 import tpsia.tp1.Percepcion;
 
-public class Estado implements IAmbiente {
-
+public class Estado {
 
 	private int energia;
 	private float promVarEneLucha;
 	private float promVarEneComer;
 	private float promVarEneAvanz;
-	private int[] pos;
 	
-	private EstCelda[][] ambiente;
+	//private EstadoCelda[][] ambiente;
 	
 	public Estado() {
-		this.ambiente = new EstCelda[4][4];
-		for (int i=0;i<4;i++)
-			for (int j=0;j<4;j++)
-				this.ambiente[i][j] = EstCelda.Desconocida;
+//		this.ambiente = new EstadoCelda[4][4];
+//		for (int i=0;i<4;i++)
+//			for (int j=0;j<4;j++)
+//				this.ambiente[i][j] = EstadoCelda.Desconocida;
+		
 		this.energia = 0;
-		this.pos = null;
 		this.promVarEneLucha =  (float) 0.00;
 		this.promVarEneComer =  (float) 0.00;
 		this.promVarEneAvanz =  (float) 0.00;
 	}
-	public void moverPacman(Offset o) {
-		this.pos[0] = Math.abs(this.pos[0] + o.x())%4;
-		this.pos[1] = Math.abs(this.pos[1] + o.y())%4;
-	}
-	/*
-	 * Estas dos podrian estar unidas
-	 * Y OffSet podría ser de un sólo tipo.
-	 */
-	public boolean hayEnemigo(Offset o) {
-		return this.ambiente[Math.abs(pos[0]+o.x())%4][Math.abs(pos[1]+o.y())%4]
-		                                               .equals(EstCelda.Enemigo);
-	}
 	
-	public boolean hayComida(Offset o) {
-		return this.ambiente[Math.abs(pos[0]+o.x())%4][Math.abs(pos[1]+o.y())%4]
-		                                              .equals(EstCelda.Comida);
+	public void moverPacman(Offset o) {
+		
 	}
 	
 	public void comer() {
@@ -74,25 +58,31 @@ public class Estado implements IAmbiente {
 		// TODO Auto-generated method stub
 		
 	}
+	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		return super.toString();
 	}
+	
+	/**
+	 * @deprecated No haría falta que el estado se dibuje.
+	 * @return
+	 */
 	public String draw() {
 		String cuadro = new String("\n");
 		for (int j=0;j<4;j++) {
 			for (int i=0;i<4;i++) {
 				cuadro 	+= "[ "
-						+Integer.toString(this.ambiente[i][j].valor()) 
+						//+Integer.toString(this.ambiente[i][j].valor()) 
 						//+ this.ambiente[i][j]
 						+	" ]";
 			}
 			cuadro += "\n";
 		}
-		cuadro += "posPacman: [" 
-				+ Integer.toString(pos[0]) +","
-				+ Integer.toString(pos[1]) + "]\n";
+		//cuadro += "posPacman: [" 
+				//+ Integer.toString(pos[0]) +","
+				//+ Integer.toString(pos[1]) + "]\n";
 		cuadro += "energia:" 
 			+ Integer.toString(this.energia) 	+"\n";
 		cuadro += "promVarEneAvanz:" 
@@ -103,37 +93,23 @@ public class Estado implements IAmbiente {
 				+ Float.toString(this.promVarEneLucha) +"\n";
 		return cuadro;
 	}
+	
 	public String toXML() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	public void actualizarEstado(Percepcion p) {
-		if (this.pos == null) {
-			this.pos = new int[2];
-			this.pos[0] = p.posXini();
-			this.pos[1] = p.posXini();
-		}
-		this.energia = p.energia();
-		EstCelda[] ady = p.celdasAdyacentes();
-		/* arr[0] aba[1] der[2] izq[3] */ 
-		int x;
-		int y;
-
-		// arr
-		x = this.pos[0];
-		y = (this.pos[1]+1)%4;
-		this.ambiente[x][y] = ady[0];
-		// aba
-		x = this.pos[0];
-		y = Math.abs(this.pos[1]-1)%4;
-		this.ambiente[x][y] = ady[1];
-		// der
-		x = (this.pos[0]+1)%4;
-		y = this.pos[1];
-		this.ambiente[x][y] = ady[2];
-		// izq
-		x = Math.abs(this.pos[0]-1)%4;
-		y = this.pos[1];
-		this.ambiente[x][y] = ady[3];		                
+		/* No entiendo que hacía el código de abajo (y estoy apurado
+		 * para averiguarlo :) */
+//		if (this.pos == null) {
+//			this.pos = new int[2];
+//			this.pos[0] = p.posXini();
+//			this.pos[1] = p.posXini();
+//		}
+		
+		// Actualizo la energía
+		this.energia = p.getEnergia();
+		
+		// TODO: Cálculo de los promedios. Hay que recordar última acción
 	}
 }

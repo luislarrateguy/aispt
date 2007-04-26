@@ -1,0 +1,28 @@
+#!/bin/sh
+
+borrar()
+{
+  rm -f *.aux *.toc *.log *.out *.lof
+}
+
+# Borro el pdf final
+rm -f main.pdf
+
+# Borro los archivos temporales
+borrar
+
+cd prueba_meta
+borrar
+cd ../estados
+borrar
+cd ../operadores
+borrar
+cd ../objetivos
+borrar
+cd ../estrategia
+borrar
+cd ../licencia
+borrar
+
+cd ..
+./makediffs clean

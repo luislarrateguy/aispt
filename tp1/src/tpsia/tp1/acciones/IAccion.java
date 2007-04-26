@@ -21,12 +21,11 @@
 
 package tpsia.tp1.acciones;
 
-import tpsia.tp1.IAmbiente;
-
+import tpsia.tp1.Ambiente;
 
 public interface IAccion {
 
-	public void ejecutar(IAmbiente amb);
+	public void ejecutar(Ambiente amb);
 	public String getTipoAccion();
 
 }

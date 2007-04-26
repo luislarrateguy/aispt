@@ -1,0 +1,26 @@
+\section{Prueba de meta}
+
+Como desconocemos un poco el funcionamiento del agente, hay algunas dudas que
+nos hacen suponer cosas.
+
+El pseudocódigo de la prueba de meta es el siguiente:
+
+\begin{verbatim}
+Si visionAmbiente.ConocimientoTotal entonces
+
+  convienePelear = energiaPromedioPelea < energiaActual
+  convieneMoverse = energiaPromedioMover < energiaActual
+
+  Si ( (No visionAmbiente.HayAlimentosSinComer) OR
+      (visionAmbiente.HayAlimentosSinComer AND No convieneMoverse) )
+    AND ( (No visionAmbiente.HayEnemigos) OR
+      (visionAmbiente.HayEnemigos AND No convienePelear) )
+
+  retornar EXITO
+
+Sino
+  Si energiaInsuficienteParaMover retornar EXITO
+
+retornar FRACASO
+\end{verbatim}
+

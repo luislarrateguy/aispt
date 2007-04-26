@@ -23,67 +23,87 @@ package tpsia.tp1.agente;
 
 import java.util.HashMap;
 
-import tpsia.tp1.EstCelda;
-import tpsia.tp1.IAmbiente;
+import tpsia.tp1.EstadoCelda;
+import tpsia.tp1.Ambiente;
+import tpsia.tp1.FuncionesUtiles;
 import tpsia.tp1.Offset;
+import tpsia.tp1.Percepcion;
 import calculador.Pair;
-/**
- * 
- * @author nacho
- * @deprecated Como charlamos Estado implementará la interfaz
- * ya que se complicaría la duplicacion de los estados, busqueda
- * y demás.
- */
-public class VisionAmbiente implements IAmbiente {
 
-	private HashMap<Pair, EstCelda> tablero;
-	private Pair ppac;
-	
+public class VisionAmbiente extends Ambiente {
+
 	public VisionAmbiente() {
-		this.tablero = new HashMap<Pair, EstCelda>(16);
-		this.ppac = new Pair(0,0);
+		super();
+		
+		for (int i=0;i<4;i++)
+			for (int j=0;j<4;j++)
+				this.tablero[i][j] = EstadoCelda.Desconocida;
 	}
-	
-	public void moverPacman(Offset o) {
-		// TODO Actualizar la posición del pacman en la vision
-		// del ambiente
-		//ppac.inicializar( (ppac.x() + o.x()) % 4 + 1, 
-		//		(ppac.y() + oY.valor()) % 4 + 1);
-	}
-	public EstCelda getEstadoCelda(Pair cel) {
-		return this.tablero.get(cel);
-	}
-	public String verComoTablero() {
-		String tab = new String("");
-		for (int i=0; i<16; i++) {
-			if ((i % 4) == 0) {
-				tab += "[ " + tablero.get(i).valor() + " ] ";
-			}
-		}
-		return tab;
-	}
+	@Override
 	public void comer() {
 		// TODO Auto-generated method stub
-		
 	}
+
+	@Override
+	public void moverPacman(Offset o) {
+		this.posicionPacman[0] = Math.abs(this.posicionPacman[0] + o.x())%4;
+		this.posicionPacman[1] = Math.abs(this.posicionPacman[1] + o.y())%4;
+		
+		this.posicionPacman[0] = Math.abs(this.posicionPacman[0] + o.x())%4;
+		this.posicionPacman[1] = Math.abs(this.posicionPacman[1] + o.y())%4;
+	}
+
+	@Override
 	public void pelear() {
 		// TODO Auto-generated method stub
 		
 	}
-
-	public String draw() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	/**
+	 * La única actualización que se realiza en VisionAmbiente son
+	 * las nuevas celdas descubiertas por el agente. Los demás cambios
+	 * se realizan por medio de las acciones sobre VisionAmbiente.
+	 * @param p
+	 */
+	public void actualizarEstado(Percepcion p) {
+		int x,y;
+		EstadoCelda[] celdasAdyacentes = p.getCeldasAdyacentes();
+		
+		// Celda adyacente de arriba
+		x = this.posicionPacman[0];
+		y = FuncionesUtiles.sumarPosiciones(this.posicionPacman[1], 1);
+		this.tablero[x][y] = celdasAdyacentes[0];
+		
+		// Celda adyacente de abajo
+		x = this.posicionPacman[0];
+		y = FuncionesUtiles.sumarPosiciones(this.posicionPacman[1], -1);
+		this.tablero[x][y] = celdasAdyacentes[1];
+		
+		// Celda adyacente de derecha
+		x = FuncionesUtiles.sumarPosiciones(this.posicionPacman[0], 1);
+		y = this.posicionPacman[1];
+		this.tablero[x][y] = celdasAdyacentes[2];
+		
+		// Celda adyacente de izquierda
+		x = FuncionesUtiles.sumarPosiciones(this.posicionPacman[0], -1);
+		y = this.posicionPacman[1];
+		this.tablero[x][y] = celdasAdyacentes[3];
 	}
 
+	public String draw() {
+		String aux = super.draw();
+		
+		aux += "posPacman: [" 
+			+ Integer.toString(posicionPacman[0]) +","
+			+ Integer.toString(posicionPacman[1]) + "]\n";
+		
+		return aux;
+	}
+	
+	@Override
 	public String toXML() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
-	}
+	
 }
