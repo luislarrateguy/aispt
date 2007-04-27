@@ -37,7 +37,6 @@ public class Agente {
 	private Estado estado;
 	private IBusqueda busqueda;
 	private ArrayList<IAccion> acciones;
-	private Objetivo o;
 	
 	public Agente() {
 		this.estado = new Estado();
@@ -45,6 +44,7 @@ public class Agente {
 	}
 
 	public IAccion actuar(Percepcion p) {
+		Logging.logDebug("AGENTE: Percepción recibida. Actuando...");
 		this.estado.actualizarEstado(p);
 		
 		Logging.logMensaje(this.estado.getAmbiente().draw());
@@ -57,11 +57,4 @@ public class Agente {
 		 * como	última acción ejecutada y demás. */
 		return a;
 	}
-
-	private void formularObjetivo() {
-		// TODO formular objetivo
-		Logging.logDebug("PACMAN: formular objetivo (cuac.. deprecated)");
-		this.o = new Objetivo(this.estado);
-	}
-
 }

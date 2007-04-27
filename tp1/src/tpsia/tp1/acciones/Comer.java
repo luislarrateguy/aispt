@@ -31,8 +31,7 @@ public class Comer implements IAccion {
 	private static Comer instancia;
 
 	public void ejecutar(Ambiente amb) {
-		//TODO Modificar el ambiente de acuerdo a la
-		// interfaz que definamos
+		amb.comer();
 	}
 
 	public String getTipoAccion() {

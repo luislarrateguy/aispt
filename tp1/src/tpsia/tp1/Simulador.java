@@ -30,15 +30,15 @@ import calculador.*;
 public class Simulador {
 	
 	private static Simulador instancia = null;
-	private Calculador calc;
-	private AmbienteReal amb;
+	private Calculador calculador;
+	private AmbienteReal ambiente;
 	private Agente pacman;
 	
 	int cont;
 
 	private Simulador() {
-		this.calc = new Calculador();
-		this.amb = new AmbienteReal();
+		this.calculador = new Calculador();
+		this.ambiente = new AmbienteReal();
 		this.cont = 5;
 	}
 	
@@ -55,22 +55,24 @@ public class Simulador {
 
 		IAccion a;
 		Percepcion p;
-		int enePacman;
+		int energiaPacman;
 		while (!this.finSimulacion()) {
-			p = new Percepcion(amb.getCeldasAdyacentes(),
-					amb.getEnergiaPacman(), amb.getPosIniPacman());
+			/* Creo la percepción, se la envío al agente, y espero una acción
+			 * escogida por él. */
+			p = new Percepcion(ambiente.getCeldasAdyacentes(),
+					ambiente.getEnergiaPacman(), ambiente.getPosicionInicialPacman());
 			Logging.logDebug("SIM: Enviando percepcion a Pacman");
 			a = pacman.actuar(p);
 			
 			// avisar al calculador
 			Logging.logDebug("SIM: Calculando energia pacman");
-			enePacman = calc.calcularEnergiaPacMan(a.getTipoAccion());
+			energiaPacman = calculador.calcularEnergiaPacMan(a.getTipoAccion());
 
 			// ejecutar la acción y actualizar el ambiente
 			Logging.logDebug("SIM: Ejecutando accion en ambiente");
-			a.ejecutar(amb);
+			a.ejecutar(ambiente);
 			Logging.logDebug("SIM: Actualizando ambiente");
-			amb.setEnergiaPacman(enePacman);
+			ambiente.setEnergiaPacman(energiaPacman);
 		}
 	}
 	
@@ -81,21 +83,21 @@ public class Simulador {
 	 */
 	private void inicializarSimulacion() {
 		pacman = new Agente();
-		Vector posicionesEnemigos = calc.inicializarEnemigo();
-		Pair posicionPacMan 	= calc.getPosicionInicial();
-		Vector posicionesComida = calc.inicializarComida();
+		Vector posicionesEnemigos = calculador.inicializarEnemigo();
+		Pair posicionPacMan 	= calculador.getPosicionInicial();
+		Vector posicionesComida = calculador.inicializarComida();
 		
 		/* FIXME: Esto no estaría bien. Tendría que haber un método
 		 * que retorne la energía inicial, ya que así le estamos quitando,
 		 * ¿o me equivoco? */
-		int energiaPacman = calc.calcularEnergiaPacMan("arriba");
+		int energiaPacman = calculador.calcularEnergiaPacMan("arriba");
 		
-		this.amb.inicializar(energiaPacman,
+		this.ambiente.inicializar(energiaPacman,
 				posicionPacMan,
 				posicionesEnemigos,
 				posicionesComida);
 		
-		Logging.logMensaje(this.amb.draw());
+		Logging.logMensaje(this.ambiente.draw());
 	}
 	
 	private boolean finSimulacion() {
@@ -115,7 +117,7 @@ public class Simulador {
 	
 	public void mostrarPerformance() {
 		Logging.logDebug("SIM: Mostrando desempeño del PACMAN");
-		int f = calc.getPerformance();
+		int f = calculador.getPerformance();
 		// TODO Agregar código para mostrar
 	}
 }

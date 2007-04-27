@@ -32,7 +32,7 @@ public class AvanzarIzquierda extends Avanzar {
 	}
 
 	public void ejecutar(Ambiente amb) {
-		amb.moverPacman(Offset.Izquierda);
+		amb.mover(Offset.Izquierda);
 	}
 
 	static public IAccion getInstancia() {

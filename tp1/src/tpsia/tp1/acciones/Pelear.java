@@ -31,8 +31,7 @@ public class Pelear implements IAccion {
 	private static Pelear instancia;
 
 	public void ejecutar(Ambiente amb) {
-		//TODO Modificar el ambiente de acuerdo a la
-		// interfaz que definamos
+		amb.pelear();
 	}
 
 	public String getTipoAccion() {

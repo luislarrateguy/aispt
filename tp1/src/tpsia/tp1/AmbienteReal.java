@@ -24,6 +24,10 @@ package tpsia.tp1;
 import java.util.Hashtable;
 import java.util.Vector;
 
+import tpsia.tp1.acciones.Comer;
+import tpsia.tp1.acciones.Pelear;
+
+import calculador.Calculador;
 import calculador.Pair;
 
 public class AmbienteReal extends Ambiente {
@@ -33,6 +37,9 @@ public class AmbienteReal extends Ambiente {
 	 */
 	private boolean posicionInicial;
 	
+	/**
+	 * Energía actual del Pacman.
+	 */
 	private int energiaPacman;
 
 	public AmbienteReal() {
@@ -90,7 +97,8 @@ public class AmbienteReal extends Ambiente {
 		// Inicializando PacMan
 		this.energiaPacman = energiaPacman;
 		
-		this.setPosicionPacman(posicionPacMan.getX(), posicionPacMan.getY());
+		this.posicionPacman[0] = posicionPacMan.getX();
+		this.posicionPacman[1] = posicionPacMan.getY();
 		
 		//Inicializando enemigos
 		Vector<Pair> posicionesEnemigos = (Vector<Pair>)posEnemigos;
@@ -103,30 +111,13 @@ public class AmbienteReal extends Ambiente {
 			this.tablero[unaCelda.getX()][unaCelda.getY()] = EstadoCelda.Comida;
 	}
 
-	public int[] getPosIniPacman() {
+	public int[] getPosicionInicialPacman() {
 		if (!posicionInicial) {
 			posicionInicial = true;
 			return posicionPacman.clone();
 		}
 		
 		return null;
-	}
-
-	public void moverPacman(Offset o) {
-		this.posicionPacman[0] = FuncionesUtiles.sumarPosiciones(this.posicionPacman[0], o.x());
-		this.posicionPacman[1] = FuncionesUtiles.sumarPosiciones(this.posicionPacman[1], o.y());
-	}
-
-	public void comer() {
-		// TODO ChequearPrecondición
-		// Si no se cumple (no hay comida) lanzar excepción o algo
-		// ejecutar la accion.
-	}
-
-	public void pelear() {
-		// TODO ChequearPrecondición
-		// Si no se cumple (no hay enemigo) lanzar excepción o algo
-		// ejecutar la accion.
 	}
 	
 	public String toString() {

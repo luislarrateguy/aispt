@@ -31,6 +31,11 @@ import tpsia.tp1.Percepcion;
 import calculador.Pair;
 
 public class VisionAmbiente extends Ambiente {
+	
+	/**
+	 * Utilizada para saber si la posición del pacman recibida en la percepción
+	 * es válida.
+	 */
 	public static boolean first = true;
 	
 	public VisionAmbiente() {
@@ -39,22 +44,6 @@ public class VisionAmbiente extends Ambiente {
 		for (int i=0;i<4;i++)
 			for (int j=0;j<4;j++)
 				this.tablero[i][j] = EstadoCelda.Desconocida;
-	}
-	@Override
-	public void comer() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void moverPacman(Offset o) {
-		this.posicionPacman[0] = FuncionesUtiles.sumarPosiciones(this.posicionPacman[0], o.x());
-		this.posicionPacman[1] = FuncionesUtiles.sumarPosiciones(this.posicionPacman[1], o.y());
-	}
-
-	@Override
-	public void pelear() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	/**
@@ -69,6 +58,7 @@ public class VisionAmbiente extends Ambiente {
 			this.posicionPacman[1] = p.getPosY();
 			VisionAmbiente.first = false;
 		}
+		
 		int x,y;
 		EstadoCelda[] celdasAdyacentes = p.getCeldasAdyacentes();
 		
@@ -109,5 +99,4 @@ public class VisionAmbiente extends Ambiente {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 }

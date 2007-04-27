@@ -38,9 +38,43 @@ public abstract class Ambiente {
 		this.posicionPacman[1] = 0;
 	}
 	
-	public abstract void moverPacman(Offset o);
-	public abstract void comer();
-	public abstract void pelear();
+	public void pelear() {
+		int x = this.posicionPacman[0];
+		int y = this.posicionPacman[1];
+		
+		if (!this.hayEnemigo(x, y)) {
+			Logging.logError("El pacman intentó pelear contra un enemigo " +
+					"que no existe en (" + x + "," + y + ")");
+			
+			return;
+		}
+		
+		this.tablero[x][y] = EstadoCelda.Vacia;
+	}
+	
+	public void comer() {
+		int x = this.posicionPacman[0];
+		int y = this.posicionPacman[1];
+		
+		if (!this.hayComida(x, y)) {
+			Logging.logError("El pacman intentó comer comida que no existe en (" +
+					x + "," + y + ")");
+			
+			return;
+		}
+		
+		this.tablero[x][y] = EstadoCelda.Vacia;
+	}
+	
+	public void mover(Offset o) {
+		// x
+		this.posicionPacman[0] = FuncionesUtiles.sumarPosiciones(
+				this.posicionPacman[0], o.x());
+		
+		// y
+		this.posicionPacman[1] = FuncionesUtiles.sumarPosiciones(
+				this.posicionPacman[1], o.y());
+	}
 	
 	public boolean hayEnemigo(int x, int y) {
 		return this.tablero[x][y].equals(EstadoCelda.Enemigo);
@@ -48,18 +82,6 @@ public abstract class Ambiente {
 	
 	public boolean hayComida(int x, int y) {
 		return this.tablero[x][y].equals(EstadoCelda.Comida);
-	}
-	
-	/**
-	 * Debe utilizarse este método al setear la posición del Pacman, así se
-	 * matiene actualizado el tablero.
-	 * @param x
-	 * @param y
-	 */
-	public void setPosicionPacman(int x, int y) {
-		this.posicionPacman[0] = x;
-		this.posicionPacman[1] = y;
-		//this.tablero[x][y] = EstadoCelda.Pacman;
 	}
 	
 	//string toTurtle();
@@ -77,10 +99,10 @@ public abstract class Ambiente {
 		
 		for (int j=0;j<4;j++) {
 			for (int i=0;i<4;i++) {
-				cuadro 	+= "[ "
+				cuadro 	+= "["
 						+aux.get(this.tablero[i][j].valor())
 						//+ this.ambiente[i][j]
-						+	" ]";
+						+	"]";
 			}
 			cuadro += "\n";
 		}
