@@ -1,4 +1,4 @@
-\documentclass[a4paper,singleside,12pt]{article}
+\documentclass[a4paper,singleside,10pt]{article}
 \pagestyle{headings}
 \usepackage[spanish]{babel}
 \usepackage[utf8]{inputenc}
@@ -20,15 +20,19 @@
 \begin{document}
 \selectlanguage{spanish}
 % Título
-\include{titulo}
+\include{titulo/titulo}
 % Licencia
 \include{licencia/licencia}
 % Hecho con Software Libre
-\include{hechoconsl}
+\include{hechoconsl/hechoconsl}
+
 % Tabla de contenidos
 \tableofcontents
-% Objetivos
-\include{objetivos/objetivos}
+
+% Arquitectura
+\include{arquitectura/arquitectura}
+% Descripción del agente
+\include{descripcion_agente/descripcion_agente}
 % Representación del estado
 \include{estados/estados}
 % Operadores de búsqueda
