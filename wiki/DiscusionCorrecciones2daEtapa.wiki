@@ -1,0 +1,41 @@
+= Discución sobre las correcciones de las 2da Etapa =
+Podemos discutir acá lo que nos corrigió Milagros.
+
+
+
+ El estado deberían especificarlo en término de estructuras de datos.
+
+ En el estado inicial el pacman puede tener una energía menor o igual a 50.
+
+ Los operadores de búsquedas no están definidos solo aparece el nombre. Estos deben representar transiciones de estado. Que significa cada uno de estos operadores??
+
+ Las acciones de búsqueda son operadores ATÓMICOS. Representan transición de estado. La forma de representarlo es: si  la precondición se cumple en el estado  entonces el nuevo estado es este.
+
+ La búsqueda es una prueba que hace el agente para ver que tan bien le va aplicando acciones en el mundo que conoce en ese momento.
+
+ La prueba de meta debe evaluar un estado y su estructura es:
+ Si este estado cumple estas condiciones entonces  llegué a la meta (retorno true)
+
+ Ud. definen esto:
+ {{{
+Si visionAmbiente.ConocimientoTotal entonces
+convienePelear = energiaPromedioPelea < energiaActual
+convieneMoverse = energiaPromedioMover < energiaActual
+}}}
+ ¿qué significa? El agente mientras desarrolla la búsqueda no percibe nada. Conoce una porción del mundo y con eso se tiene que arreglar para tomar la decisión.
+
+ Esta parte de la prueba:
+ {{{
+Si ( (No visionAmbiente.HayAlimentosSinComer) OR
+   (visionAmbiente.HayAlimentosSinComer AND No convieneMoverse) )
+   AND ( (No visionAmbiente.HayEnemigos) OR
+   (visionAmbiente.HayEnemigos AND No convienePelear) )
+   retornar EXITO
+Sino
+   Si energiaInsuficienteParaMover retornar EXITO
+   retornar FRACASO
+}}}
+ 
+ ¿qué pasaría si en el estado inicial el agente percibe que no hay nada a su alrededor? Entonces la prueba de meta daría éxito y ninguna acción sería propuesta por el agente pacman al simulador del entorno, es decir se queda indefinidamente en la posición inicial.
+ Ojo cómo plantean el estado, los operadores y la prueba de meta, estas tres cosas deben ser coherentes.
+ Vuelvan a mandar el práctico modificado antes de implementarlo.
