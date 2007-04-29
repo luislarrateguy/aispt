@@ -21,14 +21,10 @@
 
 package tpsia.tp1.agente;
 
-import java.util.HashMap;
-
-import tpsia.tp1.EstadoCelda;
 import tpsia.tp1.Ambiente;
+import tpsia.tp1.EstadoCelda;
 import tpsia.tp1.FuncionesUtiles;
-import tpsia.tp1.Offset;
 import tpsia.tp1.Percepcion;
-import calculador.Pair;
 
 public class VisionAmbiente extends Ambiente {
 	

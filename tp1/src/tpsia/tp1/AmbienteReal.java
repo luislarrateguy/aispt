@@ -126,7 +126,7 @@ public class AmbienteReal extends Ambiente {
 
 	public String draw() {
 		String aux = "Ambiente Real:\n";
-		aux = super.draw();
+		aux += super.draw();
 		
 		aux += "posPacman: [" 
 			+ Integer.toString(posicionPacman[0]) +","

@@ -87,7 +87,7 @@ public abstract class Ambiente {
 	//string toTurtle();
 	
 	public String draw() {
-		String cuadro = new String("\n");
+		String cuadro = new String("\n[ ] 0  1  2  3 ->X\n");
 		
 		Hashtable<Integer, String> aux;
 		aux = new Hashtable<Integer, String>();
@@ -98,6 +98,7 @@ public abstract class Ambiente {
 		aux.put(3, "P");
 		
 		for (int j=0;j<4;j++) {
+			cuadro += " "+Integer.toString(j)+" ";
 			for (int i=0;i<4;i++) {
 				cuadro 	+= "["
 						+aux.get(this.tablero[i][j].valor())
@@ -107,7 +108,7 @@ public abstract class Ambiente {
 			cuadro += "\n";
 		}
 		
-		return cuadro;
+		return cuadro+" Y\n";
 	}
 	
 	public abstract String toXML();
