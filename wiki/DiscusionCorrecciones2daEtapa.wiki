@@ -27,11 +27,11 @@ _*Milton*_
 
 *Corregido*
 
- _La búsqueda es una prueba que hace el agente para ver que tan bien le va aplicando acciones en el mundo que conoce en ese momento.
+ ~~_La búsqueda es una prueba que hace el agente para ver que tan bien le va aplicando acciones en el mundo que conoce en ese momento.
  La prueba de meta debe evaluar un estado y su estructura es:
- Si este estado cumple estas condiciones entonces  llegué a la meta (retorno true)_
+ Si este estado cumple estas condiciones entonces  llegué a la meta (retorno true)_~~
 
-*Bien, esto tenemos que corregirlo en la DOC del TP, porque ya lo charlamos y lo entendimos bien ambos (creo) en la clase esa*
+*Corregido* ~~*Bien, esto tenemos que corregirlo en la DOC del TP, porque ya lo charlamos y lo entendimos bien ambos (creo) en la clase esa*~~
 
  _Ud. definen esto:_
  {{{
@@ -39,13 +39,13 @@ Si visionAmbiente.ConocimientoTotal entonces
 convienePelear = energiaPromedioPelea < energiaActual
 convieneMoverse = energiaPromedioMover < energiaActual
 }}}
- _¿qué significa? El agente mientras desarrolla la búsqueda no percibe nada._
+ ~~_¿qué significa? El agente mientras desarrolla la búsqueda no percibe nada._~~
 
-*no percibe nada, pero podemos simular que percibe, como deciamos aplicandole una ganancia o perdida de energia. Quizá convenga pensar esto y ver si no es parte de la función heurística*
+*Corregida la prueba de meta. Ahora es más entendible. Deberiamos dejar la aclaracion que el agente no percibe nada, pero podemos simular que percibe, como deciamos aplicandole una ganancia o perdida de energia. Quizá convenga pensar esto y ver si no es parte de la función heurística*
 
- _Conoce una porción del mundo y con eso se tiene que arreglar para tomar la decisión._
+ ~~_Conoce una porción del mundo y con eso se tiene que arreglar para tomar la decisión._~~
 
-*Entonces primero tendría que cumplir el objetivo "Descubrir mapa"?*
+*Resuelto* ~~*Entonces primero tendría que cumplir el objetivo "Descubrir mapa"?*~~
 
  _Esta parte de la prueba:_
  {{{
@@ -59,11 +59,36 @@ Sino
    retornar FRACASO
 }}}
  
- _¿qué pasaría si en el estado inicial el agente percibe que no hay nada a su alrededor? Entonces la prueba de meta daría éxito y ninguna acción sería propuesta por el agente pacman al simulador del entorno, es decir se queda indefinidamente en la posición inicial._
+ ~~_¿qué pasaría si en el estado inicial el agente percibe que no hay nada a su alrededor? Entonces la prueba de meta daría éxito y ninguna acción sería propuesta por el agente pacman al simulador del entorno, es decir se queda indefinidamente en la posición inicial._~~
 
-*Cuac! No habíamos puesto que debía conocer el mapa? Nos comimos eso! que bolu! *
+*nueva prueba de meta*
+{{{
+Si ConoceTodoElAmbiente entonces
+  ConvienePelear =  energiaActual > energiaPromedioPelea
+  ConvieneMoverse = energiaActual > energiaPromedioMover
+  Si (ConvieneMoverse AND (HayAlimentosSinComer OR 
+                          (HayEnemigos AND ConvienePelear) 
+     )  
+     retornar FRACASO
+  Sino
+     retornar EXITO
+Sino
+  Si convieneMoverse entonces
+     retornar FRACASO  // Se da por vencido. Asume éxito en su objetivo, porque quiere sobrevivir!
+  Sino
+     retornar EXITO
+}}}
+*Corregido. Bah, no hacia falta corregir. En caso de que no perciba nada la secuencia de "verdades" sería:
+{{{
+ConoceTodoElAmbiente -> NO
+entonces
+convieneMoverse -> veamos: energiaActual > (EnergiaPromedioMoverse = 0) SI
+entonces retonrar FRACASO
+Por lo tanto sigue buscando. No se traba.
+}}}
+*
 
  _Ojo cómo plantean el estado, los operadores y la prueba de meta, estas tres cosas deben ser coherentes.
  Vuelvan a mandar el práctico modificado antes de implementarlo._
 
-*yes sir!*
+
