@@ -6,30 +6,12 @@ nos hacen suponer cosas.
 El pseudocódigo de la prueba de meta es el siguiente:
 
 \begin{verbatim}
-Si visionAmbiente.ConocimientoTotal entonces
-
-  convienePelear = energiaPromedioPelea < energiaActual
-  convieneMoverse = energiaPromedioMover < energiaActual
-
-  Si ( (No visionAmbiente.HayAlimentosSinComer) OR
-      (visionAmbiente.HayAlimentosSinComer AND No convieneMoverse) )
-    AND ( (No visionAmbiente.HayEnemigos) OR
-      (visionAmbiente.HayEnemigos AND No convienePelear) )
-
-  retornar EXITO
-
-Sino
-  Si energiaInsuficienteParaMover retornar EXITO
-
-retornar FRACASO
-\end{verbatim}
-
-Propongo esta prueba de meta (por mas que se implemente disinto, pero para que se lea mejor. En vez de poner la negacion al principio, aprovechar que es pseudo-codigo y usar un metodo para cada cosa (aunque uno sea negacion del otro)
-\begin{verbatim}
 
 Si ConoceTodoElAmbiente entonces
+  /* Las dos variables siguientes son booleanas */
   ConvienePelear  = energiaActual > energiaPromedioPelea
   ConvieneMoverse = energiaActual > energiaPromedioMover
+
   Si (ConvieneMoverse AND (HayAlimentosSinComer OR 
                           (HayEnemigos AND ConvienePelear) 
      )  
@@ -38,9 +20,14 @@ Si ConoceTodoElAmbiente entonces
      retornar EXITO
 Sino
   Si ConvieneMoverse entonces
-     retornar FRACASO  // Se da por vencido. Asume exito en su objetivo, porque quiere sobrevivir!
+     /* Se da por vencido. Asume exito en su objetivo,
+        porque quiere sobrevivir! */
+     retornar FRACASO  
   Sino
      retornar EXITO
 
 \end{verbatim}
+
+\TODO{Revisar si la función de prueba de meta es correcta}
+\TODO{Revisar los comentarios de la función}
 
