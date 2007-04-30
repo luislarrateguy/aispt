@@ -20,8 +20,10 @@ _*Milton*_
  ~~_Los operadores de búsquedas no están definidos solo aparece el nombre. Estos deben representar transiciones de estado. Que significa cada uno de estos operadores??_~~
 
 *Corregido* Revisar por favor.
+_*Revisado*_
 
 *Tenemos que discutir esto y ver si hacemos una máquina de estados de última. Igual no se si entendió la parte de los operadores. Está sólo el nombre (que es auto descriptivo), pero nos falta explayarlos (se escribe así) y agregar sus precondiciones*
+_*Creo que así esta bien (revisión 68 del código). Lo que sí en el draft define las precondiciones y resultados de un operador con pseudocódigo.*_
 
  ~~_Las acciones de búsqueda son operadores ATÓMICOS. Representan transición de estado. La forma de representarlo es: si  la precondición se cumple en el estado  entonces el nuevo estado es este._~~
 
@@ -42,6 +44,7 @@ convieneMoverse = energiaPromedioMover < energiaActual
  ~~_¿qué significa? El agente mientras desarrolla la búsqueda no percibe nada._~~
 
 *Corregida la prueba de meta. Ahora es más entendible. Deberiamos dejar la aclaracion que el agente no percibe nada, pero podemos simular que percibe, como deciamos aplicandole una ganancia o perdida de energia. Quizá convenga pensar esto y ver si no es parte de la función heurística*
+_*Si, es verdad. Lo vemos hoy en la clase.*_
 
  ~~_Conoce una porción del mundo y con eso se tiene que arreglar para tomar la decisión._~~
 
@@ -88,7 +91,8 @@ Por lo tanto sigue buscando. No se traba.
 }}}
 *
 
+_*Milagros no entendió la prueba de meta, creo. Hoy se lo hacemos entender (que feo que suena... tiene olor a violencia física) o nos explica que estamos totalmente equivocados con nuestros pensamientos :)*_
+
  _Ojo cómo plantean el estado, los operadores y la prueba de meta, estas tres cosas deben ser coherentes.
  Vuelvan a mandar el práctico modificado antes de implementarlo._
-
 
