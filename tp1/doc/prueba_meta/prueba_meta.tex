@@ -6,21 +6,28 @@ nos hacen suponer cosas.
 El pseudocódigo de la prueba de meta es el siguiente:
 
 \begin{verbatim}
-Si visionAmbiente.ConocimientoTotal entonces
 
-  convienePelear = energiaPromedioPelea < energiaActual
-  convieneMoverse = energiaPromedioMover < energiaActual
+Si ConoceTodoElAmbiente entonces
+  /* Las dos variables siguientes son booleanas */
+  ConvienePelear  = energiaActual > energiaPromedioPelea
+  ConvieneMoverse = energiaActual > energiaPromedioMover
 
-  Si ( (No visionAmbiente.HayAlimentosSinComer) OR
-      (visionAmbiente.HayAlimentosSinComer AND No convieneMoverse) )
-    AND ( (No visionAmbiente.HayEnemigos) OR
-      (visionAmbiente.HayEnemigos AND No convienePelear) )
-
-  retornar EXITO
-
+  Si (ConvieneMoverse AND (HayAlimentosSinComer OR 
+                          (HayEnemigos AND ConvienePelear) 
+     )  
+     retornar FRACASO
+  Sino
+     retornar EXITO
 Sino
-  Si energiaInsuficienteParaMover retornar EXITO
+  Si ConvieneMoverse entonces
+     /* Se da por vencido. Asume exito en su objetivo,
+        porque quiere sobrevivir! */
+     retornar FRACASO  
+  Sino
+     retornar EXITO
 
-retornar FRACASO
 \end{verbatim}
+
+\TODO{Revisar si la función de prueba de meta es correcta}
+\TODO{Revisar los comentarios de la función}
 
