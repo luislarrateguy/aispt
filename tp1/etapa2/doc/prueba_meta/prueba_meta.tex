@@ -28,16 +28,16 @@ Propongo esta prueba de meta (por mas que se implemente disinto, pero para que s
 \begin{verbatim}
 
 Si ConoceTodoElAmbiente entonces
-  ConvienePelear = energiaPromedioPelea < energiaActual
-  ConvieneMoverse = energiaPromedioMover < energiaActual
+  ConvienePelear  = energiaActual > energiaPromedioPelea
+  ConvieneMoverse = energiaActual > energiaPromedioMover
   Si (ConvieneMoverse AND (HayAlimentosSinComer OR 
                           (HayEnemigos AND ConvienePelear) 
      )  
      retornar FRACASO
   Sino
-     retornet EXITO
+     retornar EXITO
 Sino
-  Si convieneMoverse entonces
+  Si ConvieneMoverse entonces
      retornar FRACASO  // Se da por vencido. Asume exito en su objetivo, porque quiere sobrevivir!
   Sino
      retornar EXITO
