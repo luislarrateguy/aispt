@@ -1,10 +1,23 @@
 \section{Operadores de búsqueda}
-
+\TODO{El capo del formato, que le de mejor formato a esto}
 \begin{itemize}
 \item MoverArriba.
+MoverArriba
+PreCondicion: Siempre puede MoverArriba
+Resultado: El Pacman es dezplazado a su celda superior (movimiento sobre una esfera)
 \item MoverAbajo.
+PreCondicion: Siempre puede MoverAbajo
+Resultado: El Pacman es dezplazado a su celda inferior (movimiento sobre una esfera)
 \item MoverDerecha.
+PreCondicion: Siempre puede MoverDerecha
+Resultado: El Pacman es dezplazado a su celda derecha (movimiento sobre una esfera)
 \item MoverIzquierda.
+PreCondicion: Siempre puede MoverIzquierda
+Resultado: El Pacman es dezplazado a su celda izquierda (movimiento sobre una esfera)
 \item Comer.
+PreCondicion: hayComida en posicionActual
+Resultado: El Pacman "come". Alimento en posicionActual desaparece y la celda queda en estado \textit{Vacia}
 \item Pelear.
+PreCondicion: hayEnemigo en posicionActual
+Resultado: El Pacman "pelea". Enemigo en posicionActual desaparece y la celda queda en estado \textit{Vacia}
 \end{itemize}
