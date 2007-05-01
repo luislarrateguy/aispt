@@ -1,7 +1,11 @@
 \section{Operadores de búsqueda}
-La búsqueda se efectua operando sobre un estado inicial y se le va aplicando operadores, obteniendo nuevos estados.\newline
-El estado se almacena dentro de la variable privada \textit{est} del tipo \textit{Estado}\newline
-\TODO {Cómo explico una precondición "no tiene"?}
+
+La búsqueda se efectua operando sobre un estado inicial y se le va aplicando
+operadores, obteniendo nuevos estados. El estado se almacena dentro de
+la variable privada \variable{estado} del tipo \clase{Estado}
+
+Cuando decimos que un operador ``no tiene'' precondiciones, queremos decir
+que siempre se evalúa en \emph{true} antes de aplicarlo.
 
 \begin{itemize}
 
@@ -13,40 +17,43 @@ dirige hacia arriba, aparecerá en la misma columna pero en la fila de abajo.
 Esto es similar para los demás operadores de movimiento.})
 
 \item \textbf{MoverAbajo}\newline
-\underline{PreCondicion:}  no tiene.\newline
+\underline{PreCondicion:} no tiene.\newline
 \underline{Resultado:} El Pacman es dezplazado a su celda inferior (movimiento
 sobre una esfera)\newline
-\verbatim{
-}
 
 \item \textbf{MoverDerecha}\newline
-\underline{PreCondicion:}  no tiene.\newline
+\underline{PreCondicion:} no tiene.\newline
 \underline{Resultado:} El Pacman es dezplazado a su celda derecha (movimiento
 sobre una esfera)\newline
-\verbatim{
-}
 
 \item \textbf{MoverIzquierda}\newline
-\underline{PreCondicion:}  no tiene.\newline
+\underline{PreCondicion:} no tiene.\newline
 \underline{Resultado:} El Pacman es dezplazado a su celda izquierda (movimiento
 sobre una esfera)\newline
-\verbatim{
-}
 
 \item \textbf{Comer}\newline
-\underline{PreCondicion:} \metodo{est.getAmbiente().hayComida(x,y)} = true; siendo X e Y la posición actual.\newline
-\underline{Resultado:} \metodo{visionAmbiente.comer()}. El Pacman ``come''. Alimento en posicionActual desaparece
-y la celda queda en estado \textit{Vacia}\newline
-\verbatim{Si est.getAmbiente().hayComida(x,y)
+\underline{PreCondicion:} \metodo{est.getAmbiente().hayComida(x,y)} = true;
+siendo X e Y la posición actual.
+
+\begin{verbatim}
+Si est.getAmbiente().hayComida(x,y)
    -> visionAmbiente.comer()
-}
+\end{verbatim}
+
+\underline{Resultado:} \metodo{visionAmbiente.comer()}. El Pacman ``come''.
+Alimento en posicionActual desaparece y la celda queda en estado \textit{Vacia}
+
 
 \item \textbf{Pelear}\newline
-\underline{PreCondicion:} \metodo{est.getAmbiente().hayEnemigo(x,y)} = true; siendo X e Y la posición actual\newline
-\underline{Resultado:} \metodo{visionAmbiente.pelear()}. El Pacman ``pelea''. Enemigo en posicionActual desaparece
-y la celda queda en estado \textit{Vacia}
-\verbatim{Si est.getAmbiente().hayEnemigo(x,y)
+\underline{PreCondicion:} \metodo{est.getAmbiente().hayEnemigo(x,y)} = true;
+siendo X e Y la posición actual.
+
+\begin{verbatim}
+Si est.getAmbiente().hayEnemigo(x,y)
    -> visionAmbiente.pelear()
-}
+\end{verbatim}
+
+\underline{Resultado:} \metodo{visionAmbiente.pelear()}. El Pacman ``pelea''.
+Enemigo en posicionActual desaparece y la celda queda en estado \textit{Vacia}
 
 \end{itemize}
