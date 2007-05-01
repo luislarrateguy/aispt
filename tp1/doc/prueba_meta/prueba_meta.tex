@@ -1,33 +1,31 @@
 \section{Prueba de meta}
 
-Como desconocemos un poco el funcionamiento del agente, hay algunas dudas que
-nos hacen suponer cosas.
-
 El pseudocódigo de la prueba de meta es el siguiente:
 
 \begin{verbatim}
 
 Si ConoceTodoElAmbiente entonces
   /* Las dos variables siguientes son booleanas */
-  ConvienePelear  = energiaActual > energiaPromedioPelea
-  ConvieneMoverse = energiaActual > energiaPromedioMover
+  ConvienePelear  = energiaActualAgente > energiaPromedioPelea
+  ConvieneMoverse = energiaActualAgente > energiaPromedioMover
 
   Si (ConvieneMoverse AND (HayAlimentosSinComer OR 
-                          (HayEnemigos AND ConvienePelear) 
+                          (HayEnemigos AND ConvienePelear) )
      )  
      retornar FRACASO
   Sino
      retornar EXITO
 Sino
   Si ConvieneMoverse entonces
-     /* Se da por vencido. Asume exito en su objetivo,
-        porque quiere sobrevivir! */
      retornar FRACASO  
   Sino
+     /* Se da por vencido. Asume exito en su objetivo,
+        porque quiere sobrevivir! */
      retornar EXITO
 
 \end{verbatim}
 
-\TODO{Revisar si la función de prueba de meta es correcta}
-\TODO{Revisar los comentarios de la función}
+Las variables \variable{ConvienePelear} y \variable{ConvieneMoverse} podrían
+traducirse como ``tiene energía suficiente para pelear'' y ``tiene energía
+suficiente para moverse''.
 
