@@ -6,8 +6,8 @@ El pseudocódigo de la prueba de meta es el siguiente:
 
 Si ConoceTodoElAmbiente entonces
   /* Las dos variables siguientes son booleanas */
-  ConvienePelear  = energiaActual > energiaPromedioPelea
-  ConvieneMoverse = energiaActual > energiaPromedioMover
+  ConvienePelear  = energiaActualAgente > energiaPromedioPelea
+  ConvieneMoverse = energiaActualAgente > energiaPromedioMover
 
   Si (ConvieneMoverse AND (HayAlimentosSinComer OR 
                           (HayEnemigos AND ConvienePelear) )
@@ -25,4 +25,7 @@ Sino
 
 \end{verbatim}
 
+Las variables \variable{ConvienePelear} y \variable{ConvieneMoverse} podrían
+traducirse como ``tiene energía suficiente para pelear'' y ``tiene energía
+suficiente para moverse''.
 
