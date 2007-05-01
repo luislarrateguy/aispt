@@ -15,26 +15,38 @@ Esto es similar para los demás operadores de movimiento.})
 \item \textbf{MoverAbajo}\newline
 \underline{PreCondicion:}  no tiene.\newline
 \underline{Resultado:} El Pacman es dezplazado a su celda inferior (movimiento
-sobre una esfera)
+sobre una esfera)\newline
+\verbatim{
+}
 
 \item \textbf{MoverDerecha}\newline
 \underline{PreCondicion:}  no tiene.\newline
 \underline{Resultado:} El Pacman es dezplazado a su celda derecha (movimiento
-sobre una esfera)
+sobre una esfera)\newline
+\verbatim{
+}
 
 \item \textbf{MoverIzquierda}\newline
 \underline{PreCondicion:}  no tiene.\newline
 \underline{Resultado:} El Pacman es dezplazado a su celda izquierda (movimiento
-sobre una esfera)
+sobre una esfera)\newline
+\verbatim{
+}
 
 \item \textbf{Comer}\newline
 \underline{PreCondicion:} \metodo{est.getAmbiente().hayComida(x,y)} = true; siendo X e Y la posición actual.\newline
 \underline{Resultado:} \metodo{visionAmbiente.comer()}. El Pacman ``come''. Alimento en posicionActual desaparece
-y la celda queda en estado \textit{Vacia}
+y la celda queda en estado \textit{Vacia}\newline
+\verbatim{Si est.getAmbiente().hayComida(x,y)
+   -> visionAmbiente.comer()
+}
 
 \item \textbf{Pelear}\newline
 \underline{PreCondicion:} \metodo{est.getAmbiente().hayEnemigo(x,y)} = true; siendo X e Y la posición actual\newline
 \underline{Resultado:} \metodo{visionAmbiente.pelear()}. El Pacman ``pelea''. Enemigo en posicionActual desaparece
 y la celda queda en estado \textit{Vacia}
+\verbatim{Si est.getAmbiente().hayEnemigo(x,y)
+   -> visionAmbiente.pelear()
+}
 
 \end{itemize}
