@@ -22,10 +22,11 @@
 package tpsia.tp1.acciones;
 
 import tpsia.tp1.Ambiente;
+import tpsia.tp1.busqueda.Nodo;
 
 public interface IAccion {
-
 	public void ejecutar(Ambiente amb);
+	public boolean aplicable(Ambiente amb);
 	public String getTipoAccion();
-
+	public int getCosto();
 }

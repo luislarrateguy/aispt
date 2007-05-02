@@ -27,7 +27,10 @@ import tpsia.tp1.Ambiente;
  * Singleton Notice
  */
 public abstract class Avanzar implements IAccion {
-	
 	public abstract void ejecutar(Ambiente amb);
-	public abstract String getTipoAccion(); 
+	public abstract String getTipoAccion();
+	
+	public int getCosto() {
+		return 2;
+	}
 }

@@ -45,4 +45,8 @@ public class AvanzarArriba extends Avanzar {
 	public String getTipoAccion() {
 		return "arriba";
 	}
+
+	public boolean aplicable(Ambiente amb) {
+		return true;
+	}
 }

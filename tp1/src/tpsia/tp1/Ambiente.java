@@ -24,7 +24,7 @@ package tpsia.tp1;
 import java.util.Hashtable;
 
 
-public abstract class Ambiente {
+public abstract class Ambiente implements Cloneable {
 	protected EstadoCelda[][] tablero;
 	protected int[] posicionPacman;
 	
@@ -36,6 +36,52 @@ public abstract class Ambiente {
 		this.posicionPacman = new int[2];
 		this.posicionPacman[0] = 0;
 		this.posicionPacman[1] = 0;
+	}
+	
+	public int[] getPosicionCeldaSuperior() {
+		return FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Arriba);
+	}
+	
+	public int[] getPosicionCeldaInferior() {
+		return FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Abajo);
+	}
+	
+	public int[] getPosicionCeldaDerecha() {
+		return FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Derecha);
+	}
+	
+	public int[] getPosicionCeldaIzquierda() {
+		return FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Izquierda);
+	}
+	
+	public EstadoCelda[] getCeldasAdyacentes() {
+		EstadoCelda[] ady = new EstadoCelda[4];
+		/* arr[0] aba[1] der[2] izq[3] */ 
+		int x;
+		int y;
+
+		// Celda de arriba del pacman
+		x = this.posicionPacman[0];
+		y = FuncionesUtiles.sumarPosiciones(this.posicionPacman[1], 1);
+		ady[0] = this.tablero[x][y];
+		
+		// Celda de abajo
+		x = this.posicionPacman[0];
+		y = FuncionesUtiles.sumarPosiciones(this.posicionPacman[1], -1);
+		ady[1] = this.tablero[x][y];
+		
+		// Celda de la derecha
+		x = FuncionesUtiles.sumarPosiciones(this.posicionPacman[0], 1);
+		y = this.posicionPacman[1];
+		ady[2] = this.tablero[x][y];
+		
+		// Celda de la izquierda
+		x = FuncionesUtiles.sumarPosiciones(this.posicionPacman[0], -1);
+		y = this.posicionPacman[1];
+		ady[3] = this.tablero[x][y];
+		
+		//return ady.clone();
+		return ady;
 	}
 	
 	public void pelear() {
@@ -112,4 +158,46 @@ public abstract class Ambiente {
 	}
 	
 	public abstract String toXML();
+	
+	public abstract Object clone();
+	
+	public void copiarEstadoA(Ambiente ambienteClon) {
+		// Copio el tablero
+		ambienteClon.tablero = new EstadoCelda[4][4];
+		for (int i=0;i<4;i++)
+			for (int j=0;j<4;j++)
+				ambienteClon.tablero[i][j] = this.tablero[i][j];
+		
+		// Copio la posición del pacman
+		ambienteClon.posicionPacman = new int[2];
+		ambienteClon.posicionPacman[0] = this.posicionPacman[0];
+		ambienteClon.posicionPacman[1] = this.posicionPacman[1];
+	}
+
+	public int[] getPosicionPacman() {
+		return posicionPacman;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (! (o instanceof Ambiente))
+			return false;
+		
+		Ambiente a = (Ambiente)o;
+		
+		// ¿Es igual el tablero de juego?
+		for (int i=0;i<4;i++) {
+			for (int j=0;j<4;j++) {
+				if (this.tablero[i][j] != a.tablero[i][j])
+					return false;
+			}
+		}
+		
+		// ¿Es igual la posición del pacman?
+		if (this.posicionPacman[0] != a.posicionPacman[0] ||
+				this.posicionPacman[1] != a.posicionPacman[1])
+			return false;
+		
+		return true;
+	}
 }

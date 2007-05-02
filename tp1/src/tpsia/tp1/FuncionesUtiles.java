@@ -15,4 +15,13 @@ public class FuncionesUtiles {
 		// Esto no está muy bien, pero no hay problemas para el simulador
 		return (4 + (posicion + incremento));
 	}
+	
+	public static int[] sumarPosiciones (int[] posicionActual, Offset o) {
+		int[] resultado = new int[2];
+		
+		resultado[0] = sumarPosiciones(posicionActual[0], o.x());
+		resultado[1] = sumarPosiciones(posicionActual[1], o.y());
+		
+		return resultado;
+	}
 }

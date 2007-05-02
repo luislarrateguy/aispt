@@ -37,11 +37,24 @@ public class Comer implements IAccion {
 	public String getTipoAccion() {
 		return "comer";
 	}
+	
+	public int getCosto() {
+		return 1;
+	}
 
 	static public IAccion getInstancia() {
 		if (instancia == null) {
 			instancia = new Comer();
 		}
 		return instancia;
+	}
+
+	public boolean aplicable(Ambiente amb) {
+		int[] posicionAgente = amb.getPosicionPacman();
+		
+		if (amb.hayComida(posicionAgente[0], posicionAgente[1]))
+			return true;
+		
+		return false;
 	}
 }

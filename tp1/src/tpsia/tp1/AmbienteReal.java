@@ -26,6 +26,7 @@ import java.util.Vector;
 
 import tpsia.tp1.acciones.Comer;
 import tpsia.tp1.acciones.Pelear;
+import tpsia.tp1.agente.VisionAmbiente;
 
 import calculador.Calculador;
 import calculador.Pair;
@@ -50,36 +51,6 @@ public class AmbienteReal extends Ambiente {
 				this.tablero[i][j] = EstadoCelda.Vacia;
 		
 		this.posicionInicial = false;
-	}
-
-	public EstadoCelda[] getCeldasAdyacentes() {
-		EstadoCelda[] ady = new EstadoCelda[4];
-		/* arr[0] aba[1] der[2] izq[3] */ 
-		int x;
-		int y;
-
-		// Celda de arriba del pacman
-		x = this.posicionPacman[0];
-		y = FuncionesUtiles.sumarPosiciones(this.posicionPacman[1], 1);
-		ady[0] = this.tablero[x][y];
-		
-		// Celda de abajo
-		x = this.posicionPacman[0];
-		y = FuncionesUtiles.sumarPosiciones(this.posicionPacman[1], -1);
-		ady[1] = this.tablero[x][y];
-		
-		// Celda de la derecha
-		x = FuncionesUtiles.sumarPosiciones(this.posicionPacman[0], 1);
-		y = this.posicionPacman[1];
-		ady[2] = this.tablero[x][y];
-		
-		// Celda de la izquierda
-		x = FuncionesUtiles.sumarPosiciones(this.posicionPacman[0], -1);
-		y = this.posicionPacman[1];
-		ady[3] = this.tablero[x][y];
-		
-		//return ady.clone();
-		return ady;
 	}
 	
 	/**
@@ -149,5 +120,20 @@ public class AmbienteReal extends Ambiente {
 
 	public void setEnergiaPacman(int energiaPacman) {
 		this.energiaPacman = energiaPacman;
+	}
+
+	@Override
+	public Object clone() {
+		AmbienteReal ambienteRealClon = new AmbienteReal();
+		
+		/* Le copio el tablero y la posición del agente (estado de la
+		 * clase Ambiente). */
+		this.copiarEstadoA(ambienteRealClon);
+		
+		// Le copio el estado propio de AmbienteReal
+		ambienteRealClon.posicionInicial = this.posicionInicial;
+		ambienteRealClon.energiaPacman = this.energiaPacman;
+		
+		return ambienteRealClon;
 	}
 }

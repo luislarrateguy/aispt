@@ -32,9 +32,13 @@ public class Percepcion {
 
 	public Percepcion(EstadoCelda[] ady, int e, 
 			int[] posIniPacman) {
-		Logging.logDebug("SIM: Armando percepcion...");
-		this.celdasAdyacentes = ady;
+		
+		this.celdasAdyacentes = new EstadoCelda[4];
+		for (int i=0; i<4; i++)
+			this.celdasAdyacentes[i] = ady[i];
+		
 		this.energia = e;
+		
 		if (posIniPacman != null) { 
 			this.posX = posIniPacman[0];
 			this.posY = posIniPacman[1];

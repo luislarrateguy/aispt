@@ -21,11 +21,9 @@
 
 package tpsia.tp1.agente;
 
-/**
- * @author nacho
- * @deprecated Demasiado complicado. A Eliminar en proximos
- * COMMITs
- */
-public interface IObjetivo {
+import tpsia.tp1.busqueda.Nodo;
 
+public interface IObjetivo {
+	boolean cumpleObjetivo(Estado estado);
+	boolean cumpleObjetivo(Nodo nodo);
 }

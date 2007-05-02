@@ -46,4 +46,8 @@ public class AvanzarIzquierda extends Avanzar {
 	public String getTipoAccion() {
 		return "izquierda";
 	}
+
+	public boolean aplicable(Ambiente amb) {
+		return true;
+	}
 }

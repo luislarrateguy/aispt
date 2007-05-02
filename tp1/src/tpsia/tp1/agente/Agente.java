@@ -22,25 +22,25 @@
 package tpsia.tp1.agente;
 
 import java.util.ArrayList;
-import java.util.Vector;
-
-import calculador.Pair;
 
 import tpsia.tp1.Logging;
 import tpsia.tp1.Percepcion;
 import tpsia.tp1.acciones.IAccion;
+import tpsia.tp1.acciones.NoAccion;
+import tpsia.tp1.busqueda.Busqueda;
 import tpsia.tp1.busqueda.BusquedaCostoUniforme;
-import tpsia.tp1.busqueda.IBusqueda;
 
 public class Agente {
 
 	private Estado estado;
-	private IBusqueda busqueda;
+	private IObjetivo objetivo;
+	private Busqueda busqueda;
 	private ArrayList<IAccion> acciones;
 	
 	public Agente() {
 		this.estado = new Estado();
-		this.busqueda = new BusquedaCostoUniforme();
+		this.objetivo = ObjetivoTP.getInstancia();
+		this.busqueda = new BusquedaCostoUniforme(this.estado, this.objetivo);
 	}
 
 	public IAccion actuar(Percepcion p) {
@@ -49,12 +49,23 @@ public class Agente {
 		
 		Logging.logMensaje(this.estado.getAmbiente().draw());
 		
-		this.acciones = busqueda.buscarSolucion(this.estado);
-		IAccion a = this.acciones.get(0);
-		a.ejecutar(this.estado.getAmbiente());
+		this.acciones = busqueda.buscarSolucion();
+		IAccion a = this.acciones.get(this.acciones.size() - 1);
+		
+		Logging.logDebug("AGENTE: Se decidió la acción: " + a.getTipoAccion());
+		this.estado.ejecutarAccion(a);
+		//a.ejecutar(this.estado.getAmbiente());
 		
 		/* TODO A esta altura del código podríamos guardar cosas 
 		 * como	última acción ejecutada y demás. */
 		return a;
+	}
+	
+	public boolean cumplioObjetivo() {
+		return this.objetivo.cumpleObjetivo(this.estado);
+	}
+	
+	public boolean vivo() {
+		return (this.estado.getEnergia() > 0);
 	}
 }

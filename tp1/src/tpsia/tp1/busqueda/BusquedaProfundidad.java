@@ -25,16 +25,16 @@ import java.util.ArrayList;
 
 import tpsia.tp1.acciones.IAccion;
 import tpsia.tp1.agente.Estado;
+import tpsia.tp1.agente.IObjetivo;
 
-public class BusquedaProfundidad implements IBusqueda {
+public class BusquedaProfundidad extends Busqueda {
 
-	public ArrayList<IAccion> buscarSolucion(Estado p) {
-		// TODO Auto-generated method stub
-		return null;
+	public BusquedaProfundidad(Estado estado, IObjetivo objetivo) {
+		super(estado, objetivo);
 	}
 
-	public boolean cumpleObjetivo(Estado x) {
+	public ArrayList<IAccion> buscarSolucion() {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 }

@@ -24,6 +24,7 @@ package tpsia.tp1;
 import java.util.Vector;
 
 import tpsia.tp1.acciones.IAccion;
+import tpsia.tp1.acciones.NoAccion;
 import tpsia.tp1.agente.Agente;
 import calculador.*;
 
@@ -59,10 +60,14 @@ public class Simulador {
 		while (!this.finSimulacion()) {
 			/* Creo la percepción, se la envío al agente, y espero una acción
 			 * escogida por él. */
+			Logging.logDebug("SIM: Armando percepcion...");
 			p = new Percepcion(ambiente.getCeldasAdyacentes(),
 					ambiente.getEnergiaPacman(), ambiente.getPosicionInicialPacman());
 			Logging.logDebug("SIM: Enviando percepcion a Pacman");
 			a = pacman.actuar(p);
+			
+			if (a instanceof NoAccion)
+				break;
 			
 			// avisar al calculador
 			Logging.logDebug("SIM: Calculando energia pacman");
@@ -103,9 +108,10 @@ public class Simulador {
 	private boolean finSimulacion() {
 		// TODO Agregar la condición de fin de simulacion
 		Logging.logDebug("SIM: Chequeando si termina...");
-		this.cont--;
+		//this.cont--;
 		// return pacman.cumplioObjetivo();
-		return (this.cont == 0);
+		//return (this.cont == 0);
+		return (this.pacman.cumplioObjetivo() && this.pacman.vivo());
 	}
 	
 	public static Simulador GetInstancia() {

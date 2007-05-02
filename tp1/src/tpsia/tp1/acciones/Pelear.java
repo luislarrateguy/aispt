@@ -37,11 +37,24 @@ public class Pelear implements IAccion {
 	public String getTipoAccion() {
 		return "pelear";
 	}
+	
+	public int getCosto() {
+		return 3;
+	}
 
 	static public IAccion getInstancia() {
 		if (instancia == null) {
 			instancia = new Pelear();
 		}
 		return instancia;
+	}
+
+	public boolean aplicable(Ambiente amb) {
+		int[] posicionAgente = amb.getPosicionPacman();
+		
+		if (amb.hayEnemigo(posicionAgente[0], posicionAgente[1]))
+			return true;
+		
+		return false;
 	}
 }
