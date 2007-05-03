@@ -125,12 +125,14 @@ public class Estado implements Cloneable {
 		return this.visionAmbiente;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Object clone() {
 		Estado estadoClon = new Estado();
 		
 		estadoClon.energia = this.energia;
-		// Estos warnings me preocupan.
+		// Estos warnings me preocupan. Parece que no tienen implementado CLONE
+		// sca el supress y vas a ver
 		estadoClon.promedios = (Hashtable<Class, Float>) this.promedios.clone();
 		estadoClon.vecesEjecutada = (Hashtable<Class, Integer>) this.vecesEjecutada.clone();
 		estadoClon.visionAmbiente = (VisionAmbiente) this.visionAmbiente.clone();

@@ -66,7 +66,7 @@ public class AmbienteReal extends Ambiente {
 		this.posicionPacman[1] = posicionPacMan.getY();
 		
 		//Inicializando enemigos
-		Vector<Pair> posicionesEnemigos = (Vector<Pair>)posEnemigos;
+		Vector<Pair> posicionesEnemigos = (Vector<Pair>) posEnemigos;
 		for (Pair unaCelda : posicionesEnemigos)
 			this.tablero[unaCelda.getX()][unaCelda.getY()] = EstadoCelda.Enemigo;
 		

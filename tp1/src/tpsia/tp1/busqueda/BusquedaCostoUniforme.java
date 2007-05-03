@@ -43,12 +43,12 @@ public class BusquedaCostoUniforme extends Busqueda {
 		super(estado, objetivo);
 	}
 
-	@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	public ArrayList<IAccion> buscarSolucion() {
 		// TODO buscar secuencia de acciones
 		Logging.logDebug("PACMAN: buscar accion");
 		ArrayList<IAccion> l = new ArrayList<IAccion>();
-		PriorityQueue<Nodo> colaNodos = new PriorityQueue();
+		PriorityQueue<Nodo> colaNodos = new PriorityQueue<Nodo>();
 		ArrayList<VisionAmbiente> estadosAlcanzados = new ArrayList<VisionAmbiente>();
 		
 		Nodo nodoInicial = new Nodo((Estado)this.estado.clone());
