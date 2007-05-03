@@ -126,7 +126,7 @@ public class VisionAmbiente extends Ambiente {
 		
 		aux += "posPacman: [" 
 			+ Integer.toString(posicionPacman[0]) +","
-			+ Integer.toString(posicionPacman[1]) + "]\n";
+			+ Integer.toString(posicionPacman[1]) + "]";
 		
 		return aux;
 	}

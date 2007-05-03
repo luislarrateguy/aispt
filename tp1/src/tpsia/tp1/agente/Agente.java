@@ -47,6 +47,8 @@ public class Agente {
 		this.estado.actualizarEstado(p);
 		
 		Logging.logMensaje(this.estado.getAmbiente().draw());
+		Logging.logMensaje("energia:" 
+			+ Integer.toString(this.estado.getEnergia()) + "\n");
 		
 		this.acciones = busqueda.buscarSolucion();
 		IAccion a = this.acciones.get(this.acciones.size() - 1);
