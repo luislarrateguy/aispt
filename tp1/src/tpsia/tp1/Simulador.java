@@ -26,7 +26,8 @@ import java.util.Vector;
 import tpsia.tp1.acciones.IAccion;
 import tpsia.tp1.acciones.NoAccion;
 import tpsia.tp1.agente.Agente;
-import calculador.*;
+import calculador.Calculador;
+import calculador.Pair;
 
 public class Simulador {
 	
@@ -122,8 +123,8 @@ public class Simulador {
 	}
 	
 	public void mostrarPerformance() {
-		Logging.logDebug("SIM: Mostrando desempeño del PACMAN");
+		Logging.logDebug("SIM: Mostrando desempeño del PACMAN: ");
 		int f = calculador.getPerformance();
-		// TODO Agregar código para mostrar
+		Logging.logDebug(Integer.toString(f));
 	}
 }

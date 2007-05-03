@@ -23,7 +23,6 @@ package tpsia.tp1.acciones;
 
 import tpsia.tp1.Ambiente;
 import tpsia.tp1.Offset;
-import tpsia.tp1.busqueda.Nodo;
 
 public class AvanzarAbajo extends Avanzar {
 

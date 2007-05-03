@@ -21,11 +21,8 @@
 
 package tpsia.tp1.agente;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 
-import tpsia.tp1.Ambiente;
-import tpsia.tp1.Offset;
 import tpsia.tp1.Percepcion;
 import tpsia.tp1.acciones.Avanzar;
 import tpsia.tp1.acciones.Comer;
@@ -101,8 +98,8 @@ public class Estado implements Cloneable {
 			/* Si "promedio = suma / veces", entonces para recalcularlo primero
 			 * obtengo "suma = promedio * veces".
 			 * Suma es la sumatoria de diferencias de energía. */
-			Float pasdf = this.promedios.get(this.ultimaAccionEjecutada);
-			Integer iasdf = this.vecesEjecutada.get(this.ultimaAccionEjecutada);
+//			Float pasdf = this.promedios.get(this.ultimaAccionEjecutada);
+//			Integer iasdf = this.vecesEjecutada.get(this.ultimaAccionEjecutada);
 			float suma = this.promedios.get(this.ultimaAccionEjecutada)
 				* this.vecesEjecutada.get(this.ultimaAccionEjecutada);
 			
@@ -133,9 +130,10 @@ public class Estado implements Cloneable {
 		Estado estadoClon = new Estado();
 		
 		estadoClon.energia = this.energia;
-		estadoClon.promedios = (Hashtable<Class, Float>)this.promedios.clone();
-		estadoClon.vecesEjecutada = (Hashtable<Class, Integer>)this.vecesEjecutada.clone();
-		estadoClon.visionAmbiente = (VisionAmbiente)this.visionAmbiente.clone();
+		// Estos warnings me preocupan.
+		estadoClon.promedios = (Hashtable<Class, Float>) this.promedios.clone();
+		estadoClon.vecesEjecutada = (Hashtable<Class, Integer>) this.vecesEjecutada.clone();
+		estadoClon.visionAmbiente = (VisionAmbiente) this.visionAmbiente.clone();
 		
 		return estadoClon;
 	}

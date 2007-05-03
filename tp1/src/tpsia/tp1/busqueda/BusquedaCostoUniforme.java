@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.PriorityQueue;
 
-import tpsia.tp1.EstadoCelda;
 import tpsia.tp1.Logging;
 import tpsia.tp1.acciones.AvanzarAbajo;
 import tpsia.tp1.acciones.AvanzarArriba;

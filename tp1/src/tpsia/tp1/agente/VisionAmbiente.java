@@ -24,7 +24,6 @@ package tpsia.tp1.agente;
 import tpsia.tp1.Ambiente;
 import tpsia.tp1.EstadoCelda;
 import tpsia.tp1.FuncionesUtiles;
-import tpsia.tp1.Offset;
 import tpsia.tp1.Percepcion;
 
 public class VisionAmbiente extends Ambiente {
@@ -147,7 +146,9 @@ public class VisionAmbiente extends Ambiente {
 		this.copiarEstadoA(visionAmbienteClon);
 		
 		// Le copio el estado propio de VisionAmbiente
-		visionAmbienteClon.first = this.first;
+		//Esto no va. Es un atributo de clase, o sea que afecta a todas las
+		//instancias. no hace falta copiarlo, ni se puede en realidad.
+		//visionAmbienteClon.first = this.first;
 		
 		return visionAmbienteClon;
 	}
@@ -162,8 +163,10 @@ public class VisionAmbiente extends Ambiente {
 		if (!super.equals(va))
 			return false;
 		
-		if (this.first != va.first)
-			return false;
+		// lo mismo aca, no se puede acceder desde el objeto
+		//sino desde la clase. Debia ser VisionAmbiente.first
+		//if (this.first != va.first)
+		//	return false;
 		
 		return true;
 	}

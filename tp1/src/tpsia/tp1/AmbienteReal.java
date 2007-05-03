@@ -21,14 +21,8 @@
 
 package tpsia.tp1;
 
-import java.util.Hashtable;
 import java.util.Vector;
 
-import tpsia.tp1.acciones.Comer;
-import tpsia.tp1.acciones.Pelear;
-import tpsia.tp1.agente.VisionAmbiente;
-
-import calculador.Calculador;
 import calculador.Pair;
 
 public class AmbienteReal extends Ambiente {
