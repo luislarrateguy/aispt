@@ -36,8 +36,8 @@ public class Agente {
 	private Busqueda busqueda;
 	private ArrayList<IAccion> acciones;
 	
-	public Agente() {
-		this.estado = new Estado();
+	public Agente(int energiaInicial) {
+		this.estado = new Estado(energiaInicial);
 		this.objetivo = ObjetivoTP.getInstancia();
 		this.busqueda = new BusquedaCostoUniforme(this.estado, this.objetivo);
 	}

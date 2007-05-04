@@ -35,13 +35,11 @@ public class Simulador {
 	private Calculador calculador;
 	private AmbienteReal ambiente;
 	private Agente pacman;
-	
-	int cont;
+
 
 	private Simulador() {
-		this.calculador = new Calculador();
+		this.calculador = new Calculador("Grupo 28");
 		this.ambiente = new AmbienteReal();
-		this.cont = 5;
 	}
 	
 	/**
@@ -80,6 +78,8 @@ public class Simulador {
 			Logging.logDebug("SIM: Actualizando ambiente");
 			ambiente.setEnergiaPacman(energiaPacman);
 		}
+		
+		Logging.logMensaje(" ### Fin de la simulación ### ");
 	}
 	
 	/**
@@ -88,7 +88,6 @@ public class Simulador {
 	 * Con todo esto inicializa el ambiente real.
 	 */
 	private void inicializarSimulacion() {
-		pacman = new Agente();
 		Vector posicionesEnemigos = calculador.inicializarEnemigo();
 		Pair posicionPacMan 	= calculador.getPosicionInicial();
 		Vector posicionesComida = calculador.inicializarComida();
@@ -96,7 +95,9 @@ public class Simulador {
 		/* FIXME: Esto no estaría bien. Tendría que haber un método
 		 * que retorne la energía inicial, ya que así le estamos quitando,
 		 * ¿o me equivoco? */
-		int energiaPacman = calculador.calcularEnergiaPacMan("arriba");
+		int energiaPacman = calculador.calcularEnergiaPacMan();
+		
+		this.pacman = new Agente(energiaPacman);
 		
 		this.ambiente.inicializar(energiaPacman,
 				posicionPacMan,
@@ -112,7 +113,8 @@ public class Simulador {
 		//this.cont--;
 		// return pacman.cumplioObjetivo();
 		//return (this.cont == 0);
-		return (this.pacman.cumplioObjetivo() && this.pacman.vivo());
+		return ( (this.pacman.cumplioObjetivo() && this.pacman.vivo()) ||
+				!this.pacman.vivo());
 	}
 	
 	public static Simulador GetInstancia() {
@@ -123,8 +125,7 @@ public class Simulador {
 	}
 	
 	public void mostrarPerformance() {
-		Logging.logDebug("SIM: Mostrando desempeño del PACMAN: ");
-		int f = calculador.getPerformance();
-		Logging.logDebug(Integer.toString(f));
+		Logging.logDebug("SIM: Desempeño del PACMAN: " +
+				this.calculador.getPerformance());
 	}
 }

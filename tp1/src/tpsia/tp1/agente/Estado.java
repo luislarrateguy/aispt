@@ -44,7 +44,11 @@ public class Estado implements Cloneable {
 	private VisionAmbiente visionAmbiente;
 	
 	public Estado() {
-		this.energia = 0;
+		this(0);
+	}
+	
+	public Estado(int energiaInicial) {
+		this.energia = energiaInicial;
 		this.ultimaAccionEjecutada = null;
 		
 		this.promedios = new Hashtable<Class, Float>();

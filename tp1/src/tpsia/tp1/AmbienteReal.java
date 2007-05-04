@@ -62,18 +62,18 @@ public class AmbienteReal extends Ambiente {
 		// Inicializando PacMan
 		this.energiaPacman = energiaPacman;
 		
-		this.posicionPacman[0] = posicionPacMan.getX();
-		this.posicionPacman[1] = posicionPacMan.getY();
+		this.posicionPacman[0] = posicionPacMan.x() - 1;
+		this.posicionPacman[1] = posicionPacMan.y() - 1;
 		
 		//Inicializando enemigos
 		Vector<Pair> posicionesEnemigos = (Vector<Pair>) posEnemigos;
 		for (Pair unaCelda : posicionesEnemigos)
-			this.tablero[unaCelda.getX()][unaCelda.getY()] = EstadoCelda.Enemigo;
+			this.tablero[unaCelda.x() - 1][unaCelda.y() - 1] = EstadoCelda.Enemigo;
 		
 		//Inicializando comida
 		Vector<Pair> posicionesComida = (Vector<Pair>)posComida;
 		for (Pair unaCelda : posicionesComida)
-			this.tablero[unaCelda.getX()][unaCelda.getY()] = EstadoCelda.Comida;
+			this.tablero[unaCelda.x() - 1][unaCelda.y() - 1] = EstadoCelda.Comida;
 	}
 
 	public int[] getPosicionInicialPacman() {
