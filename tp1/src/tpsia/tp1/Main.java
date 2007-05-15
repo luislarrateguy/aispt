@@ -27,9 +27,13 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Simulador s = Simulador.GetInstancia();
-		s.comenzarSimulacion();
-		s.mostrarPerformance();
+		/* Agrego un for por si queremos hacer varias
+		 * simulaciones.
+		 */
+		for (int i=1; i<=1; i++) {
+			Simulador s = new Simulador();
+			s.comenzarSimulacion();
+			s.mostrarPerformance();
+		}
 	}
 }

@@ -21,11 +21,24 @@
 
 package tpsia.tp1.acciones;
 
+import java.util.ArrayList;
 import tpsia.tp1.Ambiente;
 
-public interface IAccion {
-	public void ejecutar(Ambiente amb);
-	public boolean aplicable(Ambiente amb);
-	public String getTipoAccion();
-	public int getCosto();
+public abstract class Accion {
+	protected static ArrayList<Accion> acciones = new ArrayList<Accion>(7);
+	public abstract void ejecutar(Ambiente amb) throws Exception;
+	public abstract boolean aplicable(Ambiente amb);
+	public abstract String getTipoAccion();
+	public abstract int getCosto();
+	public abstract Class getClase();
+	public static ArrayList<Accion> getAcciones() {
+		return acciones;
+	}
+	public void toXML() {
+		/*
+		Logging.logXMLOpen("accion");
+		Logging.logXML(this.getTipoAccion());
+		Logging.logXMLClose("accion");
+		*/
+	}
 }

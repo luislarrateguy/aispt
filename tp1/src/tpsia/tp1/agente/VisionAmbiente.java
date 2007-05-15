@@ -133,8 +133,7 @@ public class VisionAmbiente extends Ambiente {
 	
 	@Override
 	public String toXML() {
-		// TODO Auto-generated method stub
-		return null;
+		return new String("");
 	}
 
 	@Override

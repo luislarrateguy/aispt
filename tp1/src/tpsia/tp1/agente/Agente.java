@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 import tpsia.tp1.Logging;
 import tpsia.tp1.Percepcion;
-import tpsia.tp1.acciones.IAccion;
+import tpsia.tp1.acciones.Accion;
 import tpsia.tp1.busqueda.Busqueda;
 import tpsia.tp1.busqueda.BusquedaCostoUniforme;
 
@@ -34,7 +34,7 @@ public class Agente {
 	private Estado estado;
 	private IObjetivo objetivo;
 	private Busqueda busqueda;
-	private ArrayList<IAccion> acciones;
+	private ArrayList<Accion> acciones;
 	
 	public Agente(int energiaInicial) {
 		this.estado = new Estado(energiaInicial);
@@ -42,7 +42,7 @@ public class Agente {
 		this.busqueda = new BusquedaCostoUniforme(this.estado, this.objetivo);
 	}
 
-	public IAccion actuar(Percepcion p) {
+	public Accion actuar(Percepcion p) {
 		Logging.logDebug("AGENTE: Percepción recibida. Actuando...");
 		this.estado.actualizarEstado(p);
 		
@@ -51,14 +51,10 @@ public class Agente {
 			+ Integer.toString(this.estado.getEnergia()) + "\n");
 		
 		this.acciones = busqueda.buscarSolucion();
-		IAccion a = this.acciones.get(this.acciones.size() - 1);
+		Accion a = this.acciones.get(this.acciones.size() - 1);
 		
 		Logging.logDebug("AGENTE: Se decidió la acción: " + a.getTipoAccion());
 		this.estado.ejecutarAccion(a);
-		//a.ejecutar(this.estado.getAmbiente());
-		
-		/* TODO A esta altura del código podríamos guardar cosas 
-		 * como	última acción ejecutada y demás. */
 		return a;
 	}
 	
@@ -68,5 +64,11 @@ public class Agente {
 	
 	public boolean vivo() {
 		return (this.estado.getEnergia() > 0);
+	}
+	public void mostrarEstadoFinal() {
+		Logging.logDebug("AGENTE: ESTADO FINAL");	
+		Logging.logMensaje(this.estado.getAmbiente().draw());
+		Logging.logMensaje("energia:" 
+			+ Integer.toString(this.estado.getEnergia()) + "\n");
 	}
 }

@@ -26,11 +26,14 @@ import tpsia.tp1.Ambiente;
 /*
  * Singleton Notice
  */
-public class Comer implements IAccion {
+public class Comer extends Accion {
 
 	private static Comer instancia;
 
-	public void ejecutar(Ambiente amb) {
+	public void ejecutar(Ambiente amb) throws Exception {
+		if (!this.aplicable(amb)) {
+			throw new Exception("Pacman intenta Comer y no hay comida");
+		}
 		amb.comer();
 	}
 
@@ -42,9 +45,10 @@ public class Comer implements IAccion {
 		return 1;
 	}
 
-	static public IAccion getInstancia() {
+	static public Accion getInstancia() {
 		if (instancia == null) {
 			instancia = new Comer();
+			Accion.acciones.add(instancia);
 		}
 		return instancia;
 	}
@@ -57,4 +61,9 @@ public class Comer implements IAccion {
 		
 		return false;
 	}
+
+	public Class getClase() {
+		return this.getClass();
+	}
+
 }

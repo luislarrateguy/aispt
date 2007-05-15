@@ -104,7 +104,7 @@ public class AmbienteReal extends Ambiente {
 	}
 
 	public String toXML() {
-		// TODO Auto-generated method stub
+		// TODO Salida XML
 		return null;
 	}
 

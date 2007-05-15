@@ -22,12 +22,8 @@
 package tpsia.tp1.agente;
 
 import java.util.Hashtable;
-
 import tpsia.tp1.Percepcion;
-import tpsia.tp1.acciones.Avanzar;
-import tpsia.tp1.acciones.Comer;
-import tpsia.tp1.acciones.IAccion;
-import tpsia.tp1.acciones.Pelear;
+import tpsia.tp1.acciones.*;
 
 public class Estado implements Cloneable {
 
@@ -40,13 +36,10 @@ public class Estado implements Cloneable {
 	 */
 	private Hashtable<Class, Float> promedios;
 	private Hashtable<Class, Integer> vecesEjecutada;
-	
 	private VisionAmbiente visionAmbiente;
-	
 	public Estado() {
 		this(0);
 	}
-	
 	public Estado(int energiaInicial) {
 		this.energia = energiaInicial;
 		this.ultimaAccionEjecutada = null;
@@ -55,7 +48,7 @@ public class Estado implements Cloneable {
 		this.promedios.put(Avanzar.class, (float)0.0);
 		this.promedios.put(Comer.class, (float)0.0);
 		this.promedios.put(Pelear.class, (float)0.0);
-		
+
 		this.vecesEjecutada = new Hashtable<Class, Integer>();
 		this.vecesEjecutada.put(Avanzar.class, 0);
 		this.vecesEjecutada.put(Comer.class, 0);
@@ -63,16 +56,18 @@ public class Estado implements Cloneable {
 		
 		this.visionAmbiente = new VisionAmbiente();
 	}
-	
-	public void ejecutarAccion(IAccion a) {
-		a.ejecutar(this.visionAmbiente);
+	public void ejecutarAccion(Accion a) {
+		try {
+			a.ejecutar(this.visionAmbiente);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		if (a instanceof Avanzar)
 			this.ultimaAccionEjecutada = Avanzar.class;
 		else
 			this.ultimaAccionEjecutada = a.getClass();
 	}
-	
 	public String draw() {
 		String cuadro = new String("\n");
 		cuadro += this.visionAmbiente.draw() + "\n";
@@ -87,33 +82,45 @@ public class Estado implements Cloneable {
 				+ Float.toString(this.promedios.get(Pelear.class)) +"\n";
 		return cuadro;
 	}
-	
-	public String toXML() {
-		// TODO hacemos salida XML?
-		return null;
+	public void toXML() {
+		/*
+		Logging.logXMLOpen("estado");
+			visionAmbiente.toXML();
+			Logging.logXMLOpen("energia");
+			Logging.logXML(Integer.toString(energia));
+			Logging.logXMLClose("energia");
+			Logging.logXMLOpen("promVarEnergiaAvanzar");
+			Logging.logXML(Float.toString(this.promedios.get(Avanzar.class)));
+			Logging.logXMLClose("promVarEnergiaAvanzar");
+			Logging.logXMLOpen("promVarEnergiaComer");
+			Logging.logXML(Float.toString(this.promedios.get(Comer.class)));
+			Logging.logXMLClose("promVarEnergiaComer");
+			Logging.logXMLOpen("promVarEnergiaPelear");
+			Logging.logXML(Float.toString(this.promedios.get(Pelear.class)));
+			Logging.logXMLClose("promVarEnergiaPelear");
+		Logging.logXMLClose("estado");
+		*/
 	}
 	public void actualizarEstado(Percepcion p) {
 		this.visionAmbiente.actualizar(p);
 		
 		// Cálculo de los promedios
+		// TODO: Documentar. Esta comparación... trata de detectar la primer ejecución del algoritmo?
+		// Que significa null? no entiendo que intenta comparar
 		if (this.ultimaAccionEjecutada != null) {
 			int diferenciaEnergia = p.getEnergia() - this.energia;
 			
-			/* Si "promedio = suma / veces", entonces para recalcularlo primero
-			 * obtengo "suma = promedio * veces".
-			 * Suma es la sumatoria de diferencias de energía. */
-//			Float pasdf = this.promedios.get(this.ultimaAccionEjecutada);
-//			Integer iasdf = this.vecesEjecutada.get(this.ultimaAccionEjecutada);
+			/* Suma es la sumatoria de diferencias de energía. */
 			float suma = this.promedios.get(this.ultimaAccionEjecutada)
 				* this.vecesEjecutada.get(this.ultimaAccionEjecutada);
 			
 			// Actualizo la cantidad de veces que se ejecutó la última acción
-			int aux = this.vecesEjecutada.get(this.ultimaAccionEjecutada);
-			this.vecesEjecutada.put(this.ultimaAccionEjecutada, aux + 1);
+			int veces = this.vecesEjecutada.get(this.ultimaAccionEjecutada) + 1;
+			this.vecesEjecutada.put(this.ultimaAccionEjecutada, veces);
 			
-			// Ahora si, recalculo el promedio
+			// Ahora sí, recalculo el promedio
 			suma += diferenciaEnergia;
-			float promedioNuevo = (suma / this.vecesEjecutada.get(this.ultimaAccionEjecutada));
+			float promedioNuevo = (suma / veces);
 			this.promedios.put(this.ultimaAccionEjecutada, promedioNuevo);
 			
 			this.ultimaAccionEjecutada = null;
@@ -121,45 +128,49 @@ public class Estado implements Cloneable {
 		
 		// Actualizo la energía
 		this.energia = p.getEnergia();
-		
-		// TODO: Cálculo de los promedios. Hay que recordar última acción
 	}
-
 	public VisionAmbiente getAmbiente() {
 		return this.visionAmbiente;
 	}
-	
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object clone() {
 		Estado estadoClon = new Estado();
 		
 		estadoClon.energia = this.energia;
-		// Estos warnings me preocupan. Parece que no tienen implementado CLONE
-		// sca el supress y vas a ver
 		estadoClon.promedios = (Hashtable<Class, Float>) this.promedios.clone();
 		estadoClon.vecesEjecutada = (Hashtable<Class, Integer>) this.vecesEjecutada.clone();
 		estadoClon.visionAmbiente = (VisionAmbiente) this.visionAmbiente.clone();
 		
 		return estadoClon;
 	}
-
 	public int getEnergia() {
 		return energia;
 	}
-
+	/**
+	 * @deprecated
+	 * @return
+	 */
 	public float getPromedioEnergiaPerdidaComer() {
 		return this.promedios.get(Comer.class);
 	}
-
+	/**
+	 * @deprecated
+	 * @return
+	 */
 	public float getPromedioEnergiaPerdidaPelear() {
 		return this.promedios.get(Pelear.class);
 	}
-
+	/**
+	 * @deprecated 
+	 * @return
+	 */
 	public float getPromEnergiaPerdidaAvanzar() {
 		return this.promedios.get(Avanzar.class);
 	}
-
+	public float getPromedioVarEnergia(Accion a) {
+		return this.promedios.get(a.getClase());
+	}
 	public Class getUltimaAccionEjecutada() {
 		return ultimaAccionEjecutada;
 	}

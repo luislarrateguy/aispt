@@ -1,5 +1,7 @@
 package tpsia.tp1.agente;
 
+import tpsia.tp1.acciones.AvanzarAbajo;
+import tpsia.tp1.acciones.Pelear;
 import tpsia.tp1.busqueda.Nodo;
 
 public class ObjetivoTP implements IObjetivo {
@@ -18,9 +20,9 @@ public class ObjetivoTP implements IObjetivo {
 	
 	public boolean cumpleObjetivo(Estado estado) {
 		boolean convienePelear = estado.getEnergia() >
-			estado.getPromedioEnergiaPerdidaPelear();
+			estado.getPromedioVarEnergia(Pelear.getInstancia());
 		boolean convieneMoverse = estado.getEnergia() >
-			estado.getPromEnergiaPerdidaAvanzar();
+			estado.getPromedioVarEnergia(AvanzarAbajo.getInstancia());
 		
 		if (estado.getAmbiente().conoceTodo()) {
 			if (convieneMoverse &&

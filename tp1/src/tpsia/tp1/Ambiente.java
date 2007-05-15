@@ -157,7 +157,10 @@ public abstract class Ambiente implements Cloneable {
 		return cuadro+" Y\n";
 	}
 	
-	public abstract String toXML();
+	public  String toXML() {
+		String str = new String("");
+		return str;
+	}
 	
 	public abstract Object clone();
 	

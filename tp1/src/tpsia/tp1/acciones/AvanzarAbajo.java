@@ -35,9 +35,10 @@ public class AvanzarAbajo extends Avanzar {
 		amb.mover(Offset.Abajo);
 	}
 
-	static public IAccion getInstancia() {
+	static public Accion getInstancia() {
 		if (instancia == null) {
 			instancia = new AvanzarAbajo();
+			Accion.acciones.add(instancia);
 		}
 		return instancia;
 	}

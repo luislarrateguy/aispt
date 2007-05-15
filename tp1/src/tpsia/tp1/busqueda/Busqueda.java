@@ -2,7 +2,7 @@ package tpsia.tp1.busqueda;
 
 import java.util.ArrayList;
 
-import tpsia.tp1.acciones.IAccion;
+import tpsia.tp1.acciones.Accion;
 import tpsia.tp1.agente.Estado;
 import tpsia.tp1.agente.IObjetivo;
 
@@ -15,5 +15,5 @@ public abstract class Busqueda {
 		this.objetivo = objetivo;
 	}
 	
-	public abstract ArrayList<IAccion> buscarSolucion();
+	public abstract ArrayList<Accion> buscarSolucion();
 }

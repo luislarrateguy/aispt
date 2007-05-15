@@ -26,11 +26,13 @@ import tpsia.tp1.Ambiente;
 /*
  * Singleton Notice
  */
-public abstract class Avanzar implements IAccion {
+public abstract class Avanzar extends Accion {
 	public abstract void ejecutar(Ambiente amb);
 	public abstract String getTipoAccion();
-	
-	public int getCosto() {
+	public final Class getClase() {
+		return Avanzar.class;
+	}
+	public final int getCosto() {
 		return 2;
 	}
 }

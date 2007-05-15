@@ -23,7 +23,7 @@ package tpsia.tp1.busqueda;
 
 import java.util.ArrayList;
 
-import tpsia.tp1.acciones.IAccion;
+import tpsia.tp1.acciones.Accion;
 import tpsia.tp1.agente.Estado;
 import tpsia.tp1.agente.IObjetivo;
 
@@ -33,8 +33,7 @@ public class BusquedaProfundidad extends Busqueda {
 		super(estado, objetivo);
 	}
 
-	public ArrayList<IAccion> buscarSolucion() {
-		// TODO Auto-generated method stub
+	public ArrayList<Accion> buscarSolucion() {
 		return null;
 	}
 }

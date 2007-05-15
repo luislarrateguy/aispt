@@ -12,7 +12,7 @@ public class EstadoTest {/*
 		Estado estado = new Estado();
 		
 		Percepcion p = new Percepcion(new EstadoCelda[4], 40, new int[2]);
-		IAccion a = AvanzarAbajo.getInstancia();
+		Accion a = AvanzarAbajo.getInstancia();
 		
 		estado.actualizarEstado(p);
 		assertEquals(40, estado.getEnergia());

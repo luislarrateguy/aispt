@@ -26,11 +26,14 @@ import tpsia.tp1.Ambiente;
 /*
  * Singleton Notice
  */
-public class Pelear implements IAccion {
+public class Pelear extends Accion {
 
 	private static Pelear instancia;
 
-	public void ejecutar(Ambiente amb) {
+	public void ejecutar(Ambiente amb) throws Exception {
+		if (!this.aplicable(amb)) {
+			throw new Exception("Pacman intenta Pelear y no hay enemigo");
+		}
 		amb.pelear();
 	}
 
@@ -42,9 +45,10 @@ public class Pelear implements IAccion {
 		return 3;
 	}
 
-	static public IAccion getInstancia() {
+	static public Accion getInstancia() {
 		if (instancia == null) {
 			instancia = new Pelear();
+			Accion.acciones.add(instancia);
 		}
 		return instancia;
 	}
@@ -56,5 +60,8 @@ public class Pelear implements IAccion {
 			return true;
 		
 		return false;
+	}
+	public Class getClase() {
+		return this.getClass();
 	}
 }

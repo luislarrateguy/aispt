@@ -26,28 +26,23 @@ import java.util.Collection;
 import java.util.PriorityQueue;
 
 import tpsia.tp1.Logging;
-import tpsia.tp1.acciones.AvanzarAbajo;
-import tpsia.tp1.acciones.AvanzarArriba;
-import tpsia.tp1.acciones.AvanzarDerecha;
-import tpsia.tp1.acciones.AvanzarIzquierda;
-import tpsia.tp1.acciones.Comer;
-import tpsia.tp1.acciones.IAccion;
-import tpsia.tp1.acciones.NoAccion;
-import tpsia.tp1.acciones.Pelear;
+import tpsia.tp1.acciones.*;
 import tpsia.tp1.agente.Estado;
 import tpsia.tp1.agente.IObjetivo;
 import tpsia.tp1.agente.VisionAmbiente;
 
 public class BusquedaCostoUniforme extends Busqueda {
+	static int busquedaNro = 0;
 	public BusquedaCostoUniforme(Estado estado, IObjetivo objetivo) {
 		super(estado, objetivo);
 	}
 
 	//@SuppressWarnings("unchecked")
-	public ArrayList<IAccion> buscarSolucion() {
-		// TODO buscar secuencia de acciones
+	public ArrayList<Accion> buscarSolucion() {
 		Logging.logDebug("PACMAN: buscar accion");
-		ArrayList<IAccion> l = new ArrayList<IAccion>();
+		
+		
+		ArrayList<Accion> l = new ArrayList<Accion>();
 		PriorityQueue<Nodo> colaNodos = new PriorityQueue<Nodo>();
 		ArrayList<VisionAmbiente> estadosAlcanzados = new ArrayList<VisionAmbiente>();
 		
@@ -55,25 +50,36 @@ public class BusquedaCostoUniforme extends Busqueda {
 		colaNodos.add(nodoInicial);
 		
 		Nodo nodoActual;
+		nodoActual = colaNodos.remove();
 		
-		while (true) {
-			nodoActual = colaNodos.remove();
-			
-			if (this.objetivo.cumpleObjetivo(nodoActual))
-				break;
-			
+		/* 
+		 * Saqué el while (true) y saqué el break. Me parecía que no es bueno tener un if
+		 * dentro de un while siendo que es una estructura de control
+		 * pensada para ejecutarse mientras se cumpla una condición
+		 */
+		while ( ! this.objetivo.cumpleObjetivo(nodoActual) ) {
 			if (!estadosAlcanzados.contains(nodoActual.getEstado().getAmbiente())) {
 				estadosAlcanzados.add(nodoActual.getEstado().getAmbiente());
 				
 				/* Puede que el método addAll no inserte los nodos ordenados.
 				 * Si no es así, utilizar el bucle for-each que está comentado
-				 * abajo. Estaría bueno que halla un método insert*/
-				colaNodos.addAll(this.expandir(nodoActual));
-				/*
-				for (Nodo n : this.expandir(unNodo))
+				 * abajo. Estaría bueno que haya un método insert
+				 */
+				// TODO: borrar comentarios
+				/* Por lo que dice JavaDoc agrega en el orden que devuelve
+				 * el iterador por defecto, por lo tanto como en el foreach
+				 * usas el iterador en forma implícita, es lo mismo.
+				 * Voy a dejar el iterador, con el for, ya que nos va a servir
+				 * para hacer un mejor debugging. Te parece? 
+				 */
+				//colaNodos.addAll(this.expandir(nodoActual));
+				
+				for (Nodo n : this.expandir(nodoActual)) {
 					colaNodos.add(n);
-				*/
+				}
 			}
+			nodoActual = colaNodos.remove();
+			
 		}
 		
 		while (nodoActual.getPadre() != null) {
@@ -84,52 +90,61 @@ public class BusquedaCostoUniforme extends Busqueda {
 		if (l.isEmpty())
 			l.add(NoAccion.getInstancia());
 		
+
 		return l;
 	}
 
 	private Collection<Nodo> expandir(Nodo unNodo) {
-		ArrayList<Nodo> nodosExpandidos = new ArrayList<Nodo>();
+		ArrayList<Nodo> nodosExpandir = new ArrayList<Nodo>();
 		
 		/* Expando el nodo unNodo sólo si se cumple la precondición de cada
 		 * acción. */
-		
+		for(Accion a : Accion.getAcciones()) {
+			if (a.aplicable(unNodo.getEstado().getAmbiente()))
+				nodosExpandir.add(new Nodo(unNodo, a,
+						this.estado.getPromedioVarEnergia(a)));
+		}
+		//TODO: borrar lel código comentado debajo.
+		/* 
 		// AvanzarAbajo
-		IAccion avanzarAbajo = AvanzarAbajo.getInstancia();
-		if (avanzarAbajo.aplicable(unNodo.getEstado().getAmbiente()))
-			nodosExpandidos.add(new Nodo(unNodo, avanzarAbajo,
-					-this.estado.getPromEnergiaPerdidaAvanzar()));
+		Accion accion;
 		
+		accion = AvanzarAbajo.getInstancia();
+		if (accion.aplicable(unNodo.getEstado().getAmbiente()))
+			nodosExpandir.add(new Nodo(unNodo, accion,
+					-this.estado.getPromedioPerdida(accion)));
+
 		// AvanzarArriba
-		IAccion avanzarArriba = AvanzarArriba.getInstancia();
-		if (avanzarArriba.aplicable(unNodo.getEstado().getAmbiente()))
-			nodosExpandidos.add(new Nodo(unNodo, avanzarArriba,
-					-this.estado.getPromEnergiaPerdidaAvanzar()));
+		accion = AvanzarArriba.getInstancia();
+		if (accion.aplicable(unNodo.getEstado().getAmbiente()))
+			nodosExpandir.add(new Nodo(unNodo, accion,
+					-this.estado.getPromedioPerdida(accion)));
 		
 		// AvanzarDerecha
-		IAccion avanzarDerecha = AvanzarDerecha.getInstancia();
-		if (avanzarDerecha.aplicable(unNodo.getEstado().getAmbiente()))
-			nodosExpandidos.add(new Nodo(unNodo, avanzarDerecha,
-					-this.estado.getPromEnergiaPerdidaAvanzar()));
+		accion = AvanzarDerecha.getInstancia();
+		if (accion.aplicable(unNodo.getEstado().getAmbiente()))
+			nodosExpandir.add(new Nodo(unNodo, accion,
+					-this.estado.getPromedioPerdida(accion)));
 		
 		// AvanzarIzquierda
-		IAccion avanzarIzquierda = AvanzarIzquierda.getInstancia();
-		if (avanzarIzquierda.aplicable(unNodo.getEstado().getAmbiente()))
-			nodosExpandidos.add(new Nodo(unNodo, avanzarIzquierda,
-					-this.estado.getPromEnergiaPerdidaAvanzar()));
+		accion = AvanzarIzquierda.getInstancia();
+		if (accion.aplicable(unNodo.getEstado().getAmbiente()))
+			nodosExpandir.add(new Nodo(unNodo, accion,
+					-this.estado.getPromedioPerdida(accion)));
 		
 		// Comer
-		IAccion comer = Comer.getInstancia();
-		if (comer.aplicable(unNodo.getEstado().getAmbiente()))
-			nodosExpandidos.add(new Nodo(unNodo, comer,
-					-this.estado.getPromedioEnergiaPerdidaComer()));
+		accion = Comer.getInstancia();
+		if (accion.aplicable(unNodo.getEstado().getAmbiente()))
+			nodosExpandir.add(new Nodo(unNodo, accion,
+					-this.estado.getPromedioPerdida(accion)));;
 		
 		// Pelear
-		IAccion pelear = Pelear.getInstancia();
-		if (pelear.aplicable(unNodo.getEstado().getAmbiente()))
-			nodosExpandidos.add(new Nodo(unNodo, pelear,
-					-this.estado.getPromedioEnergiaPerdidaPelear()));
-		
-		return nodosExpandidos;
+		accion = Pelear.getInstancia();
+		if (accion.aplicable(unNodo.getEstado().getAmbiente()))
+			nodosExpandir.add(new Nodo(unNodo, accion,
+					-this.estado.getPromedioPerdida(accion)));
+		*/
+		return nodosExpandir;
 	}
 
 }

@@ -23,8 +23,7 @@ package tpsia.tp1;
 
 import java.util.Vector;
 
-import tpsia.tp1.acciones.IAccion;
-import tpsia.tp1.acciones.NoAccion;
+import tpsia.tp1.acciones.*;
 import tpsia.tp1.agente.Agente;
 import calculador.Calculador;
 import calculador.Pair;
@@ -37,9 +36,17 @@ public class Simulador {
 	private Agente pacman;
 
 
-	private Simulador() {
+	public Simulador() {
 		this.calculador = new Calculador("Grupo 28");
 		this.ambiente = new AmbienteReal();
+		/* Inicializando Acciones para acelerar ejecución */
+		AvanzarAbajo.getInstancia();
+		AvanzarArriba.getInstancia();
+		AvanzarDerecha.getInstancia();
+		AvanzarIzquierda.getInstancia();
+		Pelear.getInstancia();
+		Comer.getInstancia();
+		NoAccion.getInstancia();
 	}
 	
 	/**
@@ -53,7 +60,7 @@ public class Simulador {
 		Logging.logDebug("SIM: Iniciando simulación...");
 		this.inicializarSimulacion();
 
-		IAccion a;
+		Accion a;
 		Percepcion p;
 		int energiaPacman;
 		while (!this.finSimulacion()) {
@@ -65,7 +72,7 @@ public class Simulador {
 			Logging.logDebug("SIM: Enviando percepcion a Pacman");
 			a = pacman.actuar(p);
 			
-			if (a instanceof NoAccion)
+			if (a.getClass().equals(NoAccion.class))
 				break;
 			
 			// avisar al calculador
@@ -74,12 +81,18 @@ public class Simulador {
 
 			// ejecutar la acción y actualizar el ambiente
 			Logging.logDebug("SIM: Ejecutando accion en ambiente");
-			a.ejecutar(ambiente);
+			try {
+				a.ejecutar(ambiente);
+			} catch (Exception e) {
+				// Mostrar la excepción.
+				e.printStackTrace();
+			}
 			Logging.logDebug("SIM: Actualizando ambiente");
 			ambiente.setEnergiaPacman(energiaPacman);
 		}
 		
 		Logging.logMensaje(" ### Fin de la simulación ### ");
+		this.pacman.mostrarEstadoFinal();
 	}
 	
 	/**
@@ -94,7 +107,9 @@ public class Simulador {
 		
 		/* FIXME: Esto no estaría bien. Tendría que haber un método
 		 * que retorne la energía inicial, ya que así le estamos quitando,
-		 * ¿o me equivoco? */
+		 * ¿o me equivoco? 
+		 * FIXME: Esto fue resuelto con la nueva clase?
+		 * */
 		int energiaPacman = calculador.calcularEnergiaPacMan();
 		
 		this.pacman = new Agente(energiaPacman);
@@ -108,13 +123,16 @@ public class Simulador {
 	}
 	
 	private boolean finSimulacion() {
-		// TODO Agregar la condición de fin de simulacion
 		Logging.logDebug("SIM: Chequeando si termina...");
-		//this.cont--;
-		// return pacman.cumplioObjetivo();
-		//return (this.cont == 0);
+		/* La condición lógica de abajo es equivalente a 
+		 * preguntar solamente si cumplióObjetivo o si murió
+		 * debido a leyes de lógica
+		 */
+		/*
 		return ( (this.pacman.cumplioObjetivo() && this.pacman.vivo()) ||
 				!this.pacman.vivo());
+		*/
+		return this.pacman.cumplioObjetivo() || !this.pacman.vivo();
 	}
 	
 	public static Simulador GetInstancia() {
