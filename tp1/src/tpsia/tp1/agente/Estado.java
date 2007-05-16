@@ -27,35 +27,55 @@ import tpsia.tp1.acciones.*;
 
 public class Estado implements Cloneable {
 
+	/**
+	 * La energía del agente.
+	 */
 	private int energia;
-	private Class ultimaAccionEjecutada;
 	
 	/**
+	 * Última acción ejecutada por el agente. Es utilizada para realizar
+	 * cálculos de promedio de cambio de energía por cada acción.
+	 */
+	private Accion ultimaAccionEjecutada;
+	
+	/**
+	 * Indica el promedio de cambio de energía por cada acción.
 	 * Un promedio positivo indica que en promedio se esta ganando
 	 * energía. Uno negativo, que en promedio se esta perdiendo.
 	 */
-	private Hashtable<Class, Float> promedios;
-	private Hashtable<Class, Integer> vecesEjecutada;
+	private float[] promedios;
+	
+	/**
+	 * Indica la cantidad de veces que se ejecutó cada acción.
+	 */
+	private int[] vecesEjecutada;
+	
+	/**
+	 * El ambiente tal y como lo ve el agente.
+	 */
 	private VisionAmbiente visionAmbiente;
+	
 	public Estado() {
 		this(0);
 	}
+	
 	public Estado(int energiaInicial) {
 		this.energia = energiaInicial;
 		this.ultimaAccionEjecutada = null;
 		
-		this.promedios = new Hashtable<Class, Float>();
-		this.promedios.put(Avanzar.class, (float)0.0);
-		this.promedios.put(Comer.class, (float)0.0);
-		this.promedios.put(Pelear.class, (float)0.0);
+		this.promedios = new float[Accion.getAcciones().size()];
+		this.promedios[0] = 0;
+		this.promedios[1] = 0;
+		this.promedios[2] = 0;
 
-		this.vecesEjecutada = new Hashtable<Class, Integer>();
-		this.vecesEjecutada.put(Avanzar.class, 0);
-		this.vecesEjecutada.put(Comer.class, 0);
-		this.vecesEjecutada.put(Pelear.class, 0);
+		this.vecesEjecutada = new int[Accion.getAcciones().size()];
+		this.vecesEjecutada[0] = 0;
+		this.vecesEjecutada[1] = 0;
+		this.vecesEjecutada[2] = 0;
 		
 		this.visionAmbiente = new VisionAmbiente();
 	}
+	
 	public void ejecutarAccion(Accion a) {
 		try {
 			a.ejecutar(this.visionAmbiente);
@@ -63,11 +83,9 @@ public class Estado implements Cloneable {
 			e.printStackTrace();
 		}
 		
-		if (a instanceof Avanzar)
-			this.ultimaAccionEjecutada = Avanzar.class;
-		else
-			this.ultimaAccionEjecutada = a.getClass();
+		this.ultimaAccionEjecutada = a;
 	}
+	
 	public String draw() {
 		String cuadro = new String("\n");
 		cuadro += this.visionAmbiente.draw() + "\n";
@@ -75,13 +93,14 @@ public class Estado implements Cloneable {
 		cuadro += "energia:" 
 			+ Integer.toString(this.energia) 	+"\n";
 		cuadro += "promVarEneAvanz:"
-				+ Float.toString(this.promedios.get(Avanzar.class)) 	+"\n";
+				+ Float.toString(this.promedios[AvanzarAbajo.getInstancia().getIdentificador()]) 	+"\n";
 		cuadro += "promVarEneAvanz:" 
-				+ Float.toString(this.promedios.get(Comer.class)) +"\n";
+				+ Float.toString(this.promedios[Comer.getInstancia().getIdentificador()]) +"\n";
 		cuadro += "promVarEneLucha:" 
-				+ Float.toString(this.promedios.get(Pelear.class)) +"\n";
+				+ Float.toString(this.promedios[Pelear.getInstancia().getIdentificador()]) +"\n";
 		return cuadro;
 	}
+	
 	public void toXML() {
 		/*
 		Logging.logXMLOpen("estado");
@@ -101,27 +120,30 @@ public class Estado implements Cloneable {
 		Logging.logXMLClose("estado");
 		*/
 	}
+	
 	public void actualizarEstado(Percepcion p) {
 		this.visionAmbiente.actualizar(p);
 		
-		// Cálculo de los promedios
-		// TODO: Documentar. Esta comparación... trata de detectar la primer ejecución del algoritmo?
-		// Que significa null? no entiendo que intenta comparar
+		/* Cálculo de los promedios
+		 * ultimaAccionEjecutada posee la última acción que el agente ejecutó :)
+		 * Si es igual a null es porque nunca ejecutó una acción antes, por lo tanto
+		 * no hay promedios que calcular.
+		 */
 		if (this.ultimaAccionEjecutada != null) {
 			int diferenciaEnergia = p.getEnergia() - this.energia;
 			
 			/* Suma es la sumatoria de diferencias de energía. */
-			float suma = this.promedios.get(this.ultimaAccionEjecutada)
-				* this.vecesEjecutada.get(this.ultimaAccionEjecutada);
+			float suma = this.promedios[this.ultimaAccionEjecutada.getIdentificador()]
+				* this.vecesEjecutada[this.ultimaAccionEjecutada.getIdentificador()];
 			
 			// Actualizo la cantidad de veces que se ejecutó la última acción
-			int veces = this.vecesEjecutada.get(this.ultimaAccionEjecutada) + 1;
-			this.vecesEjecutada.put(this.ultimaAccionEjecutada, veces);
+			int veces = this.vecesEjecutada[this.ultimaAccionEjecutada.getIdentificador()] + 1;
+			this.vecesEjecutada[this.ultimaAccionEjecutada.getIdentificador()] = veces;
 			
 			// Ahora sí, recalculo el promedio
 			suma += diferenciaEnergia;
 			float promedioNuevo = (suma / veces);
-			this.promedios.put(this.ultimaAccionEjecutada, promedioNuevo);
+			this.promedios[this.ultimaAccionEjecutada.getIdentificador()] = promedioNuevo;
 			
 			this.ultimaAccionEjecutada = null;
 		}
@@ -129,49 +151,33 @@ public class Estado implements Cloneable {
 		// Actualizo la energía
 		this.energia = p.getEnergia();
 	}
+	
 	public VisionAmbiente getAmbiente() {
 		return this.visionAmbiente;
 	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object clone() {
 		Estado estadoClon = new Estado();
 		
 		estadoClon.energia = this.energia;
-		estadoClon.promedios = (Hashtable<Class, Float>) this.promedios.clone();
-		estadoClon.vecesEjecutada = (Hashtable<Class, Integer>) this.vecesEjecutada.clone();
+		estadoClon.promedios = this.promedios.clone();
+		estadoClon.vecesEjecutada = this.vecesEjecutada.clone();
 		estadoClon.visionAmbiente = (VisionAmbiente) this.visionAmbiente.clone();
 		
 		return estadoClon;
 	}
+	
 	public int getEnergia() {
 		return energia;
 	}
-	/**
-	 * @deprecated
-	 * @return
-	 */
-	public float getPromedioEnergiaPerdidaComer() {
-		return this.promedios.get(Comer.class);
-	}
-	/**
-	 * @deprecated
-	 * @return
-	 */
-	public float getPromedioEnergiaPerdidaPelear() {
-		return this.promedios.get(Pelear.class);
-	}
-	/**
-	 * @deprecated 
-	 * @return
-	 */
-	public float getPromEnergiaPerdidaAvanzar() {
-		return this.promedios.get(Avanzar.class);
-	}
+	
 	public float getPromedioVarEnergia(Accion a) {
-		return this.promedios.get(a.getClase());
+		return this.promedios[a.getIdentificador()];
 	}
-	public Class getUltimaAccionEjecutada() {
-		return ultimaAccionEjecutada;
+	
+	public Accion getUltimaAccionEjecutada() {
+		return this.ultimaAccionEjecutada;
 	}
 }

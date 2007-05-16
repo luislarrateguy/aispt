@@ -37,23 +37,7 @@ public abstract class Ambiente implements Cloneable {
 		this.posicionPacman[0] = 0;
 		this.posicionPacman[1] = 0;
 	}
-	/*
-	public int[] getPosicionCeldaSuperior() {
-		return FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Arriba);
-	}
 	
-	public int[] getPosicionCeldaInferior() {
-		return FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Abajo);
-	}
-	
-	public int[] getPosicionCeldaDerecha() {
-		return FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Derecha);
-	}
-	
-	public int[] getPosicionCeldaIzquierda() {
-		return FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Izquierda);
-	}
-	*/
 	public EstadoCelda[] getCeldasAdyacentes() {
 		EstadoCelda[] ady = new EstadoCelda[4];
 		/* arr[0] aba[1] der[2] izq[3] */ 

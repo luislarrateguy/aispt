@@ -25,12 +25,16 @@ import java.util.ArrayList;
 import tpsia.tp1.Ambiente;
 
 public abstract class Accion {
+	
 	protected static ArrayList<Accion> acciones = new ArrayList<Accion>(7);
+	
 	public abstract void ejecutar(Ambiente amb) throws Exception;
 	public abstract boolean aplicable(Ambiente amb);
 	public abstract String getTipoAccion();
 	public abstract int getCosto();
-	public abstract Class getClase();
+	
+	public abstract int getIdentificador();
+	
 	public static ArrayList<Accion> getAcciones() {
 		return acciones;
 	}

@@ -32,7 +32,9 @@ import tpsia.tp1.agente.IObjetivo;
 import tpsia.tp1.agente.VisionAmbiente;
 
 public class BusquedaCostoUniforme extends Busqueda {
+	
 	static int busquedaNro = 0;
+	
 	public BusquedaCostoUniforme(Estado estado, IObjetivo objetivo) {
 		super(estado, objetivo);
 	}
@@ -78,10 +80,13 @@ public class BusquedaCostoUniforme extends Busqueda {
 					colaNodos.add(n);
 				}
 			}
-			nodoActual = colaNodos.remove();
 			
+			nodoActual = colaNodos.remove();
 		}
 		
+		/* FIXME: Hubo un problema cuando lo ejecuté una vez a en este punto.
+		 * Devolvío NoAccion.
+		 */
 		while (nodoActual.getPadre() != null) {
 			l.add(nodoActual.getAccionGeneradora());
 			nodoActual = nodoActual.getPadre();
@@ -89,7 +94,6 @@ public class BusquedaCostoUniforme extends Busqueda {
 		
 		if (l.isEmpty())
 			l.add(NoAccion.getInstancia());
-		
 
 		return l;
 	}

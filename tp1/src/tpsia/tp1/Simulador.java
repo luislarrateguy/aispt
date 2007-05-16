@@ -39,6 +39,7 @@ public class Simulador {
 	public Simulador() {
 		this.calculador = new Calculador("Grupo 28");
 		this.ambiente = new AmbienteReal();
+		
 		/* Inicializando Acciones para acelerar ejecución */
 		AvanzarAbajo.getInstancia();
 		AvanzarArriba.getInstancia();

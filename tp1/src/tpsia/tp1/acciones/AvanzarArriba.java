@@ -42,6 +42,7 @@ public class AvanzarArriba extends Avanzar {
 		}
 		return instancia;
 	}
+	
 	@Override
 	public String getTipoAccion() {
 		return "arriba";

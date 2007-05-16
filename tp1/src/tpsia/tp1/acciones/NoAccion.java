@@ -30,7 +30,9 @@ public class NoAccion extends Accion {
 	public String getTipoAccion() {
 		return "no accion";
 	}
-	public Class getClase() {
-		return this.getClass();
+	
+	@Override
+	public int getIdentificador() {
+		return -1;
 	}
 }

@@ -61,7 +61,9 @@ public class Pelear extends Accion {
 		
 		return false;
 	}
-	public Class getClase() {
-		return this.getClass();
+	
+	@Override
+	public int getIdentificador() {
+		return 2;
 	}
 }
