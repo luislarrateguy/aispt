@@ -27,7 +27,7 @@ public class Nodo implements Comparable<Nodo> {
 		this.costo = 0;
 	}
 	
-	public Nodo(Nodo padre, Accion accionGeneradora, float promVarEnergia) {
+	public Nodo(Busqueda algoritmo, Nodo padre, Accion accionGeneradora, float promVarEnergia) {
 		this.padre = padre;
 		this.accionGeneradora = accionGeneradora;
 		/* El tema del promedio, al sumarlo, afecta en forma lineal al costo total
@@ -39,14 +39,13 @@ public class Nodo implements Comparable<Nodo> {
 		 * CostoAccion siempre debe ser positivo, sino tiene un costo menor que el padre.
 		 * CostoDelNodo = CostoDelPadre + CostoAccion
 		 * 
-		 */ 
-		//original
-		// this.costo = this.padre.costo + this.accionGeneradora.getCosto() - promVarEnergia;
-		
-		/* Una simple que pondera siempre comer, caminar y luego pelear. En ese orden.
-		 * 
 		 */
-		this.costo = this.padre.costo + this.accionGeneradora.getCosto();
+		
+		/* Una simple que pondera siempre comer, caminar y luego pelear. En ese orden. */
+		//this.costo = this.padre.costo + this.accionGeneradora.getCosto();
+
+		// Al costo lo puse abajo. Es necesario que se calcule luego de que el nodo
+		// aplique los cambios de la acción generadora.
 		
 		/* Una opcion que calcula costo en base a la información que tiene
 		 * Le paso sus propios parámetros para que sea más claro el código
@@ -88,6 +87,8 @@ public class Nodo implements Comparable<Nodo> {
 				(int)(this.estadoNodo.getEnergia() + promVarEnergia), posicion);
 		
 		this.estadoNodo.actualizarEstado(p);
+		
+		this.costo = algoritmo.calcularFuncionDeEvaluacion(this);
 		
 		/* Si el nodo provoca la muerte del Pacman, lo cortamos. Su costo
 		 * es infinito. */
@@ -133,5 +134,9 @@ public class Nodo implements Comparable<Nodo> {
 
 	public void toXML() {
 
+	}
+
+	public float getCosto() {
+		return costo;
 	}
 }

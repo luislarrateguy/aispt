@@ -22,6 +22,7 @@
 package tpsia.tp1.busqueda;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import tpsia.tp1.acciones.Accion;
 import tpsia.tp1.agente.Estado;
@@ -33,7 +34,16 @@ public class BusquedaProfundidad extends Busqueda {
 		super(estado, objetivo);
 	}
 
-	public ArrayList<Accion> buscarSolucion() {
-		return null;
+	@Override
+	protected float calcularFuncionDeEvaluacion(Nodo unNodo) {
+		/* ESTE CÓDIGO NO ESTA PROBADO
+		 * Una estrategia de búsqueda en profundidad utiliza una pila, no una cola.
+		 * Sin embargo según nuestro diseño, la clase Busqueda implementa una cola
+		 * de prioridad, y esta debería ser utilizada por todas las clases (estrategias)
+		 * que hereden de ella.
+		 * Con este código intento simular el comportamiento de una pila a partir de una
+		 * cola de prioridad.
+		 */
+		return (unNodo.getPadre().getCosto() - unNodo.getAccionGeneradora().getCosto());
 	}
 }
