@@ -1,6 +1,7 @@
 package tpsia.tp1.acciones;
 
 import tpsia.tp1.Ambiente;
+import tpsia.tp1.agente.Estado;
 
 public class NoAccion extends Accion {
 	private static NoAccion instancia;
@@ -15,7 +16,7 @@ public class NoAccion extends Accion {
 		return instancia;
 	}
 	
-	public boolean aplicable(Ambiente amb) {
+	public boolean aplicable(Estado estado) {
 		return false;
 	}
 

@@ -162,11 +162,6 @@ public class VisionAmbiente extends Ambiente {
 		if (!super.equals(va))
 			return false;
 		
-		// lo mismo aca, no se puede acceder desde el objeto
-		//sino desde la clase. Debia ser VisionAmbiente.first
-		//if (this.first != va.first)
-		//	return false;
-		
 		return true;
 	}
 }

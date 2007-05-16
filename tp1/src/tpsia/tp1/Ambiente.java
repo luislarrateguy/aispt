@@ -127,7 +127,7 @@ public abstract class Ambiente implements Cloneable {
 		return draw(false);
 	}
 	public String draw(boolean p) {
-		String cuadro = new String("\n[ ] 0  1  2  3 ->X\n");
+		String cuadro = new String("\n[ ]  0   1   2   3 ->X\n");
 		
 		
 		

@@ -19,6 +19,9 @@ public class ObjetivoTP implements IObjetivo {
 	}
 	
 	public boolean cumpleObjetivo(Estado estado) {
+		if (estado.getEnergia() <= 0)
+			return false;
+		
 		boolean convienePelear = estado.getEnergia() >
 			estado.getPromedioVarEnergia(Pelear.getInstancia());
 		boolean convieneMoverse = estado.getEnergia() >

@@ -57,7 +57,10 @@ public abstract class Busqueda {
 				}
 			}
 			
-			nodoActual = colaNodos.remove();
+			if (!colaNodos.isEmpty())
+				nodoActual = colaNodos.remove();
+			else
+				break;
 		}
 		
 		/* FIXME: Hubo un problema cuando lo ejecuté una vez a en este punto.
@@ -86,7 +89,7 @@ public abstract class Busqueda {
 		/* Expando el nodo unNodo sólo si se cumple la precondición de cada
 		 * acción. */
 		for(Accion a : Accion.getAcciones()) {
-			if (a.aplicable(unNodo.getEstado().getAmbiente()))
+			if (a.aplicable(unNodo.getEstado()))
 				nodosExpandir.add(new Nodo(this, unNodo, a,
 						this.estado.getPromedioVarEnergia(a)));
 		}

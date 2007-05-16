@@ -90,11 +90,6 @@ public class Nodo implements Comparable<Nodo> {
 		
 		
 		this.prioridadExpansion = algoritmo.calcularPrioridad(this);
-		
-		/* Si el nodo provoca la muerte del Pacman, lo cortamos. Su costo
-		 * es infinito. */
-		if (this.estadoNodo.getEnergia() <= 0)
-			this.prioridadExpansion = Float.POSITIVE_INFINITY;
 	}
 
 	private float calcularCosto(float c, Accion accion, float var) {

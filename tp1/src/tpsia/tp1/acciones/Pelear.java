@@ -22,6 +22,7 @@
 package tpsia.tp1.acciones;
 
 import tpsia.tp1.Ambiente;
+import tpsia.tp1.agente.Estado;
 
 /*
  * Singleton Notice
@@ -31,9 +32,6 @@ public class Pelear extends Accion {
 	private static Pelear instancia;
 
 	public void ejecutar(Ambiente amb) throws Exception {
-		if (!this.aplicable(amb)) {
-			throw new Exception("Pacman intenta Pelear y no hay enemigo");
-		}
 		amb.pelear();
 	}
 
@@ -53,10 +51,12 @@ public class Pelear extends Accion {
 		return instancia;
 	}
 
-	public boolean aplicable(Ambiente amb) {
-		int[] posicionAgente = amb.getPosicionPacman();
-		
-		if (amb.hayEnemigo(posicionAgente[0], posicionAgente[1]))
+	public boolean aplicable(Estado estado) {
+		/* Verifico que exista un enemigo en la posición del agente, y que
+		 * haya energía suficiente para pelear. */
+		int[] posicionAgente = estado.getAmbiente().getPosicionPacman();
+		if (estado.getAmbiente().hayEnemigo(posicionAgente[0], posicionAgente[1])
+				&& (estado.getEnergia() + estado.getPromedioVarEnergia(this) > 0))
 			return true;
 		
 		return false;

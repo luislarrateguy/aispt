@@ -22,6 +22,7 @@
 package tpsia.tp1.acciones;
 
 import tpsia.tp1.Ambiente;
+import tpsia.tp1.agente.Estado;
 
 /*
  * Singleton Notice
@@ -31,9 +32,6 @@ public class Comer extends Accion {
 	private static Comer instancia;
 
 	public void ejecutar(Ambiente amb) throws Exception {
-		if (!this.aplicable(amb)) {
-			throw new Exception("Pacman intenta Comer y no hay comida");
-		}
 		amb.comer();
 	}
 
@@ -53,10 +51,10 @@ public class Comer extends Accion {
 		return instancia;
 	}
 
-	public boolean aplicable(Ambiente amb) {
-		int[] posicionAgente = amb.getPosicionPacman();
+	public boolean aplicable(Estado estado) {
+		int[] posicionAgente = estado.getAmbiente().getPosicionPacman();
 		
-		if (amb.hayComida(posicionAgente[0], posicionAgente[1]))
+		if (estado.getAmbiente().hayComida(posicionAgente[0], posicionAgente[1]))
 			return true;
 		
 		return false;

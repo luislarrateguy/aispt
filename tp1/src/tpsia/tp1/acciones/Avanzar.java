@@ -22,6 +22,7 @@
 package tpsia.tp1.acciones;
 
 import tpsia.tp1.Ambiente;
+import tpsia.tp1.agente.Estado;
 
 /*
  * Singleton Notice
@@ -36,7 +37,17 @@ public abstract class Avanzar extends Accion {
 		return 0;
 	}
 	
+	@Override
 	public final int getCosto() {
 		return 20;
+	}
+	
+	@Override
+	public final boolean aplicable(Estado estado) {
+		// Verifico que el agente tenga energía suficiente para moverse
+		if (estado.getEnergia() - estado.getPromedioVarEnergia(this) > 0)
+			return true;
+		
+		return false;
 	}
 }

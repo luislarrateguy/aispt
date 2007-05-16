@@ -23,6 +23,7 @@ package tpsia.tp1.acciones;
 
 import tpsia.tp1.Ambiente;
 import tpsia.tp1.Offset;
+import tpsia.tp1.agente.Estado;
 
 public class AvanzarDerecha extends Avanzar {
 
@@ -46,9 +47,5 @@ public class AvanzarDerecha extends Avanzar {
 	@Override
 	public String getTipoAccion() {
 		return "derecha";
-	}
-
-	public boolean aplicable(Ambiente amb) {
-		return true;
 	}
 }

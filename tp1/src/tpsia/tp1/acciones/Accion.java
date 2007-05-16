@@ -23,13 +23,14 @@ package tpsia.tp1.acciones;
 
 import java.util.ArrayList;
 import tpsia.tp1.Ambiente;
+import tpsia.tp1.agente.Estado;
 
 public abstract class Accion {
 	
 	protected static ArrayList<Accion> acciones = new ArrayList<Accion>(7);
 	
 	public abstract void ejecutar(Ambiente amb) throws Exception;
-	public abstract boolean aplicable(Ambiente amb);
+	public abstract boolean aplicable(Estado estado);
 	public abstract String getTipoAccion();
 	public abstract int getCosto();
 	
