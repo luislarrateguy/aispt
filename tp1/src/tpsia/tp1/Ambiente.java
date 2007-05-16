@@ -27,6 +27,7 @@ import java.util.Hashtable;
 public abstract class Ambiente implements Cloneable {
 	protected EstadoCelda[][] tablero;
 	protected int[] posicionPacman;
+	protected Hashtable<Integer, String> aux;
 	
 	public Ambiente() {
 		this.tablero = new EstadoCelda[4][4];
@@ -36,6 +37,13 @@ public abstract class Ambiente implements Cloneable {
 		this.posicionPacman = new int[2];
 		this.posicionPacman[0] = 0;
 		this.posicionPacman[1] = 0;
+		
+		aux = new Hashtable<Integer, String>();
+		aux.put(-1, "X");
+		aux.put(0, " ");
+		aux.put(1, "C");
+		aux.put(2, "E");
+		aux.put(3, "P");
 	}
 	
 	public EstadoCelda[] getCeldasAdyacentes() {
@@ -116,24 +124,18 @@ public abstract class Ambiente implements Cloneable {
 	
 	//string toTurtle();
 	public String draw() {
-		return draw(false,0,0);
+		return draw(false);
 	}
-	public String draw(boolean p,int x,int y) {
+	public String draw(boolean p) {
 		String cuadro = new String("\n[ ] 0  1  2  3 ->X\n");
 		
-		Hashtable<Integer, String> aux;
-		aux = new Hashtable<Integer, String>();
-		aux.put(-1, "X");
-		aux.put(0, " ");
-		aux.put(1, "C");
-		aux.put(2, "E");
-		aux.put(3, "P");
+		
 		
 		for (int j=0;j<4;j++) {
-			cuadro += " "+Integer.toString(j)+" ";
+			cuadro += "  "+Integer.toString(j)+" ";
 			for (int i=0;i<4;i++) {
 				cuadro 	+= "["+aux.get(this.tablero[i][j].valor());
-				if (p && x==i && y == j) {
+				if (p && posicionPacman[0]==i && posicionPacman[1] == j) {
 					cuadro += "P]";
 				} else {
 					cuadro += " ]";
