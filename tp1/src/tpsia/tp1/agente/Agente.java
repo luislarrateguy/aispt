@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import tpsia.tp1.Logging;
 import tpsia.tp1.Percepcion;
 import tpsia.tp1.acciones.Accion;
+import tpsia.tp1.acciones.NoAccion;
 import tpsia.tp1.busqueda.Busqueda;
 import tpsia.tp1.busqueda.BusquedaAEstrella;
 import tpsia.tp1.busqueda.BusquedaCostoUniforme;
@@ -56,7 +57,8 @@ public class Agente {
 		Accion a = this.acciones.get(this.acciones.size() - 1);
 		
 		Logging.logDebug("AGENTE: Se decidió la acción: " + a.getTipoAccion());
-		this.estado.ejecutarAccion(a);
+		if (!a.getClass().equals(NoAccion.class))
+			this.estado.ejecutarAccion(a);
 		return a;
 	}
 	

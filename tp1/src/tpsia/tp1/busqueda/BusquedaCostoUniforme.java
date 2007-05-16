@@ -41,7 +41,7 @@ public class BusquedaCostoUniforme extends Busqueda {
 	}
 
 	@Override
-	protected float calcularFuncionDeEvaluacion(Nodo unNodo) {
-		return (unNodo.getPadre().getCosto() + unNodo.getAccionGeneradora().getCosto());
+	protected float calcularPrioridad(Nodo unNodo) {
+		return (unNodo.getPadre().getPrioridadExpansion() + unNodo.getAccionGeneradora().getCosto());
 	}
 }

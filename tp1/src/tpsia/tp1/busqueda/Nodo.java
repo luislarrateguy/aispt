@@ -12,19 +12,19 @@ public class Nodo implements Comparable<Nodo> {
 	private Accion accionGeneradora;
 	
 	private Estado estadoNodo;
-	private float costo;
+	private float prioridadExpansion;
 	
 	/**
 	 * Este constructor sólo debe ser utilizado para generar el
 	 * nodo del estado inicial.
 	 * @param estado
-	 * @param costo
+	 * @param prioridadExpansion
 	 */
 	public Nodo (Estado estado) {
 		this.padre = null;
 		this.accionGeneradora = null;
 		this.estadoNodo = estado;
-		this.costo = 0;
+		this.prioridadExpansion = 0;
 	}
 	
 	public Nodo(Busqueda algoritmo, Nodo padre, Accion accionGeneradora, float promVarEnergia) {
@@ -88,12 +88,13 @@ public class Nodo implements Comparable<Nodo> {
 		
 		this.estadoNodo.actualizarEstado(p);
 		
-		this.costo = algoritmo.calcularFuncionDeEvaluacion(this);
+		
+		this.prioridadExpansion = algoritmo.calcularPrioridad(this);
 		
 		/* Si el nodo provoca la muerte del Pacman, lo cortamos. Su costo
 		 * es infinito. */
 		if (this.estadoNodo.getEnergia() <= 0)
-			this.costo = Float.POSITIVE_INFINITY;
+			this.prioridadExpansion = Float.POSITIVE_INFINITY;
 	}
 
 	private float calcularCosto(float c, Accion accion, float var) {
@@ -112,9 +113,9 @@ public class Nodo implements Comparable<Nodo> {
 	}
 
 	public int compareTo(Nodo arg0) {
-		if (this.costo == arg0.costo)
+		if (this.prioridadExpansion == arg0.prioridadExpansion)
 			return 0;
-		else if (this.costo < arg0.costo)
+		else if (this.prioridadExpansion < arg0.prioridadExpansion)
 			return -1;
 		else
 			return 1;
@@ -136,7 +137,7 @@ public class Nodo implements Comparable<Nodo> {
 
 	}
 
-	public float getCosto() {
-		return costo;
+	public float getPrioridadExpansion() {
+		return prioridadExpansion;
 	}
 }

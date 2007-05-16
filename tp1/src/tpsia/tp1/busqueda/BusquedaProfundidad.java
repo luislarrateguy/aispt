@@ -35,7 +35,7 @@ public class BusquedaProfundidad extends Busqueda {
 	}
 
 	@Override
-	protected float calcularFuncionDeEvaluacion(Nodo unNodo) {
+	protected float calcularPrioridad(Nodo unNodo) {
 		/* ESTE CÓDIGO NO ESTA PROBADO
 		 * Una estrategia de búsqueda en profundidad utiliza una pila, no una cola.
 		 * Sin embargo según nuestro diseño, la clase Busqueda implementa una cola
@@ -44,6 +44,6 @@ public class BusquedaProfundidad extends Busqueda {
 		 * Con este código intento simular el comportamiento de una pila a partir de una
 		 * cola de prioridad.
 		 */
-		return (unNodo.getPadre().getCosto() - unNodo.getAccionGeneradora().getCosto());
+		return (unNodo.getPadre().getPrioridadExpansion() - unNodo.getAccionGeneradora().getCosto());
 	}
 }

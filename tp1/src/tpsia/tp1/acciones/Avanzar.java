@@ -37,6 +37,6 @@ public abstract class Avanzar extends Accion {
 	}
 	
 	public final int getCosto() {
-		return 2;
+		return 20;
 	}
 }

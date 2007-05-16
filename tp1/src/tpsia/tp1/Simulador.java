@@ -71,10 +71,12 @@ public class Simulador {
 			p = new Percepcion(ambiente.getCeldasAdyacentes(),
 					ambiente.getEnergiaPacman(), ambiente.getPosicionInicialPacman());
 			Logging.logDebug("SIM: Enviando percepcion a Pacman");
-			a = pacman.actuar(p);
 			
+			a = pacman.actuar(p);
 			if (a.getClass().equals(NoAccion.class))
 				break;
+			
+
 			
 			// avisar al calculador
 			Logging.logDebug("SIM: Calculando energia pacman");

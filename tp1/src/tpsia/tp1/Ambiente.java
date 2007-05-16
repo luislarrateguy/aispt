@@ -115,8 +115,10 @@ public abstract class Ambiente implements Cloneable {
 	}
 	
 	//string toTurtle();
-	
 	public String draw() {
+		return draw(false,0,0);
+	}
+	public String draw(boolean p,int x,int y) {
 		String cuadro = new String("\n[ ] 0  1  2  3 ->X\n");
 		
 		Hashtable<Integer, String> aux;
@@ -130,10 +132,12 @@ public abstract class Ambiente implements Cloneable {
 		for (int j=0;j<4;j++) {
 			cuadro += " "+Integer.toString(j)+" ";
 			for (int i=0;i<4;i++) {
-				cuadro 	+= "["
-						+aux.get(this.tablero[i][j].valor())
-						//+ this.ambiente[i][j]
-						+	"]";
+				cuadro 	+= "["+aux.get(this.tablero[i][j].valor());
+				if (p && x==i && y == j) {
+					cuadro += "P]";
+				} else {
+					cuadro += " ]";
+				}
 			}
 			cuadro += "\n";
 		}

@@ -122,7 +122,7 @@ public class VisionAmbiente extends Ambiente {
 
 	public String draw() {
 		String aux = "Vision del ambiente:\n";
-		aux += super.draw();
+		aux += super.draw(true,posicionPacman[0],posicionPacman[1]);
 		
 		aux += "posPacman: [" 
 			+ Integer.toString(posicionPacman[0]) +","

@@ -11,9 +11,9 @@ public class BusquedaAEstrella extends Busqueda {
 	}
 	
 	@Override
-	protected float calcularFuncionDeEvaluacion(Nodo unNodo) {
+	protected float calcularPrioridad(Nodo unNodo) {
 		/* Calculo el costo */
-		float costo = unNodo.getPadre().getCosto() + unNodo.getAccionGeneradora().getCosto();
+		float costo = unNodo.getPadre().getPrioridadExpansion() + unNodo.getAccionGeneradora().getCosto();
 		
 		/* Calculo la función heurística, que consiste en la cantidad de celdas que
 		 * son desconocidas. */

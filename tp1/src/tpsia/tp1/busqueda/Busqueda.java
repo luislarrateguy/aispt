@@ -25,7 +25,7 @@ public abstract class Busqueda {
 	 * @param accionGeneradora
 	 * @return
 	 */
-	protected abstract float calcularFuncionDeEvaluacion(Nodo unNodo);
+	protected abstract float calcularPrioridad(Nodo unNodo);
 	
 	public Busqueda(Estado estado, IObjetivo objetivo) {
 		this.estado = estado;
