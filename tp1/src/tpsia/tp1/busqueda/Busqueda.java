@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.PriorityQueue;
 
+import org.apache.log4j.Logger;
+
 import tpsia.tp1.Logging;
 import tpsia.tp1.acciones.Accion;
 import tpsia.tp1.acciones.NoAccion;
+import tpsia.tp1.agente.Agente;
 import tpsia.tp1.agente.Estado;
 import tpsia.tp1.agente.IObjetivo;
 import tpsia.tp1.agente.VisionAmbiente;
@@ -33,7 +36,8 @@ public abstract class Busqueda {
 	}
 	
 	public ArrayList<Accion> buscarSolucion() {
-		Logging.logDebug("PACMAN: buscar accion");
+		Logger log = Logger.getLogger(Busqueda.class);
+		log.debug("Buscar accion");
 		
 		ArrayList<Accion> listaAcciones = new ArrayList<Accion>();
 		PriorityQueue<Nodo> colaNodos = new PriorityQueue<Nodo>();

@@ -117,7 +117,9 @@ public abstract class Ambiente implements Cloneable {
 		return this.tablero[x][y].equals(EstadoCelda.Comida);
 	}
 	
-	//string toTurtle();
+	public String toString() {
+		return this.draw();
+	}
 	public String draw() {
 		return draw(false);
 	}

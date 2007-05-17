@@ -23,14 +23,12 @@ package tpsia.tp1.agente;
 
 import java.util.ArrayList;
 
+import org.apache.log4j.*;
 import tpsia.tp1.Logging;
 import tpsia.tp1.Percepcion;
 import tpsia.tp1.acciones.Accion;
 import tpsia.tp1.acciones.NoAccion;
-import tpsia.tp1.busqueda.Busqueda;
-import tpsia.tp1.busqueda.BusquedaAEstrella;
-import tpsia.tp1.busqueda.BusquedaAmplitud;
-import tpsia.tp1.busqueda.BusquedaCostoUniforme;
+import tpsia.tp1.busqueda.*;
 
 public class Agente {
 
@@ -42,11 +40,16 @@ public class Agente {
 	public Agente(int energiaInicial) {
 		this.estado = new Estado(energiaInicial);
 		this.objetivo = ObjetivoTP.getInstancia();
+		// Selecciona y CTRL+SHIFT+C
+//		this.busqueda = new BusquedaAmplitud(this.estado, this.objetivo);
+//		this.busqueda = new BusquedaCostoUniforme (this.estado, this.objetivo);
+//		this.busqueda = new BusquedaAvara(this.estado, this.objetivo);
 		this.busqueda = new BusquedaAEstrella(this.estado, this.objetivo);
 	}
 
 	public Accion actuar(Percepcion p) {
-		Logging.logDebug("AGENTE: Percepción recibida. Actuando...");
+		Logger log = Logger.getLogger(Agente.class);
+		log.debug("Percepción recibida. Actuando...");
 		this.estado.actualizarEstado(p);
 		
 		Logging.logMensaje(this.estado.getAmbiente().draw());
@@ -56,7 +59,7 @@ public class Agente {
 		this.acciones = busqueda.buscarSolucion();
 		Accion a = this.acciones.get(this.acciones.size() - 1);
 		
-		Logging.logDebug("AGENTE: Se decidió la acción: " + a.getTipoAccion());
+		log.debug("Se decidió la acción: " + a.getTipoAccion());
 		if (!a.getClass().equals(NoAccion.class))
 			this.estado.ejecutarAccion(a);
 		return a;
@@ -70,9 +73,10 @@ public class Agente {
 		return (this.estado.getEnergia() > 0);
 	}
 	public void mostrarEstadoFinal() {
-		Logging.logDebug("AGENTE: ESTADO FINAL");	
-		Logging.logMensaje(this.estado.getAmbiente().draw());
-		Logging.logMensaje("energia:" 
+		Logger log = Logger.getLogger(Agente.class);
+		log.info("ESTADO FINAL");	
+		log.info(this.estado.getAmbiente());
+		log.info("energia:" 
 			+ Integer.toString(this.estado.getEnergia()) + "\n");
 	}
 }

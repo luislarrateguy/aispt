@@ -21,6 +21,9 @@
 
 package tpsia.tp1;
 
+import org.apache.log4j.*;
+import org.apache.log4j.BasicConfigurator;
+
 public class Main {
 
 	/**
@@ -30,7 +33,12 @@ public class Main {
 		/* Agrego un for por si queremos hacer varias
 		 * simulaciones.
 		 */
+
+		Logger log = Logger.getLogger("main");
+		BasicConfigurator.configure();
+
 		for (int i=1; i<=1; i++) {
+				log.debug("Iniciando simulación nro : "+ Integer.toString(i));
 			Simulador s = new Simulador();
 			s.comenzarSimulacion();
 			s.mostrarPerformance();
