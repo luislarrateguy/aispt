@@ -115,6 +115,10 @@ public class AmbienteReal extends Ambiente {
 	public void setEnergiaPacman(int energiaPacman) {
 		this.energiaPacman = energiaPacman;
 	}
+	
+	public boolean agenteVivo() {
+		return (this.energiaPacman > 0);
+	}
 
 	@Override
 	public Object clone() {

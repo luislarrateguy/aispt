@@ -49,28 +49,23 @@ public abstract class Ambiente implements Cloneable {
 	public EstadoCelda[] getCeldasAdyacentes() {
 		EstadoCelda[] ady = new EstadoCelda[4];
 		/* arr[0] aba[1] der[2] izq[3] */ 
-		int x;
-		int y;
+		int pos[];
 
 		// Celda de arriba del pacman
-		x = this.posicionPacman[0];
-		y = FuncionesUtiles.sumarPosiciones(this.posicionPacman[1], 1);
-		ady[0] = this.tablero[x][y];
+		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Arriba);
+		ady[0] = this.tablero[pos[0]][pos[1]];
 		
 		// Celda de abajo
-		x = this.posicionPacman[0];
-		y = FuncionesUtiles.sumarPosiciones(this.posicionPacman[1], -1);
-		ady[1] = this.tablero[x][y];
+		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Abajo);
+		ady[1] = this.tablero[pos[0]][pos[1]];
 		
 		// Celda de la derecha
-		x = FuncionesUtiles.sumarPosiciones(this.posicionPacman[0], 1);
-		y = this.posicionPacman[1];
-		ady[2] = this.tablero[x][y];
+		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Derecha);
+		ady[2] = this.tablero[pos[0]][pos[1]];
 		
 		// Celda de la izquierda
-		x = FuncionesUtiles.sumarPosiciones(this.posicionPacman[0], -1);
-		y = this.posicionPacman[1];
-		ady[3] = this.tablero[x][y];
+		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Izquierda);
+		ady[3] = this.tablero[pos[0]][pos[1]];
 		
 		//return ady.clone();
 		return ady;

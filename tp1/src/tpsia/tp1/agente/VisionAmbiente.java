@@ -24,6 +24,7 @@ package tpsia.tp1.agente;
 import tpsia.tp1.Ambiente;
 import tpsia.tp1.EstadoCelda;
 import tpsia.tp1.FuncionesUtiles;
+import tpsia.tp1.Offset;
 import tpsia.tp1.Percepcion;
 
 public class VisionAmbiente extends Ambiente {
@@ -96,28 +97,24 @@ public class VisionAmbiente extends Ambiente {
 			VisionAmbiente.first = false;
 		}
 		
-		int x,y;
+		int pos[];
 		EstadoCelda[] celdasAdyacentes = p.getCeldasAdyacentes();
 		
 		// Celda adyacente de arriba
-		x = this.posicionPacman[0];
-		y = FuncionesUtiles.sumarPosiciones(this.posicionPacman[1], 1);
-		this.tablero[x][y] = celdasAdyacentes[0];
+		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Arriba);
+		this.tablero[pos[0]][pos[1]] = celdasAdyacentes[0];
 		
 		// Celda adyacente de abajo
-		x = this.posicionPacman[0];
-		y = FuncionesUtiles.sumarPosiciones(this.posicionPacman[1], -1);
-		this.tablero[x][y] = celdasAdyacentes[1];
+		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Abajo);
+		this.tablero[pos[0]][pos[1]] = celdasAdyacentes[1];
 		
 		// Celda adyacente de derecha
-		x = FuncionesUtiles.sumarPosiciones(this.posicionPacman[0], 1);
-		y = this.posicionPacman[1];
-		this.tablero[x][y] = celdasAdyacentes[2];
+		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Derecha);
+		this.tablero[pos[0]][pos[1]] = celdasAdyacentes[2];
 		
 		// Celda adyacente de izquierda
-		x = FuncionesUtiles.sumarPosiciones(this.posicionPacman[0], -1);
-		y = this.posicionPacman[1];
-		this.tablero[x][y] = celdasAdyacentes[3];
+		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Izquierda);
+		this.tablero[pos[0]][pos[1]] = celdasAdyacentes[3];
 	}
 
 	public String draw() {

@@ -134,7 +134,7 @@ public class Simulador {
 		return ( (this.pacman.cumplioObjetivo() && this.pacman.vivo()) ||
 				!this.pacman.vivo());
 		*/
-		return this.pacman.cumplioObjetivo() || !this.pacman.vivo();
+		return this.pacman.cumplioObjetivo() || !this.ambiente.agenteVivo();
 	}
 	
 	public static Simulador GetInstancia() {

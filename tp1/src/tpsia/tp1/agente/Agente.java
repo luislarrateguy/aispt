@@ -42,8 +42,7 @@ public class Agente {
 	public Agente(int energiaInicial) {
 		this.estado = new Estado(energiaInicial);
 		this.objetivo = ObjetivoTP.getInstancia();
-		//this.busqueda = new BusquedaCostoUniforme(this.estado, this.objetivo);
-		this.busqueda = new BusquedaAmplitud(this.estado, this.objetivo);
+		this.busqueda = new BusquedaAEstrella(this.estado, this.objetivo);
 	}
 
 	public Accion actuar(Percepcion p) {
