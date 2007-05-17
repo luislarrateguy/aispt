@@ -52,16 +52,17 @@ public class Agente {
 		log.debug("Percepción recibida. Actuando...");
 		this.estado.actualizarEstado(p);
 		
-		log.debug(this.estado.getAmbiente());
-		log.debug("energia:" 
+		log.info(this.estado.getAmbiente());
+		log.info("energia:" 
 			+ Integer.toString(this.estado.getEnergia()) + "\n");
 		
 		this.acciones = busqueda.buscarSolucion();
 		Accion a = this.acciones.get(this.acciones.size() - 1);
 		
-		log.debug("Se decidió la acción: " + a.getTipoAccion());
+		log.info("Se decidió la acción: " + a.getTipoAccion());
 		if (!a.getClass().equals(NoAccion.class))
 			this.estado.ejecutarAccion(a);
+		
 		return a;
 	}
 	
