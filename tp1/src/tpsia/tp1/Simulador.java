@@ -75,9 +75,7 @@ public class Simulador {
 			a = pacman.actuar(p);
 			if (a.getClass().equals(NoAccion.class))
 				break;
-			
-
-			
+		
 			// avisar al calculador
 			Logging.logDebug("SIM: Calculando energia pacman");
 			energiaPacman = calculador.calcularEnergiaPacMan(a.getTipoAccion());
@@ -90,6 +88,7 @@ public class Simulador {
 				// Mostrar la excepción.
 				e.printStackTrace();
 			}
+			
 			Logging.logDebug("SIM: Actualizando ambiente");
 			ambiente.setEnergiaPacman(energiaPacman);
 		}

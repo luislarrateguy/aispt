@@ -29,6 +29,7 @@ import tpsia.tp1.acciones.Accion;
 import tpsia.tp1.acciones.NoAccion;
 import tpsia.tp1.busqueda.Busqueda;
 import tpsia.tp1.busqueda.BusquedaAEstrella;
+import tpsia.tp1.busqueda.BusquedaAmplitud;
 import tpsia.tp1.busqueda.BusquedaCostoUniforme;
 
 public class Agente {
@@ -42,7 +43,7 @@ public class Agente {
 		this.estado = new Estado(energiaInicial);
 		this.objetivo = ObjetivoTP.getInstancia();
 		//this.busqueda = new BusquedaCostoUniforme(this.estado, this.objetivo);
-		this.busqueda = new BusquedaAEstrella(this.estado, this.objetivo);
+		this.busqueda = new BusquedaAmplitud(this.estado, this.objetivo);
 	}
 
 	public Accion actuar(Percepcion p) {
