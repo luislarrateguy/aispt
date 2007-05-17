@@ -37,8 +37,11 @@ public abstract class Busqueda {
 	
 	public ArrayList<Accion> buscarSolucion() {
 		VECES_EJECUTADA++;
-		Logger log = Logger.getLogger(Busqueda.class + ".ejecucion" + Integer.toString(VECES_EJECUTADA));
+		Nodo.resetID();
+		
+		Logger log = Logger.getLogger("Busqueda" + ".ejecucion" + Integer.toString(VECES_EJECUTADA));
 		log.debug("Buscar accion");
+		log.debug(log.getName());
 		
 		ArrayList<Accion> listaAcciones = new ArrayList<Accion>();
 		PriorityQueue<Nodo> colaNodos = new PriorityQueue<Nodo>();

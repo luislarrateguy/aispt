@@ -148,4 +148,7 @@ public class Nodo implements Comparable<Nodo> {
 	public String getID() {
 		return Integer.toString(this.id);
 	}
+	public static void resetID() {
+		LAST_ID = 0;
+	}
 }

@@ -34,9 +34,9 @@ public class Main {
 		 * simulaciones.
 		 */
 		
-
-		Logger log = Logger.getLogger(Main.class);
 		PropertyConfigurator.configure(args[0]);
+		Logger log = Logger.getLogger(Main.class);
+
 		
 		//BasicConfigurator.configure();
 
