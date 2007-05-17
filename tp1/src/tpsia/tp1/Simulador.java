@@ -23,6 +23,7 @@ package tpsia.tp1;
 
 import java.util.Vector;
 
+import org.apache.log4j.*;
 import tpsia.tp1.acciones.*;
 import tpsia.tp1.agente.Agente;
 import calculador.Calculador;
@@ -58,7 +59,9 @@ public class Simulador {
 	 * la energía del pacman en el mismo.
 	 */
 	public void comenzarSimulacion() {
-		Logging.logDebug("SIM: Iniciando simulación...");
+		Logger log = Logger.getLogger(Simulador.class);
+		
+		log.info("Iniciando simulación...");
 		this.inicializarSimulacion();
 
 		Accion a;
@@ -67,21 +70,21 @@ public class Simulador {
 		while (!this.finSimulacion()) {
 			/* Creo la percepción, se la envío al agente, y espero una acción
 			 * escogida por él. */
-			Logging.logDebug("SIM: Armando percepcion...");
+			log.debug("Armando percepcion");
 			p = new Percepcion(ambiente.getCeldasAdyacentes(),
 					ambiente.getEnergiaPacman(), ambiente.getPosicionInicialPacman());
-			Logging.logDebug("SIM: Enviando percepcion a Pacman");
+			log.debug("Enviando percepcion a Pacman");
 			
 			a = pacman.actuar(p);
 			if (a.getClass().equals(NoAccion.class))
 				break;
 		
 			// avisar al calculador
-			Logging.logDebug("SIM: Calculando energia pacman");
+			log.debug("Calculando energia pacman");
 			energiaPacman = calculador.calcularEnergiaPacMan(a.getTipoAccion());
 
 			// ejecutar la acción y actualizar el ambiente
-			Logging.logDebug("SIM: Ejecutando accion en ambiente");
+			log.debug("Ejecutando accion en ambiente");
 			try {
 				a.ejecutar(ambiente);
 			} catch (Exception e) {
@@ -89,11 +92,11 @@ public class Simulador {
 				e.printStackTrace();
 			}
 			
-			Logging.logDebug("SIM: Actualizando ambiente");
+			log.debug("Actualizando ambiente");
 			ambiente.setEnergiaPacman(energiaPacman);
 		}
 		
-		Logging.logMensaje(" ### Fin de la simulación ### ");
+		log.info("### Fin de la simulación ###");
 		this.pacman.mostrarEstadoFinal();
 	}
 	
@@ -103,6 +106,8 @@ public class Simulador {
 	 * Con todo esto inicializa el ambiente real.
 	 */
 	private void inicializarSimulacion() {
+		Logger log = Logger.getLogger(Simulador.class);
+		
 		Vector posicionesEnemigos = calculador.inicializarEnemigo();
 		Pair posicionPacMan 	= calculador.getPosicionInicial();
 		Vector posicionesComida = calculador.inicializarComida();
@@ -121,11 +126,12 @@ public class Simulador {
 				posicionesEnemigos,
 				posicionesComida);
 		
-		Logging.logMensaje(this.ambiente.draw());
+		log.info(this.ambiente);
 	}
 	
 	private boolean finSimulacion() {
-		Logging.logDebug("SIM: Chequeando si termina...");
+		Logger log = Logger.getLogger(Simulador.class);
+		log.debug("Chequeando si termina");
 		/* La condición lógica de abajo es equivalente a 
 		 * preguntar solamente si cumplióObjetivo o si murió
 		 * debido a leyes de lógica
@@ -145,7 +151,8 @@ public class Simulador {
 	}
 	
 	public void mostrarPerformance() {
-		Logging.logDebug("SIM: Desempeño del PACMAN: " +
+		Logger log = Logger.getLogger(Simulador.class);
+		log.info("Desempeño del PACMAN: " +
 				this.calculador.getPerformance());
 	}
 }
