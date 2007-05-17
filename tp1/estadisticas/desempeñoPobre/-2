@@ -1,0 +1,274 @@
+Datos:
+------
+
+Probado por: milton
+Revisión del código: 81
+Estrategia utilizada: A*
+Observaciones: Se ejecutó velozmente.
+
+-------------------
+
+DEBUG: SIM: Iniciando simulación...
+Ambiente Real:
+
+[ ]  0   1   2   3 ->X
+  0 [  ][  ][  ][  ]
+  1 [  ][E ][  ][  ]
+  2 [  ][E ][  ][  ]
+  3 [C ][C ][  ][  ]
+ Y
+posPacman: [2,2]
+energia:21
+
+DEBUG: SIM: Chequeando si termina...
+DEBUG: SIM: Armando percepcion...
+DEBUG: SIM: Enviando percepcion a Pacman
+DEBUG: AGENTE: Percepción recibida. Actuando...
+Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [X ][X ][X ][X ]
+  1 [X ][X ][  ][X ]
+  2 [X ][E ][XP][  ]
+  3 [X ][X ][  ][X ]
+ Y
+posPacman: [2,2]
+energia:21
+
+DEBUG: PACMAN: buscar accion
+DEBUG: AGENTE: Se decidió la acción: izquierda
+DEBUG: SIM: Calculando energia pacman
+DEBUG: SIM: Ejecutando accion en ambiente
+DEBUG: SIM: Actualizando ambiente
+DEBUG: SIM: Chequeando si termina...
+DEBUG: SIM: Armando percepcion...
+DEBUG: SIM: Enviando percepcion a Pacman
+DEBUG: AGENTE: Percepción recibida. Actuando...
+Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [X ][X ][X ][X ]
+  1 [X ][E ][  ][X ]
+  2 [  ][EP][  ][  ]
+  3 [X ][C ][  ][X ]
+ Y
+posPacman: [1,2]
+energia:19
+
+DEBUG: PACMAN: buscar accion
+DEBUG: AGENTE: Se decidió la acción: pelear
+DEBUG: SIM: Calculando energia pacman
+DEBUG: SIM: Ejecutando accion en ambiente
+DEBUG: SIM: Actualizando ambiente
+DEBUG: SIM: Chequeando si termina...
+DEBUG: SIM: Armando percepcion...
+DEBUG: SIM: Enviando percepcion a Pacman
+DEBUG: AGENTE: Percepción recibida. Actuando...
+Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [X ][X ][X ][X ]
+  1 [X ][E ][  ][X ]
+  2 [  ][ P][  ][  ]
+  3 [X ][C ][  ][X ]
+ Y
+posPacman: [1,2]
+energia:19
+
+DEBUG: PACMAN: buscar accion
+DEBUG: AGENTE: Se decidió la acción: abajo
+DEBUG: SIM: Calculando energia pacman
+DEBUG: SIM: Ejecutando accion en ambiente
+DEBUG: SIM: Actualizando ambiente
+DEBUG: SIM: Chequeando si termina...
+DEBUG: SIM: Armando percepcion...
+DEBUG: SIM: Enviando percepcion a Pacman
+DEBUG: AGENTE: Percepción recibida. Actuando...
+Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [X ][  ][X ][X ]
+  1 [X ][E ][  ][X ]
+  2 [  ][  ][  ][  ]
+  3 [C ][CP][  ][X ]
+ Y
+posPacman: [1,3]
+energia:18
+
+DEBUG: PACMAN: buscar accion
+DEBUG: AGENTE: Se decidió la acción: comer
+DEBUG: SIM: Calculando energia pacman
+DEBUG: SIM: Ejecutando accion en ambiente
+DEBUG: SIM: Actualizando ambiente
+DEBUG: SIM: Chequeando si termina...
+DEBUG: SIM: Armando percepcion...
+DEBUG: SIM: Enviando percepcion a Pacman
+DEBUG: AGENTE: Percepción recibida. Actuando...
+Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [X ][  ][X ][X ]
+  1 [X ][E ][  ][X ]
+  2 [  ][  ][  ][  ]
+  3 [C ][ P][  ][X ]
+ Y
+posPacman: [1,3]
+energia:18
+
+DEBUG: PACMAN: buscar accion
+DEBUG: AGENTE: Se decidió la acción: izquierda
+DEBUG: SIM: Calculando energia pacman
+DEBUG: SIM: Ejecutando accion en ambiente
+DEBUG: SIM: Actualizando ambiente
+DEBUG: SIM: Chequeando si termina...
+DEBUG: SIM: Armando percepcion...
+DEBUG: SIM: Enviando percepcion a Pacman
+DEBUG: AGENTE: Percepción recibida. Actuando...
+Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [  ][  ][X ][X ]
+  1 [X ][E ][  ][X ]
+  2 [  ][  ][  ][  ]
+  3 [CP][  ][  ][  ]
+ Y
+posPacman: [0,3]
+energia:17
+
+DEBUG: PACMAN: buscar accion
+DEBUG: AGENTE: Se decidió la acción: comer
+DEBUG: SIM: Calculando energia pacman
+DEBUG: SIM: Ejecutando accion en ambiente
+DEBUG: SIM: Actualizando ambiente
+DEBUG: SIM: Chequeando si termina...
+DEBUG: SIM: Armando percepcion...
+DEBUG: SIM: Enviando percepcion a Pacman
+DEBUG: AGENTE: Percepción recibida. Actuando...
+Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [  ][  ][X ][X ]
+  1 [X ][E ][  ][X ]
+  2 [  ][  ][  ][  ]
+  3 [ P][  ][  ][  ]
+ Y
+posPacman: [0,3]
+energia:17
+
+DEBUG: PACMAN: buscar accion
+DEBUG: AGENTE: Se decidió la acción: abajo
+DEBUG: SIM: Calculando energia pacman
+DEBUG: SIM: Ejecutando accion en ambiente
+DEBUG: SIM: Actualizando ambiente
+DEBUG: SIM: Chequeando si termina...
+DEBUG: SIM: Armando percepcion...
+DEBUG: SIM: Enviando percepcion a Pacman
+DEBUG: AGENTE: Percepción recibida. Actuando...
+Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [ P][  ][X ][  ]
+  1 [  ][E ][  ][X ]
+  2 [  ][  ][  ][  ]
+  3 [  ][  ][  ][  ]
+ Y
+posPacman: [0,0]
+energia:16
+
+DEBUG: PACMAN: buscar accion
+DEBUG: AGENTE: Se decidió la acción: abajo
+DEBUG: SIM: Calculando energia pacman
+DEBUG: SIM: Ejecutando accion en ambiente
+DEBUG: SIM: Actualizando ambiente
+DEBUG: SIM: Chequeando si termina...
+DEBUG: SIM: Armando percepcion...
+DEBUG: SIM: Enviando percepcion a Pacman
+DEBUG: AGENTE: Percepción recibida. Actuando...
+Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [  ][  ][X ][  ]
+  1 [ P][E ][  ][  ]
+  2 [  ][  ][  ][  ]
+  3 [  ][  ][  ][  ]
+ Y
+posPacman: [0,1]
+energia:15
+
+DEBUG: PACMAN: buscar accion
+DEBUG: AGENTE: Se decidió la acción: derecha
+DEBUG: SIM: Calculando energia pacman
+DEBUG: SIM: Ejecutando accion en ambiente
+DEBUG: SIM: Actualizando ambiente
+DEBUG: SIM: Chequeando si termina...
+DEBUG: SIM: Armando percepcion...
+DEBUG: SIM: Enviando percepcion a Pacman
+DEBUG: AGENTE: Percepción recibida. Actuando...
+Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [  ][  ][X ][  ]
+  1 [  ][EP][  ][  ]
+  2 [  ][  ][  ][  ]
+  3 [  ][  ][  ][  ]
+ Y
+posPacman: [1,1]
+energia:14
+
+DEBUG: PACMAN: buscar accion
+DEBUG: AGENTE: Se decidió la acción: pelear
+DEBUG: SIM: Calculando energia pacman
+DEBUG: SIM: Ejecutando accion en ambiente
+DEBUG: SIM: Actualizando ambiente
+DEBUG: SIM: Chequeando si termina...
+DEBUG: SIM: Armando percepcion...
+DEBUG: SIM: Enviando percepcion a Pacman
+DEBUG: AGENTE: Percepción recibida. Actuando...
+Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [  ][  ][X ][  ]
+  1 [  ][ P][  ][  ]
+  2 [  ][  ][  ][  ]
+  3 [  ][  ][  ][  ]
+ Y
+posPacman: [1,1]
+energia:3
+
+DEBUG: PACMAN: buscar accion
+DEBUG: AGENTE: Se decidió la acción: arriba
+DEBUG: SIM: Calculando energia pacman
+DEBUG: SIM: Ejecutando accion en ambiente
+DEBUG: SIM: Actualizando ambiente
+DEBUG: SIM: Chequeando si termina...
+DEBUG: SIM: Armando percepcion...
+DEBUG: SIM: Enviando percepcion a Pacman
+DEBUG: AGENTE: Percepción recibida. Actuando...
+Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [  ][ P][  ][  ]
+  1 [  ][  ][  ][  ]
+  2 [  ][  ][  ][  ]
+  3 [  ][  ][  ][  ]
+ Y
+posPacman: [1,0]
+energia:2
+
+DEBUG: PACMAN: buscar accion
+DEBUG: AGENTE: Se decidió la acción: no accion
+ ### Fin de la simulación ### 
+DEBUG: AGENTE: ESTADO FINAL
+Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [  ][ P][  ][  ]
+  1 [  ][  ][  ][  ]
+  2 [  ][  ][  ][  ]
+  3 [  ][  ][  ][  ]
+ Y
+posPacman: [1,0]
+energia:2
+
+DEBUG: SIM: Desempeño del PACMAN: -2
+
