@@ -6,10 +6,8 @@ import java.util.PriorityQueue;
 
 import org.apache.log4j.Logger;
 
-import tpsia.tp1.Logging;
 import tpsia.tp1.acciones.Accion;
 import tpsia.tp1.acciones.NoAccion;
-import tpsia.tp1.agente.Agente;
 import tpsia.tp1.agente.Estado;
 import tpsia.tp1.agente.IObjetivo;
 import tpsia.tp1.agente.VisionAmbiente;
@@ -68,6 +66,8 @@ public abstract class Busqueda {
 				for (Nodo n : this.expandir(nodoActual)) {
 					colaNodos.add(n);
 				}
+				
+				colaNodos.remove(nodoActual);
 			}
 			
 			if (!colaNodos.isEmpty()) {
