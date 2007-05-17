@@ -33,9 +33,12 @@ public class Main {
 		/* Agrego un for por si queremos hacer varias
 		 * simulaciones.
 		 */
+		
 
-		Logger log = Logger.getLogger("main");
-		BasicConfigurator.configure();
+		Logger log = Logger.getLogger(Main.class);
+		PropertyConfigurator.configure(args[0]);
+		
+		//BasicConfigurator.configure();
 
 		for (int i=1; i<=1; i++) {
 				log.debug("Iniciando simulación nro : "+ Integer.toString(i));

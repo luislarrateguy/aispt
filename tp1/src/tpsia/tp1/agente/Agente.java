@@ -42,9 +42,9 @@ public class Agente {
 		this.objetivo = ObjetivoTP.getInstancia();
 		// Selecciona y CTRL+SHIFT+C
 //		this.busqueda = new BusquedaAmplitud(this.estado, this.objetivo);
-//		this.busqueda = new BusquedaCostoUniforme (this.estado, this.objetivo);
+		this.busqueda = new BusquedaCostoUniforme (this.estado, this.objetivo);
 //		this.busqueda = new BusquedaAvara(this.estado, this.objetivo);
-		this.busqueda = new BusquedaAEstrella(this.estado, this.objetivo);
+//		this.busqueda = new BusquedaAEstrella(this.estado, this.objetivo);
 	}
 
 	public Accion actuar(Percepcion p) {
@@ -52,8 +52,8 @@ public class Agente {
 		log.debug("Percepción recibida. Actuando...");
 		this.estado.actualizarEstado(p);
 		
-		Logging.logMensaje(this.estado.getAmbiente().draw());
-		Logging.logMensaje("energia:" 
+		log.debug(this.estado.getAmbiente());
+		log.debug("energia:" 
 			+ Integer.toString(this.estado.getEnergia()) + "\n");
 		
 		this.acciones = busqueda.buscarSolucion();

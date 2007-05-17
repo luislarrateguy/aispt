@@ -10,9 +10,11 @@ import tpsia.tp1.agente.VisionAmbiente;
 public class Nodo implements Comparable<Nodo> {
 	private Nodo padre;
 	private Accion accionGeneradora;
+	private static int LAST_ID = 0;
 	
 	private Estado estadoNodo;
 	private float prioridadExpansion;
+	private int id;
 	
 	/**
 	 * Este constructor sólo debe ser utilizado para generar el
@@ -22,12 +24,19 @@ public class Nodo implements Comparable<Nodo> {
 	 */
 	public Nodo (Estado estado) {
 		this.padre = null;
+		this.id = Nodo.GenID();
 		this.accionGeneradora = null;
 		this.estadoNodo = estado;
 		this.prioridadExpansion = 0;
 	}
 	
+	private static int GenID() {
+		LAST_ID++;
+		return LAST_ID;
+	}
+
 	public Nodo(Busqueda algoritmo, Nodo padre, Accion accionGeneradora, float promVarEnergia) {
+		this.id = Nodo.GenID();
 		this.padre = padre;
 		this.accionGeneradora = accionGeneradora;
 		/* El tema del promedio, al sumarlo, afecta en forma lineal al costo total
@@ -94,7 +103,7 @@ public class Nodo implements Comparable<Nodo> {
 
 	private float calcularCosto(float c, Accion accion, float var) {
 		float aux;
-		
+		//TODO: No se esta usando nunca!
 		/* Si no sabe lo que es pelear, que se arriesgue.
 		 * Para eso le asigno un costo un poco menor que la comida. 
 		 * var es la variancia */
@@ -128,11 +137,15 @@ public class Nodo implements Comparable<Nodo> {
 		return accionGeneradora;
 	}
 
-	public void toXML() {
-
+	public String toString() {
+		return new String("Accion:"+this.accionGeneradora + " Prioridad: "+Float.toString(this.prioridadExpansion));
 	}
 
 	public float getPrioridadExpansion() {
 		return prioridadExpansion;
+	}
+
+	public String getID() {
+		return Integer.toString(this.id);
 	}
 }

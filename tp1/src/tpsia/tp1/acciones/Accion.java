@@ -39,11 +39,7 @@ public abstract class Accion {
 	public static ArrayList<Accion> getAcciones() {
 		return acciones;
 	}
-	public void toXML() {
-		/*
-		Logging.logXMLOpen("accion");
-		Logging.logXML(this.getTipoAccion());
-		Logging.logXMLClose("accion");
-		*/
+	public String toString() {
+		return this.getTipoAccion();
 	}
 }

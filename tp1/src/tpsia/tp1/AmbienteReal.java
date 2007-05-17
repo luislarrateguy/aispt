@@ -86,7 +86,7 @@ public class AmbienteReal extends Ambiente {
 	}
 	
 	public String toString() {
-		return null;
+		return this.draw();
 	}
 
 	public String draw() {
@@ -98,7 +98,7 @@ public class AmbienteReal extends Ambiente {
 			+ Integer.toString(posicionPacman[1]) + "]\n";
 		
 		aux += "energia:" 
-			+ Integer.toString(this.energiaPacman) 	+"\n";
+			+ Integer.toString(this.energiaPacman);
 		
 		return aux;
 	}

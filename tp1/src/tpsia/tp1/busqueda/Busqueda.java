@@ -17,7 +17,7 @@ import tpsia.tp1.agente.VisionAmbiente;
 public abstract class Busqueda {
 	protected Estado estado;
 	protected IObjetivo objetivo;
-	
+	private static int VECES_EJECUTADA = 0;
 	/**
 	 * La función de evaluación representa, en:
 	 * - Estrategia de amplitud: costo (nodo padre + 1)
@@ -36,7 +36,8 @@ public abstract class Busqueda {
 	}
 	
 	public ArrayList<Accion> buscarSolucion() {
-		Logger log = Logger.getLogger(Busqueda.class);
+		VECES_EJECUTADA++;
+		Logger log = Logger.getLogger(Busqueda.class + ".ejecucion" + Integer.toString(VECES_EJECUTADA));
 		log.debug("Buscar accion");
 		
 		ArrayList<Accion> listaAcciones = new ArrayList<Accion>();
@@ -44,13 +45,18 @@ public abstract class Busqueda {
 		ArrayList<VisionAmbiente> estadosAlcanzados = new ArrayList<VisionAmbiente>();
 		
 		Nodo nodoActual = new Nodo((Estado)this.estado.clone());
-		
+		log.debug("Comenzando busqueda. Nodo actual:");
+		log.debug(nodoActual);
 		/*
 		 * Mientras no se cumple el objetivo en el nodo actual, seguimos expandiendo.
 		 */
+		log.debug("Expandiendo nodo Inicial: " + nodoActual.getID());
 		while ( ! this.objetivo.cumpleObjetivo(nodoActual) ) {
 			
+			log.debug(nodoActual);
+			
 			/* Vemos si el nodo actual ya fue inspeccionado. */
+			
 			if (!estadosAlcanzados.contains(nodoActual.getEstado().getAmbiente())) {
 				
 				/* Agrego el nodo actual a la lista de nodos ya inspeccionados. */
@@ -61,10 +67,12 @@ public abstract class Busqueda {
 				}
 			}
 			
-			if (!colaNodos.isEmpty())
+			if (!colaNodos.isEmpty()) {
 				nodoActual = colaNodos.remove();
-			else
+				log.debug("Nodo a expandir: " + nodoActual.getID()  + " hijo de "+ nodoActual.getPadre().getID());
+			} else {
 				break;
+			}
 		}
 		
 		/* FIXME: Hubo un problema cuando lo ejecuté una vez a en este punto.

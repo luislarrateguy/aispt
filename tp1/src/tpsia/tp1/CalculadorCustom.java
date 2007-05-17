@@ -5,6 +5,9 @@ import java.util.Vector;
 import calculador.Calculador;
 import calculador.Pair;
 
+/* jeje muy groso estuviste con esto 
+ * se me ocurrió lo mismo por eso te digo groso jajaja
+ */
 public class CalculadorCustom extends Calculador {
 	private final int[] POSICION_INICIAL = {1,2};
 	private final int[] POSICION_COMIDAS = {
