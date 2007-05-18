@@ -20,7 +20,7 @@ public abstract class Busqueda {
 	 * La función de evaluación representa, en:
 	 * - Estrategia de amplitud: costo (nodo padre + 1)
 	 * - Estrategia de costo uniforme: costo (nodo padre + costo acción)
-	 * - Estrategia A*: costo + heurística
+	 * - Estrategia A*: costo (costouniforme + heurística)
 	 * - etc...
 	 * @param padre
 	 * @param accionGeneradora
@@ -37,7 +37,7 @@ public abstract class Busqueda {
 		VECES_EJECUTADA++;
 		Nodo.resetID();
 		
-		Logger log = Logger.getLogger(Busqueda.class + ".ejecucion" + Integer.toString(VECES_EJECUTADA));
+		Logger log = Logger.getLogger("Busqueda" + ".ejecucion" + Integer.toString(VECES_EJECUTADA));
 		log.info("Buscar accion");
 		log.debug(log.getName());
 		
