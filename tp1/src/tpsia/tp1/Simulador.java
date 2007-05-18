@@ -44,10 +44,10 @@ public class Simulador {
 		/* Inicializando Acciones para acelerar ejecución */
 		Pelear.getInstancia();
 		Comer.getInstancia();
-		AvanzarAbajo.getInstancia();
-		AvanzarDerecha.getInstancia();
 		AvanzarArriba.getInstancia();
 		AvanzarIzquierda.getInstancia();
+		AvanzarAbajo.getInstancia();
+		AvanzarDerecha.getInstancia();
 		NoAccion.getInstancia();
 	}
 	

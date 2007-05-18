@@ -39,7 +39,7 @@ public abstract class Avanzar extends Accion {
 	
 	@Override
 	public final int getCosto() {
-		return 5;
+		return 20;
 	}
 	
 	@Override
@@ -48,7 +48,7 @@ public abstract class Avanzar extends Accion {
 		// Es esto una precondicion para que aplique? 
 		// si es así.. no deberíamos chequear ademas
 		// que si hay comida no aplique?
-		if (estado.getEnergia() > estado.getPromedioVarEnergia(this))
+		if (estado.getEnergia() > 0)
 			return true;
 		
 		return false;

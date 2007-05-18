@@ -83,8 +83,9 @@ public class VisionAmbiente extends Ambiente {
 	public boolean hayEnemigosVivos() {
 		for (int i=0;i<4;i++) {
 			for (int j=0;j<4;j++) {
-				if (this.tablero[i][j] == EstadoCelda.Enemigo)
+				if (this.tablero[i][j] == EstadoCelda.Enemigo) {
 					return true;
+				}
 			}
 		}
 		

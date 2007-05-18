@@ -39,34 +39,6 @@ public class Nodo implements Comparable<Nodo> {
 		this.id = Nodo.GenID();
 		this.padre = padre;
 		this.accionGeneradora = accionGeneradora;
-		/* El tema del promedio, al sumarlo, afecta en forma lineal al costo total
-		 * Además el promedio puede ser negativo, positivo, o nulo.
-		 * Ya que pudo haber ganado o perdido energía.
-		 * ¿ No sería mejor multiplicar por ese promedio ?
- 		 * CostoAccion = (PonderacionDeLaAccion+promVarEnergia)/promVarEnergia
-		 * 
-		 * CostoAccion siempre debe ser positivo, sino tiene un costo menor que el padre.
-		 * CostoDelNodo = CostoDelPadre + CostoAccion
-		 * 
-		 */
-		
-		/* Una simple que pondera siempre comer, caminar y luego pelear. En ese orden. */
-		//this.costo = this.padre.costo + this.accionGeneradora.getCosto();
-
-		// Al costo lo puse abajo. Es necesario que se calcule luego de que el nodo
-		// aplique los cambios de la acción generadora.
-		
-		/* Una opcion que calcula costo en base a la información que tiene
-		 * Le paso sus propios parámetros para que sea más claro el código
-		 * en la función
-		 */
-		//this.costo =  this.calcularCosto(this.padre.costo,this.accionGeneradora, promVarEnergia);
-		
-		//otra
-		//float pond = (float) ((promVarEnergia<0)? 1.5:0.5);
-		//this.costo = this.padre.costo + this.accionGeneradora.getCosto()*pond;
-	
-		// Copio el estado y le aplico la acción generadora para modificar el ambiente
 		this.estadoNodo = (Estado) this.padre.estadoNodo.clone();
 		
 		try {
@@ -154,4 +126,12 @@ public class Nodo implements Comparable<Nodo> {
 	public static void resetID() {
 		LAST_ID = 0;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+
+
+		return super.equals(obj);
+	}
+	
 }

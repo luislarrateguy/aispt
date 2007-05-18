@@ -108,11 +108,15 @@ public abstract class Ambiente implements Cloneable {
 		this.posicionPacman[1] = FuncionesUtiles.sumarPosiciones(
 				this.posicionPacman[1], o.y());
 	}
-	
+	public boolean hayEnemigo() {
+		return this.hayEnemigo(this.posicionPacman[0], this.posicionPacman[1]);
+	}
 	public boolean hayEnemigo(int x, int y) {
 		return this.tablero[x][y].equals(EstadoCelda.Enemigo);
 	}
-	
+	public boolean hayComida() {
+		return this.hayComida(this.posicionPacman[0], this.posicionPacman[1]);
+	}
 	public boolean hayComida(int x, int y) {
 		return this.tablero[x][y].equals(EstadoCelda.Comida);
 	}

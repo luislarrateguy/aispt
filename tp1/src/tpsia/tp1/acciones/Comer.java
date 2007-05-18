@@ -43,7 +43,7 @@ public class Comer extends Accion {
 	
 	@Override
 	public int getCosto() {
-		return 2;
+		return 1;
 	}
 
 	static public Accion getInstancia() {
@@ -56,11 +56,8 @@ public class Comer extends Accion {
 
 	@Override
 	public boolean aplicable(Estado estado) {
-		int[] posicionAgente = estado.getAmbiente().getPosicionPacman();
-		
-		if (estado.getAmbiente().hayComida(posicionAgente[0], posicionAgente[1]))
+		if (estado.getAmbiente().hayComida())
 			return true;
-		
 		return false;
 	}
 

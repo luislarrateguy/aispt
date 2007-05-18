@@ -43,7 +43,7 @@ public class Pelear extends Accion {
 	
 	@Override
 	public int getCosto() {
-		return 3;
+		return 10;
 	}
 
 	static public Accion getInstancia() {
@@ -58,9 +58,11 @@ public class Pelear extends Accion {
 	public boolean aplicable(Estado estado) {
 		/* Verifico que exista un enemigo en la posición del agente, y que
 		 * haya energía suficiente para pelear. */
-		int[] posicionAgente = estado.getAmbiente().getPosicionPacman();
+		/*int[] posicionAgente = estado.getAmbiente().getPosicionPacman();
 		if (estado.getAmbiente().hayEnemigo(posicionAgente[0], posicionAgente[1])
 				&& (estado.getEnergia() + estado.getPromedioVarEnergia(this) > 0))
+			return true;*/
+		if (estado.getAmbiente().hayEnemigo())
 			return true;
 		
 		return false;

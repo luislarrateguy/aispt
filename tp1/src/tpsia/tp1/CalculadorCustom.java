@@ -9,7 +9,7 @@ import calculador.Pair;
  * se me ocurrió lo mismo por eso te digo groso jajaja
  */
 public class CalculadorCustom extends Calculador {
-	private final int[] POSICION_INICIAL = {1,2};
+	private final int[] POSICION_INICIAL = {0,2};
 	private final int[] POSICION_COMIDAS = {
 			1,1,
 			2,2,

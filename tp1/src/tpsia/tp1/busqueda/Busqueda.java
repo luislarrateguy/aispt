@@ -44,6 +44,7 @@ public abstract class Busqueda {
 		ArrayList<Accion> listaAcciones;
 		PriorityQueue<Nodo> colaNodos;
 		ArrayList<VisionAmbiente> estadosAlcanzados;
+		ArrayList<Nodo> nodosExpandidos;
 		
 		Logger log = Logger.getLogger("Pacman.Busqueda" + ".ejecucion" + Integer.toString(VECES_EJECUTADA));
 		log.info("Buscar accion");
@@ -64,9 +65,11 @@ public abstract class Busqueda {
 		 * Igual esas secuencias de acciones no deberían ocurrir debido a la heurística 
 		 * y costo! no deberían!
 		 */
-		estadosAlcanzados = (ArrayList<VisionAmbiente>) this.estadosAlcanzadosAgente.clone();
+		//estadosAlcanzados = (ArrayList<VisionAmbiente>) this.estadosAlcanzadosAgente.clone();
 		
 		nodoActual = new Nodo((Estado)this.estado.clone());
+		colaNodos.add(nodoActual);
+		estadosAlcanzados.add(nodoActual.getEstado().getAmbiente());
 		log.debug("Estoy buscando. Nodo actual:");
 		log.debug(nodoActual);
 		/*
@@ -75,15 +78,16 @@ public abstract class Busqueda {
 		log.debug("Expandiendo nodo Inicial: " + nodoActual.getID());
 		while ( ! this.objetivo.cumpleObjetivo(nodoActual) ) {
 			log.debug(nodoActual);
+			/* lo saco de la cola */
+			colaNodos.remove(nodoActual);
 			
-			/* Vemos si el nodo actual ya fue inspeccionado. */
-			if (!estadosAlcanzados.contains(nodoActual.getEstado().getAmbiente())) {
-				/* Agrego el nodo actual a la lista de nodos ya inspeccionados. */
-				estadosAlcanzados.add(nodoActual.getEstado().getAmbiente());
-				for (Nodo n : this.expandir(nodoActual)) {
-					colaNodos.add(n);
+			for (Nodo n : this.expandir(nodoActual)) {
+				/* Vemos si el nodo expandido ya fue inspeccionado. */
+				if (estadosAlcanzados.contains(n)) {
+					/* Agrego el nodo expandido a la lista de nodos ya inspeccionados. */
+					estadosAlcanzados.add(n.getEstado().getAmbiente());
 				}
-				colaNodos.remove(nodoActual);
+				colaNodos.add(n);
 			}
 			
 			if (!colaNodos.isEmpty()) {
