@@ -54,6 +54,13 @@ public class VisionAmbiente extends Ambiente {
 		return true;
 	}
 	
+	public boolean paradoSobreAlimento() {
+		int x = this.posicionPacman[0];
+		int y = this.posicionPacman[1];
+		
+		return (this.tablero[x][y] == EstadoCelda.Comida);
+	}
+	
 	/**
 	 * Este método sólo tiene sentido si se conoce todo el ambiente.
 	 * @return

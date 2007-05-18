@@ -45,7 +45,7 @@ public abstract class Avanzar extends Accion {
 	@Override
 	public final boolean aplicable(Estado estado) {
 		// Verifico que el agente tenga energía suficiente para moverse
-		if (estado.getEnergia() - estado.getPromedioVarEnergia(this) > 0)
+		if (estado.getEnergia() + estado.getPromedioVarEnergia(this) > 0)
 			return true;
 		
 		return false;

@@ -31,14 +31,17 @@ public class Comer extends Accion {
 
 	private static Comer instancia;
 
+	@Override
 	public void ejecutar(Ambiente amb) throws Exception {
 		amb.comer();
 	}
 
+	@Override
 	public String getTipoAccion() {
 		return "comer";
 	}
 	
+	@Override
 	public int getCosto() {
 		return 1;
 	}
@@ -51,6 +54,7 @@ public class Comer extends Accion {
 		return instancia;
 	}
 
+	@Override
 	public boolean aplicable(Estado estado) {
 		int[] posicionAgente = estado.getAmbiente().getPosicionPacman();
 		

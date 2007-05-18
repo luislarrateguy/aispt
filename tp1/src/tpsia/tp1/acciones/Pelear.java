@@ -31,14 +31,17 @@ public class Pelear extends Accion {
 
 	private static Pelear instancia;
 
+	@Override
 	public void ejecutar(Ambiente amb) throws Exception {
 		amb.pelear();
 	}
 
+	@Override
 	public String getTipoAccion() {
 		return "pelear";
 	}
 	
+	@Override
 	public int getCosto() {
 		return 2;
 	}
@@ -51,6 +54,7 @@ public class Pelear extends Accion {
 		return instancia;
 	}
 
+	@Override
 	public boolean aplicable(Estado estado) {
 		/* Verifico que exista un enemigo en la posición del agente, y que
 		 * haya energía suficiente para pelear. */

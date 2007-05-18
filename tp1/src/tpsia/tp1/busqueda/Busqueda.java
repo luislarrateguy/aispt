@@ -15,6 +15,8 @@ import tpsia.tp1.agente.VisionAmbiente;
 public abstract class Busqueda {
 	protected Estado estado;
 	protected IObjetivo objetivo;
+	protected ArrayList<VisionAmbiente> estadosAlcanzadosAgente;
+	
 	private static int VECES_EJECUTADA = 0;
 	/**
 	 * La función de evaluación representa, en:
@@ -28,9 +30,10 @@ public abstract class Busqueda {
 	 */
 	protected abstract float calcularPrioridad(Nodo unNodo);
 	
-	public Busqueda(Estado estado, IObjetivo objetivo) {
+	public Busqueda(Estado estado, IObjetivo objetivo, ArrayList<VisionAmbiente> estadosAlcanzadosAgente) {
 		this.estado = estado;
 		this.objetivo = objetivo;
+		this.estadosAlcanzadosAgente = estadosAlcanzadosAgente;
 	}
 	
 	public ArrayList<Accion> buscarSolucion() {
@@ -41,7 +44,15 @@ public abstract class Busqueda {
 		
 		ArrayList<Accion> listaAcciones = new ArrayList<Accion>();
 		PriorityQueue<Nodo> colaNodos = new PriorityQueue<Nodo>();
-		ArrayList<VisionAmbiente> estadosAlcanzados = new ArrayList<VisionAmbiente>();
+		
+		/* Creo un ArrayList de estados ya alcanzados. El agente almacena estados
+		 * ya alcanzados también, pero esta es una copia local para realizar la búsqueda.
+		 * Sin embargo, antes de continuar con la búsqueda, copio a estadosAlcanzados
+		 * (la versión local) los estados a los que ya no queremos llegar desde la
+		 * versión del agente. De esta forma evitamos secuencias de acciones como:
+		 * izq, izq, der, der.
+		 */
+		ArrayList<VisionAmbiente> estadosAlcanzados = (ArrayList<VisionAmbiente>)this.estadosAlcanzadosAgente.clone();
 		
 		Nodo nodoActual = new Nodo((Estado)this.estado.clone());
 		log.debug("Estoy buscando. Nodo actual:");
@@ -50,6 +61,7 @@ public abstract class Busqueda {
 		 * Mientras no se cumple el objetivo en el nodo actual, seguimos expandiendo.
 		 */
 		log.debug("Expandiendo nodo Inicial: " + nodoActual.getID());
+		
 		while ( ! this.objetivo.cumpleObjetivo(nodoActual) ) {
 			
 			log.debug(nodoActual);
@@ -76,9 +88,6 @@ public abstract class Busqueda {
 			}
 		}
 		
-		/* FIXME: Hubo un problema cuando lo ejecuté una vez a en este punto.
-		 * Devolvío NoAccion.
-		 */
 		/* nodoActual es un nodo que cumple con el objetivo. Entonces agregamos
 		 * a la lista de acciones a devolver las acciones que fueron necesarias
 		 * para llegar a este nodo objetivo. Notar que la lista de acciones está

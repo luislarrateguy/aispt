@@ -22,7 +22,7 @@ public class ObjetivoTP implements IObjetivo {
 	
 	public boolean cumpleObjetivo(Estado estado) {
 		boolean cumplio = false;
-		boolean convienePelear,convieneMoverse,conoceTodo,hayAlimentos,hayEnemigos;
+		boolean convienePelear,convieneMoverse,conoceTodo,hayAlimentos,hayEnemigos,paradoSobreAlimento;
 		
 		Logger log = Logger.getLogger("Pacman.Busqueda.Objetivo");
 		
@@ -32,15 +32,34 @@ public class ObjetivoTP implements IObjetivo {
 		} else {
 			convienePelear = estado.getEnergia() >
 				estado.getPromedioVarEnergia(Pelear.getInstancia());
+				
 			convieneMoverse = estado.getEnergia() >
-				estado.getPromedioVarEnergia(AvanzarAbajo.getInstancia());			
+				estado.getPromedioVarEnergia(AvanzarAbajo.getInstancia());	
+				
 			conoceTodo = estado.getAmbiente().conoceTodo();
 			hayAlimentos = estado.getAmbiente().hayAlimentosSinComer();
 			hayEnemigos = estado.getAmbiente().hayEnemigosVivos();
-
-			
+			paradoSobreAlimento = estado.getAmbiente().paradoSobreAlimento();
 			
 			// Condicion del objetivo
+			// Suposición 1: convienePelear => convieneMoverse
+			// Suposición 2: paradoSobreAlimento => hayAlimentos
+			
+			/* Aca hay que armar una tabla como esta para armar todas las condiciones donde se cumple
+			 * el objetivo:
+			 * 
+			 * conoceTodo	hayAlimentos	convieneMoverse 	hayEnemigos		convienePelear	paradoSobreAlimento 	¿Objetivo cumplido?
+			 * 1			1				1					1				1				1						Si			
+			 * ...
+			 * ...
+			 * ...
+			 */
+			
+			// Estas son las condiciones que estoy armando, pero todavía no se usan...
+			boolean condicion1 = conoceTodo && !hayAlimentos && !hayEnemigos;
+			boolean condicion2 = conoceTodo && hayAlimentos && !convieneMoverse && !paradoSobreAlimento;
+			boolean condicion3 = conoceTodo && hayEnemigos && !hayAlimentos && !convienePelear;
+			
 			boolean cumplio1 = conoceTodo && !convieneMoverse;
 			boolean cumplio2 = conoceTodo && convieneMoverse && !hayAlimentos && !(hayEnemigos && convienePelear);
 			boolean cumplio3 = !conoceTodo && !convieneMoverse;

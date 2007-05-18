@@ -36,15 +36,20 @@ public class Agente {
 	private IObjetivo objetivo;
 	private Busqueda busqueda;
 	private ArrayList<Accion> acciones;
+	private ArrayList<VisionAmbiente> estadosAlcanzados;
 	
 	public Agente(int energiaInicial) {
 		this.estado = new Estado(energiaInicial);
 		this.objetivo = ObjetivoTP.getInstancia();
+		this.estadosAlcanzados = new ArrayList<VisionAmbiente>();
 		// Selecciona y CTRL+SHIFT+C
 //		this.busqueda = new BusquedaAmplitud(this.estado, this.objetivo);
-		this.busqueda = new BusquedaCostoUniforme (this.estado, this.objetivo);
+//		this.busqueda = new BusquedaCostoUniforme (this.estado, this.objetivo, this.estadosAlcanzados);
 //		this.busqueda = new BusquedaAvara(this.estado, this.objetivo);
-//		this.busqueda = new BusquedaAEstrella(this.estado, this.objetivo);
+		this.busqueda = new BusquedaAEstrella(this.estado, this.objetivo, this.estadosAlcanzados);
+		
+		Logger log = Logger.getLogger(Agente.class);
+		log.info("Utilizando estrategia: " + this.busqueda.getClass());
 	}
 
 	public Accion actuar(Percepcion p) {
@@ -57,11 +62,13 @@ public class Agente {
 			+ Integer.toString(this.estado.getEnergia()) + "");
 		
 		this.acciones = busqueda.buscarSolucion();
+		this.estadosAlcanzados.add((VisionAmbiente)this.estado.getAmbiente().clone());
 		Accion a = this.acciones.get(this.acciones.size() - 1);
 		
 		log.info("Se decidió la acción: " + a.getTipoAccion());
-		if (!a.getClass().equals(NoAccion.class))
+		if (!a.getClass().equals(NoAccion.class)) {
 			this.estado.ejecutarAccion(a);
+		}
 		
 		return a;
 	}
@@ -73,6 +80,7 @@ public class Agente {
 	public boolean vivo() {
 		return (this.estado.getEnergia() > 0);
 	}
+	
 	public void mostrarEstadoFinal() {
 		Logger log = Logger.getLogger(Agente.class);
 		log.info("ESTADO FINAL");	

@@ -27,11 +27,12 @@ import java.util.Collection;
 import tpsia.tp1.acciones.Accion;
 import tpsia.tp1.agente.Estado;
 import tpsia.tp1.agente.IObjetivo;
+import tpsia.tp1.agente.VisionAmbiente;
 
 public class BusquedaProfundidad extends Busqueda {
 
-	public BusquedaProfundidad(Estado estado, IObjetivo objetivo) {
-		super(estado, objetivo);
+	public BusquedaProfundidad(Estado estado, IObjetivo objetivo, ArrayList<VisionAmbiente> estadosAlcanzadosAgente) {
+		super(estado, objetivo, estadosAlcanzadosAgente);
 	}
 
 	@Override

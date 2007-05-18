@@ -36,8 +36,8 @@ public class BusquedaCostoUniforme extends Busqueda {
 	// ¿Para que es esto?
 	//static int busquedaNro = 0;
 	
-	public BusquedaCostoUniforme(Estado estado, IObjetivo objetivo) {
-		super(estado, objetivo);
+	public BusquedaCostoUniforme(Estado estado, IObjetivo objetivo, ArrayList<VisionAmbiente> estadosAlcanzadosAgente) {
+		super(estado, objetivo, estadosAlcanzadosAgente);
 	}
 
 	@Override

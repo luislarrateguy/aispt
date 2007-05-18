@@ -91,9 +91,8 @@ public class Nodo implements Comparable<Nodo> {
 				nuevasCeldasAdyacentes[i] = EstadoCelda.Vacia;
 		}
 		
-		int [] posicion = this.estadoNodo.getAmbiente().getPosicionPacman();
 		Percepcion p = new Percepcion(nuevasCeldasAdyacentes,
-				(int)(this.estadoNodo.getEnergia() + promVarEnergia), posicion);
+				(int)(this.estadoNodo.getEnergia() + promVarEnergia), null);
 		
 		this.estadoNodo.actualizarEstado(p);
 		this.prioridadExpansion = algoritmo.calcularPrioridad(this);

@@ -32,6 +32,7 @@ public class AvanzarDerecha extends Avanzar {
 	private AvanzarDerecha() {
 	}
 
+	@Override
 	public void ejecutar(Ambiente amb) {
 		amb.mover(Offset.Derecha);
 	}

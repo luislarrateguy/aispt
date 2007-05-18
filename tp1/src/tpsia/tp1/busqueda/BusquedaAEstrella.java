@@ -1,13 +1,16 @@
 package tpsia.tp1.busqueda;
 
+import java.util.ArrayList;
+
 import tpsia.tp1.acciones.Accion;
 import tpsia.tp1.agente.Estado;
 import tpsia.tp1.agente.IObjetivo;
+import tpsia.tp1.agente.VisionAmbiente;
 
 public class BusquedaAEstrella extends Busqueda {
 
-	public BusquedaAEstrella(Estado estado, IObjetivo objetivo) {
-		super(estado, objetivo);
+	public BusquedaAEstrella(Estado estado, IObjetivo objetivo, ArrayList<VisionAmbiente> estadosAlcanzadosAgente) {
+		super(estado, objetivo, estadosAlcanzadosAgente);
 	}
 	
 	@Override
