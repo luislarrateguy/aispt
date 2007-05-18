@@ -41,6 +41,7 @@ public class Agente {
 	public Agente(int energiaInicial) {
 		this.estado = new Estado(energiaInicial);
 		this.objetivo = ObjetivoTP.getInstancia();
+		this.estadosAlcanzados = new ArrayList<VisionAmbiente>();
 		// Selecciona y CTRL+SHIFT+C
 //		this.busqueda = new BusquedaAmplitud(this.estado, this.objetivo, estadosAlcanzados);
 		this.busqueda = new BusquedaCostoUniforme (this.estado, this.objetivo, estadosAlcanzados);

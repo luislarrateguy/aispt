@@ -64,7 +64,7 @@ public abstract class Busqueda {
 		 * Igual esas secuencias de acciones no deberían ocurrir debido a la heurística 
 		 * y costo! no deberían!
 		 */
-		//estadosAlcanzados = (ArrayList<VisionAmbiente>) this.estadosAlcanzadosAgente.clone();
+		estadosAlcanzados = (ArrayList<VisionAmbiente>) this.estadosAlcanzadosAgente.clone();
 		
 		nodoActual = new Nodo((Estado)this.estado.clone());
 		log.debug("Estoy buscando. Nodo actual:");
