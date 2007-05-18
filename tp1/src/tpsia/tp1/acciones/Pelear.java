@@ -43,7 +43,7 @@ public class Pelear extends Accion {
 	
 	@Override
 	public int getCosto() {
-		return 2;
+		return 3;
 	}
 
 	static public Accion getInstancia() {

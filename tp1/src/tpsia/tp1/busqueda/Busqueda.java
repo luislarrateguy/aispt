@@ -39,11 +39,21 @@ public abstract class Busqueda {
 	public ArrayList<Accion> buscarSolucion() {
 		VECES_EJECUTADA++;
 		Nodo.resetID();
+		Nodo nodoActual;
+		Nodo raiz;
+		ArrayList<Accion> listaAcciones;
+		PriorityQueue<Nodo> colaNodos;
+		ArrayList<VisionAmbiente> estadosAlcanzados;
+		
 		Logger log = Logger.getLogger("Pacman.Busqueda" + ".ejecucion" + Integer.toString(VECES_EJECUTADA));
 		log.info("Buscar accion");
 		
-		ArrayList<Accion> listaAcciones = new ArrayList<Accion>();
-		PriorityQueue<Nodo> colaNodos = new PriorityQueue<Nodo>();
+		listaAcciones = new ArrayList<Accion>();
+		colaNodos = new PriorityQueue<Nodo>();
+		estadosAlcanzados = new ArrayList<VisionAmbiente>();
+		
+		nodoActual = new Nodo((Estado)this.estado.clone());
+		raiz = nodoActual;
 		
 		/* Creo un ArrayList de estados ya alcanzados. El agente almacena estados
 		 * ya alcanzados también, pero esta es una copia local para realizar la búsqueda.
@@ -51,32 +61,28 @@ public abstract class Busqueda {
 		 * (la versión local) los estados a los que ya no queremos llegar desde la
 		 * versión del agente. De esta forma evitamos secuencias de acciones como:
 		 * izq, izq, der, der.
+		 * Igual esas secuencias de acciones no deberían ocurrir debido a la heurística 
+		 * y costo! no deberían!
 		 */
-		ArrayList<VisionAmbiente> estadosAlcanzados = (ArrayList<VisionAmbiente>)this.estadosAlcanzadosAgente.clone();
+		//estadosAlcanzados = (ArrayList<VisionAmbiente>) this.estadosAlcanzadosAgente.clone();
 		
-		Nodo nodoActual = new Nodo((Estado)this.estado.clone());
+		nodoActual = new Nodo((Estado)this.estado.clone());
 		log.debug("Estoy buscando. Nodo actual:");
 		log.debug(nodoActual);
 		/*
 		 * Mientras no se cumple el objetivo en el nodo actual, seguimos expandiendo.
 		 */
 		log.debug("Expandiendo nodo Inicial: " + nodoActual.getID());
-		
 		while ( ! this.objetivo.cumpleObjetivo(nodoActual) ) {
-			
 			log.debug(nodoActual);
 			
 			/* Vemos si el nodo actual ya fue inspeccionado. */
-			
 			if (!estadosAlcanzados.contains(nodoActual.getEstado().getAmbiente())) {
-				
 				/* Agrego el nodo actual a la lista de nodos ya inspeccionados. */
 				estadosAlcanzados.add(nodoActual.getEstado().getAmbiente());
-				
 				for (Nodo n : this.expandir(nodoActual)) {
 					colaNodos.add(n);
 				}
-				
 				colaNodos.remove(nodoActual);
 			}
 			
@@ -88,6 +94,9 @@ public abstract class Busqueda {
 			}
 		}
 		
+		/* FIXME: Hubo un problema cuando lo ejecuté una vez a en este punto.
+		 * Devolvío NoAccion.
+		 */
 		/* nodoActual es un nodo que cumple con el objetivo. Entonces agregamos
 		 * a la lista de acciones a devolver las acciones que fueron necesarias
 		 * para llegar a este nodo objetivo. Notar que la lista de acciones está

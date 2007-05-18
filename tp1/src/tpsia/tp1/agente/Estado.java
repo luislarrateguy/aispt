@@ -102,23 +102,7 @@ public class Estado implements Cloneable {
 	}
 	
 	public void toXML() {
-		/*
-		Logging.logXMLOpen("estado");
-			visionAmbiente.toXML();
-			Logging.logXMLOpen("energia");
-			Logging.logXML(Integer.toString(energia));
-			Logging.logXMLClose("energia");
-			Logging.logXMLOpen("promVarEnergiaAvanzar");
-			Logging.logXML(Float.toString(this.promedios.get(Avanzar.class)));
-			Logging.logXMLClose("promVarEnergiaAvanzar");
-			Logging.logXMLOpen("promVarEnergiaComer");
-			Logging.logXML(Float.toString(this.promedios.get(Comer.class)));
-			Logging.logXMLClose("promVarEnergiaComer");
-			Logging.logXMLOpen("promVarEnergiaPelear");
-			Logging.logXML(Float.toString(this.promedios.get(Pelear.class)));
-			Logging.logXMLClose("promVarEnergiaPelear");
-		Logging.logXMLClose("estado");
-		*/
+
 	}
 	
 	public void actualizarEstado(Percepcion p) {
@@ -128,8 +112,12 @@ public class Estado implements Cloneable {
 		 * ultimaAccionEjecutada posee la última acción que el agente ejecutó :)
 		 * Si es igual a null es porque nunca ejecutó una acción antes, por lo tanto
 		 * no hay promedios que calcular.
+		 * NACHO dice: Por que la seteas a null entonces luego de calcular un promedio??
 		 */
 		if (this.ultimaAccionEjecutada != null) {
+			/* Variacion positiva significa PERDIDA
+			 * Variación negativa significa GANANCIA
+			 */
 			int diferenciaEnergia = p.getEnergia() - this.energia;
 			
 			/* Suma es la sumatoria de diferencias de energía. */
