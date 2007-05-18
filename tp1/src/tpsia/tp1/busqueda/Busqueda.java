@@ -72,6 +72,7 @@ public abstract class Busqueda {
 		estadosAlcanzados.add(nodoActual.getEstado().getAmbiente());
 		log.debug("Estoy buscando. Nodo actual:");
 		log.debug(nodoActual);
+		log.debug(nodoActual.getEstado().getAmbiente());
 		/*
 		 * Mientras no se cumple el objetivo en el nodo actual, seguimos expandiendo.
 		 */
@@ -83,16 +84,21 @@ public abstract class Busqueda {
 			
 			for (Nodo n : this.expandir(nodoActual)) {
 				/* Vemos si el nodo expandido ya fue inspeccionado. */
-				if (estadosAlcanzados.contains(n)) {
+				if (estadosAlcanzados.contains(n.getEstado().getAmbiente()) ||
+						this.estadosAlcanzadosAgente.contains(n.getEstado().getAmbiente())) {
+					log.debug("Estado repetido:"+n.getID() + " accion generadora: " +
+							n.getAccionGeneradora() + " hijo de: " + n.getPadre().getID());
+				} else {
 					/* Agrego el nodo expandido a la lista de nodos ya inspeccionados. */
 					estadosAlcanzados.add(n.getEstado().getAmbiente());
+					colaNodos.add(n);
 				}
-				colaNodos.add(n);
 			}
 			
 			if (!colaNodos.isEmpty()) {
 				nodoActual = colaNodos.remove();
 				log.debug("Nodo a expandir: " + nodoActual.getID()  + " hijo de "+ nodoActual.getPadre().getID());
+				log.debug(nodoActual.getEstado().getAmbiente());
 			} else {
 				break;
 			}
@@ -121,13 +127,15 @@ public abstract class Busqueda {
 	
 	private Collection<Nodo> expandir(Nodo unNodo) {
 		ArrayList<Nodo> nodosExpandir = new ArrayList<Nodo>();
-		
+		Logger log = Logger.getLogger("Pacman.Busqueda" + ".ejecucion" + Integer.toString(VECES_EJECUTADA));
 		/* Expando el nodo unNodo sólo si se cumple la precondición de cada
 		 * acción. */
 		for(Accion a : Accion.getAcciones()) {
-			if (a.aplicable(unNodo.getEstado()))
+			if (a.aplicable(unNodo.getEstado())) {
+				log.debug("Aplicable: " + a);
 				nodosExpandir.add(new Nodo(this, unNodo, a,
 						this.estado.getPromedioVarEnergia(a)));
+			}
 		}
 		
 		return nodosExpandir;

@@ -40,8 +40,8 @@ public class Agente {
 	
 	public Agente(int energiaInicial) {
 		this.estado = new Estado(energiaInicial);
-//		this.objetivo = ObjetivoTP.getInstancia();
-		this.objetivo = ObjetivoSimple.getInstancia();
+		this.objetivo = ObjetivoTP.getInstancia();
+//		this.objetivo = ObjetivoSimple.getInstancia();
 		this.estadosAlcanzados = new ArrayList<VisionAmbiente>();
 		// Selecciona y CTRL+SHIFT+C
 //		this.busqueda = new BusquedaAmplitud(this.estado, this.objetivo, estadosAlcanzados);
@@ -65,7 +65,8 @@ public class Agente {
 		log.info("Se decidió la acción: " + a.getTipoAccion());
 		if (!a.getClass().equals(NoAccion.class))
 			this.estado.ejecutarAccion(a);
-
+		
+		this.estadosAlcanzados.add(this.estado.getAmbiente());
 		return a;
 	}
 	
