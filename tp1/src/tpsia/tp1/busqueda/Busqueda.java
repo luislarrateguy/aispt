@@ -36,17 +36,15 @@ public abstract class Busqueda {
 	public ArrayList<Accion> buscarSolucion() {
 		VECES_EJECUTADA++;
 		Nodo.resetID();
-		
-		Logger log = Logger.getLogger("Busqueda" + ".ejecucion" + Integer.toString(VECES_EJECUTADA));
+		Logger log = Logger.getLogger("Pacman.Busqueda" + ".ejecucion" + Integer.toString(VECES_EJECUTADA));
 		log.info("Buscar accion");
-		log.debug(log.getName());
 		
 		ArrayList<Accion> listaAcciones = new ArrayList<Accion>();
 		PriorityQueue<Nodo> colaNodos = new PriorityQueue<Nodo>();
 		ArrayList<VisionAmbiente> estadosAlcanzados = new ArrayList<VisionAmbiente>();
 		
 		Nodo nodoActual = new Nodo((Estado)this.estado.clone());
-		log.debug("Comenzando busqueda. Nodo actual:");
+		log.debug("Estoy buscando. Nodo actual:");
 		log.debug(nodoActual);
 		/*
 		 * Mientras no se cumple el objetivo en el nodo actual, seguimos expandiendo.
@@ -89,7 +87,8 @@ public abstract class Busqueda {
 			listaAcciones.add(nodoActual.getAccionGeneradora());
 			nodoActual = nodoActual.getPadre();
 		}
-		
+		log.info("Llegaré a mi objetivo si ejecuto esta secuencia de acciones");
+		log.info("ultima->primera"+listaAcciones);
 		/* Si la lista de acciones es vacía, entonces ninguna acción fue necesaria, y el
 		 * nodo ya se encuenta en un estado objetivo. */
 		if (listaAcciones.isEmpty())

@@ -67,7 +67,7 @@ public class Nodo implements Comparable<Nodo> {
 		//this.costo = this.padre.costo + this.accionGeneradora.getCosto()*pond;
 	
 		// Copio el estado y le aplico la acción generadora para modificar el ambiente
-		this.estadoNodo = (Estado)this.padre.estadoNodo.clone();
+		this.estadoNodo = (Estado) this.padre.estadoNodo.clone();
 		
 		try {
 			this.accionGeneradora.ejecutar(this.estadoNodo.getAmbiente());
@@ -96,11 +96,15 @@ public class Nodo implements Comparable<Nodo> {
 				(int)(this.estadoNodo.getEnergia() + promVarEnergia), posicion);
 		
 		this.estadoNodo.actualizarEstado(p);
-		
-		
 		this.prioridadExpansion = algoritmo.calcularPrioridad(this);
 	}
-
+	/**
+	 * @deprecated
+	 * @param c
+	 * @param accion
+	 * @param var
+	 * @return
+	 */
 	private float calcularCosto(float c, Accion accion, float var) {
 		float aux;
 		//TODO: No se esta usando nunca!

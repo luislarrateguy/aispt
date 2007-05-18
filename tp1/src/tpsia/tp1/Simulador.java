@@ -42,12 +42,12 @@ public class Simulador {
 		this.ambiente = new AmbienteReal();
 		
 		/* Inicializando Acciones para acelerar ejecución */
-		AvanzarAbajo.getInstancia();
-		AvanzarArriba.getInstancia();
-		AvanzarDerecha.getInstancia();
-		AvanzarIzquierda.getInstancia();
 		Pelear.getInstancia();
 		Comer.getInstancia();
+		AvanzarAbajo.getInstancia();
+		AvanzarDerecha.getInstancia();
+		AvanzarArriba.getInstancia();
+		AvanzarIzquierda.getInstancia();
 		NoAccion.getInstancia();
 	}
 	

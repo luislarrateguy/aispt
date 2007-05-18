@@ -41,8 +41,8 @@ public class Agente {
 		this.estado = new Estado(energiaInicial);
 		this.objetivo = ObjetivoTP.getInstancia();
 		// Selecciona y CTRL+SHIFT+C
-		this.busqueda = new BusquedaAmplitud(this.estado, this.objetivo);
-//		this.busqueda = new BusquedaCostoUniforme (this.estado, this.objetivo);
+//		this.busqueda = new BusquedaAmplitud(this.estado, this.objetivo);
+		this.busqueda = new BusquedaCostoUniforme (this.estado, this.objetivo);
 //		this.busqueda = new BusquedaAvara(this.estado, this.objetivo);
 //		this.busqueda = new BusquedaAEstrella(this.estado, this.objetivo);
 	}
@@ -54,7 +54,7 @@ public class Agente {
 		
 		log.info(this.estado.getAmbiente());
 		log.info("energia:" 
-			+ Integer.toString(this.estado.getEnergia()) + "\n");
+			+ Integer.toString(this.estado.getEnergia()) + "");
 		
 		this.acciones = busqueda.buscarSolucion();
 		Accion a = this.acciones.get(this.acciones.size() - 1);

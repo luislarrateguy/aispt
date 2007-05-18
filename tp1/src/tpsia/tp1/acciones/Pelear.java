@@ -40,7 +40,7 @@ public class Pelear extends Accion {
 	}
 	
 	public int getCosto() {
-		return 10;
+		return 2;
 	}
 
 	static public Accion getInstancia() {
