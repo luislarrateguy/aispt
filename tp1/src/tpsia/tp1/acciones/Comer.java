@@ -40,7 +40,7 @@ public class Comer extends Accion {
 	}
 	
 	public int getCosto() {
-		return 10;
+		return 7;
 	}
 
 	static public Accion getInstancia() {

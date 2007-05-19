@@ -40,6 +40,7 @@ public abstract class Busqueda {
 	public ArrayList<Accion> buscarSolucion() {
 		VECES_EJECUTADA++;
 		Nodo.resetID();
+		
 		Nodo nodoActual;
 		Nodo raiz;
 		ArrayList<Accion> listaAcciones;
@@ -64,41 +65,40 @@ public abstract class Busqueda {
 		 * (la versión local) los estados a los que ya no queremos llegar desde la
 		 * versión del agente. De esta forma evitamos secuencias de acciones como:
 		 * izq, izq, der, der.
+		 * No las evita..
 		 * Igual esas secuencias de acciones no deberían ocurrir debido a la heurística 
 		 * y costo! no deberían!
 		 */
 		//estadosAlcanzados = (ArrayList<VisionAmbiente>) this.estadosAlcanzadosAgente.clone();
 		
-		colaNodos.add(nodoActual);
-		nodosAlcanzados.add(nodoActual);
-		estadosAlcanzados.add(nodoActual.getEstado().getAmbiente());
 		log.debug("Estoy buscando. Nodo actual:");
-
+		estadosAlcanzados.add(nodoActual.getEstado().getAmbiente());
+		nodosAlcanzados.add(nodoActual);
+		
 		/*
 		 * Mientras no se cumple el objetivo en el nodo actual, seguimos expandiendo.
 		 */
 		log.debug("Expandiendo nodo Inicial: " + nodoActual.getID());
+		boolean estadoAlcanzadoAgente;
+		boolean estadoAlcanzado;
+		
 		while ( ! this.objetivo.cumpleObjetivo(nodoActual) ) {
 			log.debug(nodoActual);
 			log.debug(nodoActual.getEstado().getAmbiente());
 			
-			/* lo saco de la cola */
-			colaNodos.remove(nodoActual);
 			log.debug("Prioridad: "+nodoActual.getPrioridadExpansion());
 			
 			for (Nodo n : this.expandir(nodoActual)) {
 				/* Vemos si el nodo expandido ya fue inspeccionado. */
-				
-				if (estadosAlcanzados.contains(n.getEstado().getAmbiente()) ||
-						this.estadosAlcanzadosAgente.contains(n.getEstado().getAmbiente())) {
-					
-				/*
-				if (nodosAlcanzados.contains(n)) ||
-					this.estadosAlcanzadosAgente.contains(n.getEstado().getAmbiente()) {
-				*/
-					log.debug("Estado repetido:"+n.getID() + " accion generadora: " +
-							n.getAccionGeneradora() + " hijo de: " + n.getPadre().getID());
+				estadoAlcanzado = estadosAlcanzados.contains(n.getEstado().getAmbiente());
+				estadoAlcanzadoAgente = this.estadosAlcanzadosAgente.contains(n.getEstado().getAmbiente());
+				if (estadoAlcanzado ) {		
+					if (estadoAlcanzadoAgente) {
+						log.fatal("Estado repetido del agente:"+n.getID() + " accion generadora: " +
+								n.getAccionGeneradora() + " hijo de: " + n.getPadre().getID());
+					}
 				} else {
+				
 					/* Agrego el nodo expandido a la lista de nodos ya inspeccionados. */
 					estadosAlcanzados.add(n.getEstado().getAmbiente());
 					nodosAlcanzados.add(n);

@@ -24,7 +24,7 @@ public class CalculadorCustom extends Calculador {
 	};
 	
 	/** Energía inicial del pacman. */
-	private final int ENERGIA_INICIAL = 20;
+	private final int ENERGIA_INICIAL = 40;
 	
 	/** Energía que gana el pacman por alimento. */
 	private final int ENERGIA_COMIDA = 5;
