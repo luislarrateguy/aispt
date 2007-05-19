@@ -73,7 +73,6 @@ public abstract class Busqueda {
 		
 		log.debug("Estoy buscando. Nodo actual:");
 		estadosAlcanzados.add(nodoActual.getEstado().getAmbiente());
-		nodosAlcanzados.add(nodoActual);
 		
 		/*
 		 * Mientras no se cumple el objetivo en el nodo actual, seguimos expandiendo.
@@ -85,7 +84,6 @@ public abstract class Busqueda {
 		while ( ! this.objetivo.cumpleObjetivo(nodoActual) ) {
 			log.debug(nodoActual);
 			log.debug(nodoActual.getEstado().getAmbiente());
-			
 			log.debug("Prioridad: "+nodoActual.getPrioridadExpansion());
 			
 			for (Nodo n : this.expandir(nodoActual)) {
@@ -97,11 +95,9 @@ public abstract class Busqueda {
 						log.fatal("Estado repetido del agente:"+n.getID() + " accion generadora: " +
 								n.getAccionGeneradora() + " hijo de: " + n.getPadre().getID());
 					}
-				} else {
-				
+				} else {	
 					/* Agrego el nodo expandido a la lista de nodos ya inspeccionados. */
 					estadosAlcanzados.add(n.getEstado().getAmbiente());
-					nodosAlcanzados.add(n);
 					colaNodos.add(n);
 				}
 			}

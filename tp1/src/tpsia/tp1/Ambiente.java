@@ -190,11 +190,11 @@ public abstract class Ambiente implements Cloneable {
 		// Esto lo paso a comparación en estado
 		// Debido a que un espacio es repetido solo si no agrega informacion
 		// sin importar la posición de pacman.
-		/*
+		
 		if (this.posicionPacman[0] != a.posicionPacman[0] ||
 				this.posicionPacman[1] != a.posicionPacman[1])
 			return false;
-		*/
+		
 		return true;
 	}
 	/**
