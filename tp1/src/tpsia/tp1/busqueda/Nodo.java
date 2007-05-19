@@ -25,13 +25,18 @@ public class Nodo implements Comparable<Nodo> {
 	 * @param estado
 	 * @param prioridadExpansion
 	 */
-	public Nodo (Estado estado) {
+	public Nodo () {
+		super();
 		this.padre = null;
 		this.id = Nodo.GenID();
 		this.hijos = new ArrayList<Nodo>();
 		this.accionGeneradora = null;
-		this.estadoNodo = estado;
 		this.prioridadExpansion = 0;
+	}
+	
+	public Nodo (Estado estado) {
+		this();
+		this.estadoNodo = estado;
 	}
 	
 	private static int GenID() {
@@ -40,11 +45,8 @@ public class Nodo implements Comparable<Nodo> {
 	}
 
 	public Nodo(Busqueda algoritmo, Nodo padre2, Accion accionGeneradora, float promVarEnergia) {
-		super();
-		
-		this.id = Nodo.GenID();
+		this();
 		this.padre = padre2;
-		this.hijos = new ArrayList<Nodo>();
 		if (padre2!= null)
 			padre2.addHijo(this);
 
@@ -158,13 +160,17 @@ public class Nodo implements Comparable<Nodo> {
 		return true;
 	}
 
-	public String toXML() {
-		String ret = new String("<nodo id=\""+this.getID()+"\">");
-		ret += this.estadoNodo.toXML();
-		ret += "<prioridad>"+Float.toString(this.prioridadExpansion)+"</prioridad>";
-		ret += "<accion>"+this.accionGeneradora+"</accion>";
-		ret +="</nodo>";
-		return null;
+	public void toXML() {
+		Busqueda.logxml.debug("<nodo id=\""+this.getID()+"\">");
+		this.estadoNodo.toXML();
+		Busqueda.logxml.debug("<prioridad>"+Float.toString(this.prioridadExpansion)+"</prioridad>");
+		Busqueda.logxml.debug("<accion>"+this.accionGeneradora+"</accion>");
+		Busqueda.logxml.debug("<hijos>");
+		for (Nodo h : this.hijos ) {
+			h.toXML();
+		}
+		Busqueda.logxml.debug("</hijos>");
+		Busqueda.logxml.debug("</nodo>");
 	}
 	
 }

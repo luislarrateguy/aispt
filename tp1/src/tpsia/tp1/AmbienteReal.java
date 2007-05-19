@@ -103,9 +103,8 @@ public class AmbienteReal extends Ambiente {
 		return aux;
 	}
 
-	public String toXML() {
+	public void toXML() {
 		// TODO Salida XML
-		return null;
 	}
 
 	public int getEnergiaPacman() {

@@ -26,6 +26,7 @@ import tpsia.tp1.EstadoCelda;
 import tpsia.tp1.FuncionesUtiles;
 import tpsia.tp1.Offset;
 import tpsia.tp1.Percepcion;
+import tpsia.tp1.busqueda.Busqueda;
 
 public class VisionAmbiente extends Ambiente {
 	
@@ -136,9 +137,10 @@ public class VisionAmbiente extends Ambiente {
 		return aux;
 	}
 	
-	@Override
-	public String toXML() {
-		return draw();
+	public void toXML() {
+		Busqueda.logxml.debug("<ambiente type=\"!CDATA\">");
+		Busqueda.logxml.debug(this.draw());
+		Busqueda.logxml.debug("</ambiente>");
 	}
 
 	@Override

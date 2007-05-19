@@ -24,6 +24,7 @@ package tpsia.tp1.agente;
 import java.util.Hashtable;
 import tpsia.tp1.Percepcion;
 import tpsia.tp1.acciones.*;
+import tpsia.tp1.busqueda.Busqueda;
 
 public class Estado implements Cloneable {
 
@@ -101,18 +102,18 @@ public class Estado implements Cloneable {
 		return cuadro;
 	}
 	
-	public String toXML() {
-		String cuadro = new String("<estado>");
-		cuadro += "<ambiente>" + this.visionAmbiente.toXML() + "</ambiente>"; 
-		cuadro += "<energia>" 
-			+ Integer.toString(this.energia) +"</energia>";
-		cuadro += "<promVarEneAvanz>"
-				+ Float.toString(this.promedios[AvanzarAbajo.getInstancia().getIdentificador()]) 	+"</promVarEneAvanz>";
-		cuadro += "<promVarEneComer>" 
-				+ Float.toString(this.promedios[Comer.getInstancia().getIdentificador()]) +"</promVarEneComer>";
-		cuadro += "<promVarEneLucha>" 
-				+ Float.toString(this.promedios[Pelear.getInstancia().getIdentificador()]) +"</promVarEneLucha>";
-		return cuadro + "</estado>";
+	public void toXML() {
+		Busqueda.logxml.debug("<estado>");
+		this.visionAmbiente.toXML(); 
+		Busqueda.logxml.debug("<energia>" 
+			+ Integer.toString(this.energia) +"</energia>");
+		Busqueda.logxml.debug("<promVarEneAvanz>"
+				+ Float.toString(this.promedios[AvanzarAbajo.getInstancia().getIdentificador()]) 	+"</promVarEneAvanz>");
+		Busqueda.logxml.debug("<promVarEneComer>" 
+				+ Float.toString(this.promedios[Comer.getInstancia().getIdentificador()]) +"</promVarEneComer>");
+		Busqueda.logxml.debug("<promVarEneLucha>" 
+				+ Float.toString(this.promedios[Pelear.getInstancia().getIdentificador()]) +"</promVarEneLucha>");
+		Busqueda.logxml.debug("</estado>");
 	}
 	
 	public void actualizarEstado(Percepcion p) {

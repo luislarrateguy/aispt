@@ -16,22 +16,18 @@ public class NoAccion extends Accion {
 		return instancia;
 	}
 	
-	@Override
 	public boolean aplicable(Estado estado) {
-		return true;
+		return false;
 	}
 
-	@Override
 	public void ejecutar(Ambiente amb) throws Exception {
 		throw new Exception("Se intentó ejecutar la acción: NoAccion");
 	}
 
-	@Override
 	public int getCosto() {
 		return 0;
 	}
 
-	@Override
 	public String getTipoAccion() {
 		return "no accion";
 	}

@@ -32,7 +32,6 @@ public class AvanzarAbajo extends Avanzar {
 	private AvanzarAbajo() {
 	}
 
-	@Override
 	public void ejecutar(Ambiente amb) {
 		amb.mover(Offset.Abajo);
 	}

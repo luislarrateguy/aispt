@@ -16,8 +16,9 @@ public abstract class Busqueda {
 	protected Estado estado;
 	protected IObjetivo objetivo;
 	protected ArrayList<VisionAmbiente> estadosAlcanzadosAgente;
-	
 	private static int VECES_EJECUTADA = 0;
+	public static Logger logxml;
+	
 	/**
 	 * La función de evaluación representa, en:
 	 * - Estrategia de amplitud: costo (nodo padre + 1)
@@ -66,7 +67,6 @@ public abstract class Busqueda {
 		 */
 		//estadosAlcanzados = (ArrayList<VisionAmbiente>) this.estadosAlcanzadosAgente.clone();
 		
-		nodoActual = new Nodo((Estado)this.estado.clone());
 		colaNodos.add(nodoActual);
 		estadosAlcanzados.add(nodoActual);
 		log.debug("Estoy buscando. Nodo actual:");
@@ -80,6 +80,7 @@ public abstract class Busqueda {
 			log.debug(nodoActual);
 			/* lo saco de la cola */
 			colaNodos.remove(nodoActual);
+			log.debug("Prioridad: "+nodoActual.getPrioridadExpansion());
 			
 			for (Nodo n : this.expandir(nodoActual)) {
 				/* Vemos si el nodo expandido ya fue inspeccionado. */
@@ -122,8 +123,10 @@ public abstract class Busqueda {
 			listaAcciones.add(NoAccion.getInstancia());
 		
 		/* Salida jerárquica del árbol de búsqueda */
-		Logger logxml =  Logger.getLogger("Pacman.Busqueda" + ".ejecucion" + Integer.toString(VECES_EJECUTADA)+".xml");
-		logxml.info(raiz.toXML());
+		
+		logxml =  Logger.getLogger("Pacman.Busqueda" + ".ejecucion" + Integer.toString(VECES_EJECUTADA)+".xml");
+		logxml.debug("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+		raiz.toXML();
 		return listaAcciones;
 	}
 	
