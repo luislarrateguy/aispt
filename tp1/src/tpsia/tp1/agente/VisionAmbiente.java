@@ -180,4 +180,30 @@ public class VisionAmbiente extends Ambiente {
 		
 		return true;
 	}
+
+	public float cantidadComidaVisible() {
+		int cant = 0;
+			
+		for (int i=0;i<4;i++) {
+			for (int j=0;j<4;j++) {
+				if (this.tablero[i][j] == EstadoCelda.Comida)
+					cant++;
+			}
+		}
+			
+		return cant;
+	}
+
+	public float cantidadEnemigosVisible() {
+		int cant = 0;
+		
+		for (int i=0;i<4;i++) {
+			for (int j=0;j<4;j++) {
+				if (this.tablero[i][j] == EstadoCelda.Enemigo)
+					cant++;
+			}
+		}
+			
+		return cant;
+	}
 }

@@ -193,7 +193,10 @@ public abstract class Ambiente implements Cloneable {
 		
 		return true;
 	}
-	
+	/**
+	 * No debería ir sólo en visionambiente?
+	 * @return
+	 */
 	public int cantidadCeldasDesconocidas() {
 		int cant = 0;
 		

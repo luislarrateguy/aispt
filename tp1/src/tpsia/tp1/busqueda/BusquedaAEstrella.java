@@ -20,9 +20,12 @@ public class BusquedaAEstrella extends Busqueda {
 		
 		/* Calculo la función heurística, que consiste en la cantidad de celdas que
 		 * son desconocidas. */
-		float heuristica = unNodo.getEstado().getAmbiente().cantidadCeldasDesconocidas();
+		float heuristica1 = unNodo.getEstado().getAmbiente().cantidadCeldasDesconocidas();
+		float heuristica2 = unNodo.getEstado().getAmbiente().cantidadComidaVisible();
+		float heuristica3 = unNodo.getEstado().getAmbiente().cantidadEnemigosVisible();
+		float heuristica = heuristica1 + 10*heuristica2 + 5*heuristica3;
 		
 		/* Retorno el valor de la función de evaluación = costo + heuristica */
-		return (costo + heuristica);
+		return (costo + heuristica1);
 	}
 }

@@ -12,13 +12,13 @@ public class CalculadorCustom extends Calculador {
 	private final int[] POSICION_INICIAL = {0,2};
 	private final int[] POSICION_COMIDAS = {
 			1,1,
-			2,2,
+			0,1,
 			3,3
 	};
 	
 	private final int[] POSICION_ENEMIGOS = {
 			0,0,
-			0,1,
+			1,0,
 			0,2,
 			0,3
 	};

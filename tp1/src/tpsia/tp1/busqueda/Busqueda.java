@@ -44,7 +44,8 @@ public abstract class Busqueda {
 		Nodo raiz;
 		ArrayList<Accion> listaAcciones;
 		PriorityQueue<Nodo> colaNodos;
-		ArrayList<Nodo> estadosAlcanzados;
+		ArrayList<VisionAmbiente> estadosAlcanzados;
+		ArrayList<Nodo> nodosAlcanzados;
 
 		
 		Logger log = Logger.getLogger("Pacman.Busqueda" + ".ejecucion" + Integer.toString(VECES_EJECUTADA));
@@ -52,9 +53,10 @@ public abstract class Busqueda {
 		
 		listaAcciones = new ArrayList<Accion>();
 		colaNodos = new PriorityQueue<Nodo>();
-		estadosAlcanzados = new ArrayList<Nodo>();
-		nodoActual = new Nodo((Estado)this.estado.clone());
-		raiz = nodoActual;
+		estadosAlcanzados = new ArrayList<VisionAmbiente>();
+		nodosAlcanzados = new ArrayList<Nodo>();
+		raiz = new Nodo((Estado)this.estado.clone());
+		nodoActual = raiz;
 		
 		/* Creo un ArrayList de estados ya alcanzados. El agente almacena estados
 		 * ya alcanzados también, pero esta es una copia local para realizar la búsqueda.
@@ -68,29 +70,38 @@ public abstract class Busqueda {
 		//estadosAlcanzados = (ArrayList<VisionAmbiente>) this.estadosAlcanzadosAgente.clone();
 		
 		colaNodos.add(nodoActual);
-		estadosAlcanzados.add(nodoActual);
+		nodosAlcanzados.add(nodoActual);
+		estadosAlcanzados.add(nodoActual.getEstado().getAmbiente());
 		log.debug("Estoy buscando. Nodo actual:");
-		log.debug(nodoActual);
-		log.debug(nodoActual.getEstado().getAmbiente());
+
 		/*
 		 * Mientras no se cumple el objetivo en el nodo actual, seguimos expandiendo.
 		 */
 		log.debug("Expandiendo nodo Inicial: " + nodoActual.getID());
 		while ( ! this.objetivo.cumpleObjetivo(nodoActual) ) {
 			log.debug(nodoActual);
+			log.debug(nodoActual.getEstado().getAmbiente());
+			
 			/* lo saco de la cola */
 			colaNodos.remove(nodoActual);
 			log.debug("Prioridad: "+nodoActual.getPrioridadExpansion());
 			
 			for (Nodo n : this.expandir(nodoActual)) {
 				/* Vemos si el nodo expandido ya fue inspeccionado. */
-				if (estadosAlcanzados.contains(n) ||
+				
+				if (estadosAlcanzados.contains(n.getEstado().getAmbiente()) ||
 						this.estadosAlcanzadosAgente.contains(n.getEstado().getAmbiente())) {
+					
+				/*
+				if (nodosAlcanzados.contains(n)) ||
+					this.estadosAlcanzadosAgente.contains(n.getEstado().getAmbiente()) {
+				*/
 					log.debug("Estado repetido:"+n.getID() + " accion generadora: " +
 							n.getAccionGeneradora() + " hijo de: " + n.getPadre().getID());
 				} else {
 					/* Agrego el nodo expandido a la lista de nodos ya inspeccionados. */
-					estadosAlcanzados.add(n);
+					estadosAlcanzados.add(n.getEstado().getAmbiente());
+					nodosAlcanzados.add(n);
 					colaNodos.add(n);
 				}
 			}
