@@ -1,5 +1,7 @@
 package tpsia.tp1.busqueda;
 
+import java.util.ArrayList;
+
 import tpsia.tp1.EstadoCelda;
 import tpsia.tp1.Percepcion;
 import tpsia.tp1.acciones.Accion;
@@ -9,6 +11,7 @@ import tpsia.tp1.agente.VisionAmbiente;
 
 public class Nodo implements Comparable<Nodo> {
 	private Nodo padre;
+	private ArrayList<Nodo> hijos;
 	private Accion accionGeneradora;
 	private static int LAST_ID = 0;
 	
@@ -25,6 +28,7 @@ public class Nodo implements Comparable<Nodo> {
 	public Nodo (Estado estado) {
 		this.padre = null;
 		this.id = Nodo.GenID();
+		this.hijos = new ArrayList<Nodo>();
 		this.accionGeneradora = null;
 		this.estadoNodo = estado;
 		this.prioridadExpansion = 0;
@@ -35,9 +39,15 @@ public class Nodo implements Comparable<Nodo> {
 		return LAST_ID;
 	}
 
-	public Nodo(Busqueda algoritmo, Nodo padre, Accion accionGeneradora, float promVarEnergia) {
+	public Nodo(Busqueda algoritmo, Nodo padre2, Accion accionGeneradora, float promVarEnergia) {
+		super();
+		
 		this.id = Nodo.GenID();
-		this.padre = padre;
+		this.padre = padre2;
+		this.hijos = new ArrayList<Nodo>();
+		if (padre2!= null)
+			padre2.addHijo(this);
+
 		this.accionGeneradora = accionGeneradora;
 		this.estadoNodo = (Estado) this.padre.estadoNodo.clone();
 		
@@ -69,6 +79,10 @@ public class Nodo implements Comparable<Nodo> {
 		this.estadoNodo.actualizarEstado(p);
 		this.prioridadExpansion = algoritmo.calcularPrioridad(this);
 	}
+	private void addHijo(Nodo nodo) {
+		this.hijos.add(nodo);		
+	}
+
 	/**
 	 * @deprecated
 	 * @param c
@@ -129,9 +143,28 @@ public class Nodo implements Comparable<Nodo> {
 
 	@Override
 	public boolean equals(Object obj) {
+		Nodo n = (Nodo) obj;
+		if (this.prioridadExpansion != n.prioridadExpansion) {
+			return false;
+		}
+		
 
+		
+		if (!this.getEstado().getAmbiente().equals(
+				n.getEstado().getAmbiente())) {
+			return false;
+		}
+		
+		return true;
+	}
 
-		return super.equals(obj);
+	public String toXML() {
+		String ret = new String("<nodo id=\""+this.getID()+"\">");
+		ret += this.estadoNodo.toXML();
+		ret += "<prioridad>"+Float.toString(this.prioridadExpansion)+"</prioridad>";
+		ret += "<accion>"+this.accionGeneradora+"</accion>";
+		ret +="</nodo>";
+		return null;
 	}
 	
 }

@@ -45,9 +45,9 @@ public class Agente {
 		this.estadosAlcanzados = new ArrayList<VisionAmbiente>();
 		// Selecciona y CTRL+SHIFT+C
 //		this.busqueda = new BusquedaAmplitud(this.estado, this.objetivo, estadosAlcanzados);
-		this.busqueda = new BusquedaCostoUniforme (this.estado, this.objetivo, estadosAlcanzados);
+//		this.busqueda = new BusquedaCostoUniforme (this.estado, this.objetivo, this.estadosAlcanzados);
 //		this.busqueda = new BusquedaAvara(this.estado, this.objetivo, estadosAlcanzados);
-//		this.busqueda = new BusquedaAEstrella(this.estado, this.objetivo, estadosAlcanzados);
+		this.busqueda = new BusquedaAEstrella(this.estado, this.objetivo, estadosAlcanzados);
 	}
 
 	public Accion actuar(Percepcion p) {
@@ -59,14 +59,16 @@ public class Agente {
 		log.info("energia:" 
 			+ Integer.toString(this.estado.getEnergia()) + "");
 		
+		
 		this.acciones = busqueda.buscarSolucion();
 		Accion a = this.acciones.get(this.acciones.size() - 1);
 		
 		log.info("Se decidió la acción: " + a.getTipoAccion());
-		if (!a.getClass().equals(NoAccion.class))
+		if (!a.getClass().equals(NoAccion.class)) {
 			this.estado.ejecutarAccion(a);
+			this.estadosAlcanzados.add(this.estado.getAmbiente());
+		}
 		
-		this.estadosAlcanzados.add(this.estado.getAmbiente());
 		return a;
 	}
 	

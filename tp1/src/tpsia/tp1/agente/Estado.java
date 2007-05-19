@@ -101,8 +101,18 @@ public class Estado implements Cloneable {
 		return cuadro;
 	}
 	
-	public void toXML() {
-
+	public String toXML() {
+		String cuadro = new String("<estado>");
+		cuadro += "<ambiente>" + this.visionAmbiente.toXML() + "</ambiente>"; 
+		cuadro += "<energia>" 
+			+ Integer.toString(this.energia) +"</energia>";
+		cuadro += "<promVarEneAvanz>"
+				+ Float.toString(this.promedios[AvanzarAbajo.getInstancia().getIdentificador()]) 	+"</promVarEneAvanz>";
+		cuadro += "<promVarEneComer>" 
+				+ Float.toString(this.promedios[Comer.getInstancia().getIdentificador()]) +"</promVarEneComer>";
+		cuadro += "<promVarEneLucha>" 
+				+ Float.toString(this.promedios[Pelear.getInstancia().getIdentificador()]) +"</promVarEneLucha>";
+		return cuadro + "</estado>";
 	}
 	
 	public void actualizarEstado(Percepcion p) {

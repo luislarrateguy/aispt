@@ -30,10 +30,10 @@ public abstract class Busqueda {
 	 */
 	protected abstract float calcularPrioridad(Nodo unNodo);
 	
-	public Busqueda(Estado estado, IObjetivo objetivo, ArrayList<VisionAmbiente> estadosAlcanzadosAgente) {
+	public Busqueda(Estado estado, IObjetivo objetivo, ArrayList<VisionAmbiente> estados) {
 		this.estado = estado;
 		this.objetivo = objetivo;
-		this.estadosAlcanzadosAgente = estadosAlcanzadosAgente;
+		this.estadosAlcanzadosAgente = estados;
 	}
 	
 	public ArrayList<Accion> buscarSolucion() {
@@ -43,16 +43,15 @@ public abstract class Busqueda {
 		Nodo raiz;
 		ArrayList<Accion> listaAcciones;
 		PriorityQueue<Nodo> colaNodos;
-		ArrayList<VisionAmbiente> estadosAlcanzados;
-		ArrayList<Nodo> nodosExpandidos;
+		ArrayList<Nodo> estadosAlcanzados;
+
 		
 		Logger log = Logger.getLogger("Pacman.Busqueda" + ".ejecucion" + Integer.toString(VECES_EJECUTADA));
 		log.info("Buscar accion");
 		
 		listaAcciones = new ArrayList<Accion>();
 		colaNodos = new PriorityQueue<Nodo>();
-		estadosAlcanzados = new ArrayList<VisionAmbiente>();
-		
+		estadosAlcanzados = new ArrayList<Nodo>();
 		nodoActual = new Nodo((Estado)this.estado.clone());
 		raiz = nodoActual;
 		
@@ -69,7 +68,7 @@ public abstract class Busqueda {
 		
 		nodoActual = new Nodo((Estado)this.estado.clone());
 		colaNodos.add(nodoActual);
-		estadosAlcanzados.add(nodoActual.getEstado().getAmbiente());
+		estadosAlcanzados.add(nodoActual);
 		log.debug("Estoy buscando. Nodo actual:");
 		log.debug(nodoActual);
 		log.debug(nodoActual.getEstado().getAmbiente());
@@ -84,13 +83,13 @@ public abstract class Busqueda {
 			
 			for (Nodo n : this.expandir(nodoActual)) {
 				/* Vemos si el nodo expandido ya fue inspeccionado. */
-				if (estadosAlcanzados.contains(n.getEstado().getAmbiente()) ||
+				if (estadosAlcanzados.contains(n) ||
 						this.estadosAlcanzadosAgente.contains(n.getEstado().getAmbiente())) {
 					log.debug("Estado repetido:"+n.getID() + " accion generadora: " +
 							n.getAccionGeneradora() + " hijo de: " + n.getPadre().getID());
 				} else {
 					/* Agrego el nodo expandido a la lista de nodos ya inspeccionados. */
-					estadosAlcanzados.add(n.getEstado().getAmbiente());
+					estadosAlcanzados.add(n);
 					colaNodos.add(n);
 				}
 			}
@@ -121,7 +120,10 @@ public abstract class Busqueda {
 		 * nodo ya se encuenta en un estado objetivo. */
 		if (listaAcciones.isEmpty())
 			listaAcciones.add(NoAccion.getInstancia());
-
+		
+		/* Salida jerárquica del árbol de búsqueda */
+		Logger logxml =  Logger.getLogger("Pacman.Busqueda" + ".ejecucion" + Integer.toString(VECES_EJECUTADA)+".xml");
+		logxml.info(raiz.toXML());
 		return listaAcciones;
 	}
 	

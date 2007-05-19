@@ -138,7 +138,7 @@ public class VisionAmbiente extends Ambiente {
 	
 	@Override
 	public String toXML() {
-		return new String("");
+		return draw();
 	}
 
 	@Override
@@ -161,10 +161,19 @@ public class VisionAmbiente extends Ambiente {
 	public boolean equals(Object o) {
 		if (! (o instanceof VisionAmbiente))
 			return false;
+		VisionAmbiente va = (VisionAmbiente) o;
+
+		// ¿Es igual el tablero de juego?
+		for (int i=0;i<4;i++) {
+			for (int j=0;j<4;j++) {
+				if (this.tablero[i][j] != va.tablero[i][j])
+					return false;
+			}
+		}
 		
-		VisionAmbiente va = (VisionAmbiente)o;
-		
-		if (!super.equals(va))
+		// ¿Es igual la posición del pacman?
+		if (this.posicionPacman[0] != va.posicionPacman[0] ||
+				this.posicionPacman[1] != va.posicionPacman[1])
 			return false;
 		
 		return true;

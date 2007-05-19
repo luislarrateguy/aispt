@@ -30,6 +30,7 @@ public class ObjetivoTP implements IObjetivo {
 			//log.debug("El Pacman está muerto");
 			cumplio = false;
 		} else {
+			
 			convienePelear = estado.getEnergia() >	estado.getPromedioVarEnergia(Pelear.getInstancia());
 			convieneMoverse = estado.getEnergia() >	estado.getPromedioVarEnergia(AvanzarAbajo.getInstancia());			
 			convienePelear = estado.getEnergia() >
@@ -64,10 +65,12 @@ public class ObjetivoTP implements IObjetivo {
 			 */
 			
 			// Estas son las condiciones que estoy armando, pero todavía no se usan...
+			// Nacho dice:
 			// Parado sobre alimento no creo que deba estar definido en el objetivo. Acordate que
 			// el objetivo se mide en cualquier nodo e indica si el agente llegó a su meta o no.. no nos desviemos
 			// Observa las salidas que te mandé. A veces hay enemigos y la variable "hayEnemigos" retorna falso!
 			// y encima conoce todo! no encuentro el error!
+			/*
 			boolean condicion1 = conoceTodo && !hayAlimentos && !hayEnemigos;
 			boolean condicion2 = conoceTodo && hayAlimentos && !convieneMoverse && !paradoSobreAlimento;
 			boolean condicion3 = conoceTodo && hayEnemigos && !hayAlimentos && !convienePelear;
@@ -76,9 +79,9 @@ public class ObjetivoTP implements IObjetivo {
 			boolean cumplio2 = conoceTodo && convieneMoverse && !hayAlimentos && !(hayEnemigos && convienePelear);
 			boolean cumplio3 = !conoceTodo && !convieneMoverse;
 
-			cumplio = cumplio1 || cumplio2 || cumplio3;
+			cumplio = (conoceTodo || !convieneMoverse) && (!hayAlimentos && (!hayEnemigos || !convienePelear));
+			*/
 			
-			/*
 			if (conoceTodo) {
 				if (convieneMoverse &&
 						(hayAlimentos ||
@@ -93,10 +96,9 @@ public class ObjetivoTP implements IObjetivo {
 					cumplio = false;
 				} else {
 					cumplio = true;
-					cumplio = true;
 				}
 			}
-			*/
+			
 			if (cumplio) {
 				log.debug("Conviene pelear: "+convienePelear + " Conviene moverse: "+convieneMoverse +
 						" Conoce todo: "+conoceTodo + " Hay alimentos: "+hayAlimentos + " Hay enemigos: "+hayEnemigos);

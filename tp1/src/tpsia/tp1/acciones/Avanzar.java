@@ -39,7 +39,7 @@ public abstract class Avanzar extends Accion {
 	
 	@Override
 	public final int getCosto() {
-		return 20;
+		return 30;
 	}
 	
 	@Override
@@ -47,8 +47,10 @@ public abstract class Avanzar extends Accion {
 		// Verifico que el agente tenga energía suficiente para moverse
 		// Es esto una precondicion para que aplique? 
 		// si es así.. no deberíamos chequear ademas
-		// que si hay comida no aplique?
-		if (estado.getEnergia() > 0)
+		// que si hay comida (en ese lugar) no aplique?
+		if (estado.getEnergia() > 0 
+				&& !estado.getAmbiente().hayComida() 
+				)
 			return true;
 		
 		return false;
