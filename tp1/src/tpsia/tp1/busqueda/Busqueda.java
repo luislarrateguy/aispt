@@ -88,17 +88,17 @@ public abstract class Busqueda {
 			
 			for (Nodo n : this.expandir(nodoActual)) {
 				/* Vemos si el nodo expandido ya fue inspeccionado. */
-				estadoAlcanzado = estadosAlcanzados.contains(n.getEstado().getAmbiente());
 				estadoAlcanzadoAgente = this.estadosAlcanzadosAgente.contains(n.getEstado().getAmbiente());
-				if (estadoAlcanzado ) {		
-					if (estadoAlcanzadoAgente) {
-						log.fatal("Estado repetido del agente:"+n.getID() + " accion generadora: " +
-								n.getAccionGeneradora() + " hijo de: " + n.getPadre().getID());
+				if (!estadoAlcanzadoAgente) {
+					estadoAlcanzado = estadosAlcanzados.contains(n.getEstado().getAmbiente());
+					if (!estadoAlcanzado ) {
+						/* Agrego el nodo expandido a la lista de nodos ya inspeccionados. */
+						estadosAlcanzados.add(n.getEstado().getAmbiente());
+						colaNodos.add(n);
 					}
-				} else {	
-					/* Agrego el nodo expandido a la lista de nodos ya inspeccionados. */
-					estadosAlcanzados.add(n.getEstado().getAmbiente());
-					colaNodos.add(n);
+				} else {
+					log.fatal("Estado repetido del agente:"+n.getID() + " accion generadora: " +
+							n.getAccionGeneradora() + " hijo de: " + n.getPadre().getID());
 				}
 			}
 			
@@ -124,6 +124,7 @@ public abstract class Busqueda {
 		}
 		log.info("Llegaré a mi objetivo si ejecuto esta secuencia de acciones");
 		log.info("ultima->primera"+listaAcciones);
+		log.info("Cantidad de nodos generados: " + Nodo.getLastId());
 		/* Si la lista de acciones es vacía, entonces ninguna acción fue necesaria, y el
 		 * nodo ya se encuenta en un estado objetivo. */
 		if (listaAcciones.isEmpty())

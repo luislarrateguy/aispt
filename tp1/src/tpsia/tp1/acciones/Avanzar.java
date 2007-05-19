@@ -48,11 +48,11 @@ public abstract class Avanzar extends Accion {
 		// Es esto una precondicion para que aplique? 
 		// si es así.. no deberíamos chequear ademas
 		// que si hay comida (en ese lugar) no aplique?
-		if (estado.getEnergia() - estado.getPromedioVarEnergia(this) > 0
+/*		if (estado.getEnergia() - estado.getPromedioVarEnergia(this) > 0
 				&& !estado.getAmbiente().hayComida() 
-				)
+				)*/
 			return true;
 		
-		return false;
+//		return false;
 	}
 }

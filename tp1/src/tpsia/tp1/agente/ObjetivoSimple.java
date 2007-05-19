@@ -32,7 +32,7 @@ public class ObjetivoSimple implements IObjetivo {
 			hayAlimentos = estado.getAmbiente().hayAlimentosSinComer();
 			hayEnemigos = estado.getAmbiente().hayEnemigosVivos();
 
-			cumplio = !hayAlimentos && !hayEnemigos && conoceTodo;
+			cumplio =  conoceTodo && !hayAlimentos && !hayEnemigos;
 
 			if (cumplio) {
 				log.debug("Conoce todo: "+conoceTodo + " Hay alimentos: "+hayAlimentos + 

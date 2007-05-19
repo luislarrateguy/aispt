@@ -37,17 +37,20 @@ public class Agente {
 	private Busqueda busqueda;
 	private ArrayList<Accion> acciones;
 	private ArrayList<VisionAmbiente> estadosAlcanzados;
+	private boolean cumplioObjetivo;
 	
 	public Agente(int energiaInicial) {
+		super();
+		this.cumplioObjetivo = false;
 		this.estado = new Estado(energiaInicial);
-		this.objetivo = ObjetivoTP.getInstancia();
-//		this.objetivo = ObjetivoSimple.getInstancia();
+//		this.objetivo = ObjetivoTP.getInstancia();
+		this.objetivo = ObjetivoSimple.getInstancia();
 		this.estadosAlcanzados = new ArrayList<VisionAmbiente>();
 		// Selecciona y CTRL+SHIFT+C
 //		this.busqueda = new BusquedaAmplitud(this.estado, this.objetivo, estadosAlcanzados);
-//		this.busqueda = new BusquedaCostoUniforme (this.estado, this.objetivo, this.estadosAlcanzados);
+		this.busqueda = new BusquedaCostoUniforme (this.estado, this.objetivo, this.estadosAlcanzados);
 //		this.busqueda = new BusquedaAvara(this.estado, this.objetivo, estadosAlcanzados);
-		this.busqueda = new BusquedaAEstrella(this.estado, this.objetivo, estadosAlcanzados);
+//		this.busqueda = new BusquedaAEstrella(this.estado, this.objetivo, estadosAlcanzados);
 	}
 
 	public Accion actuar(Percepcion p) {
@@ -68,12 +71,12 @@ public class Agente {
 			this.estado.ejecutarAccion(a);
 			this.estadosAlcanzados.add(this.estado.getAmbiente());
 		}
-		
+		this.cumplioObjetivo = this.objetivo.cumpleObjetivo(this.estado);
 		return a;
 	}
 	
 	public boolean cumplioObjetivo() {
-		return this.objetivo.cumpleObjetivo(this.estado);
+		return this.cumplioObjetivo;
 	}
 	
 	public boolean vivo() {

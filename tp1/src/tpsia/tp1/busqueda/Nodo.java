@@ -172,5 +172,9 @@ public class Nodo implements Comparable<Nodo> {
 		Busqueda.logxml.debug("</hijos>");
 		Busqueda.logxml.debug("</nodo>");
 	}
+
+	public static String getLastId() {
+		return Integer.toString(LAST_ID);
+	}
 	
 }
