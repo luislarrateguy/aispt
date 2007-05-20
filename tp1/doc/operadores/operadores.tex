@@ -1,33 +1,32 @@
-\section{Operadores de búsqueda}
+﻿\section{Operadores de búsqueda}
 
 La búsqueda se efectua operando sobre un estado inicial y se le va aplicando
 operadores, obteniendo nuevos estados. El estado se almacena dentro de
 la variable privada \variable{estado} del tipo \clase{Estado}
 
-Cuando decimos que un operador ``no tiene'' precondiciones, queremos decir
-que siempre se evalúa en \emph{true} antes de aplicarlo.
-
+\fixme{Ponemos la precondición para cada Avanzar que !hayComida(x,y)? Me
+parece que seria una buena optimizacion}
 \begin{itemize}
 
-\item \textbf{MoverArriba}\newline
-\underline{Precondicion:} no tiene.\newline
+\item \textbf{AvanzarArriba}\newline
+\underline{Precondicion:} energiaActual > energiaPerdidaPromedioEnPelea\newline
 \underline{Resultado:} El Pacman es dezplazado a su celda superior (movimiento
 sobre una esfera\footnote{Es decir, si se encuentra en la primer fila y se
 dirige hacia arriba, aparecerá en la misma columna pero en la fila de abajo.
 Esto es similar para los demás operadores de movimiento.})
 
-\item \textbf{MoverAbajo}\newline
-\underline{PreCondicion:} no tiene.\newline
+\item \textbf{AvanzarAbajo}\newline
+\underline{PreCondicion:}energiaActual > energiaPerdidaPromedioEnPelea
 \underline{Resultado:} El Pacman es dezplazado a su celda inferior (movimiento
 sobre una esfera)\newline
 
-\item \textbf{MoverDerecha}\newline
-\underline{PreCondicion:} no tiene.\newline
+\item \textbf{AvanzarDerecha}\newline
+\underline{PreCondicion:} energiaActual > energiaPerdidaPromedioEnPelea\newline
 \underline{Resultado:} El Pacman es dezplazado a su celda derecha (movimiento
 sobre una esfera)\newline
 
-\item \textbf{MoverIzquierda}\newline
-\underline{PreCondicion:} no tiene.\newline
+\item \textbf{AvanzarIzquierda}\newline
+\underline{PreCondicion:} energiaActual > energiaPerdidaPromedioEnPelea\newline
 \underline{Resultado:} El Pacman es dezplazado a su celda izquierda (movimiento
 sobre una esfera)\newline
 
@@ -45,7 +44,8 @@ Alimento en posicionActual desaparece y la celda queda en estado \textit{Vacia}
 
 
 \item \textbf{Pelear}\newline
-\underline{PreCondicion:} \metodo{est.getAmbiente().hayEnemigo(x,y)} = true;
+\underline{PreCondicion:} \metodo{est.getAmbiente().hayEnemigo(x,y) AND 
+energiaActual > energiaPromedioPerdidaEnPelea} = true;
 siendo X e Y la posición actual.
 
 \begin{verbatim}
