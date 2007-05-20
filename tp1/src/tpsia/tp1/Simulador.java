@@ -36,12 +36,13 @@ public class Simulador {
 	private Calculador calculador;
 	private AmbienteReal ambiente;
 	private Agente pacman;
+	private String busqueda;
 
 
 	public Simulador() {
 		this.calculador = new CalculadorCustom("Grupo 28");
 		this.ambiente = new AmbienteReal();
-		
+		this.busqueda = "aestrella";
 		/* Inicializando Acciones para acelerar ejecución */
 		Pelear.getInstancia();
 		Comer.getInstancia();
@@ -50,6 +51,10 @@ public class Simulador {
 		AvanzarAbajo.getInstancia();
 		AvanzarIzquierda.getInstancia();
 		NoAccion.getInstancia();
+	}
+	public Simulador(String tipoBusqueda) {
+		this();
+		this.busqueda = tipoBusqueda;
 	}
 	
 	/**
@@ -120,7 +125,7 @@ public class Simulador {
 		 * */
 		int energiaPacman = calculador.calcularEnergiaPacMan();
 		
-		this.pacman = new Agente(energiaPacman);
+		this.pacman = new Agente(energiaPacman,this.busqueda);
 		
 		this.ambiente.inicializar(energiaPacman,
 				posicionPacMan,

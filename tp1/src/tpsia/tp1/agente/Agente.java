@@ -39,7 +39,7 @@ public class Agente {
 	private ArrayList<VisionAmbiente> estadosAlcanzados;
 	private boolean cumplioObjetivo;
 	
-	public Agente(int energiaInicial) {
+	public Agente(int energiaInicial, String tipoBusqueda) {
 		super();
 		this.cumplioObjetivo = false;
 		this.estado = new Estado(energiaInicial);
@@ -47,10 +47,8 @@ public class Agente {
 		this.objetivo = ObjetivoSimple.getInstancia();
 		this.estadosAlcanzados = new ArrayList<VisionAmbiente>();
 		// Selecciona y CTRL+SHIFT+C
-//		this.busqueda = new BusquedaAmplitud(this.estado, this.objetivo, estadosAlcanzados);
-		this.busqueda = new BusquedaCostoUniforme (this.estado, this.objetivo, this.estadosAlcanzados);
-//		this.busqueda = new BusquedaAvara(this.estado, this.objetivo, estadosAlcanzados);
-//		this.busqueda = new BusquedaAEstrella(this.estado, this.objetivo, estadosAlcanzados);
+		this.busqueda = BusquedaFactory.Create(tipoBusqueda,this.estado, this.objetivo, this.estadosAlcanzados);
+
 	}
 
 	public Accion actuar(Percepcion p) {

@@ -2,6 +2,7 @@ package tpsia.tp1.busqueda;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.PriorityQueue;
 
 import org.apache.log4j.Logger;
@@ -37,6 +38,7 @@ public abstract class Busqueda {
 		this.estadosAlcanzadosAgente = estados;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public ArrayList<Accion> buscarSolucion() {
 		VECES_EJECUTADA++;
 		Nodo.resetID();
@@ -46,7 +48,7 @@ public abstract class Busqueda {
 		ArrayList<Accion> listaAcciones;
 		PriorityQueue<Nodo> colaNodos;
 		ArrayList<VisionAmbiente> estadosAlcanzados;
-		ArrayList<Nodo> nodosAlcanzados;
+
 
 		
 		Logger log = Logger.getLogger("Pacman.Busqueda" + ".ejecucion" + Integer.toString(VECES_EJECUTADA));
@@ -55,7 +57,6 @@ public abstract class Busqueda {
 		listaAcciones = new ArrayList<Accion>();
 		colaNodos = new PriorityQueue<Nodo>();
 		estadosAlcanzados = new ArrayList<VisionAmbiente>();
-		nodosAlcanzados = new ArrayList<Nodo>();
 		raiz = new Nodo((Estado)this.estado.clone());
 		nodoActual = raiz;
 		
@@ -73,7 +74,7 @@ public abstract class Busqueda {
 		
 		log.debug("Estoy buscando. Nodo actual:");
 		estadosAlcanzados.add(nodoActual.getEstado().getAmbiente());
-		
+		estadosAlcanzados.addAll((ArrayList<VisionAmbiente>) this.estadosAlcanzadosAgente.clone());
 		/*
 		 * Mientras no se cumple el objetivo en el nodo actual, seguimos expandiendo.
 		 */
@@ -88,18 +89,21 @@ public abstract class Busqueda {
 			
 			for (Nodo n : this.expandir(nodoActual)) {
 				/* Vemos si el nodo expandido ya fue inspeccionado. */
-				estadoAlcanzadoAgente = this.estadosAlcanzadosAgente.contains(n.getEstado().getAmbiente());
-				if (!estadoAlcanzadoAgente) {
+//				estadoAlcanzadoAgente = this.estadosAlcanzadosAgente.contains(n.getEstado().getAmbiente());
+//				if (!estadoAlcanzadoAgente) {
 					estadoAlcanzado = estadosAlcanzados.contains(n.getEstado().getAmbiente());
 					if (!estadoAlcanzado ) {
 						/* Agrego el nodo expandido a la lista de nodos ya inspeccionados. */
 						estadosAlcanzados.add(n.getEstado().getAmbiente());
 						colaNodos.add(n);
+					} else {
+						log.debug("Estado repetido de busqueda:"+n.getID() + " accion generadora: " +
+								n.getAccionGeneradora() + " hijo de: " + n.getPadre().getID());
 					}
-				} else {
-					log.fatal("Estado repetido del agente:"+n.getID() + " accion generadora: " +
-							n.getAccionGeneradora() + " hijo de: " + n.getPadre().getID());
-				}
+//				} else {
+//					log.fatal("Estado repetido del agente:"+n.getID() + " accion generadora: " +
+//							n.getAccionGeneradora() + " hijo de: " + n.getPadre().getID());
+//				}
 			}
 			
 			if (!colaNodos.isEmpty()) {

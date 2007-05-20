@@ -26,6 +26,9 @@ import org.apache.log4j.BasicConfigurator;
 
 public class Main {
 
+	private static String busqueda = "aestrella";
+	private static String debugFile = "logger.config";
+	
 	/**
 	 * @param args
 	 */
@@ -33,18 +36,50 @@ public class Main {
 		/* Agrego un for por si queremos hacer varias
 		 * simulaciones.
 		 */
-		
-		PropertyConfigurator.configure(args[0]);
-		Logger log = Logger.getLogger(Main.class);
 
-		
-		//BasicConfigurator.configure();
-
-		for (int i=1; i<=1; i++) {
-				log.debug("Iniciando simulación nro : "+ Integer.toString(i));
-			Simulador s = new Simulador();
-			s.comenzarSimulacion();
-			s.mostrarPerformance();
+		if (parseArguments(args)) {
+			PropertyConfigurator.configure(args[0]);
+			Logger log = Logger.getLogger(Main.class);
+			
+			for (int i=1; i<=1; i++) {
+					log.debug("Iniciando simulación nro : "+ Integer.toString(i));
+				Simulador s = new Simulador(busqueda);
+				s.comenzarSimulacion();
+				s.mostrarPerformance();
+			}
 		}
+	}
+	
+    public static boolean parseArguments(String[] args) {
+    	int cant = args.length;
+        if (cant > 0) {
+            String arg = args[0];
+            if (arg.startsWith("?") || arg.equals("-?") || arg.equals("-h") || arg.startsWith("--h")) {
+                mostrarAyuda();
+                return false;
+            }
+        	if (cant == 3 && args[1].equals("--busqueda")) {
+        		if (args[2].equals("aestrella") ||
+        				args[1].equals("avara") ||
+        				args[1].equals("profundida") ||
+        				args[1].equals("amplitud") ||
+        				args[1].equals("costouniforme"))
+            	busqueda = args[1];
+        		debugFile = args[0];
+            }
+        }
+        return true;
+    }
+
+	private static void mostrarAyuda() {
+		System.out.println("\nUso:");
+		System.out.println("java -jar simulador.jar --help");
+		System.out.println("\t muestra esta ayuda");
+		System.out.println("java -jar simulador.jar logger.config --busqueda [tipo_busqueda]");
+		System.out.println("\t permite seleccionar el tipo de busqueda que");
+		System.out.println("\t utilizará el Agente.");
+		System.out.println("\t\t tipo_busqueda: amplitud,avara,aestrella,");
+		System.out.println("\t\t                profundidad,costouniforme");
+		
 	}
 }
