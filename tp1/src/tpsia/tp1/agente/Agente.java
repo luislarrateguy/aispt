@@ -43,8 +43,8 @@ public class Agente {
 		super();
 		this.cumplioObjetivo = false;
 		this.estado = new Estado(energiaInicial);
-//		this.objetivo = ObjetivoTP.getInstancia();
-		this.objetivo = ObjetivoSimple.getInstancia();
+		this.objetivo = ObjetivoTP.getInstancia();
+//		this.objetivo = ObjetivoSimple.getInstancia();
 		this.estadosAlcanzados = new ArrayList<VisionAmbiente>();
 		// Selecciona y CTRL+SHIFT+C
 		this.busqueda = BusquedaFactory.Create(tipoBusqueda,this.estado, this.objetivo, this.estadosAlcanzados);

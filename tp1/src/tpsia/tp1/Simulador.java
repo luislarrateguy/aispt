@@ -40,7 +40,7 @@ public class Simulador {
 
 
 	public Simulador() {
-		this.calculador = new CalculadorCustom("Grupo 28");
+		this.calculador = new Calculador("Grupo 28");
 		this.ambiente = new AmbienteReal();
 		this.busqueda = "aestrella";
 		/* Inicializando Acciones para acelerar ejecución */
