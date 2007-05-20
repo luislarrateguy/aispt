@@ -137,8 +137,11 @@ public abstract class Busqueda {
 		/* Salida jerárquica del árbol de búsqueda */
 		
 		logxml =  Logger.getLogger("Pacman.Busqueda" + ".ejecucion" + Integer.toString(VECES_EJECUTADA)+".xml");
-		logxml.debug("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-		raiz.toXML();
+		// SI hago esto mejor la velocidad, ya que no se efectua la llamada recursiva.
+		if (logxml.isDebugEnabled()) {
+			logxml.debug("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+			raiz.toXML();
+		}
 		return listaAcciones;
 	}
 	
