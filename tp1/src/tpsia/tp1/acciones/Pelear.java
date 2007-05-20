@@ -40,7 +40,7 @@ public class Pelear extends Accion {
 	}
 	
 	public int getCosto() {
-		return 40;
+		return 38;
 	}
 
 	static public Accion getInstancia() {
@@ -58,11 +58,11 @@ public class Pelear extends Accion {
 		if (estado.getAmbiente().hayEnemigo(posicionAgente[0], posicionAgente[1])
 				&& (estado.getEnergia() + estado.getPromedioVarEnergia(this) > 0))
 			return true;*/
-//		if (estado.getAmbiente().hayEnemigo() &&
-//				estado.getEnergia() > 
-//				estado.getPromedioVarEnergia(Pelear.getInstancia())
-//						)
-		if (estado.getAmbiente().hayEnemigo())
+		if (estado.getAmbiente().hayEnemigo() &&
+				estado.getEnergia() > 
+				estado.getPromedioVarEnergia(Pelear.getInstancia())
+						)
+
 			return true;
 		
 		return false;

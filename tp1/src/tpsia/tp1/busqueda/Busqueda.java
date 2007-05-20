@@ -87,23 +87,27 @@ public abstract class Busqueda {
 			log.debug(nodoActual.getEstado().getAmbiente());
 			log.debug("Prioridad: "+nodoActual.getPrioridadExpansion());
 			
-			for (Nodo n : this.expandir(nodoActual)) {
-				/* Vemos si el nodo expandido ya fue inspeccionado. */
-//				estadoAlcanzadoAgente = this.estadosAlcanzadosAgente.contains(n.getEstado().getAmbiente());
-//				if (!estadoAlcanzadoAgente) {
-					estadoAlcanzado = estadosAlcanzados.contains(n.getEstado().getAmbiente());
-					if (!estadoAlcanzado ) {
-						/* Agrego el nodo expandido a la lista de nodos ya inspeccionados. */
-						estadosAlcanzados.add(n.getEstado().getAmbiente());
-						colaNodos.add(n);
-					} else {
-						log.debug("Estado repetido de busqueda:"+n.getID() + " accion generadora: " +
-								n.getAccionGeneradora() + " hijo de: " + n.getPadre().getID());
-					}
-//				} else {
-//					log.fatal("Estado repetido del agente:"+n.getID() + " accion generadora: " +
-//							n.getAccionGeneradora() + " hijo de: " + n.getPadre().getID());
-//				}
+			Collection<Nodo> nodosExpandir = this.expandir(nodoActual);
+			/* Que no tenga ningun nodo a expandir significa que no era un nodo
+			 * objetivo (porque ingreso al while) y que además llevó a la muerte
+			 * al pacman. Así que lo saco de los estados repetidos para
+			 * decrementar esa lista.
+			 */
+			if (!nodosExpandir.isEmpty()) {
+				for (Nodo n : nodosExpandir) {
+					/* Vemos si el nodo expandido ya fue inspeccionado. */
+						estadoAlcanzado = estadosAlcanzados.contains(n.getEstado().getAmbiente());
+						if (!estadoAlcanzado ) {
+							/* Agrego el nodo expandido a la lista de nodos ya inspeccionados. */
+							estadosAlcanzados.add(n.getEstado().getAmbiente());
+							colaNodos.add(n);
+						} else {
+							log.debug("Estado repetido de busqueda:"+n.getID() + " accion generadora: " +
+									n.getAccionGeneradora() + " hijo de: " + n.getPadre().getID());
+						}
+				}
+			} else {
+				estadosAlcanzados.remove(nodoActual.getEstado().getAmbiente());
 			}
 			
 			if (!colaNodos.isEmpty()) {

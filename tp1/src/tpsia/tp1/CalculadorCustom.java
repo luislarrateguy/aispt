@@ -9,29 +9,25 @@ import calculador.Pair;
  * se me ocurrió lo mismo por eso te digo groso jajaja
  */
 public class CalculadorCustom extends Calculador {
-	private final int[] POSICION_INICIAL = {0,2};
+	private final int[] POSICION_INICIAL = {1,1};
 	private final int[] POSICION_COMIDAS = {
-			1,0,
-			1,2,
-			3,1,
-			3,2
+			3,0,
+			3,2,
+			2,3
 	};
 	
 	private final int[] POSICION_ENEMIGOS = {
-			1,1,
-			1,3,
-			3,0,
-			3,3,
+			2,0,
 			0,3
 	};
 	
 	/** Energía inicial del pacman. */
-	private final int ENERGIA_INICIAL = 39;
+	private final int ENERGIA_INICIAL = 7;
 	
 	/** Energía que gana el pacman por alimento. */
-	private final int ENERGIA_COMIDA = 0;
+	private final int ENERGIA_COMIDA = 4;
 	/** Energía que pierde el pacman por pelear. */
-	private final int ENERGIA_ENEMIGO = 10;
+	private final int ENERGIA_ENEMIGO = 4;
 	/** Energía que pierde el pacman por moverse. */
 	private final int ENERGIA_MOVIMIENTO = 1;
 	
