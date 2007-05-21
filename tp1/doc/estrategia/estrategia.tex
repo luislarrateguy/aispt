@@ -1,60 +1,27 @@
 \section{Estrategia}
 
-Como estrategia primaria hemos escogido para nuestro agente A*.
-Si bien además están implementadas las estrategias de Profundidad, Amplitud
-CostoUniforme y Avara, escogimos A* porque es la que mejor parecía resolver los 
-problemas en la mayoría de los casos.
-El costo de aplicar un operador Avanzar es de 50, el de aplicar Pelear de 38, y el 
-de aplicar Comer es de 20.
-Por lo tanto
-g(n) = costoDelPadre + costoAccion
+Hemos escogido A* como estrategia primaria para nuestro agente.  Si bien además
+están implementadas las estrategias de \emph{Profundidad}, \emph{Amplitud},
+\emph{Costo Uniforme} y \emph{Avara}, escogimos A* porque es la que mejor
+parecía resolver los problemas en la mayoría de los casos.
 
-Para A* utilizamos la siguiente heurística:
-sea 
-ccd: la cantidad de celdas desconocidas
-cev: la cantidad de enemigos vivos
-cas: la cantidad de alimento sin comer
+Cada acción tiene un costo. El avanzar a cualquier dirección supone un aumento
+de 60. Pelear tiene un costo de 40, y Comer 20.
 
-h(n) = ccd + cev +cas
+La función de evaluación $f(n)$ de la estrategia A* es igual a $g(n) + h(n)$.
+En nuestra implementación:
 
-La cantidad de celdas desconocidas tendrá un máximo de 12 (16 - las 4 iniciales), 
-y un mínimo de 0.
-La cantidad de enemigos vivos + la cantidad de comida sin comer tendrá un máximo 
-de 16 y un mínimo de 0.
+\begin{itemize}
+\item $g(n) = costoDelNodoPadre + costoAccionGeneradora$
+\item $h(n) = cantidad de celdas desconocidas$.
+\end{itemize}
 
-f(n) = g(n) + h(n)
+Para que una heurística sea consistente, se debe cumplir que $h(n) <= c(n,a,n')
++ h(n')$, siendo \emph{n'} un nodo que se alcanza desde el nodo \emph{n} al
+aplicar la acción \emph{a}.
 
-Notar que:
-* La suma de enemigos y comida nunca puede superar 16 (cantida de celdas)
-* La cantidad de celdas vacias inicialmente es 12, en el primer movimiento se decrementa 
-en 4, y luego como máximo en 2 (debido a que e sun tablero de 4x4)
-* Con cada acción comer o pelear sólo disminuye en 1 la cantidad de celdas
-con enemigo o alimento.
-
-la heurística elegida es consistente (y admisible) ya que:
-MAX(h(n)) = 16    // Corresponde a 12 celdas desconocidas y 4 elementos alrededor.
-MIN(h(n)) = 0     // objetivo
-MIN(g(n)) =  50   // costo del primer nivel de nodos, debido a la primer accion avanzar
-
-h(n) <= g(n') + h(n')
-
-En el primer caso
-
-MAX(h(n')) <= MIN(g(n')) + (MAX(h(n')) - 4)
-
-Ya que moverse es su única opción al comienzo
-De ahí en más
-
-h(n) <= g(n') + h(n')
-
-donde h(n) >= h(n')
-y g(n') > h(n) (debido a los mínimos y máximos)
-
-Hemos escogido la estrategia de costo uniforme para nuestro agente. Un nodo se
-descarta si se pronostica la muerte del Pac-Man. Si todos los nodos implican su
-muerte, entonces el agente finaliza.
-
-La función f(n) prioriza comer primero los alimentos (les daría un ``mayor
-valor'' a los caminos que realizan esta accion). También se encargaría de premiar
-a aquellos caminos que hacen que el agente conozca más el tablero.
+Moviendo $h(n')$ al término de la izquierda, queda $c(n,a,n') >= h(n) - h(n')$.
+La máxima diferencia posible del segundo término es 4, pero el menor costo de
+cualquier acción es 20. Por lo tanto la heurística es consistente, y por lo
+tanto también admisible.
 

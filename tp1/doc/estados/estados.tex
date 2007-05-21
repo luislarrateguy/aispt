@@ -3,15 +3,17 @@
 \subsection{Representación del estado}
 \incluirimagen{scale=0.8}{estados/representacion_estado.pdf}
 
-El \clase{Agente} posee un \clase{Estado}. Éste mantiene una vision del
+El \clase{Agente} posee un \clase{Estado}. Éste mantiene una visión del
 ambiente, incompleta al principio y que se irá extendiendo con las percepciones
 futuras.  \clase{EstadoCelda} es una enumeración. Su \variable{valor} puede ser
 \emph{Desconocido}, \emph{Vacío}, \emph{Comida} o \emph{Enemigo}, según lo que
 haya en la celda. Un \clase{Ambiente} posee 16 instancias de \clase{EstadoCelda}
 que le indican, justamente, el estado de cada celda.
 
-El método \metodo{hayEnemigo(int, int)} de \clase{Ambiente} permite saber la
-existencia de un enemigo en una posición dada, y el método
+El método \metodo{hayEnemigo(int, int)} de \clase{Ambiente}\footnote{En la
+figura no aparece por cuestiones de espacio, pero la clase completa fue
+incluida en una imagen anterior, cuando se presentaba la arquitectura} permite
+saber la existencia de un enemigo en una posición dada, y el método
 \metodo{hayEnemigo()} es similar, pero al no recibir argumentos supone que se
 pregunta para la posición actual del \clase{Agente}. Lo mismo sucede con
 \metodo{hayComida(int, int)} y \metodo{hayComida()}. Por supuesto que si se
@@ -47,7 +49,7 @@ Vacía,Enemigo,Comida.
 \begin{itemize}
 \item Agente.estado.getAmbiente().posicionPacman representa una posición
 aleatoria.
-\item Agente.estado.energiaActual tendrá coom valor cualquier entero mayor a 0.
+\item Agente.estado.energiaActual tendrá como valor cualquier entero mayor a 0.
 Incluso puede que sea mayor que la inicial y mayor que 50.
 \item Conocimiento parcial del tablero.
 \item Percepción de algunos enemigos y alimentos.

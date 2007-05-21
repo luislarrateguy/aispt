@@ -2,30 +2,21 @@
 
 El pseudocódigo de la prueba de meta es el siguiente:
 
-\FIXME{Esto debe ajustarse a lo que quede fijo en el código.}
-
 \begin{verbatim}
-Si ConoceTodoElAmbiente entonces
-  /* Las dos variables siguientes son booleanas */
-  ConvienePelear  = energiaActualAgente > energiaPromedioPelea
-  ConvieneMoverse = energiaActualAgente > energiaPromedioMover
-
-  Si (ConvieneMoverse AND (HayAlimentosSinComer OR 
-                          (HayEnemigos AND ConvienePelear) )
-     )  
-     retornar FRACASO
-  Sino
-     retornar EXITO
+Si energiaActual <= 0 entonces
+   cumplio = falso
 Sino
-  Si ConvieneMoverse entonces
-     retornar FRACASO  
-  Sino
-     /* Se da por vencido. Asume exito en su objetivo,
-        porque quiere sobrevivir! */
-     retornar EXITO
+   convienePelear = (energiaActual - promedioPerdidaAlPelear) > 0
+   convieneMoverse = (energiaActual - promedioPerdidaAlMoverse) > 0
+
+   cumplio = (conoceTodoElTablero OR No convieneMoverse)
+      && (No hayAlimentos AND (No hayEnemigos OR No convienePelear))
+Fin Si
+
+retornar cumplio
 \end{verbatim}
 
-Las variables \variable{ConvienePelear} y \variable{ConvieneMoverse} podrían
+Las variables \variable{convienePelear} y \variable{convieneMoverse} podrían
 traducirse como ``tiene energía suficiente para pelear'' y ``tiene energía
 suficiente para moverse''.
 

@@ -1,39 +1,41 @@
 \section{Operadores de búsqueda}
 
-La búsqueda se efectua operando sobre un estado inicial y se le va 
-operadores, obteniendo nuevos estados. El estado se almacena dentro de
-la variable privada \variable{estado} del tipo \clase{Estado}
-
-\FIXME{Ponemos la precondición para cada Avanzar que !hayComida(x,y). ?
-Me parece que seria una buena optimizacion}
+La búsqueda se efectúa operando sobre un estado inicial, aplicando sobre éste
+todos los operadores en los cuales su precondición sea verdadera, obteniendo
+nuevos estados. El estado se almacena dentro de la variable privada
+\variable{estado} del \clase{Agente}.
 
 \begin{itemize}
 
 \item \textbf{AvanzarArriba}\newline
-\underline{Precondicion:} energiaActual > energiaPerdidaPromedioEnPelea\newline
-\underline{Resultado:} El Pacman es dezplazado a su celda superior (movimiento
+\underline{Precondición:} (energiaActual - energiaPerdidaPromedioAlAvanzar) > 0
+\newline
+\underline{Resultado:} El Pacman es desplazado a su celda superior (movimiento
 sobre una esfera\footnote{Es decir, si se encuentra en la primer fila y se
-dirige hacia arriba, aparecerá en la misma columna pero en la fila de abajo.
-Esto es similar para los demás operadores de movimiento.})
+dirige hacia arriba, aparecerá en la misma columna pero en la fila inferior del
+tablero.  Esto es similar para los demás operadores de movimiento.})
 
 \item \textbf{AvanzarAbajo}\newline
-\underline{PreCondicion:}energiaActual > energiaPerdidaPromedioEnPelea
-\underline{Resultado:} El Pacman es dezplazado a su celda inferior (movimiento
+\underline{Precondición:} (energiaActual - energiaPerdidaPromedioAlAvanzar) > 0
+\newline
+\underline{Resultado:} El Pacman es desplazado a su celda inferior (movimiento
 sobre una esfera)\newline
 
 \item \textbf{AvanzarDerecha}\newline
-\underline{PreCondicion:} energiaActual > energiaPerdidaPromedioEnPelea\newline
-\underline{Resultado:} El Pacman es dezplazado a su celda derecha (movimiento
+\underline{Precondición:} (energiaActual - energiaPerdidaPromedioAlAvanzar) > 0
+\newline
+\underline{Resultado:} El Pacman es desplazado a su celda derecha (movimiento
 sobre una esfera)\newline
 
 \item \textbf{AvanzarIzquierda}\newline
-\underline{PreCondicion:} energiaActual > energiaPerdidaPromedioEnPelea\newline
-\underline{Resultado:} El Pacman es dezplazado a su celda izquierda (movimiento
+\underline{Precondición:} (energiaActual - energiaPerdidaPromedioAlAvanzar) > 0
+\newline
+\underline{Resultado:} El Pacman es desplazado a su celda izquierda (movimiento
 sobre una esfera)\newline
 
 \item \textbf{Comer}\newline
-\underline{PreCondicion:} \metodo{est.getAmbiente().hayComida(x,y)} = true;
-siendo X e Y la posición actual.
+\underline{Precondición:} \metodo{est.getAmbiente().hayComida(x,y)} = true;
+siendo $x$ e $y$ la posición actual.
 
 \begin{verbatim}
 Si est.getAmbiente().hayComida(x,y)
@@ -43,10 +45,11 @@ Si est.getAmbiente().hayComida(x,y)
 \underline{Resultado:} \metodo{visionAmbiente.comer()}. El Pacman ``come''.
 Alimento en posicionActual desaparece y la celda queda en estado \textit{Vacia}
 
-
 \item \textbf{Pelear}\newline
-\underline{PreCondicion:} \metodo{est.getAmbiente().hayEnemigo(x,y) AND 
-energiaActual > energiaPromedioPerdidaEnPelea} = true;
+\underline{Precondición:} \metodo{est.getAmbiente().hayEnemigo(x,y) AND}
+\newline
+\metodo{(energiaActual - energiaPromedioPerdidaEnPelea) > 0};
+\newline
 siendo X e Y la posición actual.
 
 \begin{verbatim}
