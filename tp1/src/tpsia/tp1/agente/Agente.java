@@ -38,9 +38,11 @@ public class Agente {
 	private ArrayList<Accion> acciones;
 	private ArrayList<VisionAmbiente> estadosAlcanzados;
 	private boolean cumplioObjetivo;
+	private boolean tieneSolucion;
 	
 	public Agente(int energiaInicial, String tipoBusqueda) {
 		super();
+		this.tieneSolucion = true;
 		this.cumplioObjetivo = false;
 		this.estado = new Estado(energiaInicial);
 		this.objetivo = ObjetivoTP.getInstancia();
@@ -62,18 +64,25 @@ public class Agente {
 		
 		
 		this.acciones = busqueda.buscarSolucion();
-		Accion a = this.acciones.get(this.acciones.size() - 1);
-		
-		log.info("Se decidió la acción: " + a.getTipoAccion());
-		this.estado.ejecutarAccion(a);
-		this.estadosAlcanzados.add(this.estado.getAmbiente());
-		
-		this.cumplioObjetivo = this.objetivo.cumpleObjetivo(this.estado);
+		Accion a = null;
+
+		try {
+			a = this.acciones.get(this.acciones.size() - 1);
+			log.info("Se decidió la acción: " + a.getTipoAccion());
+			this.estado.ejecutarAccion(a);
+			this.estadosAlcanzados.add(this.estado.getAmbiente());
+			this.cumplioObjetivo = this.objetivo.cumpleObjetivo(this.estado);
+		} catch (Exception e) {
+			a = null;
+			this.tieneSolucion = false;
+			log.fatal("No se encontró solución que satisfaga el objetivo");
+		}
+
 		return a;
 	}
 	
 	public boolean cumplioObjetivo() {
-		return this.cumplioObjetivo;
+		return this.cumplioObjetivo || !this.tieneSolucion;
 	}
 	
 	public boolean vivo() {

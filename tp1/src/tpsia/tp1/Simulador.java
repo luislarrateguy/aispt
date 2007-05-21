@@ -82,22 +82,17 @@ public class Simulador {
 			log.debug("Enviando percepcion a Pacman");
 			
 			a = pacman.actuar(p);
-		
-			// avisar al calculador
-			log.debug("Calculando energia pacman");
-			energiaPacman = calculador.calcularEnergiaPacMan(a.getTipoAccion());
-
-			// ejecutar la acción y actualizar el ambiente
-			log.debug("Ejecutando accion en ambiente");
 			try {
+				log.debug("Calculando energia pacman");
+				energiaPacman = calculador.calcularEnergiaPacMan(a.getTipoAccion());
+				log.debug("Ejecutando accion en ambiente");
 				a.ejecutar(ambiente);
+				log.debug("Actualizando ambiente");
+				ambiente.setEnergiaPacman(energiaPacman);
 			} catch (Exception e) {
-				// Mostrar la excepción.
-				e.printStackTrace();
+				// No se hace nada. La ejecución termina en la 
+				// proxima iteración del NullPointer
 			}
-			
-			log.debug("Actualizando ambiente");
-			ambiente.setEnergiaPacman(energiaPacman);
 		}
 		
 		log.info("### Fin de la simulación ###");

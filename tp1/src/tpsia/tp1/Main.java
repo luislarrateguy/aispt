@@ -38,7 +38,7 @@ public class Main {
 		 */
 
 		if (parseArguments(args)) {
-			PropertyConfigurator.configure(args[0]);
+			PropertyConfigurator.configure(debugFile);
 			Logger log = Logger.getLogger(Main.class);
 			
 			for (int i=1; i<=1; i++) {

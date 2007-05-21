@@ -37,45 +37,10 @@ public class ObjetivoTP implements IObjetivo {
 			conoceTodo = estado.getAmbiente().conoceTodo();
 			hayAlimentos = estado.getAmbiente().hayAlimentosSinComer();
 			hayEnemigos = estado.getAmbiente().hayEnemigosVivos();
-			
-			/*
-			// Condicion del objetivo
-			boolean cumplio1 = false; //conoceTodo && !convieneMoverse;
-			//boolean cumplio2 = conoceTodo && convieneMoverse && !hayAlimentos && !(hayEnemigos && convienePelear);
-			boolean cumplio2 = conoceTodo && !hayAlimentos && !hayEnemigos;
-			boolean cumplio3 = false; //!conoceTodo && !convieneMoverse;
-			// Condicion del objetivo
-			// Suposición 1: convienePelear => convieneMoverse
-			// Suposición 2: paradoSobreAlimento => hayAlimentos
-			
-			/* Aca hay que armar una tabla como esta para armar todas las condiciones donde se cumple
-			 * el objetivo:
-			 * 
-			 * conoceTodo	hayAlimentos	convieneMoverse 	hayEnemigos		convienePelear	paradoSobreAlimento 	¿Objetivo cumplido?
-			 * 1			1				1					1				1				1						Si			
-			 * ...
-			 * ...
-			 * ...
-			 */
-			
-			// Estas son las condiciones que estoy armando, pero todavía no se usan...
-			// Nacho dice:
-			// Parado sobre alimento no creo que deba estar definido en el objetivo. Acordate que
-			// el objetivo se mide en cualquier nodo e indica si el agente llegó a su meta o no.. no nos desviemos
-			// Observa las salidas que te mandé. A veces hay enemigos y la variable "hayEnemigos" retorna falso!
-			// y encima conoce todo! no encuentro el error!
-			/*
-			boolean condicion1 = conoceTodo && !hayAlimentos && !hayEnemigos;
-			boolean condicion2 = conoceTodo && hayAlimentos && !convieneMoverse && !paradoSobreAlimento;
-			boolean condicion3 = conoceTodo && hayEnemigos && !hayAlimentos && !convienePelear;
-			
-			boolean cumplio1 = conoceTodo && !convieneMoverse;
-			boolean cumplio2 = conoceTodo && convieneMoverse && !hayAlimentos && !(hayEnemigos && convienePelear);
-			boolean cumplio3 = !conoceTodo && !convieneMoverse;
 
 			cumplio = (conoceTodo || !convieneMoverse) && (!hayAlimentos && (!hayEnemigos || !convienePelear));
-			*/
-			
+			//cumplio = conoceTodo && !hayAlimentos && !hayEnemigos;
+			/*
 			if (conoceTodo) {
 				if (convieneMoverse &&
 						(hayAlimentos ||
@@ -92,7 +57,7 @@ public class ObjetivoTP implements IObjetivo {
 					cumplio = true;
 				}
 			}
-			
+			*/
 			if (cumplio) {
 				log.debug("Conviene pelear: "+convienePelear + " Conviene moverse: "+convieneMoverse +
 						" Conoce todo: "+conoceTodo + " Hay alimentos: "+hayAlimentos + " Hay enemigos: "+hayEnemigos);
