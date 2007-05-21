@@ -3,6 +3,7 @@ package tpsia.tp1.busqueda;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 import org.apache.log4j.Logger;
@@ -19,6 +20,7 @@ public abstract class Busqueda {
 	protected ArrayList<VisionAmbiente> estadosAlcanzadosAgente;
 	private static int VECES_EJECUTADA = 0;
 	public static Logger logxml;
+	public static Logger logLatex;
 	
 	/**
 	 * La función de evaluación representa, en:
@@ -48,9 +50,8 @@ public abstract class Busqueda {
 		ArrayList<Accion> listaAcciones;
 		PriorityQueue<Nodo> colaNodos;
 		ArrayList<VisionAmbiente> estadosAlcanzados;
+		LinkedList<Nodo> nodosSeleccionados = new LinkedList<Nodo>();
 
-
-		
 		Logger log = Logger.getLogger("Pacman.Busqueda" + ".ejecucion" + Integer.toString(VECES_EJECUTADA));
 		log.info("Buscar accion");
 		
@@ -59,6 +60,7 @@ public abstract class Busqueda {
 		estadosAlcanzados = new ArrayList<VisionAmbiente>();
 		raiz = new Nodo((Estado)this.estado.clone());
 		nodoActual = raiz;
+		nodosSeleccionados.add(raiz);
 		
 		/* Creo un ArrayList de estados ya alcanzados. El agente almacena estados
 		 * ya alcanzados también, pero esta es una copia local para realizar la búsqueda.
@@ -79,7 +81,6 @@ public abstract class Busqueda {
 		 * Mientras no se cumple el objetivo en el nodo actual, seguimos expandiendo.
 		 */
 		log.debug("Expandiendo nodo Inicial: " + nodoActual.getID());
-		boolean estadoAlcanzadoAgente;
 		boolean estadoAlcanzado;
 		
 		while ( ! this.objetivo.cumpleObjetivo(nodoActual) ) {
@@ -112,6 +113,7 @@ public abstract class Busqueda {
 			
 			if (!colaNodos.isEmpty()) {
 				nodoActual = colaNodos.remove();
+				nodosSeleccionados.add(nodoActual);
 				log.debug("Nodo a expandir: " + nodoActual.getID()  + " hijo de "+ nodoActual.getPadre().getID());
 				log.debug(nodoActual.getEstado().getAmbiente());
 			} else {
@@ -146,6 +148,10 @@ public abstract class Busqueda {
 			logxml.debug("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
 			raiz.toXML();
 		}
+		
+		logLatex = Logger.getLogger("Pacman.Busqueda.ejecucion" + Integer.toString(VECES_EJECUTADA) + ".tex");
+		Busqueda.toDocumentLatex(nodosSeleccionados, 16);
+		
 		return listaAcciones;
 	}
 	
@@ -163,5 +169,89 @@ public abstract class Busqueda {
 		}
 		
 		return nodosExpandir;
+	}
+	
+	public static void toDocumentLatex(LinkedList<Nodo> nodosSeleccionados, int niveles) {
+		
+		/* Salida para latex (genera un arbol usando el paquete qtree). El siguiente código
+		 * genera el documento completo para compilar. Sólo hay que disponer de los paquetes
+		 * necesarios. Debido a la forma en que dibuja, no es muy útil si se incluyen muchos
+		 * niveles (ver método toLatex de la clase Nodo). */
+		
+		// Clase del documento y opciones generales
+		Busqueda.logLatex.debug("\\documentclass[a0,landscale]{a0poster}");
+		
+		// Paquetes utilizados
+		Busqueda.logLatex.debug("\\usepackage{mathptmx}");
+		Busqueda.logLatex.debug("\\usepackage[scaled=.90]{helvet}");
+		Busqueda.logLatex.debug("\\usepackage{courier}");
+		Busqueda.logLatex.debug("\\usepackage{qtree}");
+		Busqueda.logLatex.debug("\\usepackage{estilo}");
+		Busqueda.logLatex.debug("\\usepackage[spanish]{babel}");
+		Busqueda.logLatex.debug("\\usepackage[utf8]{inputenc}");
+		
+		Busqueda.logLatex.debug("\\title{Árbol de ejecución - Estrategia A*}");
+		Busqueda.logLatex.debug("\\author{}");
+		Busqueda.logLatex.debug("\\begin{document}");
+		Busqueda.logLatex.debug("\\maketitle");
+		
+		StringBuffer sf = new StringBuffer();
+		int cuentaArboles = 0;
+		int nivelesProcesados = 0;
+		
+		for (Nodo unNodo : nodosSeleccionados) {
+			if (cuentaArboles == 0)
+				sf.append("\\begin{figure}[h]\n");
+			
+			sf.append("\\Tree " + unNodo.toQtree() + "\n");
+			cuentaArboles++;
+
+			if (cuentaArboles == 4) {
+				cuentaArboles = 0;
+				sf.append("\\end{figure}\n");
+			}
+			
+			nivelesProcesados++;
+			
+			if (nivelesProcesados >= niveles)
+				break;
+		}
+		
+		if (cuentaArboles > 0)
+			sf.append("\\end{figure}");
+		
+		sf.append("\n");
+		
+		Busqueda.logLatex.debug(sf.toString());
+		
+//		StringBuffer sf = new StringBuffer();
+//		
+//		// Datos de éste nodo
+//		sf.append("\\Tree [.\\nodo"
+//				+ "{" + this.getID() + "}"
+//				+ "{" + this.getPrioridadExpansion() + "}"
+//				+ "{-} ");
+//		
+//		// Datos de sus hijos
+//		for (Nodo n : this.hijos) {
+//			sf.append("[.\\nodo"
+//				+ "{" + n.getID() + "}"
+//				+ "{" + n.getPrioridadExpansion() + "}"
+//				+ "{" + n.getAccionGeneradora().getTipoAccion() + "} ");
+//			
+//			// Datos de los hijos de los hijos
+//			//for (Nodo nn : n.hijos) {
+//			//	sf.append("[.\\nodo"
+//			//			+ "{" + nn.getID() + "}"
+//			//			+ "{" + nn.getPrioridadExpansion() + "}"
+//			//			+ "{" + nn.getAccionGeneradora().getTipoAccion() + "} ]");
+//			//}
+//			
+//			sf.append("]");
+//		}
+//		
+//		sf.append(" ]");
+		
+		Busqueda.logLatex.debug("\\end{document}");
 	}
 }

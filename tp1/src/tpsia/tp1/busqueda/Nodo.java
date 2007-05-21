@@ -1,6 +1,9 @@
 package tpsia.tp1.busqueda;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+
+import org.apache.log4j.Logger;
 
 import tpsia.tp1.EstadoCelda;
 import tpsia.tp1.Percepcion;
@@ -81,6 +84,7 @@ public class Nodo implements Comparable<Nodo> {
 		this.estadoNodo.actualizarEstado(p);
 		this.prioridadExpansion = algoritmo.calcularPrioridad(this);
 	}
+	
 	private void addHijo(Nodo nodo) {
 		this.hijos.add(nodo);		
 	}
@@ -150,8 +154,6 @@ public class Nodo implements Comparable<Nodo> {
 			return false;
 		}
 		
-
-		
 		if (!this.getEstado().getAmbiente().equals(
 				n.getEstado().getAmbiente())) {
 			return false;
@@ -171,6 +173,36 @@ public class Nodo implements Comparable<Nodo> {
 		}
 		Busqueda.logxml.debug("</hijos>");
 		Busqueda.logxml.debug("</nodo>");
+	}
+	
+	public String toQtree() {
+		
+		StringBuffer resultado = new StringBuffer();
+		
+		resultado.append("[." + this.toLatex() + " ");
+		
+		for (Nodo hijo : this.hijos) {
+			resultado.append(hijo.toLatex() + " ");
+		}
+		
+		resultado.append("]");
+		
+		return resultado.toString();
+	}
+	
+	private String toLatex() {
+		String resultado;
+		
+		resultado = "\\nodo"
+			+ "{" + this.getID() + "}"
+			+ "{" + this.getPrioridadExpansion() + "}";
+		
+		if (this.accionGeneradora != null)
+			resultado += "{" + this.getAccionGeneradora().getTipoAccion() + "}";
+		else
+			resultado += "{-}";
+		
+		return resultado;
 	}
 
 	public static String getLastId() {
