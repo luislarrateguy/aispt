@@ -31,18 +31,12 @@ public class ObjetivoTP implements IObjetivo {
 			cumplio = false;
 		} else {
 			
-			convienePelear = estado.getEnergia() >	estado.getPromedioVarEnergia(Pelear.getInstancia());
-			convieneMoverse = estado.getEnergia() >	estado.getPromedioVarEnergia(AvanzarAbajo.getInstancia());			
-			convienePelear = estado.getEnergia() >
-				estado.getPromedioVarEnergia(Pelear.getInstancia());
-				
-			convieneMoverse = estado.getEnergia() >
-				estado.getPromedioVarEnergia(AvanzarAbajo.getInstancia());	
+			convienePelear = (estado.getEnergia() +	estado.getPromedioVarEnergia(Pelear.getInstancia())) > 0;
+			convieneMoverse = (estado.getEnergia() + estado.getPromedioVarEnergia(AvanzarAbajo.getInstancia())) > 0;			
 				
 			conoceTodo = estado.getAmbiente().conoceTodo();
 			hayAlimentos = estado.getAmbiente().hayAlimentosSinComer();
 			hayEnemigos = estado.getAmbiente().hayEnemigosVivos();
-			paradoSobreAlimento = estado.getAmbiente().paradoSobreAlimento();
 			
 			/*
 			// Condicion del objetivo
