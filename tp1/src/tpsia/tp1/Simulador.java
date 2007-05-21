@@ -19,7 +19,6 @@
 
  */
 
-
 package tpsia.tp1;
 
 import java.util.Vector;
@@ -37,12 +36,12 @@ public class Simulador {
 	private AmbienteReal ambiente;
 	private Agente pacman;
 	private String busqueda;
-
-
+	
 	public Simulador() {
 		this.calculador = new CalculadorCustom("Grupo 28");
 		this.ambiente = new AmbienteReal();
 		this.busqueda = "aestrella";
+		
 		/* Inicializando Acciones para acelerar ejecución */
 		Pelear.getInstancia();
 		Comer.getInstancia();
@@ -51,6 +50,7 @@ public class Simulador {
 		AvanzarAbajo.getInstancia();
 		AvanzarIzquierda.getInstancia();
 	}
+	
 	public Simulador(String tipoBusqueda) {
 		this();
 		this.busqueda = tipoBusqueda;
@@ -111,11 +111,6 @@ public class Simulador {
 		Pair posicionPacMan 	= calculador.getPosicionInicial();
 		Vector posicionesComida = calculador.inicializarComida();
 		
-		/* FIXME: Esto no estaría bien. Tendría que haber un método
-		 * que retorne la energía inicial, ya que así le estamos quitando,
-		 * ¿o me equivoco? 
-		 * FIXME: Esto fue resuelto con la nueva clase?
-		 * */
 		int energiaPacman = calculador.calcularEnergiaPacMan();
 		
 		this.pacman = new Agente(energiaPacman,this.busqueda);
@@ -131,14 +126,7 @@ public class Simulador {
 	private boolean finSimulacion() {
 		Logger log = Logger.getLogger(Simulador.class);
 		log.debug("Chequeando si termina");
-		/* La condición lógica de abajo es equivalente a 
-		 * preguntar solamente si cumplióObjetivo o si murió
-		 * debido a leyes de lógica
-		 */
-		/*
-		return ( (this.pacman.cumplioObjetivo() && this.pacman.vivo()) ||
-				!this.pacman.vivo());
-		*/
+		
 		return !this.ambiente.agenteVivo() || this.pacman.cumplioObjetivo();
 	}
 	

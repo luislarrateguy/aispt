@@ -24,9 +24,6 @@ package tpsia.tp1.acciones;
 import tpsia.tp1.Ambiente;
 import tpsia.tp1.agente.Estado;
 
-/*
- * Singleton Notice
- */
 public abstract class Avanzar extends Accion {
 	
 	public abstract void ejecutar(Ambiente amb);
@@ -45,12 +42,7 @@ public abstract class Avanzar extends Accion {
 	@Override
 	public final boolean aplicable(Estado estado) {
 		// Verifico que el agente tenga energía suficiente para moverse
-		// Es esto una precondicion para que aplique? 
-		// si es así.. no deberíamos chequear ademas
-		// que si hay comida (en ese lugar) no aplique?
 		if (estado.getEnergia() + estado.getPromedioVarEnergia(this) > 0)
-//				&& !estado.getAmbiente().hayComida() 
-//				)
 			return true;
 		
 		return false;

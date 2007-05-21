@@ -24,9 +24,6 @@ package tpsia.tp1.acciones;
 import tpsia.tp1.Ambiente;
 import tpsia.tp1.agente.Estado;
 
-/*
- * Singleton Notice
- */
 public class Comer extends Accion {
 
 	private static Comer instancia;

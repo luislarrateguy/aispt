@@ -24,9 +24,6 @@ package tpsia.tp1.acciones;
 import tpsia.tp1.Ambiente;
 import tpsia.tp1.agente.Estado;
 
-/*
- * Singleton Notice
- */
 public class Pelear extends Accion {
 
 	private static Pelear instancia;
@@ -57,11 +54,8 @@ public class Pelear extends Accion {
 	@Override
 	public boolean aplicable(Estado estado) {
 		/* Verifico que exista un enemigo en la posición del agente, y que
-		 * haya energía suficiente para pelear. */
-		/*int[] posicionAgente = estado.getAmbiente().getPosicionPacman();
-		if (estado.getAmbiente().hayEnemigo(posicionAgente[0], posicionAgente[1])
-				&& (estado.getEnergia() + estado.getPromedioVarEnergia(this) > 0))
-			return true;*/
+		 * haya energía suficiente para pelear (para esto último se tiene en
+		 * cuenta una previsión). */
 		if (estado.getAmbiente().hayEnemigo() &&
 				(estado.getEnergia() + 
 						estado.getPromedioVarEnergia(Pelear.getInstancia())) > 3)

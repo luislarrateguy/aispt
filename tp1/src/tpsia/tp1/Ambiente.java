@@ -23,6 +23,8 @@ package tpsia.tp1;
 
 import java.util.Hashtable;
 
+import org.apache.log4j.Logger;
+
 
 public abstract class Ambiente implements Cloneable {
 	protected EstadoCelda[][] tablero;
@@ -76,7 +78,8 @@ public abstract class Ambiente implements Cloneable {
 		int y = this.posicionPacman[1];
 		
 		if (!this.hayEnemigo(x, y)) {
-			Logging.logError("El pacman intentó pelear contra un enemigo " +
+			Logger log = Logger.getLogger("Ambiente");
+			log.fatal("El pacman intentó pelear contra un enemigo " +
 					"que no existe en (" + x + "," + y + ")");
 			
 			return;
@@ -90,7 +93,8 @@ public abstract class Ambiente implements Cloneable {
 		int y = this.posicionPacman[1];
 		
 		if (!this.hayComida(x, y)) {
-			Logging.logError("El pacman intentó comer comida que no existe en (" +
+			Logger log = Logger.getLogger("Ambiente");
+			log.fatal("El pacman intentó comer comida que no existe en (" +
 					x + "," + y + ")");
 			
 			return;
@@ -124,13 +128,13 @@ public abstract class Ambiente implements Cloneable {
 	public String toString() {
 		return this.draw();
 	}
+	
 	public String draw() {
 		return draw(false);
 	}
+	
 	public String draw(boolean p) {
 		String cuadro = new String("\n[ ]  0   1   2   3 ->X\n");
-		
-		
 		
 		for (int j=0;j<4;j++) {
 			cuadro += "  "+Integer.toString(j)+" ";
@@ -178,7 +182,7 @@ public abstract class Ambiente implements Cloneable {
 		
 		Ambiente a = (Ambiente)o;
 		
-		// ¿Es igual el tablero de juego?
+		// Chequeamos si el tablero de juego es igual
 		for (int i=0;i<4;i++) {
 			for (int j=0;j<4;j++) {
 				if (this.tablero[i][j] != a.tablero[i][j])
@@ -186,31 +190,11 @@ public abstract class Ambiente implements Cloneable {
 			}
 		}
 		
-		// ¿Es igual la posición del pacman?
-		// Esto lo paso a comparación en estado
-		// Debido a que un espacio es repetido solo si no agrega informacion
-		// sin importar la posición de pacman.
-		
+		// Chequeo si la posición del pacman es igual
 		if (this.posicionPacman[0] != a.posicionPacman[0] ||
 				this.posicionPacman[1] != a.posicionPacman[1])
 			return false;
 		
 		return true;
-	}
-	/**
-	 * No debería ir sólo en visionambiente?
-	 * @return
-	 */
-	public int cantidadCeldasDesconocidas() {
-		int cant = 0;
-		
-		for (int i=0;i<4;i++) {
-			for (int j=0;j<4;j++) {
-				if (this.tablero[i][j] == EstadoCelda.Desconocida)
-					cant++;
-			}
-		}
-		
-		return cant;
 	}
 }

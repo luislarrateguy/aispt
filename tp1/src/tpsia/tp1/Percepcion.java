@@ -27,9 +27,7 @@ public class Percepcion {
 	private int energia;
 	private int posX;
 	private int posY;
-
-
-
+	
 	public Percepcion(EstadoCelda[] ady, int e, 
 			int[] posIniPacman) {
 		

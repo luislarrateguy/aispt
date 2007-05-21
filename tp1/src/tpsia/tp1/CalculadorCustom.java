@@ -1,3 +1,24 @@
+/*
+
+ Copyright (c) 2007 by Luis I. Larrateguy y Milton Pividori
+ All Rights Reserved
+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+ */
+
 package tpsia.tp1;
 
 import java.util.Vector;
@@ -5,9 +26,6 @@ import java.util.Vector;
 import calculador.Calculador;
 import calculador.Pair;
 
-/* jeje muy groso estuviste con esto 
- * se me ocurrió lo mismo por eso te digo groso jajaja
- */
 public class CalculadorCustom extends Calculador {
 	private final int[] POSICION_INICIAL = {1,3};
 	private final int[] POSICION_COMIDAS = {
@@ -32,7 +50,7 @@ public class CalculadorCustom extends Calculador {
 	/** Energía que gana el pacman por alimento. */
 	private final int ENERGIA_COMIDA = 5;
 	/** Energía que pierde el pacman por pelear. */
-	private final int ENERGIA_ENEMIGO = 10;
+	private final int ENERGIA_ENEMIGO = 5;
 	/** Energía que pierde el pacman por moverse. */
 	private final int ENERGIA_MOVIMIENTO = 1;
 	
