@@ -67,8 +67,9 @@ public class Main {
             	busqueda = args[1];
         		debugFile = args[0];
             }
+        	return true;
         }
-        return true;
+        return false;
     }
 
 	private static void mostrarAyuda() {
