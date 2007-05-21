@@ -67,14 +67,10 @@ public class Estado implements Cloneable {
 		this.ultimaAccionEjecutada = null;
 		
 		this.promedios = new float[Accion.getAcciones().size()];
-		this.promedios[0] = 0;
-		this.promedios[1] = 0;
-		this.promedios[2] = 0;
+		this.promedios[Comer.getInstancia().getIdentificador()] = 1;
+		this.promedios[Pelear.getInstancia().getIdentificador()] = -1;
 
 		this.vecesEjecutada = new int[Accion.getAcciones().size()];
-		this.vecesEjecutada[0] = 0;
-		this.vecesEjecutada[1] = 0;
-		this.vecesEjecutada[2] = 0;
 		
 		this.visionAmbiente = new VisionAmbiente();
 	}

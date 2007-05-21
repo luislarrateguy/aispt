@@ -19,4 +19,10 @@ public class BusquedaAvara extends Busqueda {
 		return heuristica;
 	}
 
+	@Override
+	protected String nombreEstrategia() {
+		// TODO Auto-generated method stub
+		return "Avara";
+	}
+
 }

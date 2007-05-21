@@ -45,4 +45,10 @@ public class BusquedaProfundidad extends Busqueda {
 		 */
 		return (unNodo.getPadre().getPrioridadExpansion() - unNodo.getAccionGeneradora().getCosto());
 	}
+
+	@Override
+	protected String nombreEstrategia() {
+		// TODO Auto-generated method stub
+		return "Profundidad";
+	}
 }

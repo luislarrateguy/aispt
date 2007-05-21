@@ -33,4 +33,9 @@ public class BusquedaAEstrella extends Busqueda {
 		/* Retorno el valor de la función de evaluación = costo + heuristica */
 		return (costo + heuristica1);
 	}
+
+	@Override
+	protected String nombreEstrategia() {
+		return "A*";
+	}
 }

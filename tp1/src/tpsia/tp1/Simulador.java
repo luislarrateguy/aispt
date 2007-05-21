@@ -67,6 +67,7 @@ public class Simulador {
 		Logger log = Logger.getLogger(Simulador.class);
 		
 		log.info("Iniciando simulación...");
+		log.info("Utilizando estrategia: " + this.busqueda);
 		this.inicializarSimulacion();
 
 		Accion a;

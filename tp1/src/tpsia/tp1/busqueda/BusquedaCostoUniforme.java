@@ -40,4 +40,10 @@ public class BusquedaCostoUniforme extends Busqueda {
 	protected float calcularPrioridad(Nodo unNodo) {
 		return (unNodo.getPadre().getPrioridadExpansion() + unNodo.getAccionGeneradora().getCosto());
 	}
+
+	@Override
+	protected String nombreEstrategia() {
+		// TODO Auto-generated method stub
+		return "Costo Uniforme";
+	}
 }

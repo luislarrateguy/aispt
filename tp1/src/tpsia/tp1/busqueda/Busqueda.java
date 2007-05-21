@@ -31,6 +31,7 @@ public abstract class Busqueda {
 	 * @return
 	 */
 	protected abstract float calcularPrioridad(Nodo unNodo);
+	protected abstract String nombreEstrategia();
 	
 	public Busqueda(Estado estado, IObjetivo objetivo, ArrayList<VisionAmbiente> estados) {
 		this.estado = estado;
@@ -147,7 +148,7 @@ public abstract class Busqueda {
 		}
 		
 		logLatex = Logger.getLogger("Pacman.Busqueda.ejecucion" + Integer.toString(VECES_EJECUTADA) + ".tex");
-		Busqueda.toDocumentLatex(nodosSeleccionados, 16);
+		this.toDocumentLatex(nodosSeleccionados, 16);
 		
 		return listaAcciones;
 	}
@@ -168,7 +169,7 @@ public abstract class Busqueda {
 		return nodosExpandir;
 	}
 	
-	public static void toDocumentLatex(LinkedList<Nodo> nodosSeleccionados, int niveles) {
+	private void toDocumentLatex(LinkedList<Nodo> nodosSeleccionados, int niveles) {
 		
 		/* Salida para latex (genera un arbol usando el paquete qtree). El siguiente código
 		 * genera el documento completo para compilar. Sólo hay que disponer de los paquetes
@@ -183,11 +184,11 @@ public abstract class Busqueda {
 		Busqueda.logLatex.debug("\\usepackage[scaled=.90]{helvet}");
 		Busqueda.logLatex.debug("\\usepackage{courier}");
 		Busqueda.logLatex.debug("\\usepackage{qtree}");
-		Busqueda.logLatex.debug("\\usepackage{estilo}");
+		Busqueda.logLatex.debug("\\usepackage{nodo}");
 		Busqueda.logLatex.debug("\\usepackage[spanish]{babel}");
 		Busqueda.logLatex.debug("\\usepackage[utf8]{inputenc}");
 		
-		Busqueda.logLatex.debug("\\title{Árbol de ejecución - Estrategia A*}");
+		Busqueda.logLatex.debug("\\title{Árbol de ejecución - Estrategia: " + this.nombreEstrategia() + "}");
 		Busqueda.logLatex.debug("\\author{}");
 		Busqueda.logLatex.debug("\\begin{document}");
 		Busqueda.logLatex.debug("\\maketitle");

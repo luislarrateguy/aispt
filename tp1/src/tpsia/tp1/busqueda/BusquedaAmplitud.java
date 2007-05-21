@@ -18,4 +18,10 @@ public class BusquedaAmplitud extends Busqueda {
 		return (unNodo.getPadre().getPrioridadExpansion() + 1);
 	}
 
+	@Override
+	protected String nombreEstrategia() {
+		// TODO Auto-generated method stub
+		return "Amplitud";
+	}
+
 }
