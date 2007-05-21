@@ -39,7 +39,7 @@ public abstract class Avanzar extends Accion {
 	
 	@Override
 	public final int getCosto() {
-		return 50;
+		return 60;
 	}
 	
 	@Override

@@ -43,7 +43,7 @@ public class Comer extends Accion {
 	
 	@Override
 	public int getCosto() {
-		return 30;
+		return 20;
 	}
 
 	static public Accion getInstancia() {

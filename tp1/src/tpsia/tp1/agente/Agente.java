@@ -66,6 +66,7 @@ public class Agente {
 		
 		log.info("Se decidió la acción: " + a.getTipoAccion());
 		this.estado.ejecutarAccion(a);
+		this.estadosAlcanzados.add(this.estado.getAmbiente());
 		
 		this.cumplioObjetivo = this.objetivo.cumpleObjetivo(this.estado);
 		return a;

@@ -73,8 +73,7 @@ public abstract class Busqueda {
 		//estadosAlcanzados = (ArrayList<VisionAmbiente>) this.estadosAlcanzadosAgente.clone();
 		
 		log.debug("Estoy buscando. Nodo actual:");
-		estadosAlcanzados.add(nodoActual.getEstado().getAmbiente());
-		estadosAlcanzados.addAll((ArrayList<VisionAmbiente>) this.estadosAlcanzadosAgente.clone());
+		estadosAlcanzados.addAll((ArrayList<VisionAmbiente>) this.estadosAlcanzadosAgente);
 		/*
 		 * Mientras no se cumple el objetivo en el nodo actual, seguimos expandiendo.
 		 */
