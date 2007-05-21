@@ -1,7 +1,7 @@
 package tpsia.tp1.busqueda;
 
 import java.util.ArrayList;
-import tpsia.tp1.busqueda.*;
+
 import tpsia.tp1.agente.Estado;
 import tpsia.tp1.agente.IObjetivo;
 import tpsia.tp1.agente.VisionAmbiente;

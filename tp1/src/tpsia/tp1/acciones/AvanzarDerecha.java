@@ -23,7 +23,6 @@ package tpsia.tp1.acciones;
 
 import tpsia.tp1.Ambiente;
 import tpsia.tp1.Offset;
-import tpsia.tp1.agente.Estado;
 
 public class AvanzarDerecha extends Avanzar {
 
@@ -32,6 +31,7 @@ public class AvanzarDerecha extends Avanzar {
 	private AvanzarDerecha() {
 	}
 
+	@Override
 	public void ejecutar(Ambiente amb) {
 		amb.mover(Offset.Derecha);
 	}

@@ -22,9 +22,7 @@
 package tpsia.tp1.busqueda;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
-import tpsia.tp1.acciones.Accion;
 import tpsia.tp1.agente.Estado;
 import tpsia.tp1.agente.IObjetivo;
 import tpsia.tp1.agente.VisionAmbiente;

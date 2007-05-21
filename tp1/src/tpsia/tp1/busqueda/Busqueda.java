@@ -2,14 +2,12 @@ package tpsia.tp1.busqueda;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 import org.apache.log4j.Logger;
 
 import tpsia.tp1.acciones.Accion;
-import tpsia.tp1.acciones.NoAccion;
 import tpsia.tp1.agente.Estado;
 import tpsia.tp1.agente.IObjetivo;
 import tpsia.tp1.agente.VisionAmbiente;
@@ -98,7 +96,7 @@ public abstract class Busqueda {
 				for (Nodo n : nodosExpandir) {
 					/* Vemos si el nodo expandido ya fue inspeccionado. */
 						estadoAlcanzado = estadosAlcanzados.contains(n.getEstado().getAmbiente());
-						if (!estadoAlcanzado ) {
+						if (!estadoAlcanzado) {
 							/* Agrego el nodo expandido a la lista de nodos ya inspeccionados. */
 							estadosAlcanzados.add(n.getEstado().getAmbiente());
 							colaNodos.add(n);
@@ -137,8 +135,8 @@ public abstract class Busqueda {
 		log.info("Cantidad de nodos generados: " + Nodo.getLastId());
 		/* Si la lista de acciones es vacía, entonces ninguna acción fue necesaria, y el
 		 * nodo ya se encuenta en un estado objetivo. */
-		if (listaAcciones.isEmpty())
-			listaAcciones.add(NoAccion.getInstancia());
+		//if (listaAcciones.isEmpty())
+			//listaAcciones.add(NoAccion.getInstancia());
 		
 		/* Salida jerárquica del árbol de búsqueda */
 		

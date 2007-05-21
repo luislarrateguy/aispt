@@ -40,7 +40,7 @@ public class Simulador {
 
 
 	public Simulador() {
-		this.calculador = new Calculador("Grupo 28");
+		this.calculador = new CalculadorCustom("Grupo 28");
 		this.ambiente = new AmbienteReal();
 		this.busqueda = "aestrella";
 		/* Inicializando Acciones para acelerar ejecución */
@@ -50,7 +50,6 @@ public class Simulador {
 		AvanzarDerecha.getInstancia();
 		AvanzarAbajo.getInstancia();
 		AvanzarIzquierda.getInstancia();
-		NoAccion.getInstancia();
 	}
 	public Simulador(String tipoBusqueda) {
 		this();
@@ -82,8 +81,6 @@ public class Simulador {
 			log.debug("Enviando percepcion a Pacman");
 			
 			a = pacman.actuar(p);
-			if (a.getClass().equals(NoAccion.class))
-				break;
 		
 			// avisar al calculador
 			log.debug("Calculando energia pacman");

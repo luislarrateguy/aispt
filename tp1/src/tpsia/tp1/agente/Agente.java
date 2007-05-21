@@ -23,12 +23,12 @@ package tpsia.tp1.agente;
 
 import java.util.ArrayList;
 
-import org.apache.log4j.*;
-import tpsia.tp1.Logging;
+import org.apache.log4j.Logger;
+
 import tpsia.tp1.Percepcion;
 import tpsia.tp1.acciones.Accion;
-import tpsia.tp1.acciones.NoAccion;
-import tpsia.tp1.busqueda.*;
+import tpsia.tp1.busqueda.Busqueda;
+import tpsia.tp1.busqueda.BusquedaFactory;
 
 public class Agente {
 
@@ -65,10 +65,8 @@ public class Agente {
 		Accion a = this.acciones.get(this.acciones.size() - 1);
 		
 		log.info("Se decidió la acción: " + a.getTipoAccion());
-		if (!a.getClass().equals(NoAccion.class)) {
-			this.estado.ejecutarAccion(a);
-			this.estadosAlcanzados.add(this.estado.getAmbiente());
-		}
+		this.estado.ejecutarAccion(a);
+		
 		this.cumplioObjetivo = this.objetivo.cumpleObjetivo(this.estado);
 		return a;
 	}

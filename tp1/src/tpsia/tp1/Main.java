@@ -21,8 +21,8 @@
 
 package tpsia.tp1;
 
-import org.apache.log4j.*;
-import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 public class Main {
 

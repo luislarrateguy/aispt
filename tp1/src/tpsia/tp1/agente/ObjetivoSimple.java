@@ -2,8 +2,6 @@ package tpsia.tp1.agente;
 
 import org.apache.log4j.Logger;
 
-import tpsia.tp1.acciones.AvanzarAbajo;
-import tpsia.tp1.acciones.Pelear;
 import tpsia.tp1.busqueda.Nodo;
 
 public class ObjetivoSimple implements IObjetivo {

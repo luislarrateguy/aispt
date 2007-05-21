@@ -1,14 +1,10 @@
 package tpsia.tp1.busqueda;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-
-import org.apache.log4j.Logger;
 
 import tpsia.tp1.EstadoCelda;
 import tpsia.tp1.Percepcion;
 import tpsia.tp1.acciones.Accion;
-import tpsia.tp1.acciones.Pelear;
 import tpsia.tp1.agente.Estado;
 import tpsia.tp1.agente.VisionAmbiente;
 
@@ -87,28 +83,6 @@ public class Nodo implements Comparable<Nodo> {
 	
 	private void addHijo(Nodo nodo) {
 		this.hijos.add(nodo);		
-	}
-
-	/**
-	 * @deprecated
-	 * @param c
-	 * @param accion
-	 * @param var
-	 * @return
-	 */
-	private float calcularCosto(float c, Accion accion, float var) {
-		float aux;
-		//TODO: No se esta usando nunca!
-		/* Si no sabe lo que es pelear, que se arriesgue.
-		 * Para eso le asigno un costo un poco menor que la comida. 
-		 * var es la variancia */
-		if (accion == Pelear.getInstancia() && 
-				var == 0.0) {
-			aux = (float) (c + 0.5);
-		} else {
-			aux = c + accion.getCosto() * ((var < 0)? 2 : 1) ;
-		}
-		return aux;
 	}
 
 	public int compareTo(Nodo arg0) {

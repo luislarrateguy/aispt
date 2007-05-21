@@ -21,9 +21,11 @@
 
 package tpsia.tp1.agente;
 
-import java.util.Hashtable;
 import tpsia.tp1.Percepcion;
-import tpsia.tp1.acciones.*;
+import tpsia.tp1.acciones.Accion;
+import tpsia.tp1.acciones.AvanzarAbajo;
+import tpsia.tp1.acciones.Comer;
+import tpsia.tp1.acciones.Pelear;
 import tpsia.tp1.busqueda.Busqueda;
 
 public class Estado implements Cloneable {

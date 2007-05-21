@@ -18,16 +18,19 @@ public class CalculadorCustom extends Calculador {
 	
 	private final int[] POSICION_ENEMIGOS = {
 			2,0,
-			0,3
+			0,3,
+			3,1,
+			3,2,
+			3,3
 	};
 	
 	/** Energía inicial del pacman. */
-	private final int ENERGIA_INICIAL = 7;
+	private final int ENERGIA_INICIAL = 20;
 	
 	/** Energía que gana el pacman por alimento. */
-	private final int ENERGIA_COMIDA = 4;
+	private final int ENERGIA_COMIDA = 5;
 	/** Energía que pierde el pacman por pelear. */
-	private final int ENERGIA_ENEMIGO = 4;
+	private final int ENERGIA_ENEMIGO = 10;
 	/** Energía que pierde el pacman por moverse. */
 	private final int ENERGIA_MOVIMIENTO = 1;
 	
@@ -41,6 +44,7 @@ public class CalculadorCustom extends Calculador {
 		this();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public CalculadorCustom() {
 		this.energiaPacman = ENERGIA_INICIAL;
 		

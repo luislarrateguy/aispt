@@ -22,7 +22,7 @@ public class ObjetivoTP implements IObjetivo {
 	
 	public boolean cumpleObjetivo(Estado estado) {
 		boolean cumplio = false;
-		boolean convienePelear,convieneMoverse,conoceTodo,hayAlimentos,hayEnemigos,paradoSobreAlimento;
+		boolean convienePelear,convieneMoverse,conoceTodo,hayAlimentos,hayEnemigos;
 		
 		Logger log = Logger.getLogger("Pacman.Busqueda.Objetivo");
 		
