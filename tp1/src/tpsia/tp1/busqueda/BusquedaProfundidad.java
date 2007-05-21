@@ -35,7 +35,7 @@ public class BusquedaProfundidad extends Busqueda {
 
 	@Override
 	protected float calcularPrioridad(Nodo unNodo) {
-		/* ESTE CÓDIGO NO ESTA PROBADO
+		/* 
 		 * Una estrategia de búsqueda en profundidad utiliza una pila, no una cola.
 		 * Sin embargo según nuestro diseño, la clase Busqueda implementa una cola
 		 * de prioridad, y esta debería ser utilizada por todas las clases (estrategias)
@@ -48,7 +48,6 @@ public class BusquedaProfundidad extends Busqueda {
 
 	@Override
 	protected String nombreEstrategia() {
-		// TODO Auto-generated method stub
 		return "Profundidad";
 	}
 }

@@ -75,6 +75,12 @@ public class Estado implements Cloneable {
 		this.visionAmbiente = new VisionAmbiente();
 	}
 	
+	/**
+	 * Ejecuta la Accion a
+	 * Hace uso del patrón Strategy, implementado para que las acciones
+	 * se puedan ejecutar sobre cualquier clase Ambiente (y especializaciones)
+	 * @param a
+	 */
 	public void ejecutarAccion(Accion a) {
 		try {
 			a.ejecutar(this.visionAmbiente);
@@ -118,14 +124,14 @@ public class Estado implements Cloneable {
 		this.visionAmbiente.actualizar(p);
 		
 		/* Cálculo de los promedios
-		 * ultimaAccionEjecutada posee la última acción que el agente ejecutó :)
+		 * ultimaAccionEjecutada posee la última acción que el agente ejecutó
 		 * Si es igual a null es porque nunca ejecutó una acción antes, por lo tanto
 		 * no hay promedios que calcular.
-		 * NACHO dice: Por que la seteas a null entonces luego de calcular un promedio??
 		 */
 		if (this.ultimaAccionEjecutada != null) {
 			/* Variacion positiva significa PERDIDA
 			 * Variación negativa significa GANANCIA
+			 * Diferencia de energía percibida y energia conocida. 
 			 */
 			int diferenciaEnergia = p.getEnergia() - this.energia;
 			
@@ -170,6 +176,12 @@ public class Estado implements Cloneable {
 		return energia;
 	}
 	
+	/**
+	 * Dada una acción, obtengo el promedio de variacion de energia causado
+	 * por dicha acción
+	 * @param a
+	 * @return
+	 */
 	public float getPromedioVarEnergia(Accion a) {
 		return this.promedios[a.getIdentificador()];
 	}

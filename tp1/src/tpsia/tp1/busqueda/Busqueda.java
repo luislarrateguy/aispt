@@ -1,3 +1,23 @@
+/*
+
+ Copyright (c) 2007 by Luis I. Larrateguy y Milton Pividori
+ All Rights Reserved
+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+ */
 package tpsia.tp1.busqueda;
 
 import java.util.ArrayList;
@@ -16,6 +36,8 @@ public abstract class Busqueda {
 	protected Estado estado;
 	protected IObjetivo objetivo;
 	protected ArrayList<VisionAmbiente> estadosAlcanzadosAgente;
+	
+	/** Sólo usada para debugging */
 	private static int VECES_EJECUTADA = 0;
 	public static Logger logxml;
 	public static Logger logLatex;
@@ -25,7 +47,7 @@ public abstract class Busqueda {
 	 * - Estrategia de amplitud: costo (nodo padre + 1)
 	 * - Estrategia de costo uniforme: costo (nodo padre + costo acción)
 	 * - Estrategia A*: costo (costouniforme + heurística)
-	 * - etc...
+	 * - etc... (ver cada clase)
 	 * @param padre
 	 * @param accionGeneradora
 	 * @return
@@ -49,6 +71,8 @@ public abstract class Busqueda {
 		ArrayList<Accion> listaAcciones;
 		PriorityQueue<Nodo> colaNodos;
 		ArrayList<VisionAmbiente> estadosAlcanzados;
+		
+		/* Unicamente utilizada para mostrar la salida en latex (debugger) */
 		LinkedList<Nodo> nodosSeleccionados = new LinkedList<Nodo>();
 
 		Logger log = Logger.getLogger("Pacman.Busqueda" + ".ejecucion" + Integer.toString(VECES_EJECUTADA));
@@ -119,9 +143,6 @@ public abstract class Busqueda {
 			}
 		}
 		
-		/* FIXME: Hubo un problema cuando lo ejecuté una vez a en este punto.
-		 * Devolvío NoAccion.
-		 */
 		/* nodoActual es un nodo que cumple con el objetivo. Entonces agregamos
 		 * a la lista de acciones a devolver las acciones que fueron necesarias
 		 * para llegar a este nodo objetivo. Notar que la lista de acciones está
@@ -133,29 +154,28 @@ public abstract class Busqueda {
 		log.info("Llegaré a mi objetivo si ejecuto esta secuencia de acciones");
 		log.info("ultima->primera"+listaAcciones);
 		log.info("Cantidad de nodos generados: " + Nodo.getLastId());
-		/* Si la lista de acciones es vacía, entonces ninguna acción fue necesaria, y el
-		 * nodo ya se encuenta en un estado objetivo. */
-		//if (listaAcciones.isEmpty())
-			//listaAcciones.add(NoAccion.getInstancia());
 		
 		/* Salida jerárquica del árbol de búsqueda */
+		logxml =  Logger.getLogger("Pacman.Busqueda.ejecucion" + Integer.toString(VECES_EJECUTADA)+".xml");
+		logLatex = Logger.getLogger("Pacman.Busqueda.ejecucion" + Integer.toString(VECES_EJECUTADA) + ".tex");
 		
-		logxml =  Logger.getLogger("Pacman.Busqueda" + ".ejecucion" + Integer.toString(VECES_EJECUTADA)+".xml");
-		// SI hago esto mejor la velocidad, ya que no se efectua la llamada recursiva.
+		/* Mejora para la velocidad de ejecución si no corresponde debugging */
 		if (logxml.isDebugEnabled()) {
 			logxml.debug("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
 			raiz.toXML();
 		}
-		
-		logLatex = Logger.getLogger("Pacman.Busqueda.ejecucion" + Integer.toString(VECES_EJECUTADA) + ".tex");
-		this.toDocumentLatex(nodosSeleccionados, 16);
-		
+		if (logxml.isDebugEnabled()) {
+			this.toDocumentLatex(nodosSeleccionados, 16);
+		}
+			
 		return listaAcciones;
 	}
 	
 	private Collection<Nodo> expandir(Nodo unNodo) {
 		ArrayList<Nodo> nodosExpandir = new ArrayList<Nodo>();
-		Logger log = Logger.getLogger("Pacman.Busqueda" + ".ejecucion" + Integer.toString(VECES_EJECUTADA));
+		Logger log = Logger.getLogger("Pacman.Busqueda" + ".ejecucion" 
+				+ Integer.toString(VECES_EJECUTADA));
+		
 		/* Expando el nodo unNodo sólo si se cumple la precondición de cada
 		 * acción. */
 		for(Accion a : Accion.getAcciones()) {
@@ -171,10 +191,11 @@ public abstract class Busqueda {
 	
 	private void toDocumentLatex(LinkedList<Nodo> nodosSeleccionados, int niveles) {
 		
-		/* Salida para latex (genera un arbol usando el paquete qtree). El siguiente código
-		 * genera el documento completo para compilar. Sólo hay que disponer de los paquetes
-		 * necesarios. Debido a la forma en que dibuja, no es muy útil si se incluyen muchos
-		 * niveles (ver método toLatex de la clase Nodo). */
+		/* Salida para latex (genera un arbol usando el paquete qtree). El 
+		 * siguiente código genera el documento completo para compilar. Sólo 
+		 * hay que disponer de los paquetes necesarios. Debido a la forma en 
+		 * que dibuja, no es muy útil si se incluyen muchos niveles (ver método 
+		 * toLatex de la clase Nodo). */
 		
 		// Clase del documento y opciones generales
 		Busqueda.logLatex.debug("\\documentclass[a0,landscale]{a0poster}");
@@ -217,39 +238,8 @@ public abstract class Busqueda {
 		
 		if (cuentaArboles > 0)
 			sf.append("\\end{figure}");
-		
 		sf.append("\n");
-		
-		Busqueda.logLatex.debug(sf.toString());
-		
-//		StringBuffer sf = new StringBuffer();
-//		
-//		// Datos de éste nodo
-//		sf.append("\\Tree [.\\nodo"
-//				+ "{" + this.getID() + "}"
-//				+ "{" + this.getPrioridadExpansion() + "}"
-//				+ "{-} ");
-//		
-//		// Datos de sus hijos
-//		for (Nodo n : this.hijos) {
-//			sf.append("[.\\nodo"
-//				+ "{" + n.getID() + "}"
-//				+ "{" + n.getPrioridadExpansion() + "}"
-//				+ "{" + n.getAccionGeneradora().getTipoAccion() + "} ");
-//			
-//			// Datos de los hijos de los hijos
-//			//for (Nodo nn : n.hijos) {
-//			//	sf.append("[.\\nodo"
-//			//			+ "{" + nn.getID() + "}"
-//			//			+ "{" + nn.getPrioridadExpansion() + "}"
-//			//			+ "{" + nn.getAccionGeneradora().getTipoAccion() + "} ]");
-//			//}
-//			
-//			sf.append("]");
-//		}
-//		
-//		sf.append(" ]");
-		
+		Busqueda.logLatex.debug(sf.toString());		
 		Busqueda.logLatex.debug("\\end{document}");
 	}
 }

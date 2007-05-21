@@ -44,6 +44,11 @@ public class VisionAmbiente extends Ambiente {
 				this.tablero[i][j] = EstadoCelda.Desconocida;
 	}
 	
+	/**
+	 * Retorna verdadero si Pacman no tiene celda alguna
+	 * de la cual desconozca su estado.
+	 * @return
+	 */
 	public boolean conoceTodo() {
 		for (int i=0;i<4;i++) {
 			for (int j=0;j<4;j++) {
@@ -51,19 +56,13 @@ public class VisionAmbiente extends Ambiente {
 					return false;
 			}
 		}
-		
 		return true;
-	}
-	
-	public boolean paradoSobreAlimento() {
-		int x = this.posicionPacman[0];
-		int y = this.posicionPacman[1];
-		
-		return (this.tablero[x][y] == EstadoCelda.Comida);
 	}
 	
 	/**
 	 * Este método sólo tiene sentido si se conoce todo el ambiente.
+	 * Por lo tanto sólo se verifica si ya se evaluó a verdadero
+	 * conoceTodo().Ver ObjetivoTP()
 	 * @return
 	 */
 	public boolean hayAlimentosSinComer() {
@@ -79,6 +78,8 @@ public class VisionAmbiente extends Ambiente {
 	
 	/**
 	 * Este método sólo tiene sentido si se conoce todo el ambiente.
+	 * Por lo tanto sólo se verifica si ya se evaluó a verdadero
+	 * conoceTodo().Ver ObjetivoTP()
 	 * @return
 	 */
 	public boolean hayEnemigosVivos() {
@@ -150,11 +151,6 @@ public class VisionAmbiente extends Ambiente {
 		/* Le copio el tablero y la posición del agente (estado de la
 		 * clase Ambiente). */
 		this.copiarEstadoA(visionAmbienteClon);
-		
-		// Le copio el estado propio de VisionAmbiente
-		//Esto no va. Es un atributo de clase, o sea que afecta a todas las
-		//instancias. no hace falta copiarlo, ni se puede en realidad.
-		//visionAmbienteClon.first = this.first;
 		
 		return visionAmbienteClon;
 	}

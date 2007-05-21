@@ -40,28 +40,34 @@ public class Agente {
 	private boolean cumplioObjetivo;
 	private boolean tieneSolucion;
 	
+	/**
+	 * Crea un Agente.
+	 * Hace uso de BusquedaFactory para crear la búsqueda
+	 * y aprovecha la implementación del Patrón Strategy
+	 * sobre las Búsquedas para cambiar el comportamiento.
+	 * 
+	 * @param energiaInicial
+	 * @param tipoBusqueda
+	 */
 	public Agente(int energiaInicial, String tipoBusqueda) {
 		super();
 		this.tieneSolucion = true;
 		this.cumplioObjetivo = false;
 		this.estado = new Estado(energiaInicial);
 		this.objetivo = ObjetivoTP.getInstancia();
-//		this.objetivo = ObjetivoSimple.getInstancia();
 		this.estadosAlcanzados = new ArrayList<VisionAmbiente>();
-		// Selecciona y CTRL+SHIFT+C
-		this.busqueda = BusquedaFactory.Create(tipoBusqueda,this.estado, this.objetivo, this.estadosAlcanzados);
-
+		this.busqueda = BusquedaFactory.Create(tipoBusqueda,this.estado, 
+				this.objetivo, this.estadosAlcanzados);
 	}
 
 	public Accion actuar(Percepcion p) {
 		Logger log = Logger.getLogger(Agente.class);
 		log.debug("Percepción recibida. Actuando...");
+
 		this.estado.actualizarEstado(p);
 
 		log.info(this.estado.getAmbiente());
-		log.info("energia:" 
-			+ Integer.toString(this.estado.getEnergia()) + "");
-		
+		log.info("energia:" + Integer.toString(this.estado.getEnergia()));
 		
 		this.acciones = busqueda.buscarSolucion();
 		Accion a = null;
@@ -73,6 +79,10 @@ public class Agente {
 			this.estadosAlcanzados.add(this.estado.getAmbiente());
 			this.cumplioObjetivo = this.objetivo.cumpleObjetivo(this.estado);
 		} catch (Exception e) {
+			/* Si salto la excepcion debido a que la secuencia de acciones 
+			 * está vacía, entonces es porque no se encontró solución.
+			 * No se cumple el objetivo en ningún nodo.
+			 */
 			a = null;
 			this.tieneSolucion = false;
 			log.fatal("No se encontró solución que satisfaga el objetivo");

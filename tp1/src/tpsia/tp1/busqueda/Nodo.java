@@ -24,7 +24,7 @@ public class Nodo implements Comparable<Nodo> {
 	 * @param estado
 	 * @param prioridadExpansion
 	 */
-	public Nodo () {
+	private Nodo () {
 		super();
 		this.padre = null;
 		this.id = Nodo.GenID();
@@ -38,11 +38,6 @@ public class Nodo implements Comparable<Nodo> {
 		this.estadoNodo = estado;
 	}
 	
-	private static int GenID() {
-		LAST_ID++;
-		return LAST_ID;
-	}
-
 	public Nodo(Busqueda algoritmo, Nodo padre2, Accion accionGeneradora, float promVarEnergia) {
 		this();
 		this.padre = padre2;
@@ -60,9 +55,6 @@ public class Nodo implements Comparable<Nodo> {
 		
 		/* Actualizo el estado del nodo "enviándole una percepción", descubriendo como
 		 * vacías las celdas desconocidas. */
-		/* TODO: Se podría sacar a otro método o aplicar el patrón Factory para 
-		 * crear el objeto Percepcion, ya que su creacion aca complica la lectura
-		 * del resto del código de búsqueda */ 
 		VisionAmbiente visionAmbienteNodoActual = this.estadoNodo.getAmbiente();
 		EstadoCelda celdasAdyacentes[] = visionAmbienteNodoActual.getCeldasAdyacentes();
 		EstadoCelda nuevasCeldasAdyacentes[] = new EstadoCelda[4];
@@ -80,11 +72,20 @@ public class Nodo implements Comparable<Nodo> {
 		this.estadoNodo.actualizarEstado(p);
 		this.prioridadExpansion = algoritmo.calcularPrioridad(this);
 	}
+	/**
+	 * Sólo para mantener un ID único de cada nodo.
+	 * Utilizado para salidas de debugging.
+	 * @return
+	 */
+	private static int GenID() {
+		LAST_ID++;
+		return LAST_ID;
+	}
 	
 	private void addHijo(Nodo nodo) {
 		this.hijos.add(nodo);		
 	}
-
+	
 	public int compareTo(Nodo arg0) {
 		if (this.prioridadExpansion == arg0.prioridadExpansion)
 			return 0;
