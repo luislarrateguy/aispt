@@ -1,0 +1,39 @@
+\documentclass[a0,landscale]{a0poster}
+\usepackage{mathptmx}
+\usepackage[scaled=.90]{helvet}
+\usepackage{courier}
+\usepackage{qtree}
+\usepackage{nodo}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\title{Árbol de ejecución - Estrategia: A*}
+\author{}
+\begin{document}
+\maketitle
+\begin{figure}[h]
+\Tree [.\nodo{1}{0.0}{-} \nodo{2}{68.0}{arriba} \nodo{3}{68.0}{derecha} \nodo{4}{68.0}{abajo} \nodo{5}{68.0}{izquierda} ]
+\Tree [.\nodo{2}{68.0}{arriba} \nodo{6}{116.0}{pelear} \nodo{7}{134.0}{arriba} \nodo{8}{134.0}{derecha} \nodo{9}{136.0}{abajo} \nodo{10}{134.0}{izquierda} ]
+\Tree [.\nodo{5}{68.0}{izquierda} \nodo{11}{134.0}{arriba} \nodo{12}{136.0}{derecha} \nodo{13}{134.0}{abajo} \nodo{14}{134.0}{izquierda} ]
+\Tree [.\nodo{3}{68.0}{derecha} \nodo{15}{134.0}{arriba} \nodo{16}{134.0}{derecha} \nodo{17}{134.0}{abajo} \nodo{18}{136.0}{izquierda} ]
+\end{figure}
+\begin{figure}[h]
+\Tree [.\nodo{4}{68.0}{abajo} \nodo{19}{96.0}{comer} \nodo{20}{136.0}{arriba} \nodo{21}{134.0}{derecha} \nodo{22}{134.0}{abajo} \nodo{23}{134.0}{izquierda} ]
+\Tree [.\nodo{19}{96.0}{comer} \nodo{24}{164.0}{arriba} \nodo{25}{162.0}{derecha} \nodo{26}{162.0}{abajo} \nodo{27}{162.0}{izquierda} ]
+\Tree [.\nodo{6}{116.0}{pelear} \nodo{28}{182.0}{arriba} \nodo{29}{182.0}{derecha} \nodo{30}{184.0}{abajo} \nodo{31}{182.0}{izquierda} ]
+\Tree [.\nodo{10}{134.0}{izquierda} \nodo{32}{198.0}{arriba} \nodo{33}{200.0}{derecha} \nodo{34}{198.0}{abajo} \nodo{35}{198.0}{izquierda} ]
+\end{figure}
+\begin{figure}[h]
+\Tree [.\nodo{11}{134.0}{arriba} \nodo{36}{198.0}{arriba} \nodo{37}{198.0}{derecha} \nodo{38}{200.0}{abajo} \nodo{39}{198.0}{izquierda} ]
+\Tree [.\nodo{21}{134.0}{derecha} \nodo{40}{198.0}{arriba} \nodo{41}{198.0}{derecha} \nodo{42}{198.0}{abajo} \nodo{43}{200.0}{izquierda} ]
+\Tree [.\nodo{22}{134.0}{abajo} \nodo{44}{200.0}{arriba} \nodo{45}{198.0}{derecha} \nodo{46}{198.0}{abajo} \nodo{47}{198.0}{izquierda} ]
+\Tree [.\nodo{23}{134.0}{izquierda} \nodo{48}{198.0}{arriba} \nodo{49}{200.0}{derecha} \nodo{50}{198.0}{abajo} \nodo{51}{198.0}{izquierda} ]
+\end{figure}
+\begin{figure}[h]
+\Tree [.\nodo{7}{134.0}{arriba} \nodo{52}{198.0}{arriba} \nodo{53}{198.0}{derecha} \nodo{54}{200.0}{abajo} \nodo{55}{198.0}{izquierda} ]
+\Tree [.\nodo{13}{134.0}{abajo} \nodo{56}{200.0}{arriba} \nodo{57}{198.0}{derecha} \nodo{58}{198.0}{abajo} \nodo{59}{198.0}{izquierda} ]
+\Tree [.\nodo{15}{134.0}{arriba} \nodo{60}{198.0}{arriba} \nodo{61}{198.0}{derecha} \nodo{62}{200.0}{abajo} \nodo{63}{198.0}{izquierda} ]
+\Tree [.\nodo{8}{134.0}{derecha} \nodo{64}{198.0}{arriba} \nodo{65}{198.0}{derecha} \nodo{66}{198.0}{abajo} \nodo{67}{200.0}{izquierda} ]
+\end{figure}
+
+
+\end{document}

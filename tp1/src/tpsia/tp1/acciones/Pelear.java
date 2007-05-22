@@ -58,7 +58,7 @@ public class Pelear extends Accion {
 		 * cuenta una previsión). */
 		if (estado.getAmbiente().hayEnemigo() &&
 				(estado.getEnergia() + 
-						estado.getPromedioVarEnergia(Pelear.getInstancia())) > 3)
+						estado.getPromedioVarEnergia(Pelear.getInstancia())) > 0)
 
 			return true;
 		
