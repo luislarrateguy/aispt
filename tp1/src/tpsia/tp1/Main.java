@@ -69,7 +69,7 @@ public class Main {
             }
         	return true;
         }
-        return false;
+        return true;
     }
 
 	private static void mostrarAyuda() {
