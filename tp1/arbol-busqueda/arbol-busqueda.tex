@@ -10,29 +10,46 @@
 \author{}
 \begin{document}
 \maketitle
-\begin{figure}[h]
+
+\section{Notas}
+Este es el árbol con los 16 primeros nodos elegidos por el algoritmo de
+búsqueda. También se muestran los nodos hijos de los mismos.
+
+La forma de leer la secuencia es de arriba hacia abajo, de izquierda a derecha.
+Por lo tanto el primero nodo tomado es aquel con Id = 1, luego aquel con Id =
+2, luego el 5, el 3, el 4, el 19, etc.
+
+$f$ representa la función de evaluación, igual a $g(n) + h(n)$. En la
+documentación principal hay mas información sobre esto en la sección
+\emph{Estrategia}.
+
+El campo \emph{A} indica la acción que generó el nodo.
+
+\section{Secuencia de subárboles}
+
+\begin{figure}[!h]
 \Tree [.\nodo{1}{0.0}{-} \nodo{2}{68.0}{arriba} \nodo{3}{68.0}{derecha} \nodo{4}{68.0}{abajo} \nodo{5}{68.0}{izquierda} ]
 \Tree [.\nodo{2}{68.0}{arriba} \nodo{6}{116.0}{pelear} \nodo{7}{134.0}{arriba} \nodo{8}{134.0}{derecha} \nodo{9}{136.0}{abajo} \nodo{10}{134.0}{izquierda} ]
 \Tree [.\nodo{5}{68.0}{izquierda} \nodo{11}{134.0}{arriba} \nodo{12}{136.0}{derecha} \nodo{13}{134.0}{abajo} \nodo{14}{134.0}{izquierda} ]
 \Tree [.\nodo{3}{68.0}{derecha} \nodo{15}{134.0}{arriba} \nodo{16}{134.0}{derecha} \nodo{17}{134.0}{abajo} \nodo{18}{136.0}{izquierda} ]
 \end{figure}
-\begin{figure}[h]
-\Tree [.\nodo{4}{68.0}{abajo} \nodo{19}{96.0}{comer} \nodo{20}{136.0}{arriba} \nodo{21}{134.0}{derecha} \nodo{22}{134.0}{abajo} \nodo{23}{134.0}{izquierda} ]
-\Tree [.\nodo{19}{96.0}{comer} \nodo{24}{164.0}{arriba} \nodo{25}{162.0}{derecha} \nodo{26}{162.0}{abajo} \nodo{27}{162.0}{izquierda} ]
-\Tree [.\nodo{6}{116.0}{pelear} \nodo{28}{182.0}{arriba} \nodo{29}{182.0}{derecha} \nodo{30}{184.0}{abajo} \nodo{31}{182.0}{izquierda} ]
-\Tree [.\nodo{10}{134.0}{izquierda} \nodo{32}{198.0}{arriba} \nodo{33}{200.0}{derecha} \nodo{34}{198.0}{abajo} \nodo{35}{198.0}{izquierda} ]
+\begin{figure}[!h]
+\Tree [.\nodo{4}{68.0}{abajo} \nodo{19}{136.0}{arriba} \nodo{20}{134.0}{derecha} \nodo{21}{134.0}{abajo} \nodo{22}{134.0}{izquierda} ]
+\Tree [.\nodo{6}{116.0}{pelear} \nodo{23}{182.0}{arriba} \nodo{24}{182.0}{derecha} \nodo{25}{184.0}{abajo} \nodo{26}{182.0}{izquierda} ]
+\Tree [.\nodo{22}{134.0}{izquierda} \nodo{27}{198.0}{arriba} \nodo{28}{200.0}{derecha} \nodo{29}{198.0}{abajo} \nodo{30}{198.0}{izquierda} ]
+\Tree [.\nodo{10}{134.0}{izquierda} \nodo{31}{198.0}{arriba} \nodo{32}{200.0}{derecha} \nodo{33}{198.0}{abajo} \nodo{34}{198.0}{izquierda} ]
 \end{figure}
-\begin{figure}[h]
-\Tree [.\nodo{11}{134.0}{arriba} \nodo{36}{198.0}{arriba} \nodo{37}{198.0}{derecha} \nodo{38}{200.0}{abajo} \nodo{39}{198.0}{izquierda} ]
-\Tree [.\nodo{21}{134.0}{derecha} \nodo{40}{198.0}{arriba} \nodo{41}{198.0}{derecha} \nodo{42}{198.0}{abajo} \nodo{43}{200.0}{izquierda} ]
-\Tree [.\nodo{22}{134.0}{abajo} \nodo{44}{200.0}{arriba} \nodo{45}{198.0}{derecha} \nodo{46}{198.0}{abajo} \nodo{47}{198.0}{izquierda} ]
-\Tree [.\nodo{23}{134.0}{izquierda} \nodo{48}{198.0}{arriba} \nodo{49}{200.0}{derecha} \nodo{50}{198.0}{abajo} \nodo{51}{198.0}{izquierda} ]
+\begin{figure}[!h]
+\Tree [.\nodo{11}{134.0}{arriba} \nodo{35}{198.0}{arriba} \nodo{36}{198.0}{derecha} \nodo{37}{200.0}{abajo} \nodo{38}{198.0}{izquierda} ]
+\Tree [.\nodo{21}{134.0}{abajo} \nodo{39}{200.0}{arriba} \nodo{40}{198.0}{derecha} \nodo{41}{198.0}{abajo} \nodo{42}{198.0}{izquierda} ]
+\Tree [.\nodo{7}{134.0}{arriba} \nodo{43}{198.0}{arriba} \nodo{44}{198.0}{derecha} \nodo{45}{200.0}{abajo} \nodo{46}{198.0}{izquierda} ]
+\Tree [.\nodo{13}{134.0}{abajo} \nodo{47}{200.0}{arriba} \nodo{48}{198.0}{derecha} \nodo{49}{198.0}{abajo} \nodo{50}{198.0}{izquierda} ]
 \end{figure}
-\begin{figure}[h]
-\Tree [.\nodo{7}{134.0}{arriba} \nodo{52}{198.0}{arriba} \nodo{53}{198.0}{derecha} \nodo{54}{200.0}{abajo} \nodo{55}{198.0}{izquierda} ]
-\Tree [.\nodo{13}{134.0}{abajo} \nodo{56}{200.0}{arriba} \nodo{57}{198.0}{derecha} \nodo{58}{198.0}{abajo} \nodo{59}{198.0}{izquierda} ]
-\Tree [.\nodo{15}{134.0}{arriba} \nodo{60}{198.0}{arriba} \nodo{61}{198.0}{derecha} \nodo{62}{200.0}{abajo} \nodo{63}{198.0}{izquierda} ]
-\Tree [.\nodo{8}{134.0}{derecha} \nodo{64}{198.0}{arriba} \nodo{65}{198.0}{derecha} \nodo{66}{198.0}{abajo} \nodo{67}{200.0}{izquierda} ]
+\begin{figure}[!h]
+\Tree [.\nodo{15}{134.0}{arriba} \nodo{51}{198.0}{arriba} \nodo{52}{198.0}{derecha} \nodo{53}{200.0}{abajo} \nodo{54}{198.0}{izquierda} ]
+\Tree [.\nodo{14}{134.0}{izquierda} \nodo{55}{198.0}{arriba} \nodo{56}{200.0}{derecha} \nodo{57}{198.0}{abajo} \nodo{58}{198.0}{izquierda} ]
+\Tree [.\nodo{8}{134.0}{derecha} \nodo{59}{198.0}{arriba} \nodo{60}{198.0}{derecha} \nodo{61}{198.0}{abajo} \nodo{62}{200.0}{izquierda} ]
+\Tree [.\nodo{16}{134.0}{derecha} \nodo{63}{198.0}{arriba} \nodo{64}{198.0}{derecha} \nodo{65}{198.0}{abajo} \nodo{66}{200.0}{izquierda} ]
 \end{figure}
 
 
