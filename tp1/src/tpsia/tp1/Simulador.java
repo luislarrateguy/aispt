@@ -38,7 +38,7 @@ public class Simulador {
 	private String busqueda;
 	
 	public Simulador() {
-		this.calculador = new Calculador("Grupo 28");
+		this.calculador = new Calculador("Grupo 7");
 		this.ambiente = new AmbienteReal();
 		this.busqueda = "aestrella";
 		
