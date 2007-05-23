@@ -31,6 +31,8 @@ cd ../estrategia
 borrar
 cd ../licencia
 borrar
+cd ../notas
+borrar
 
 cd ..
 ./makediffs clean
