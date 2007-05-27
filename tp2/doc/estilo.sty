@@ -1,0 +1,94 @@
+\ProvidesPackage{estilo}
+\RequirePackage{fancyheaders}
+\newcommand{\chaptermark}[1]{\markboth{#1}{}}
+%
+% Lets have some nice headings
+%
+\pagestyle{fancyplain}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection{} #1}}
+\lhead[\fancyplain{}{\bfseries\thepage}]
+    {\fancyplain{}{\bfseries\rightmark}}
+\rhead[\fancyplain{}{\bfseries\leftmark}]
+    {\fancyplain{}{\bfseries\thepage}}
+\cfoot[]{}
+\addtolength{\headheight}{1.6pt}
+
+%
+% Estilo cursiva para los nombres de archivos
+%
+\newcommand{\archivo}[1] {\mbox{\textit{#1}}}
+
+%
+% Estilo para el nombre de una clase
+%
+\newcommand{\clase}[1] {\mbox{\texttt{#1}}}
+
+%
+% Estilo para el nombre de una clase
+%
+\newcommand{\boton}[1] {\mbox{\texttt{#1}}}
+
+%
+% Estilo para el nombre de un paquete
+%
+\newcommand{\paquete}[1] {\mbox{\textsl{#1}}}
+
+%
+% Estilo para una variable
+%
+\newcommand{\variable}[1] {\mbox{\textit{#1}}}
+
+%
+% Estilo para un método
+%
+\newcommand{\metodo}[1] {\mbox{\textsl{#1}}}
+
+%
+% Para algunas indicaciones abajo de los títulos de las secciones
+%
+\newcommand{\notas}[1]{\nopagebreak\par\addvspace{-1.5ex}%
+     \vskip -\parskip\noindent{\tiny #1}\par\nopagebreak%
+     \addvspace{1ex plus 0.8ex minus 0.2ex}% 
+     \vskip -\parskip\noindent\ignorespaces}
+
+%
+% Incluir imagen
+%
+\newcommand{\incluirimagen}[2]{
+  \begin{center}
+    \par\addvspace{0.3in}
+    \includegraphics*[#1]{#2}
+    \par\addvspace{0.3in}
+  \end{center}
+}
+
+%
+% Para indicar cosas por terminar (TODO)
+%
+\newcommand{\TODO}[1]{
+  \colorbox{yellow}{TODO:} #1
+}
+
+%
+% Para indicar cosas por corregir (FIXME)
+%
+\newcommand{\FIXME}[1]{
+  \colorbox{red}{FIXME:} #1
+}
+
+%
+% Nodo de un árbol
+%
+\newcommand{\nodo}[3]{
+  \begin{tabular}{|rl|}
+    \hline
+    \textbf{Id:} & #1 \\
+    \hline
+    \textbf{$f$:} & #2 \\
+    \hline
+    \textbf{A:} & #3 \\
+    \hline
+  \end{tabular}
+}
+
