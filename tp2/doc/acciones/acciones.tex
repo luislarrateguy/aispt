@@ -1,0 +1,56 @@
+\section{Acciones}
+
+Las acciones posibles son las siguientes:
+
+\begin{itemize}
+
+\item \textbf{Mover(dirección)}: donde dirección es ``arriba'', ``abajo'',
+``derecha'' o ``izquierda''.
+
+\item \textbf{Comer()}
+
+\item \textbf{Pelear()}
+
+\end{itemize}
+
+\subsection{Valoración de las acciones}
+
+\begin{itemize}
+
+\item posicion(x,y,s) $\land$ hayComida(x,y,s) $\Rightarrow$ excelente(Comer,s)
+
+\item posicion(x,y,s) $\land$ hayEnemigo(x,y,s) $\land$ energia(energíaActual,s)
+$\land$ promedioPorPelear(promedio,s) $\land$ $(energíaActual + promedio) > 0$
+$\Rightarrow$ \linebreak muy\_bueno(Comer,s)
+
+\item posicion(x,y,s) $\land$ hayEnemigo(x,y,s) $\land$ energia(energíaActual,s)
+$\land$ promedioPorPelear(promedio,s) $\land$ $(energíaActual + promedio)$ $\le$ 0
+$\Rightarrow$ malo(Comer,s)
+
+\item posicion(x,y,s) $\land$ adyacente(xa,ya,dirección,s) $\land$
+hayComida(xa,ya,s) $\Rightarrow$ excelente(Mover(dirección),s)
+
+\item posicion(x,y,s) $\land$ adyacente(xa,ya,dirección,s) $\land$
+hayEnemigo(xa,ya,s) $\land$ energia(energíaActual,s) $\land$
+promedioPorPelear(promedio,s) $\land$ $(energíaActual + promedio) > 0$ $\Rightarrow$
+muy\_bueno(Mover(dirección),s)
+
+\item posicion(x,y,s) $\land$ adyacente(xa,ya,dirección,s) $\land$
+hayEnemigo(xa,ya,s) $\land$ energía(energíaActual,s) $\land$
+promedioPorPelear(promedio,s) $\land$ $(energíaActual + promedio) \le 0$
+$\Rightarrow$ malo(Mover(dirección),s)
+
+\item posicion(x,y,s) $\land$ adyacente(xa,ya,dirección,s) $\land$
+celdaVacía(xa,ya,s) $\land$ energía(energíaActual,s) $\land$
+promedioPorAvanzar(promedio,s) $\land$ $(energíaActual + promedio) > 0$ $\Rightarrow$
+bueno(Mover(dirección),s)
+
+\item posicion(x,y,s) $\land$ adyacente(xa,ya,dirección,s) $\land$
+celdaVacía(xa,ya,s) $\land$ energía(energíaActual,s) $\land$
+promedioPorAvanzar(promedio,s) $\land$ $(energíaActual + promedio) \le 0$
+$\Rightarrow$ malo(Mover(dirección),s)
+
+\TODO{Es probable que le haya errado a algún signo. Ver.}
+
+\end{itemize}
+

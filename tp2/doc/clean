@@ -17,6 +17,18 @@ cd ../titulo
 borrar
 cd ../licencia
 borrar
+cd ../acciones
+borrar
+cd ../base_conocimiento
+borrar
+cd ../estado
+borrar
+cd ../estado_sucesor
+borrar
+cd ../reglas_causales
+borrar
+cd ../reglas_de_diagnostico
+borrar
 
 cd ..
 ./makediffs clean
