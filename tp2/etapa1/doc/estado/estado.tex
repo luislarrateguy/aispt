@@ -1,0 +1,36 @@
+\section{Representacion del estado}
+
+\begin{itemize}
+
+\item \textbf{posicion(x,y,s)}: la posicion del pacman en la situación $s$ es
+la columna $x$ y la fila $y$.
+
+\item \textbf{energía(e,s)}: el pacman tiene una energía igual a $e$ en la
+situacion $s$.
+
+\item \textbf{hayEnemigo(x,y,s)}: hay un enemigo en la columna $x$ fila $y$ en
+la situación $s$.
+
+\item \textbf{hayComida(x,y,s)}: hay comida en la columna $x$ fila $y$ en la
+situación $s$.
+
+\item \textbf{celdaVacía(x,y,s)}: la celda en la columna $x$ fila $y$ está
+vacía.
+
+\item \textbf{promedioPorPelear(prom,s)}: promedio energía perdida por pelear.
+El valor de los promedios es positivo si implica una ganancia y negativo en
+caso contrario.
+
+\item \textbf{promedioPorAvanzar(prom,s)}: promedio energía perdida por
+avanzar. El valor de los promedios es positivo si implica una ganancia y
+negativo en caso contrario.
+
+\item \textbf{promedioPorComer(prom,s)}: promedio energía ganada por comer. El
+valor de los promedios es positivo si implica una ganancia y negativo en caso
+contrario.
+
+\item \textbf{adyacentes(xa,ya,dirección,s)}: devuelve en $xa$ y en $ya$ la
+posición de una celda adyancente a la actual ($posicion(x,y,s)$). $direccion$
+devuelve los mismos valores que acepta la acción \emph{Mover}.
+
+\end{itemize}
