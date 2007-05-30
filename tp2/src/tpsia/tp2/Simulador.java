@@ -19,13 +19,13 @@
 
  */
 
-package tpsia.tp1;
+package tpsia.tp2;
 
 import java.util.Vector;
 
 import org.apache.log4j.*;
-import tpsia.tp1.acciones.*;
-import tpsia.tp1.agente.Agente;
+import tpsia.tp2.acciones.*;
+import tpsia.tp2.agente.Agente;
 import calculador.Calculador;
 import calculador.Pair;
 

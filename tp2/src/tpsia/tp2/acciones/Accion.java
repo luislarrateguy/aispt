@@ -19,43 +19,28 @@
 
  */
 
-package tpsia.tp1;
+package tpsia.tp2.acciones;
 
-public class Percepcion {
+import java.util.ArrayList;
 
-	private EstadoCelda[] celdasAdyacentes;
-	private int energia;
-	private int posX;
-	private int posY;
+import tpsia.tp2.Ambiente;
+import tpsia.tp2.agente.BaseConocimiento;
+
+public abstract class Accion {
 	
-	public Percepcion(EstadoCelda[] ady, int e, 
-			int[] posIniPacman) {
-		
-		this.celdasAdyacentes = new EstadoCelda[4];
-		for (int i=0; i<4; i++)
-			this.celdasAdyacentes[i] = ady[i];
-		
-		this.energia = e;
-		
-		if (posIniPacman != null) { 
-			this.posX = posIniPacman[0];
-			this.posY = posIniPacman[1];
-		}
+	protected static ArrayList<Accion> acciones = new ArrayList<Accion>(7);
+	
+	public abstract void ejecutar(Ambiente amb) throws Exception;
+	public abstract boolean aplicable(BaseConocimiento estado);
+	public abstract String getTipoAccion();
+	public abstract int getCosto();
+	
+	public abstract int getIdentificador();
+	
+	public static ArrayList<Accion> getAcciones() {
+		return acciones;
 	}
-
-	public EstadoCelda[] getCeldasAdyacentes() {
-		return celdasAdyacentes.clone();
-	}
-
-	public int getEnergia() {
-		return energia;
-	}
-
-	public int getPosX() {
-		return posX;
-	}
-
-	public int getPosY() {
-		return posY;
+	public String toString() {
+		return this.getTipoAccion();
 	}
 }

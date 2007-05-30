@@ -19,33 +19,54 @@
 
  */
 
-package tpsia.tp1.acciones;
+package tpsia.tp2.acciones;
 
-import tpsia.tp1.Ambiente;
-import tpsia.tp1.Offset;
+import tpsia.tp2.Ambiente;
+import tpsia.tp2.agente.BaseConocimiento;
 
-public class AvanzarDerecha extends Avanzar {
+public class Pelear extends Accion {
 
-	private static AvanzarDerecha instancia;
+	private static Pelear instancia;
 
-	private AvanzarDerecha() {
+	@Override
+	public void ejecutar(Ambiente amb) throws Exception {
+		amb.pelear();
 	}
 
 	@Override
-	public void ejecutar(Ambiente amb) {
-		amb.mover(Offset.Derecha);
+	public String getTipoAccion() {
+		return "pelear";
+	}
+	
+	@Override
+	public int getCosto() {
+		return 40;
 	}
 
 	static public Accion getInstancia() {
 		if (instancia == null) {
-			instancia = new AvanzarDerecha();
+			instancia = new Pelear();
 			Accion.acciones.add(instancia);
 		}
 		return instancia;
 	}
+
+	@Override
+	public boolean aplicable(BaseConocimiento estado) {
+		/* Verifico que exista un enemigo en la posición del agente, y que
+		 * haya energía suficiente para pelear (para esto último se tiene en
+		 * cuenta una previsión). */
+//		if (estado.getAmbiente().hayEnemigo() &&
+//				(estado.getEnergia() + 
+//						estado.getPromedioVarEnergia(Pelear.getInstancia())) > 0)
+//
+//			return true;
+		
+		return false;
+	}
 	
 	@Override
-	public String getTipoAccion() {
-		return "derecha";
+	public int getIdentificador() {
+		return 2;
 	}
 }

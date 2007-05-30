@@ -19,28 +19,33 @@
 
  */
 
-package tpsia.tp1.acciones;
+package tpsia.tp2.acciones;
 
-import java.util.ArrayList;
+import tpsia.tp2.Ambiente;
+import tpsia.tp2.Offset;
 
-import tpsia.tp1.Ambiente;
-import tpsia.tp1.agente.Estado;
+public class AvanzarArriba extends Avanzar {
 
-public abstract class Accion {
-	
-	protected static ArrayList<Accion> acciones = new ArrayList<Accion>(7);
-	
-	public abstract void ejecutar(Ambiente amb) throws Exception;
-	public abstract boolean aplicable(Estado estado);
-	public abstract String getTipoAccion();
-	public abstract int getCosto();
-	
-	public abstract int getIdentificador();
-	
-	public static ArrayList<Accion> getAcciones() {
-		return acciones;
+	private static AvanzarArriba instancia;
+
+	private AvanzarArriba() {
 	}
-	public String toString() {
-		return this.getTipoAccion();
+
+	@Override
+	public void ejecutar(Ambiente amb) {
+		amb.mover(Offset.Arriba);
+	}
+
+	static public Accion getInstancia() {
+		if (instancia == null) {
+			instancia = new AvanzarArriba();
+			Accion.acciones.add(instancia);
+		}
+		return instancia;
+	}
+	
+	@Override
+	public String getTipoAccion() {
+		return "arriba";
 	}
 }

@@ -19,49 +19,33 @@
 
  */
 
-package tpsia.tp1.acciones;
+package tpsia.tp2.acciones;
 
-import tpsia.tp1.Ambiente;
-import tpsia.tp1.agente.Estado;
+import tpsia.tp2.Ambiente;
+import tpsia.tp2.Offset;
 
-public class Comer extends Accion {
+public class AvanzarIzquierda extends Avanzar {
 
-	private static Comer instancia;
+	private static AvanzarIzquierda instancia;
 
-	@Override
-	public void ejecutar(Ambiente amb) throws Exception {
-		amb.comer();
+	private AvanzarIzquierda() {
 	}
 
 	@Override
-	public String getTipoAccion() {
-		return "comer";
-	}
-	
-	@Override
-	public int getCosto() {
-		return 20;
+	public void ejecutar(Ambiente amb) {
+		amb.mover(Offset.Izquierda);
 	}
 
 	static public Accion getInstancia() {
 		if (instancia == null) {
-			instancia = new Comer();
+			instancia = new AvanzarIzquierda();
 			Accion.acciones.add(instancia);
 		}
 		return instancia;
 	}
 
 	@Override
-	public boolean aplicable(Estado estado) {
-		if (estado.getAmbiente().hayComida())
-			return true;
-		
-		return false;
+	public String getTipoAccion() {
+		return "izquierda";
 	}
-
-	@Override
-	public int getIdentificador() {
-		return 1;
-	}
-
 }

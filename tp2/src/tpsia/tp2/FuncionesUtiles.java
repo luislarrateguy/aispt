@@ -19,7 +19,7 @@
 
  */
 
-package tpsia.tp1;
+package tpsia.tp2;
 
 public class FuncionesUtiles {
 	/**

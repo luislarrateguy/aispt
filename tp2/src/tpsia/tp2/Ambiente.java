@@ -19,7 +19,7 @@
 
  */
 
-package tpsia.tp1;
+package tpsia.tp2;
 
 import java.util.Hashtable;
 

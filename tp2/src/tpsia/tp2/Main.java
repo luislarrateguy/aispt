@@ -19,7 +19,7 @@
 
  */
 
-package tpsia.tp1;
+package tpsia.tp2;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;

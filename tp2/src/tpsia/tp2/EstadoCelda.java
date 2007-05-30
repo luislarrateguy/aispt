@@ -19,11 +19,21 @@
 
  */
 
-package tpsia.tp1.agente;
+package tpsia.tp2;
 
-import tpsia.tp1.busqueda.Nodo;
-
-public interface IObjetivo {
-	boolean cumpleObjetivo(Estado estado);
-	boolean cumpleObjetivo(Nodo nodo);
+public enum EstadoCelda {
+	Desconocida(-1),
+	Vacia (0),
+	Comida (1),
+	Enemigo (2);
+	
+	private final int valor;
+	
+	EstadoCelda(int x) {
+		this.valor = x;
+	}
+	
+	public int valor() {
+		return this.valor;
+	}
 }

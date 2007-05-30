@@ -19,33 +19,33 @@
 
  */
 
-package tpsia.tp1.acciones;
+package tpsia.tp2.acciones;
 
-import tpsia.tp1.Ambiente;
-import tpsia.tp1.Offset;
+import tpsia.tp2.Ambiente;
+import tpsia.tp2.Offset;
 
-public class AvanzarIzquierda extends Avanzar {
+public class AvanzarDerecha extends Avanzar {
 
-	private static AvanzarIzquierda instancia;
+	private static AvanzarDerecha instancia;
 
-	private AvanzarIzquierda() {
+	private AvanzarDerecha() {
 	}
 
 	@Override
 	public void ejecutar(Ambiente amb) {
-		amb.mover(Offset.Izquierda);
+		amb.mover(Offset.Derecha);
 	}
 
 	static public Accion getInstancia() {
 		if (instancia == null) {
-			instancia = new AvanzarIzquierda();
+			instancia = new AvanzarDerecha();
 			Accion.acciones.add(instancia);
 		}
 		return instancia;
 	}
-
+	
 	@Override
 	public String getTipoAccion() {
-		return "izquierda";
+		return "derecha";
 	}
 }

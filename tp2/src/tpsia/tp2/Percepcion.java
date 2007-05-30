@@ -19,33 +19,43 @@
 
  */
 
-package tpsia.tp1.acciones;
+package tpsia.tp2;
 
-import tpsia.tp1.Ambiente;
-import tpsia.tp1.Offset;
+public class Percepcion {
 
-public class AvanzarAbajo extends Avanzar {
-
-	private static AvanzarAbajo instancia;
-
-	private AvanzarAbajo() {
-	}
-
-	@Override
-	public void ejecutar(Ambiente amb) {
-		amb.mover(Offset.Abajo);
-	}
-
-	static public Accion getInstancia() {
-		if (instancia == null) {
-			instancia = new AvanzarAbajo();
-			Accion.acciones.add(instancia);
-		}
-		return instancia;
-	}
+	private EstadoCelda[] celdasAdyacentes;
+	private int energia;
+	private int posX;
+	private int posY;
 	
-	@Override
-	public String getTipoAccion() {
-		return "abajo";
+	public Percepcion(EstadoCelda[] ady, int e, 
+			int[] posIniPacman) {
+		
+		this.celdasAdyacentes = new EstadoCelda[4];
+		for (int i=0; i<4; i++)
+			this.celdasAdyacentes[i] = ady[i];
+		
+		this.energia = e;
+		
+		if (posIniPacman != null) { 
+			this.posX = posIniPacman[0];
+			this.posY = posIniPacman[1];
+		}
+	}
+
+	public EstadoCelda[] getCeldasAdyacentes() {
+		return celdasAdyacentes.clone();
+	}
+
+	public int getEnergia() {
+		return energia;
+	}
+
+	public int getPosX() {
+		return posX;
+	}
+
+	public int getPosY() {
+		return posY;
 	}
 }

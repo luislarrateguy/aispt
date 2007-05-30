@@ -19,33 +19,32 @@
 
  */
 
-package tpsia.tp1.acciones;
+package tpsia.tp2.acciones;
 
-import tpsia.tp1.Ambiente;
-import tpsia.tp1.Offset;
+import tpsia.tp2.Ambiente;
+import tpsia.tp2.agente.BaseConocimiento;
 
-public class AvanzarArriba extends Avanzar {
-
-	private static AvanzarArriba instancia;
-
-	private AvanzarArriba() {
-	}
-
+public abstract class Avanzar extends Accion {
+	
+	public abstract void ejecutar(Ambiente amb);
+	public abstract String getTipoAccion();
+	
 	@Override
-	public void ejecutar(Ambiente amb) {
-		amb.mover(Offset.Arriba);
-	}
-
-	static public Accion getInstancia() {
-		if (instancia == null) {
-			instancia = new AvanzarArriba();
-			Accion.acciones.add(instancia);
-		}
-		return instancia;
+	public final int getIdentificador() {
+		return 0;
 	}
 	
 	@Override
-	public String getTipoAccion() {
-		return "arriba";
+	public final int getCosto() {
+		return 60;
+	}
+	
+	@Override
+	public final boolean aplicable(BaseConocimiento estado) {
+		// Verifico que el agente tenga energía suficiente para moverse
+//		if (estado.getEnergia() + estado.getPromedioVarEnergia(this) > 0)
+//			return true;
+//		
+		return false;
 	}
 }

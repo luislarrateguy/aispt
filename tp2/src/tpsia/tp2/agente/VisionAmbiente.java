@@ -19,14 +19,13 @@
 
  */
 
-package tpsia.tp1.agente;
+package tpsia.tp2.agente;
 
-import tpsia.tp1.Ambiente;
-import tpsia.tp1.EstadoCelda;
-import tpsia.tp1.FuncionesUtiles;
-import tpsia.tp1.Offset;
-import tpsia.tp1.Percepcion;
-import tpsia.tp1.busqueda.Busqueda;
+import tpsia.tp2.Ambiente;
+import tpsia.tp2.EstadoCelda;
+import tpsia.tp2.FuncionesUtiles;
+import tpsia.tp2.Offset;
+import tpsia.tp2.Percepcion;
 
 public class VisionAmbiente extends Ambiente {
 	
@@ -139,9 +138,9 @@ public class VisionAmbiente extends Ambiente {
 	}
 	
 	public void toXML() {
-		Busqueda.logxml.debug("<ambiente type=\"!CDATA\">");
-		Busqueda.logxml.debug(this.draw());
-		Busqueda.logxml.debug("</ambiente>");
+//		Busqueda.logxml.debug("<ambiente type=\"!CDATA\">");
+//		Busqueda.logxml.debug(this.draw());
+//		Busqueda.logxml.debug("</ambiente>");
 	}
 
 	@Override

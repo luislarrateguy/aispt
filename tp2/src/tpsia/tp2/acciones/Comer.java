@@ -19,32 +19,49 @@
 
  */
 
-package tpsia.tp1.acciones;
+package tpsia.tp2.acciones;
 
-import tpsia.tp1.Ambiente;
-import tpsia.tp1.agente.Estado;
+import tpsia.tp2.Ambiente;
+import tpsia.tp2.agente.BaseConocimiento;
 
-public abstract class Avanzar extends Accion {
-	
-	public abstract void ejecutar(Ambiente amb);
-	public abstract String getTipoAccion();
-	
+public class Comer extends Accion {
+
+	private static Comer instancia;
+
 	@Override
-	public final int getIdentificador() {
-		return 0;
+	public void ejecutar(Ambiente amb) throws Exception {
+		amb.comer();
+	}
+
+	@Override
+	public String getTipoAccion() {
+		return "comer";
 	}
 	
 	@Override
-	public final int getCosto() {
-		return 60;
+	public int getCosto() {
+		return 20;
 	}
-	
+
+	static public Accion getInstancia() {
+		if (instancia == null) {
+			instancia = new Comer();
+			Accion.acciones.add(instancia);
+		}
+		return instancia;
+	}
+
 	@Override
-	public final boolean aplicable(Estado estado) {
-		// Verifico que el agente tenga energía suficiente para moverse
-		if (estado.getEnergia() + estado.getPromedioVarEnergia(this) > 0)
-			return true;
+	public boolean aplicable(BaseConocimiento estado) {
+//		if (estado.getAmbiente().hayComida())
+//			return true;
 		
 		return false;
 	}
+
+	@Override
+	public int getIdentificador() {
+		return 1;
+	}
+
 }
