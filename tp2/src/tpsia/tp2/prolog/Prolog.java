@@ -65,7 +65,6 @@ public class Prolog {
 	try {
 	    FileReader fr = new FileReader(filename);
 	    BufferedReader br = new BufferedReader(fr);
-	    int count = 0;
 	    while (true) {
 		String line = br.readLine();
 		if (line == null) break;

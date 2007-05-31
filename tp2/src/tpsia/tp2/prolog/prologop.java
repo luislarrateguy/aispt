@@ -115,7 +115,7 @@ class prologop {
         prologop op=make(s,type,level);
         if(op==null)
             return false;
-        if(op.place==op.pre)
+        if(op.place==prologop.pre)
             preops.put(s,op);
         else if(op.place==op.in)
             inops.put(s,op);

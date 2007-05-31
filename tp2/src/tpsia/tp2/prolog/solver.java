@@ -72,7 +72,7 @@ class solver {
         lib=l;
     }
     int getbinum(term r) {
-        Integer i=(Integer)bi_pred.get(lib.searchkey(r));
+        Integer i=(Integer)bi_pred.get(program.searchkey(r));
         if(i==null)
             return -1;
         return i.intValue();
@@ -82,7 +82,7 @@ class solver {
     { /*push all goals in q on the todo stack, with parent r.*/
         if(q==null)
             return;
-        if(q.type==q.FUNCTOR&&q.name==prologop.AND) {
+        if(q.type==term.FUNCTOR&&q.name==prologop.AND) {
             stacktodo(q.arg[1],r);
             stacktodo(q.arg[0],r);
         } else todo.push(new rack(q,r));
@@ -105,13 +105,11 @@ class solver {
     static int FALSE=0,TRUE=1,ERROR=-1;
     int solve(rack r) {
         /*return one of FALSE=0,TRUE=1,ERROR=-1*/
-        if(r.solveoption==r.NOTAGAIN)
+        if(r.solveoption==rack.NOTAGAIN)
             return FALSE;
         term rpred=term.skipeq(r.pred);
         if(rpred.type!=term.FUNCTOR)
             return ERROR;
-        String fname=rpred.name;
-
         int bi=getbinum(rpred);
         if(bi!=-1) {
             char c;
@@ -121,10 +119,10 @@ class solver {
             case 1:return TRUE;
             case 2:return FALSE;
             case 3:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 return TRUE;
             case 4:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 rack todo1;
                 rack realparent=r.parent;
                 while(realparent!=null&&
@@ -152,16 +150,16 @@ class solver {
                         break;
                 }
                 if(r.parent!=null)
-                    r.parent.solveoption=r.NOTAGAIN;
+                    r.parent.solveoption=rack.NOTAGAIN;
                 return TRUE;
             case 5:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 if(term.match(rpred.arg[0],rpred.arg[1],subst))
                     return TRUE;
                 else
                     return FALSE;
             case 6:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 int n=term.numbervalue(rpred.arg[1]);
                 if(n==term.NaN)
                     return ERROR;
@@ -175,7 +173,7 @@ class solver {
             case 10:
             case 11:
             case 12:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 int n1=term.numbervalue(rpred.arg[0]);
                 int n2=term.numbervalue(rpred.arg[1]);
                 if(n1==term.NaN||n2==term.NaN) {
@@ -192,7 +190,7 @@ class solver {
                 else
                     return FALSE;
             case 15:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 do{
                     c=inp.get0();
                 }while(c<=32);
@@ -201,24 +199,24 @@ class solver {
                 else
                     return FALSE;
             case 16:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 c=inp.get0();
                 if(term.match(rpred.arg[0],new term((int)c),subst))
                     return TRUE;
                 else
                     return FALSE;
             case 17:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 inp=null;
                 return TRUE;
             case 19:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 return TRUE;
             case 20:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 return TRUE;
             case 21:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 t=term.skipeq(rpred.arg[0]);
                 if(t.type==term.NUMBER&&t.arity>=0&&t.arity<256)
                     {
@@ -226,40 +224,40 @@ class solver {
                     }
                 return ERROR;
             case 22:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 return TRUE;
             case 23:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 lib=new program();
                 return TRUE;
             case 24:
             case 25:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 t=term.skipeq(rpred.arg[0]);
                 if(t.type!=term.FUNCTOR||t.arity!=0)
                     return ERROR;
                 return TRUE;
             case 26:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 if(addStatement(program.gramconvert(rpred.arg[0].copy())
                           ))
                     return TRUE;
                 return ERROR;
             case 27:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 if(program.addStatementa(lib.user,
                                    program.gramconvert(rpred.arg[0].copy())
                                    ))
                     return TRUE;
                 return ERROR;
             case 28:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 return retract(rpred.arg[0]);
             case 29:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 return TRUE;
             case 30:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 term nam=term.skipeq(rpred.arg[2]);
                 if(nam.type!=term.FUNCTOR||nam.arity!=0)
                     return ERROR;
@@ -271,31 +269,31 @@ class solver {
                     return TRUE;
                 return ERROR;
             case 31:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 t=term.skipeq(rpred.arg[0]);
                 if(t.type==term.OPEN)
                     return TRUE;
                 return FALSE;
             case 32:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 t=term.skipeq(rpred.arg[0]);
                 if(t.type!=term.OPEN)
                     return TRUE;
                 return FALSE;
             case 33:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 t=term.skipeq(rpred.arg[0]);
                 if(t.type==term.FUNCTOR&&t.arity==0)
                     return TRUE;
                 return FALSE;
             case 34:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 t=term.skipeq(rpred.arg[0]);
                 if(t.type==term.NUMBER)
                     return TRUE;
                 return FALSE;
             case 35:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 term left=term.skipeq(rpred.arg[0]);
                 if(left.type==term.FUNCTOR)
                     {
@@ -329,7 +327,7 @@ class solver {
                     }
                 return ERROR;
             case 36:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 t=term.skipeq(rpred.arg[0]);
                 if(t.type==term.FUNCTOR&&t.arity==0)
                     {if(term.match(rpred.arg[1],term.asciilist(t.name),subst))
@@ -341,33 +339,33 @@ class solver {
                     return TRUE;
                 return FALSE;
             case 37:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 if(term.equal(rpred.arg[0],rpred.arg[1]))
                     return TRUE;
                 else
                     return FALSE;
             case 38:
-                if(r.solveoption==r.UNKNOWN)
-                    {r.solveoption=r.BUILTIN;
+                if(r.solveoption==rack.UNKNOWN)
+                    {r.solveoption=rack.BUILTIN;
                     stacktodo(rpred.arg[0],r);
                     return TRUE;
                     }
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 stacktodo(rpred.arg[1],r);
                 return TRUE;
             case 39:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 stacktodo(rpred.arg[1],r);
                 stacktodo(rpred.arg[0],r);
                 return TRUE;
             case 40:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 t=term.skipeq(rpred.arg[0]);
                 if(t.type==term.FUNCTOR&&t.arity>0)
                     return TRUE;
                 return FALSE;
             case 41:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 int a=term.numbervalue(rpred.arg[0]);
                 int b=term.numbervalue(rpred.arg[1]);
                 if(a<=b&&a!=term.NaN&&b!=term.NaN)
@@ -380,16 +378,16 @@ class solver {
                     }
                 return ERROR;
             case 42:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 if(term.equal(rpred.arg[0],rpred.arg[1]))
                     return FALSE;
                 else
                     return TRUE;
             case 43:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 return TRUE;
             case 44:
-                r.solveoption=r.NOTAGAIN;
+                r.solveoption=rack.NOTAGAIN;
                 return TRUE;
             default:
                 System.out.println("bipred missing.");
@@ -404,10 +402,10 @@ class solver {
             }
         /*No builtin predicate. Get a fitting rule out the
           clause lib, match the head, and stack the body.*/
-        if(r.solveoption==r.UNKNOWN) {
+        if(r.solveoption==rack.UNKNOWN) {
             r.clauses=lib.get(rpred);
             if(r.clauses==null) {
-                System.out.println("undefined predicate: "+lib.searchkey(rpred));
+                System.out.println("undefined predicate: "+program.searchkey(rpred));
                 return FALSE;
             }
         }
@@ -417,8 +415,8 @@ class solver {
         term theclause;
         while(r.clauses!=term.emptylist) {
             theclause=r.clauses.arg[0].copy();
-            if(term.match(rpred,lib.head(theclause),subst)) {
-                stacktodo(lib.body(theclause),r);
+            if(term.match(rpred,program.head(theclause),subst)) {
+                stacktodo(program.body(theclause),r);
                 return TRUE;
             }
             r.clauses=r.clauses.arg[1];
@@ -484,7 +482,7 @@ class solver {
         term list=lib.get(t);
         if(list==null||list==term.emptylist)
             return FALSE;
-        if(term.match(t,lib.head(list.arg[0]),subst)) {
+        if(term.match(t,program.head(list.arg[0]),subst)) {
             lib.user.put(lib.searchkey(t),list.arg[1]);
             return TRUE;
         }
@@ -503,7 +501,6 @@ class solver {
 
     void substwrite() {
         term g;
-        StringBuffer buf=new StringBuffer("\n");
         Hashtable hash = new Hashtable();
         for(int i=0;i<uservars.size();i++) {
             g=(term)uservars.elementAt(i);

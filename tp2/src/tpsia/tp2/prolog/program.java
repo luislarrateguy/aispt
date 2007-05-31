@@ -45,7 +45,7 @@ class program {
 
     static void fillwith(Hashtable to,Hashtable from) {
         Enumeration enumeration=from.elements();
-        term oldlist,newlist;
+        term oldlist;
         
         while(enumeration.hasMoreElements()) {
             oldlist=(term)enumeration.nextElement();
@@ -67,8 +67,6 @@ class program {
 
     public String toString() {
         Enumeration enumeration=user.elements();
-        Vector v;
-        term t;
         StringBuffer buf=new StringBuffer("\n");
         while(enumeration.hasMoreElements()) {
             term list=(term)enumeration.nextElement();
@@ -173,12 +171,12 @@ class program {
     {return (term)user.get(searchkey(head));}
 
     static term head(term t) {
-        if(t.type!=t.FUNCTOR)               return null;
+        if(t.type!=term.FUNCTOR) return null;
         if(t.name.equals(prologop.ARROW))   return t.arg[0];
         else return t;
     }
     static term body(term t) {
-        if(t.type==t.FUNCTOR&&t.name.equals(prologop.ARROW))
+        if(t.type==term.FUNCTOR&&t.name.equals(prologop.ARROW))
             return t.arg[1];
         return null;
     }

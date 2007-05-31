@@ -99,7 +99,7 @@ class term {
         term num;
         t=skipeq(t);
         while(t.name!=emptylist.name) {
-            if(t.type!=t.FUNCTOR||t.name!=prologop.listcons.name)
+            if(t.type!=term.FUNCTOR||t.name!=prologop.listcons.name)
                 return null;
             num=skipeq(t.arg[0]);
             if(num.type!=NUMBER||num.arity<0||num.arity>255)
@@ -330,7 +330,7 @@ class term {
                 s=t.qname;
             else
                 s=t.name;
-            s+="("+t.toString(t.arg[0],999,q);
+            s+="("+term.toString(t.arg[0],999,q);
             for(int i=1;i<t.arity;i++)
                 s+=","+toString(t.arg[i],999,q);
             return s+")";
@@ -498,7 +498,7 @@ class term {
             return asciilist(f1.substring(1));
         }
 
-        if(tok.in(first,varstart)) {
+        if(prologtokenizer.in(first,varstart)) {
             tok.gettoken();
             term old=(term)vars.get(f1);
             if(old!=null&&!f1.equals("_"))
@@ -507,14 +507,14 @@ class term {
             vars.put(f1,t);
             return t;
         }
-        else if(tok.in(first,numchar)) {
+        else if(prologtokenizer.in(first,numchar)) {
             int n;
             try{n=Integer.parseInt(tok.gettoken());}
             catch(NumberFormatException e)
                 {return null;}
             return new term(n);
         }
-        else if(tok.in(first,normalstart)) {
+        else if(prologtokenizer.in(first,normalstart)) {
             tok.gettoken();
             t=new term();
             if(first==39)
