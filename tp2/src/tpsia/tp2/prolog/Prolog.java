@@ -31,123 +31,121 @@ package tpsia.tp2.prolog;
 import java.util.*;
 import java.io.*;
 
-/**********************************************************
+/*******************************************************************************
  * PROLOG
- **********************************************************/
+ ******************************************************************************/
 
 public class Prolog {
-    program prog;
-    solver sv;
-    static private boolean once = true;
+	Program prog;
 
-    public Prolog() {
-        prologop.makeops();
-        if (once) {
-            System.out.println("CKI Prolog Engine. By Sieuwert van Otterloo.\n");
-            once = false;
-        }
-        prog=new program();
-        sv=new solver(prog);
-        prog.setsolver(sv);
-    }
-    public void addStatement(String s) {
-        term inp=(new prologtokenizer(s)).gettermdot(null);
-        if (sv.addStatement(inp) == false) {
-            System.out.println("Error addStatementing: " + s);
-        }
-    }
-    public Vector solve(String s) {
-        term inp=(new prologtokenizer(s)).gettermdot(null);
-        sv.query(inp);
-        return sv.getAnswers();
-    }
-    public boolean consultFile(String filename) {
-	try {
-	    FileReader fr = new FileReader(filename);
-	    BufferedReader br = new BufferedReader(fr);
-	    while (true) {
-		String line = br.readLine();
-		if (line == null) break;
-		System.out.println(line);
-		line = line.trim();
-		if (line.startsWith("%") || line.length() < 1) continue;
-		if (line.endsWith(".")) {
-		    addStatement(line);
-		} else {
-		    while (line.endsWith(".") == false) {
-			String s2 = br.readLine();
-			System.out.println(s2);
-			line = line + " " + s2;
-		    }
-		    addStatement(line);
-		}
-	    }
-	    br.close();
-	    return true; // OK
-	} catch (Exception e) {
-	    System.out.println("consultFile error: " + e);
-	    e.printStackTrace();
-	}
-	return false;
-    }
+	Solver sv;
 
-    static public void main(String [] args) {
-	if (args.length == 0) {
-	    /**
-	     * Simple example howing how to use embedded Prolog
-	     * in your Java programs:
-	     */
-	    Prolog p = new Prolog();
-	    p.addStatement("father(ken,mark).");
-	    p.addStatement("father(ken,ron).");
-	    p.addStatement("father(ron,anthony).");
-	    p.addStatement("grandfather(X,Z):-father(X,Y),father(Y,Z).");
-	    Vector v = p.solve("grandfather(X,Y).");
-	    System.out.println("test results:");
-	    //      Vector v = p.solve("permutation([1,2,3],X).");
-	    for (int i=0; i<v.size(); i++) {
-		System.out.println();
-		Hashtable the_answers = (Hashtable)v.elementAt(i);
-		Enumeration enumeration = the_answers.keys();
-		while (enumeration.hasMoreElements()) {
-		    String var = (String)enumeration.nextElement();
-		    String val = (String)the_answers.get(var);
-		    System.out.println(" var: " + var + "   val: " + val);
+	static private boolean once = true;
+
+	public Prolog() {
+		Prologop.makeops();
+		if (once) {
+			System.out
+					.println("CKI Prolog Engine. By Sieuwert van Otterloo.\n");
+			once = false;
 		}
-	    }
-	} else if (args.length > 1) {
-	    /**
-	     * Two arguments: a prolog file and a query
-	     */
-	    try {
-		Prolog p = new Prolog();
-		p.consultFile(args[0]);
-		Vector v = p.solve(args[1]);
-		for (int i=0; i<v.size(); i++) {
-		    System.out.println("\nNext answer:");
-		    Hashtable the_answers = (Hashtable)v.elementAt(i);
-		    Enumeration enumeration = the_answers.keys();
-		    while (enumeration.hasMoreElements()) {
-			String var = (String)enumeration.nextElement();
-			String val = (String)the_answers.get(var);
-			System.out.println(" var: " + var + "   val: " + val);
-		    }
-		}
-	    } catch (Exception e) {
-		System.out.println("error: " + e);
-		e.printStackTrace();
-	    }
+		prog = new Program();
+		sv = new Solver(prog);
+		prog.setsolver(sv);
 	}
-    }
+
+	public void addStatement(String s) {
+		Term inp = (new PrologTokenizer(s)).gettermdot(null);
+		if (sv.addStatement(inp) == false) {
+			System.out.println("Error addStatementing: " + s);
+		}
+	}
+
+	public Vector solve(String s) {
+		Term inp = (new PrologTokenizer(s)).gettermdot(null);
+		sv.query(inp);
+		return sv.getAnswers();
+	}
+
+	public boolean consultFile(String filename) {
+		try {
+			FileReader fr = new FileReader(filename);
+			BufferedReader br = new BufferedReader(fr);
+			while (true) {
+				String line = br.readLine();
+				if (line == null)
+					break;
+				System.out.println(line);
+				line = line.trim();
+				if (line.startsWith("%") || line.length() < 1)
+					continue;
+				if (line.endsWith(".")) {
+					addStatement(line);
+				} else {
+					while (line.endsWith(".") == false) {
+						String s2 = br.readLine();
+						System.out.println(s2);
+						line = line + " " + s2;
+					}
+					addStatement(line);
+				}
+			}
+			br.close();
+			return true; // OK
+		} catch (Exception e) {
+			System.out.println("consultFile error: " + e);
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	static public void main(String[] args) {
+		if (args.length == 0) {
+			/**
+			 * Simple example howing how to use embedded Prolog in your Java
+			 * programs:
+			 */
+			Prolog p = new Prolog();
+			p.addStatement("father(ken,mark).");
+			p.addStatement("father(ken,ron).");
+			p.addStatement("father(ron,anthony).");
+			p.addStatement("grandfather(X,Z):-father(X,Y),father(Y,Z).");
+
+			Vector v = p.solve("grandfather(X,Y).");
+			System.out.println("test results:");
+			// Vector v = p.solve("permutation([1,2,3],X).");
+			for (int i = 0; i < v.size(); i++) {
+				System.out.println();
+				Hashtable the_answers = (Hashtable) v.elementAt(i);
+				Enumeration enumeration = the_answers.keys();
+				while (enumeration.hasMoreElements()) {
+					String var = (String) enumeration.nextElement();
+					String val = (String) the_answers.get(var);
+					System.out.println(" var: " + var + "   val: " + val);
+				}
+			}
+		} else if (args.length > 1) {
+			/**
+			 * Two arguments: a prolog file and a query
+			 */
+			try {
+				Prolog p = new Prolog();
+				p.consultFile(args[0]);
+				Vector v = p.solve(args[1]);
+				for (int i = 0; i < v.size(); i++) {
+					System.out.println("\nNext answer:");
+					Hashtable the_answers = (Hashtable) v.elementAt(i);
+					Enumeration enumeration = the_answers.keys();
+					while (enumeration.hasMoreElements()) {
+						String var = (String) enumeration.nextElement();
+						String val = (String) the_answers.get(var);
+						System.out.println(" var: " + var + "   val: " + val);
+					}
+				}
+			} catch (Exception e) {
+				System.out.println("error: " + e);
+				e.printStackTrace();
+			}
+		}
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
