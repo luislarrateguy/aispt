@@ -1,4 +1,41 @@
 \section{Reglas causales}
 
-No encontramos reglas causales.
+\begin{itemize}
 
+\item  energia(energíaActual,s)
+$\land$ promedioPorPelear(promedio,s) $\land$ $(energíaActual + promedio)$ > 0
+$\Rightarrow$ convienePelear(s)
+
+\item hayEnemigo(x,y,s) $\land$ energia(energíaActual,s)
+$\land$ promedioPorPelear(promedio,s) $\land$ $(energíaActual + promedio)$ > 0
+$\Rightarrow$ convieneMoverse(s)
+
+\item posicion(x,y,s) $\Rightarrow$
+ conoce(SumarPosicion(x,-1,s),y,s) $\land$  
+ conoce(SumarPosicion(x,1,s),y,s) $\land$ 
+ conoce(x,SumarPosicion(y,-1,s),s) $\land$ 
+ conoce(x,SumarPosicion(y,1,s),s) 
+ 
+\item conoce(1,1,s) $\land$ conoce(1,2,s) $\land$ conoce(1,3,s) $\land$ 
+ conoce(1,4,s) $\land$ conoce(2,1,s) $\land$ conoce(2,2,s) $\land$ 
+ conoce(2,3,s) $\land$ conoce(2,4,s) $\land$ conoce(3,1,s) $\land$ 
+ conoce(3,2,s) $\land$ conoce(3,3,s) $\land$ conoce(3,4,s) $\land$ 
+ conoce(4,1,s) $\land$ conoce(4,2,s) $\land$ conoce(4,3,s) $\land$ 
+ conoce(4,4,s) $\Rightarrow$ conoceTodo(s)
+ 
+\item celdaVacia(1,1,s) $\land$ celdaVacia(1,2,s) $\land$ celdaVacia(1,3,s) $\land$ 
+ celdaVacia(1,4,s) $\land$ celdaVacia(2,1,s) $\land$ celdaVacia(2,2,s) $\land$ 
+ celdaVacia(2,3,s) $\land$ celdaVacia(2,4,s) $\land$ celdaVacia(3,1,s) $\land$ 
+ celdaVacia(3,2,s) $\land$ celdaVacia(3,3,s) $\land$ celdaVacia(3,4,s) $\land$ 
+ celdaVacia(4,1,s) $\land$ celdaVacia(4,2,s) $\land$ celdaVacia(4,3,s) $\land$ 
+ celdaVacia(4,4,s) 
+ $\Rightarrow$ noHayEnemigosVivos(s) $\land$ noHayComida(s)
+ 
+\item conoceTodo(s) $\Rightarrow$ condicionUnoObjetivo(s)
+\item ! convieneMoverse(s) $\Rightarrow$ condicionUnoObjetivo(s)
+\item noHayComida(s) $\Rightarrow$ condicionDosObjetivo(s)
+\item noHayEnemigosVivos(s) $\Rightarrow$ condicionTresObejtivo(s)
+\item ! convienePelear(s) $\Rightarrow$ condicionTresObejtivo(s)
+
+\item  condicionUnoObjetivo(s) $\land$ condicionDosObjetivo(s)
+$\land$ condicionTresObejtivo(s) $\Rightarrow$ cumplioObjetivo(s)

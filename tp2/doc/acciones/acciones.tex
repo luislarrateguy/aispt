@@ -21,33 +21,28 @@ Las acciones posibles son las siguientes:
 
 \item posicion(x,y,s) $\land$ hayEnemigo(x,y,s) $\land$ energia(energíaActual,s)
 $\land$ promedioPorPelear(promedio,s) $\land$ $(energíaActual + promedio) > 0$
-$\Rightarrow$ \linebreak muy\_bueno(Comer,s)
+$\Rightarrow$ \linebreak muy\_bueno(Pelear,s)
 
-\item posicion(x,y,s) $\land$ hayEnemigo(x,y,s) $\land$ energia(energíaActual,s)
-$\land$ promedioPorPelear(promedio,s) $\land$ $(energíaActual + promedio)$ $\le$ 0
+\item posicion(x,y,s) $\land$ hayEnemigo(x,y,s) $\land$ ! convienePelear(s)
 $\Rightarrow$ malo(Comer,s)
 
 \item posicion(x,y,s) $\land$ adyacente(xa,ya,dirección,s) $\land$
 hayComida(xa,ya,s) $\Rightarrow$ excelente(Mover(dirección),s)
 
 \item posicion(x,y,s) $\land$ adyacente(xa,ya,dirección,s) $\land$
-hayEnemigo(xa,ya,s) $\land$ energia(energíaActual,s) $\land$
-promedioPorPelear(promedio,s) $\land$ $(energíaActual + promedio) > 0$ $\Rightarrow$
+hayEnemigo(xa,ya,s)  $\land$ convienePelear(s) $\Rightarrow$
 muy\_bueno(Mover(dirección),s)
 
 \item posicion(x,y,s) $\land$ adyacente(xa,ya,dirección,s) $\land$
-hayEnemigo(xa,ya,s) $\land$ energía(energíaActual,s) $\land$
-promedioPorPelear(promedio,s) $\land$ $(energíaActual + promedio) \le 0$
+hayEnemigo(xa,ya,s) $\land$ ! convienePelear(s)
 $\Rightarrow$ malo(Mover(dirección),s)
 
 \item posicion(x,y,s) $\land$ adyacente(xa,ya,dirección,s) $\land$
-celdaVacía(xa,ya,s) $\land$ energía(energíaActual,s) $\land$
-promedioPorAvanzar(promedio,s) $\land$ $(energíaActual + promedio) > 0$ $\Rightarrow$
+celdaVacía(xa,ya,s) $\land$ convieneMoverse(s) $\Rightarrow$
 bueno(Mover(dirección),s)
 
 \item posicion(x,y,s) $\land$ adyacente(xa,ya,dirección,s) $\land$
-celdaVacía(xa,ya,s) $\land$ energía(energíaActual,s) $\land$
-promedioPorAvanzar(promedio,s) $\land$ $(energíaActual + promedio) \le 0$
+celdaVacía(xa,ya,s) $\land$ !convieneMoverse(s)
 $\Rightarrow$ malo(Mover(dirección),s)
 
 \end{itemize}
