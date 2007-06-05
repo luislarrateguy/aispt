@@ -19,13 +19,17 @@ $\Rightarrow$ convieneMoverse(s)
 \item hayComida(x,y,s) $\Rightarrow$
  conoce(x,y,s)
 
-\TODO{La regla debajo está DEPRECATED}
+\TODO{La regla debajo está DEPRECATED
+\newline
 \item posicion(x,y,s) $\Rightarrow$
  conoce(SumarPosicion(x,-1,s),y,s) $\land$  
  conoce(SumarPosicion(x,1,s),y,s) $\land$ 
  conoce(x,SumarPosicion(y,-1,s),s) $\land$ 
  conoce(x,SumarPosicion(y,1,s),s) 
- 
+}
+
+\TODO{Esta bien que planteemos esto por extensión,
+en vez de con un cuantificador?}
 \item conoce(1,1,s) $\land$ conoce(1,2,s) $\land$ 
  conoce(1,3,s) $\land$ conoce(1,4,s) $\land$ 
  \newline 
@@ -39,14 +43,28 @@ $\Rightarrow$ convieneMoverse(s)
  conoce(4,3,s) $\land$ conoce(4,4,s) 
  \newline
  $\Rightarrow$ conoceTodo(s)
+
+\TODO{ La regla debajo está DEPRECATED
+\item celdaVacia(1,1,s) $\land$ celdaVacia(1,2,s) $\land$ 
+ celdaVacia(1,3,s) $\land$ celdaVacia(1,4,s) $\land$ 
+ \newline 
+ celdaVacia(2,1,s) $\land$ celdaVacia(2,2,s) $\land$ 
+ celdaVacia(2,3,s) $\land$ celdaVacia(2,4,s) $\land$
+ \newline  
+ celdaVacia(3,1,s) $\land$ celdaVacia(3,2,s) $\land$ 
+ celdaVacia(3,3,s) $\land$ celdaVacia(3,4,s) $\land$ 
+ \newline 
+ celdaVacia(4,1,s) $\land$ celdaVacia(4,2,s) $\land$ 
+ celdaVacia(4,3,s) $\land$ celdaVacia(4,4,s) 
+ $\Rightarrow$ tableroVacio(s)
  
-\item celdaVacia(1,1,s) $\land$ celdaVacia(1,2,s) $\land$ celdaVacia(1,3,s) $\land$ 
- celdaVacia(1,4,s) $\land$ celdaVacia(2,1,s) $\land$ celdaVacia(2,2,s) $\land$ 
- celdaVacia(2,3,s) $\land$ celdaVacia(2,4,s) $\land$ celdaVacia(3,1,s) $\land$ 
- celdaVacia(3,2,s) $\land$ celdaVacia(3,3,s) $\land$ celdaVacia(3,4,s) $\land$ 
- celdaVacia(4,1,s) $\land$ celdaVacia(4,2,s) $\land$ celdaVacia(4,3,s) $\land$ 
- celdaVacia(4,4,s) 
- $\Rightarrow$ noHayEnemigosVivos(s) $\land$ noHayComida(s)
+\item tableroVacio(s) $\Rightarrow$ noHayEnemigosVivos(s) 
+\item tableroVacio(s) $\Rightarrow$ noHayComida(s)
+}
+
+\TODO{Se puede utilizar la negacion? estaría bien definido esto?}
+\item !hayEnemigo(x,y,s) $\Rightarrow$ noHayEnemigosVivos(s) 
+\item !hayComida(x,y,s) $\Rightarrow$ noHayComida(s)
  
 \item conoceTodo(s) $\Rightarrow$ condicionUnoObjetivo(s)
 \item ! convieneMoverse(s) $\Rightarrow$ condicionUnoObjetivo(s)
