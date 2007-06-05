@@ -3,11 +3,11 @@
 \begin{itemize}
 
 \item  energia(energíaActual,s)
-$\land$ promedioPorPelear(promedio,s) $\land$ $(energíaActual + promedio)$ > 0
+$\land$ promedioPorPelear(promedio,s) $\land$ $(energíaActual + promedio)$ >~0
 $\Rightarrow$ convienePelear(s)
 
 \item hayEnemigo(x,y,s) $\land$ energia(energíaActual,s)
-$\land$ promedioPorPelear(promedio,s) $\land$ $(energíaActual + promedio)$ > 0
+$\land$ promedioPorPelear(promedio,s) $\land$ $(energíaActual + promedio)$ >~0
 $\Rightarrow$ convieneMoverse(s)
 
 \item celdaVacía(x,y,s) $\Rightarrow$

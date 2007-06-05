@@ -4,12 +4,26 @@ Las acciones posibles son las siguientes:
 
 \begin{itemize}
 
-\item \textbf{Mover(dirección)}: donde dirección es ``arriba'', ``abajo'',
-``derecha'' o ``izquierda''.
+\item \textbf{Mover(direccion)}: donde \emph{direccion} es ``arriba'',
+``abajo'', ``derecha'' o ``izquierda''. Si la situación actual es \emph{s},
+``posicion(x,y,s)'' y ``convieneMoverse(s)'' entonces la acción se puede llevar
+acabo. Su efecto es que en la situación resultante es verdadero
+``posicion(x,y,s+1)'', dependiendo los valores de $x$ e $y$ según la dirección
+del movimiento del agente.
 
-\item \textbf{Comer()}
+\item \textbf{Comer()}: Debe haber un alimento en la posición actual. Esto se
+traduce a que si la situación actual es \emph{s}, ``posicion(x,y,s)'' y
+``hayAlimento(x,y,s)'' entonces la acción se puede llevar acabo. Su efecto es
+que en la situación resultante ya no es verdadero ``hayAlimento(x,y,s+1)'',
+sino ``celdaVacia(x,y,s+1)''.
 
-\item \textbf{Pelear()}
+\item \textbf{Pelear()}: Debe haber un enemigo en la posición actual, y además
+se debe contar con la energía suficiente para que el pelear no implique una
+alta probabilidad de morir. Esto se traduce a que si la situación actual es
+\emph{s}, ``posicion(x,y,s)'', ``hayEnemigo(x,y,s)'' y ``convienePelear(s)''
+entonces la acción se puede llevar acabo. Su efecto es que en la situación
+resultante ya no es verdadero ``hayEnemigo(x,y,s+1)'', sino
+``celdaVacia(x,y,s+1)'', salvo que el agente haya muerto, claro.
 
 \end{itemize}
 
