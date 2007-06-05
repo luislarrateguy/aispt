@@ -43,7 +43,7 @@ public class Main {
 			
 			for (int i=1; i<=1; i++) {
 					log.debug("Iniciando simulación nro : "+ Integer.toString(i));
-				Simulador s = new Simulador(busqueda);
+				Simulador s = new Simulador();
 				s.comenzarSimulacion();
 				s.mostrarPerformance();
 			}

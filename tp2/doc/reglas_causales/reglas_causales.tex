@@ -19,6 +19,22 @@ $\Rightarrow$ convienePelear(s)
 \item hayComida(x,y,s) $\Rightarrow$
  conoce(x,y,s)
 
+
+\Nota{Ejemplo de calculo de promedio}
+\item Resultado(accion,s) $\land$ energia(e,s) 
+\newline
+$\Rightarrow$
+     datosEnergia(accion,[e|energias])
+     
+\item sumatoria(lista,suma)$\land$ cantidad(lista,c)$\land$ prom = (suma/c)
+\newline
+       $\Rightarrow$ promedio(lista,prom)
+       
+\item  datosEnergia(accion,energias) $\land$ 
+ promedio(energias,prom) $\Rightarrow$
+ promedioPorPelear(prom,s)
+ 
+
 \Nota{La regla debajo está DEPRECATED}
 \item posicion(x,y,s) $\Rightarrow$
  conoce(SumarPosicion(x,-1,s),y,s) $\land$  
