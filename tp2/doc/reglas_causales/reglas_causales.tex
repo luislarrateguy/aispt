@@ -10,18 +10,35 @@ $\Rightarrow$ convienePelear(s)
 $\land$ promedioPorPelear(promedio,s) $\land$ $(energíaActual + promedio)$ > 0
 $\Rightarrow$ convieneMoverse(s)
 
+\item celdaVacía(x,y,s) $\Rightarrow$
+ conoce(x,y,s)
+ 
+\item hayEnemigo(x,y,s) $\Rightarrow$
+ conoce(x,y,s)
+
+\item hayComida(x,y,s) $\Rightarrow$
+ conoce(x,y,s)
+
+\TODO{La regla debajo está DEPRECATED}
 \item posicion(x,y,s) $\Rightarrow$
  conoce(SumarPosicion(x,-1,s),y,s) $\land$  
  conoce(SumarPosicion(x,1,s),y,s) $\land$ 
  conoce(x,SumarPosicion(y,-1,s),s) $\land$ 
  conoce(x,SumarPosicion(y,1,s),s) 
  
-\item conoce(1,1,s) $\land$ conoce(1,2,s) $\land$ conoce(1,3,s) $\land$ 
- conoce(1,4,s) $\land$ conoce(2,1,s) $\land$ conoce(2,2,s) $\land$ 
- conoce(2,3,s) $\land$ conoce(2,4,s) $\land$ conoce(3,1,s) $\land$ 
- conoce(3,2,s) $\land$ conoce(3,3,s) $\land$ conoce(3,4,s) $\land$ 
- conoce(4,1,s) $\land$ conoce(4,2,s) $\land$ conoce(4,3,s) $\land$ 
- conoce(4,4,s) $\Rightarrow$ conoceTodo(s)
+\item conoce(1,1,s) $\land$ conoce(1,2,s) $\land$ 
+ conoce(1,3,s) $\land$ conoce(1,4,s) $\land$ 
+ \newline 
+ conoce(2,1,s) $\land$ conoce(2,2,s) $\land$ 
+ conoce(2,3,s) $\land$ conoce(2,4,s) $\land$ 
+ \newline 
+ conoce(3,1,s) $\land$ conoce(3,2,s) $\land$ 
+ conoce(3,3,s) $\land$ conoce(3,4,s) $\land$ 
+ \newline 
+ conoce(4,1,s) $\land$ conoce(4,2,s) $\land$ 
+ conoce(4,3,s) $\land$ conoce(4,4,s) 
+ \newline
+ $\Rightarrow$ conoceTodo(s)
  
 \item celdaVacia(1,1,s) $\land$ celdaVacia(1,2,s) $\land$ celdaVacia(1,3,s) $\land$ 
  celdaVacia(1,4,s) $\land$ celdaVacia(2,1,s) $\land$ celdaVacia(2,2,s) $\land$ 
