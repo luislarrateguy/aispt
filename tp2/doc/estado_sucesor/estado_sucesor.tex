@@ -19,5 +19,14 @@
 \item $\forall x,y$: hayEnemigo(x,y,Resultado(acción,s)) $\Leftrightarrow$
 \newline (acción $\ne$ Pelear $\land$ hayEnemigo(x,y,s))
 
+\item $\forall x,y$: hayEnemigo(x,y,Resultado(acción,s)) $\Leftrightarrow$
+\newline (acción = Pelear $\land$ celdaVacia(x,y,s))
+
 \end{itemize}
+\FIXME{Me parece que tenemo que revisar con las diapositivas si los axiomas
+no serían así:
+\newline
+ $\forall x,y$: hayEnemigo(x,y,s) $\Leftrightarrow$ 
+\newline (Resultado(acción,s) $\land$  acción = Pelear $\land$ celdaVacia(x,y,s+1))
+}
 
