@@ -1,35 +1,54 @@
 \section{Axiomas de estado sucesor}
 
+\Nota{Ahora lo que era antes \emph{Resultado(accion,s)} es \emph{AccionEjecutada(acción,s)},
+e indica, como su nombre sugiere, la acción que fue ejecutada en la situación \emph{s}.}
+
 \begin{itemize}
 
-\item $\forall x,y$: posición(x,y,Resultado(acción,s)) $\Leftrightarrow$
-\newline (acción = Mover(arriba) $\land$ posicion(x, SumarPosicion(y,-1),s))
+\item $\forall x,y$: posición(x,y,s+1) $\Leftrightarrow$
+\newline (AccionEjecutada(Mover(arriba),s) $\land$ posicion(x, SumarPosicion(y,-1),s))
 \newline $\lor$
-\newline (acción = Mover(abajo) $\land$ posicion(x, SumarPosicion(y,1),s))
+\newline (AccionEjecutada(Mover(abajo),s) $\land$ posicion(x, SumarPosicion(y,1),s))
 \newline $\lor$
-\newline (acción = Mover(derecha) $\land$ posicion(SumarPosicion(x,-1),y,s))
+\newline (AccionEjecutada(Mover(derecha),s) $\land$ posicion(SumarPosicion(x,-1),y,s))
 \newline $\lor$
-\newline (acción = Mover(izquierda) $\land$ posicion(SumarPosicion(x,1),y,s))
+\newline (AccionEjecutada(Mover(izquierda),s) $\land$ posicion(SumarPosicion(x,1),y,s))
 \newline $\lor$
-\newline (acción $\ne$ Mover(dirección) $\land$ posición(x,y,s))
+\newline ($\lnot$AccionEjecutada(Mover(dirección),s) $\land$ posición(x,y,s))
 
-\item $\forall x,y$: hayComida(x,y,Resultado(acción,s)) $\Leftrightarrow$
-\newline (acción = Comer $\land$ celdaVacia(x,y,s))
+% celdaVacía
 
-\item $\forall x,y$: hayComida(x,y,Resultado(acción,s)) $\Leftrightarrow$
-\newline (acción $\ne$ Comer $\land$ hayComida(x,y,s))
+\Nota{Agregamos los axiomas de estado sucesor para celdaVacia.}
 
-\item $\forall x,y$: hayEnemigo(x,y,Resultado(acción,s)) $\Leftrightarrow$
-\newline (acción $\ne$ Pelear $\land$ hayEnemigo(x,y,s))
+\item $\forall x,y$: celdaVacia(x,y,s+1) $\Leftrightarrow$ (celdaVacia(x,y,s))
 
-\item $\forall x,y$: hayEnemigo(x,y,Resultado(acción,s)) $\Leftrightarrow$
-\newline (acción = Pelear $\land$ celdaVacia(x,y,s))
+\item $\forall x,y$: celdaVacia(x,y,s+1) $\Leftrightarrow$
+\newline (posicion(x,y,s) $\land$ hayComida(x,y,s) $\land$ AccionEjecutada(Comer,s))
+
+\item $\forall x,y$: celdaVacia(x,y,s+1) $\Leftrightarrow$
+\newline (posicion(x,y,s) $\land$ hayEnemigo(x,y,s) $\land$ AccionEjecutada(Pelear,s))
+
+% hayComida
+
+\Nota{Para hayComida, contemplamos el caso en que el agente se ubica en una
+posición coincidente a la de un alimento (primer caso), y para los otros
+alimentos conocidos pero en otras posiciones distintas a la del agente.}
+
+\item $\forall x,y$: hayComida(x,y,s+1) $\Leftrightarrow$
+\newline (posicion(x,y,s) $\land$ hayComida(x,y,s) $\land$ $\lnot$AccionEjecutada(Comer,s))
+
+\item $\forall x,y$: hayComida(x,y,s+1) $\Leftrightarrow$
+\newline (posicion(x1,y1,s) $\land$ (x $\ne$ x1 $\lor$ y $\ne$ y1) $\land$ hayComida(x,y,s))
+
+% hayEnemigo
+
+\Nota{Aquí vale la misma nota que hicimos para hayComida.}
+
+\item $\forall x,y$: hayEnemigo(x,y,s+1) $\Leftrightarrow$
+\newline (posicion(x,y,s) $\land$ hayEnemigo(x,y,s) $\land$ $\lnot$AccionEjecutada(Pelear,s))
+
+\item $\forall x,y$: hayEnemigo(x,y,s+1) $\Leftrightarrow$
+\newline (posicion(x1,y1,s) $\land$ (x $\ne$ x1 $\lor$ y $\ne$ y1) $\land$ hayEnemigo(x,y,s))
 
 \end{itemize}
-\FIXME{Me parece que tenemo que revisar con las diapositivas si los axiomas
-no serían así:
-\newline
- $\forall x,y$: hayEnemigo(x,y,s) $\Leftrightarrow$ 
-\newline (Resultado(acción,s) $\land$  acción = Pelear $\land$ celdaVacia(x,y,s+1))
-}
 

@@ -3,12 +3,12 @@
 \begin{itemize}
 
 \item  energia(energíaActual,s)
-$\land$ promedioPorPelear(promedio,s) $\land$ $(energíaActual + promedio)$ >~0
-$\Rightarrow$ convienePelear(s)
+$\land$ promedioPorMoverse(promedio,s) $\land$ (energíaActual + promedio) >~0
+$\Rightarrow$ convieneMoverse(s)
 
 \item hayEnemigo(x,y,s) $\land$ energia(energíaActual,s)
-$\land$ promedioPorPelear(promedio,s) $\land$ $(energíaActual + promedio)$ >~0
-$\Rightarrow$ convieneMoverse(s)
+$\land$ promedioPorPelear(promedio,s) $\land$ (energíaActual + promedio) >~0
+$\Rightarrow$ convienePelear(s)
 
 \item celdaVacía(x,y,s) $\Rightarrow$
  conoce(x,y,s)
@@ -19,16 +19,14 @@ $\Rightarrow$ convieneMoverse(s)
 \item hayComida(x,y,s) $\Rightarrow$
  conoce(x,y,s)
 
-\TODO{La regla debajo está DEPRECATED
-\newline
+\Nota{La regla debajo está DEPRECATED}
 \item posicion(x,y,s) $\Rightarrow$
  conoce(SumarPosicion(x,-1,s),y,s) $\land$  
  conoce(SumarPosicion(x,1,s),y,s) $\land$ 
  conoce(x,SumarPosicion(y,-1,s),s) $\land$ 
  conoce(x,SumarPosicion(y,1,s),s) 
-}
 
-\TODO{Esta bien que planteemos esto por extensión,
+\Pregunta{Esta bien que planteemos esto por extensión,
 en vez de con un cuantificador?}
 \item conoce(1,1,s) $\land$ conoce(1,2,s) $\land$ 
  conoce(1,3,s) $\land$ conoce(1,4,s) $\land$ 
@@ -44,7 +42,7 @@ en vez de con un cuantificador?}
  \newline
  $\Rightarrow$ conoceTodo(s)
 
-\TODO{ La regla debajo está DEPRECATED
+\Nota{Las tres reglas debajo están DEPRECATED}
 \item celdaVacia(1,1,s) $\land$ celdaVacia(1,2,s) $\land$ 
  celdaVacia(1,3,s) $\land$ celdaVacia(1,4,s) $\land$ 
  \newline 
@@ -60,12 +58,12 @@ en vez de con un cuantificador?}
  
 \item tableroVacio(s) $\Rightarrow$ noHayEnemigosVivos(s) 
 \item tableroVacio(s) $\Rightarrow$ noHayComida(s)
-}
 
-\TODO{Se puede utilizar la negacion? estaría bien definido esto?}
+\Pregunta{Se puede utilizar la negacion en las siguientes reglas? estaría bien definido esto?}
 \item !hayEnemigo(x,y,s) $\Rightarrow$ noHayEnemigosVivos(s) 
 \item !hayComida(x,y,s) $\Rightarrow$ noHayComida(s)
- 
+
+\Nota{Planteo de los objetivos}
 \item conoceTodo(s) $\Rightarrow$ condicionUnoObjetivo(s)
 \item ! convieneMoverse(s) $\Rightarrow$ condicionUnoObjetivo(s)
 \item noHayComida(s) $\Rightarrow$ condicionDosObjetivo(s)
