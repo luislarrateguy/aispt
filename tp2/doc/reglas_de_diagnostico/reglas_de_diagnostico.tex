@@ -3,6 +3,7 @@
 \begin{itemize}
 
 % Percepción de un enemigo
+\subsection{Celdas con enemigos}
 \item Percepción([enemigo, -, -, -], x, y, -) $\Rightarrow$
 \newline hayEnemigo(SumarPosición(x,-1),y,s)
 
@@ -16,6 +17,7 @@
 \newline hayEnemigo(x,SumarPosición(y,1),s)
 
 % Percepción de comida
+\subsection{Celdas con comida}
 \item Percepción([comida, -, -, -], x, y, -) $\Rightarrow$
 \newline hayComida(SumarPosición(x,-1),y,s)
 
@@ -29,6 +31,7 @@
 \newline hayComida(x,SumarPosición(y,1),s)
 
 % Percepción de celda vacía
+\subsection{Celdas vacías}
 \item Percepción([vacía, -, -, -], x, y, -) $\Rightarrow$
 \newline celdaVacía(SumarPosición(x,-1),y,s)
 
@@ -42,6 +45,7 @@
 \newline celdaVacía(x,SumarPosición(y,1),s)
 
 % Posición del pacman
+\subsection{Posición del agente}
 \item Percepción([-, -, -, -], x, y, -) $\Rightarrow$ posición(x,y,s)
 
 \item Percepción([-, -, -, -], -, -, energía) $\Rightarrow$ energía(energía,s)

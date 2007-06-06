@@ -1,10 +1,8 @@
 \section{Axiomas de estado sucesor}
 
-\Nota{Ahora lo que era antes \emph{Resultado(accion,s)} es \emph{AccionEjecutada(acción,s)},
-e indica, como su nombre sugiere, la acción que fue ejecutada en la situación \emph{s}.}
-
 \begin{itemize}
 
+% posicion
 \item $\forall x,y$: posición(x,y,s+1) $\Leftrightarrow$
 \newline (AccionEjecutada(Mover(arriba),s) $\land$ posicion(x, SumarPosicion(y,-1),s))
 \newline $\lor$
@@ -17,37 +15,23 @@ e indica, como su nombre sugiere, la acción que fue ejecutada en la situación 
 \newline ($\lnot$AccionEjecutada(Mover(dirección),s) $\land$ posición(x,y,s))
 
 % celdaVacía
-
-\Nota{Agregamos los axiomas de estado sucesor para celdaVacia.}
-
-\item $\forall x,y$: celdaVacia(x,y,s+1) $\Leftrightarrow$ (celdaVacia(x,y,s))
-
 \item $\forall x,y$: celdaVacia(x,y,s+1) $\Leftrightarrow$
+\newline (celdaVacia(x,y,s))
+\newline $\lor$
 \newline (posicion(x,y,s) $\land$ hayComida(x,y,s) $\land$ AccionEjecutada(Comer,s))
-
-\item $\forall x,y$: celdaVacia(x,y,s+1) $\Leftrightarrow$
+\newline $\lor$
 \newline (posicion(x,y,s) $\land$ hayEnemigo(x,y,s) $\land$ AccionEjecutada(Pelear,s))
 
 % hayComida
-
-\Nota{Para hayComida, contemplamos el caso en que el agente se ubica en una
-posición coincidente a la de un alimento (primer caso), y para los otros
-alimentos conocidos pero en otras posiciones distintas a la del agente.}
-
 \item $\forall x,y$: hayComida(x,y,s+1) $\Leftrightarrow$
 \newline (posicion(x,y,s) $\land$ hayComida(x,y,s) $\land$ $\lnot$AccionEjecutada(Comer,s))
-
-\item $\forall x,y$: hayComida(x,y,s+1) $\Leftrightarrow$
+\newline $\lor$
 \newline (posicion(x1,y1,s) $\land$ (x $\ne$ x1 $\lor$ y $\ne$ y1) $\land$ hayComida(x,y,s))
 
 % hayEnemigo
-
-\Nota{Aquí vale la misma nota que hicimos para hayComida.}
-
 \item $\forall x,y$: hayEnemigo(x,y,s+1) $\Leftrightarrow$
 \newline (posicion(x,y,s) $\land$ hayEnemigo(x,y,s) $\land$ $\lnot$AccionEjecutada(Pelear,s))
-
-\item $\forall x,y$: hayEnemigo(x,y,s+1) $\Leftrightarrow$
+\newline $\lor$
 \newline (posicion(x1,y1,s) $\land$ (x $\ne$ x1 $\lor$ y $\ne$ y1) $\land$ hayEnemigo(x,y,s))
 
 \end{itemize}

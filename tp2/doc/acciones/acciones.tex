@@ -2,7 +2,7 @@
 
 Las acciones posibles son las siguientes:
 
-\Nota{Ahora las acciones están explicadas con sus precondiciones y efectos.}
+\Nota{Ahora cada acción hace verdadero el predicado \emph{AccionEjecutada(accion,s)}, dependiendo de qué acción se ejecutó}
 
 \begin{itemize}
 
@@ -11,13 +11,13 @@ Las acciones posibles son las siguientes:
 ``posicion(x,y,s)'' y ``convieneMoverse(s)'' entonces la acción se puede llevar
 acabo. Su efecto es que en la situación resultante es verdadero
 ``posicion(x,y,s+1)'', dependiendo los valores de $x$ e $y$ según la dirección
-del movimiento del agente.
+del movimiento del agente. También se hace verdadero el predicado ``AccionEjecutada(Mover(direccion),s)''.
 
 \item \textbf{Comer()}: Debe haber un alimento en la posición actual. Esto se
 traduce a que si la situación actual es \emph{s}, ``posicion(x,y,s)'' y
 ``hayAlimento(x,y,s)'' entonces la acción se puede llevar acabo. Su efecto es
 que en la situación resultante ya no es verdadero ``hayAlimento(x,y,s+1)'',
-sino ``celdaVacia(x,y,s+1)''.
+sino ``celdaVacia(x,y,s+1)''. También se hace verdadero el predicado ``AccionEjecutada(Comer,s)''.
 
 \item \textbf{Pelear()}: Debe haber un enemigo en la posición actual, y además
 se debe contar con la energía suficiente para que el pelear no implique una
@@ -25,7 +25,7 @@ alta probabilidad de morir. Esto se traduce a que si la situación actual es
 \emph{s}, ``posicion(x,y,s)'', ``hayEnemigo(x,y,s)'' y ``convienePelear(s)''
 entonces la acción se puede llevar acabo. Su efecto es que en la situación
 resultante ya no es verdadero ``hayEnemigo(x,y,s+1)'', sino
-``celdaVacia(x,y,s+1)'', salvo que el agente haya muerto, claro.
+``celdaVacia(x,y,s+1)'', salvo que el agente haya muerto, claro. También se hace verdadero el predicado ``AccionEjecutada(Pelear,s)''.
 
 \end{itemize}
 

@@ -32,16 +32,21 @@ negativo en caso contrario.
 valor de los promedios es positivo si implica una ganancia y negativo en caso
 contrario.
 
-\Pregunta{Estos tres predicados datosEnergia, van acá en la representación del estado?
-Los mismos se utilizan para calcular los promedios.}
-\item \textbf{datosEnergia(Comer, [])}
+\item \textbf{datosEnergia(Pelear,[],s)}: Almacena una lista con las diferencias
+entre la energía percibida y la actual cuando la acción fue Pelear, para después
+sacar un promedio.
 
-\item \textbf{datosEnergia(Pelear, [])}
+\item \textbf{datosEnergia(Mover,[],s)}: Idem, pero para la acción Mover.
 
-\item \textbf{datosEnergia(Mover, [])}
+% DEPRECATED: Este dato no haría falta. Sí lo utilizabamos en búsqueda, pero
+% aquí no hace falta.
+\item \textbf{datosEnergia(Comer,[],s)}: Idem, pero para la acción Comer.
 
 \item \textbf{adyacentes(xa,ya,dirección,s)}: devuelve en $xa$ y en $ya$ la
 posición de una celda adyancente a la actual ($posicion(x,y,s)$). $direccion$
 devuelve los mismos valores que acepta la acción \emph{Mover}.
+
+\item \textbf{AccionEjecutada(acción,s)}: Indica que ``acción'' fue ejecutada
+en la situación \emph{s}.
 
 \end{itemize}
