@@ -19,21 +19,36 @@ $\Rightarrow$ convienePelear(s)
 \item hayComida(x,y,s) $\Rightarrow$
  conoce(x,y,s)
 
+\Nota{Celdas adyacentes. Utilizamos el predicado adyacente para facilitar la
+valoración de las acciones. Ver dicha sección.}
+\item posicion(x,y,s) $\Rightarrow$ adyacente(SumarPosicion(x,1),y,derecha,s)
 
-\Nota{Ejemplo de calculo de promedio}
+\item posicion(x,y,s) $\Rightarrow$ adyacente(SumarPosicion(x,-1),y,izquierda,s)
+
+\item posicion(x,y,s) $\Rightarrow$ adyacente(x,SumarPosicion(y,1),arriba,s)
+
+\item posicion(x,y,s) $\Rightarrow$ adyacente(x,SumarPosicion(y,-1),abajo,s)
+
+\Nota{Cálculo de los promedios}
 \item Resultado(accion,s) $\land$ energia(e,s) 
-\newline
 $\Rightarrow$
      datosEnergia(accion,[e|energias])
      
 \item sumatoria(lista,suma)$\land$ cantidad(lista,c)$\land$ prom = (suma/c)
 \newline
        $\Rightarrow$ promedio(lista,prom)
+
+\item  datosEnergia(Comer,energias) $\land$ 
+ promedio(energias,prom) $\Rightarrow$
+ promedioPorMoverse(prom,s)
        
-\item  datosEnergia(accion,energias) $\land$ 
+\item  datosEnergia(Pelear,energias) $\land$ 
  promedio(energias,prom) $\Rightarrow$
  promedioPorPelear(prom,s)
- 
+
+\item  datosEnergia(Mover,energias) $\land$ 
+ promedio(energias,prom) $\Rightarrow$
+ promedioPorMoverse(prom,s)
 
 \Nota{La regla debajo está DEPRECATED}
 \item posicion(x,y,s) $\Rightarrow$
