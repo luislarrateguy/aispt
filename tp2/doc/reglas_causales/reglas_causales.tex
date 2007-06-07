@@ -52,14 +52,12 @@ $\Rightarrow$
  promedioPorMoverse(prom,s)
 
 \subsection{Reglas de utilidad para evaluar los objetivos}
-\FIXME{La regla debajo está DEPRECATED}
-\item posicion(x,y,s) $\Rightarrow$
- conoce(SumarPosicion(x,-1,s),y,s) $\land$  
- conoce(SumarPosicion(x,1,s),y,s) $\land$ 
- conoce(x,SumarPosicion(y,-1,s),s) $\land$ 
- conoce(x,SumarPosicion(y,1,s),s) 
 
-\TODO{Elegir si definimos esto por extensión o con un cuantificador}
+\TODO{Elegir si definimos esto por extensión o con un cuantificador.
+\newline 
+Nacho says: me da lo mismo. Al momento de la implementacion lo hacemos por 
+extension por facilidad, y aca podriamos hacerlo por cuantificador para 
+expresarlo.}
 \item conoce(1,1,s) $\land$ conoce(1,2,s) $\land$ 
  conoce(1,3,s) $\land$ conoce(1,4,s) $\land$ 
  \newline 
@@ -73,41 +71,23 @@ $\Rightarrow$
  conoce(4,3,s) $\land$ conoce(4,4,s) 
  \newline
  $\Rightarrow$ conoceTodo(s)
-
-\FIXME{Las tres reglas debajo están DEPRECATED}
-\item celdaVacia(1,1,s) $\land$ celdaVacia(1,2,s) $\land$ 
- celdaVacia(1,3,s) $\land$ celdaVacia(1,4,s) $\land$ 
- \newline 
- celdaVacia(2,1,s) $\land$ celdaVacia(2,2,s) $\land$ 
- celdaVacia(2,3,s) $\land$ celdaVacia(2,4,s) $\land$
- \newline  
- celdaVacia(3,1,s) $\land$ celdaVacia(3,2,s) $\land$ 
- celdaVacia(3,3,s) $\land$ celdaVacia(3,4,s) $\land$ 
- \newline 
- celdaVacia(4,1,s) $\land$ celdaVacia(4,2,s) $\land$ 
- celdaVacia(4,3,s) $\land$ celdaVacia(4,4,s) 
- $\Rightarrow$ tableroVacio(s)
  
-\item tableroVacio(s) $\Rightarrow$ noHayEnemigosVivos(s) 
-\item tableroVacio(s) $\Rightarrow$ noHayComida(s)
-
-\TODO{Ver como definimos esto. Según la profesora es mejor preguntar por cosas
-que existen, para que quede más fácil de entender. Sin embargo, los dos predicados
-de abajo funcionarían perfectamente me parece. Ver si avanzamos en pro a un mejor
-entendimiento o a un planteo más... ¿elegante?}
-\item !hayEnemigo(x,y,s) $\Rightarrow$ noHayEnemigosVivos(s) 
-\item !hayComida(x,y,s) $\Rightarrow$ noHayComida(s)
+\Nota{Esto no deja de ser cierto, que si todas estan vacias luego no hay
+enemigos ni comida. No hace falta discriminar cual ocurre. No va afectar al 
+objetivo, ni va a mejorar como se comporta el agente, ya que es EXCELENTE comer.
+}
+\item $\forall$ celdaVacia(X,Y,s) 
+ $\Rightarrow$ noHayEnemigosVivos(s) $\land$ noHayComida(s)
 
 \subsection{Planteo de los objetivos}
 \item conoceTodo(s) $\Rightarrow$ condicionUnoObjetivo(s)
 
-\TODO{La profesora planteó que podríamos definir esto como convieneMoverse([si|no],s)}
-\item ! convieneMoverse(s) $\Rightarrow$ condicionUnoObjetivo(s)
+\item convieneMoverse(`no',s) $\Rightarrow$ condicionUnoObjetivo(s)
 
 \TODO{Yo propuse otra regla para la condición dos. Ver si va.}
 \item noHayComida(s) $\Rightarrow$ condicionDosObjetivo(s)
 \item noHayEnemigosVivos(s) $\Rightarrow$ condicionTresObejtivo(s)
-\item ! convienePelear(s) $\Rightarrow$ condicionTresObejtivo(s)
+\item convienePelear(`no',s) $\Rightarrow$ condicionTresObejtivo(s)
 
 \item  condicionUnoObjetivo(s) $\land$ condicionDosObjetivo(s)
 $\land$ condicionTresObejtivo(s) $\Rightarrow$ cumplioObjetivo(s)
