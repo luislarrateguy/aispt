@@ -26,6 +26,7 @@ import java.util.Vector;
 import org.apache.log4j.*;
 import tpsia.tp2.acciones.*;
 import tpsia.tp2.agente.Agente;
+import tpsia.tp2.prolog.Prolog;
 import calculador.Calculador;
 import calculador.Pair;
 
@@ -35,20 +36,22 @@ public class Simulador {
 	private Calculador calculador;
 	private AmbienteReal ambiente;
 	private Agente pacman;
+	private Prolog prolog;
 
 	
 	public Simulador() {
 		this.calculador = new Calculador("Grupo 7");
 		this.ambiente = new AmbienteReal();
-		
 		/* Inicializando Acciones para acelerar ejecución */
 		// TODO: ver si hace falta. Sino eliminar.
+		/*
 		Pelear.getInstancia();
 		Comer.getInstancia();
 		AvanzarArriba.getInstancia();
 		AvanzarDerecha.getInstancia();
 		AvanzarAbajo.getInstancia();
 		AvanzarIzquierda.getInstancia();
+		*/
 	}
 	
 	
@@ -66,17 +69,17 @@ public class Simulador {
 		this.inicializarSimulacion();
 
 		Accion a;
-		Percepcion p;
+		Percepcion per;
 		int energiaPacman;
 		while (!this.finSimulacion()) {
 			/* Creo la percepción, se la envío al agente, y espero una acción
 			 * escogida por él. */
 			log.debug("Armando percepcion");
-			p = new Percepcion(ambiente.getCeldasAdyacentes(),
+			per = new Percepcion(ambiente.getCeldasAdyacentes(),
 					ambiente.getEnergiaPacman(), ambiente.getPosicionInicialPacman());
 			log.debug("Enviando percepcion a Pacman");
 			
-			a = pacman.actuar(p);
+			a = pacman.actuar(per);
 			try {
 				log.debug("Calculando energia pacman");
 				energiaPacman = calculador.calcularEnergiaPacMan(a.getTipoAccion());

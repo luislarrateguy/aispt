@@ -25,6 +25,8 @@ import org.apache.log4j.Logger;
 
 import tpsia.tp2.Percepcion;
 import tpsia.tp2.acciones.Accion;
+import tpsia.tp2.prolog.Prolog;
+import tpsia.tp2.prolog.StmtCreator;
 
 public class Agente {
 	private BaseConocimiento baseConocimiento;
@@ -41,7 +43,6 @@ public class Agente {
 	 */
 	public Agente(int energiaInicial, String tipoBusqueda) {
 		super();
-		
 		this.baseConocimiento = new BaseConocimiento();
 		this.tiempo = 0;
 	}
@@ -50,15 +51,41 @@ public class Agente {
 		Logger log = Logger.getLogger(Agente.class);
 		log.debug("Percepción recibida. Actualizando BC...");
 
-		this.baseConocimiento.decir(p);
+		/**
+		 * Agrega la Percepción a la Base de Conocimiento (KDB)
+		 */
+		this.baseConocimiento.decir(StmtCreator.percepcion(p,this.tiempo));
 
-		// TODO: Ver como traducir esto al tp2
-		//log.info(this.estado.getAmbiente());
-		//log.info("energia:" + Integer.toString(this.estado.getEnergia()));
+		/**
+		 * TODO: Debe analizar si cumplió el objetivo en la situacion
+		 * actual S, con la percepción recién agregada.
+		 * Si no es así, continua.
+		 */
+		/**
+		 * TODO: Ver como traducir esto al tp2
+		 * log.info(this.estado.getAmbiente());
+		 * log.info("energia:" + Integer.toString(this.estado.getEnergia()));
+		 */
+
+		/**
+		 * Pregunta por la mejor accion para realizar
+		 */
+		Accion a = this.baseConocimiento.preguntar(StmtCreator.solveMejorAccion(this.tiempo));
 		
-		Accion a = this.baseConocimiento.preguntar(this.tiempo);
+		/**
+		 * El aumento del tiempo debería ir acá según lo que entiendo
+		 * ya que la percepción que recibis es resultado de tu accion anterior,
+		 * por lo tanto, tu nueva accion, corresponde a la situacion s+1
+		 * (de la cual percibirás los efectos luego)
+		 */
+		this.tiempo++;
 		
-		this.baseConocimiento.decir(a);
+		/**
+		 * Avisa a la base de conocimiento la desición de su accion,
+		 * para que la misma calcule y deje grabado el estado sucesor
+		 * a la espera de una nueva percepción.
+		 */
+		this.baseConocimiento.actuar(a,this.tiempo);
 
 //		try {
 //			a = this.acciones.get(this.acciones.size() - 1);
@@ -76,9 +103,6 @@ public class Agente {
 //			log.fatal("No se encontró solución que satisfaga el objetivo");
 //		}
 
-		// Aumento el tiempo
-		this.tiempo++;
-		
 		return a;
 	}
 	
