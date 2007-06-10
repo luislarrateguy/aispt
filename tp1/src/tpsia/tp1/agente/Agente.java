@@ -76,7 +76,7 @@ public class Agente {
 			a = this.acciones.get(this.acciones.size() - 1);
 			log.info("Se decidió la acción: " + a.getTipoAccion());
 			this.estado.ejecutarAccion(a);
-			this.estadosAlcanzados.add(this.estado.getAmbiente());
+			this.estadosAlcanzados.add((VisionAmbiente)this.estado.getAmbiente().clone());
 			this.cumplioObjetivo = this.objetivo.cumpleObjetivo(this.estado);
 		} catch (Exception e) {
 			/* Si salto la excepcion debido a que la secuencia de acciones 

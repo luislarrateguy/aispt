@@ -107,13 +107,14 @@ public abstract class Busqueda {
 		 */
 		log.debug("Expandiendo nodo Inicial: " + nodoActual.getID());
 		boolean estadoAlcanzado;
+		Collection<Nodo> nodosExpandir;
 		
 		while ( ! this.objetivo.cumpleObjetivo(nodoActual) ) {
 			log.debug(nodoActual);
 			log.debug(nodoActual.getEstado().getAmbiente());
 			log.debug("Prioridad: "+nodoActual.getPrioridadExpansion());
 			
-			Collection<Nodo> nodosExpandir = this.expandir(nodoActual);
+			nodosExpandir = this.expandir(nodoActual);
 			/* Que no tenga ningun nodo a expandir significa que no era un nodo
 			 * objetivo (porque ingreso al while) y que además llevó a la muerte
 			 * al pacman. Así que lo saco de los estados repetidos para

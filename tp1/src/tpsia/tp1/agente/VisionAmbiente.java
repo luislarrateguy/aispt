@@ -159,6 +159,7 @@ public class VisionAmbiente extends Ambiente {
 	public boolean equals(Object o) {
 		if (! (o instanceof VisionAmbiente))
 			return false;
+		
 		VisionAmbiente va = (VisionAmbiente) o;
 
 		// ¿Es igual el tablero de juego?
