@@ -38,11 +38,6 @@ public class Comer extends Accion {
 		return "comer";
 	}
 	
-	@Override
-	public int getCosto() {
-		return 20;
-	}
-
 	static public Accion getInstancia() {
 		if (instancia == null) {
 			instancia = new Comer();

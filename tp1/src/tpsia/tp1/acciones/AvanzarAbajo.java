@@ -48,4 +48,6 @@ public class AvanzarAbajo extends Avanzar {
 	public String getTipoAccion() {
 		return "abajo";
 	}
+	
+
 }

@@ -22,6 +22,8 @@ package tpsia.tp1.busqueda;
 
 import java.util.ArrayList;
 
+import tpsia.tp1.acciones.Comer;
+import tpsia.tp1.acciones.Pelear;
 import tpsia.tp1.agente.Estado;
 import tpsia.tp1.agente.IObjetivo;
 import tpsia.tp1.agente.VisionAmbiente;
@@ -43,16 +45,18 @@ public class BusquedaAEstrella extends Busqueda {
 		
 		/* Otra heurística que se nos ocurrió utilizar pero de la cual teníamos dudas.
 		 * Es consistente.
-		 * float heuristica2 = unNodo.getEstado().getAmbiente().cantidadComidaVisible()*3;
-		 * float heuristica3 = unNodo.getEstado().getAmbiente().cantidadEnemigosVisible()*2;
-		 * float promedioComer = unNodo.getEstado().getPromedioVarEnergia(Comer.getInstancia());
-		 * float promedioPelear = unNodo.getEstado().getPromedioVarEnergia(Pelear.getInstancia());
-		 * int energiaActual = unNodo.getEstado().getEnergia();
-		 * float heuristica = heuristica1 + heuristica2 + heuristica3;
-		 */
-	
+		
+		 float heuristica2 = unNodo.getEstado().getAmbiente().cantidadComidaVisible()*3;
+		 float heuristica3 = unNodo.getEstado().getAmbiente().cantidadEnemigosVisible()*2;
+		 float promedioComer = unNodo.getEstado().getPromedioVarEnergia(Comer.getInstancia());
+		 float promedioPelear = unNodo.getEstado().getPromedioVarEnergia(Pelear.getInstancia());
+		 int energiaActual = unNodo.getEstado().getEnergia();
+		 float heuristica = heuristica1 + heuristica2 + heuristica3;
+		 
+		/* */
+		float heuristica = heuristica1;
 		/* Retorno el valor de la función de evaluación = costo + heuristica */
-		return (costo + heuristica1);
+		return (costo + heuristica);
 	}
 
 	@Override

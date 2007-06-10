@@ -37,11 +37,6 @@ public class Pelear extends Accion {
 	public String getTipoAccion() {
 		return "pelear";
 	}
-	
-	@Override
-	public int getCosto() {
-		return 40;
-	}
 
 	static public Accion getInstancia() {
 		if (instancia == null) {
@@ -69,4 +64,5 @@ public class Pelear extends Accion {
 	public int getIdentificador() {
 		return 2;
 	}
+
 }

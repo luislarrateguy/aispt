@@ -64,6 +64,15 @@ public abstract class Busqueda {
 	@SuppressWarnings("unchecked")
 	public ArrayList<Accion> buscarSolucion() {
 		VECES_EJECUTADA++;
+		/* Salida jerárquica del árbol de búsqueda */
+		logxml =  Logger.getLogger("Pacman.Busqueda.ejecucion" + Integer.toString(VECES_EJECUTADA)+".xml");
+		logLatex = Logger.getLogger("Pacman.Busqueda.ejecucion" + Integer.toString(VECES_EJECUTADA) + ".tex");
+		Logger log = Logger.getLogger("Pacman.Busqueda" + ".ejecucion" + Integer.toString(VECES_EJECUTADA));
+		log.info("Buscar accion");
+		
+		/* Unicamente utilizada para mostrar la salida en latex (debugger) */
+		LinkedList<Nodo> nodosSeleccionados;
+		
 		Nodo.resetID();
 		
 		Nodo nodoActual;
@@ -73,11 +82,7 @@ public abstract class Busqueda {
 		ArrayList<VisionAmbiente> estadosAlcanzados;
 		
 		/* Unicamente utilizada para mostrar la salida en latex (debugger) */
-		LinkedList<Nodo> nodosSeleccionados = new LinkedList<Nodo>();
-
-		Logger log = Logger.getLogger("Pacman.Busqueda" + ".ejecucion" + Integer.toString(VECES_EJECUTADA));
-		log.info("Buscar accion");
-		
+		nodosSeleccionados = new LinkedList<Nodo>();
 		listaAcciones = new ArrayList<Accion>();
 		colaNodos = new PriorityQueue<Nodo>();
 		estadosAlcanzados = new ArrayList<VisionAmbiente>();
@@ -95,8 +100,6 @@ public abstract class Busqueda {
 		 * Igual esas secuencias de acciones no deberían ocurrir debido a la heurística 
 		 * y costo! no deberían!
 		 */
-		//estadosAlcanzados = (ArrayList<VisionAmbiente>) this.estadosAlcanzadosAgente.clone();
-		
 		log.debug("Estoy buscando. Nodo actual:");
 		estadosAlcanzados.addAll((ArrayList<VisionAmbiente>) this.estadosAlcanzadosAgente);
 		/*
@@ -135,7 +138,9 @@ public abstract class Busqueda {
 			
 			if (!colaNodos.isEmpty()) {
 				nodoActual = colaNodos.remove();
-				nodosSeleccionados.add(nodoActual);
+				if (logLatex.isDebugEnabled()) {
+					nodosSeleccionados.add(nodoActual);
+				}
 				log.debug("Nodo a expandir: " + nodoActual.getID()  + " hijo de "+ nodoActual.getPadre().getID());
 				log.debug(nodoActual.getEstado().getAmbiente());
 			} else {
@@ -154,17 +159,13 @@ public abstract class Busqueda {
 		log.info("Llegaré a mi objetivo si ejecuto esta secuencia de acciones");
 		log.info("ultima->primera"+listaAcciones);
 		log.info("Cantidad de nodos generados: " + Nodo.getLastId());
-		
-		/* Salida jerárquica del árbol de búsqueda */
-		logxml =  Logger.getLogger("Pacman.Busqueda.ejecucion" + Integer.toString(VECES_EJECUTADA)+".xml");
-		logLatex = Logger.getLogger("Pacman.Busqueda.ejecucion" + Integer.toString(VECES_EJECUTADA) + ".tex");
-		
+			
 		/* Mejora para la velocidad de ejecución si no corresponde debugging */
 		if (logxml.isDebugEnabled()) {
 			logxml.debug("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
 			raiz.toXML();
 		}
-		if (logxml.isDebugEnabled()) {
+		if (logLatex.isDebugEnabled()) {
 			this.toDocumentLatex(nodosSeleccionados, 16);
 		}
 			

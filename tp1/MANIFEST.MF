@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
 Main-Class: tpsia.tp1.Main
-Class-Path: lib/log4j-1.2.13.jar lib/calculador.jar
+Class-Path: lib/log4j-1.2.13.jar lib/calculador.jar lib/junit-4.1.jar
 

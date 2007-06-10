@@ -33,16 +33,12 @@ public abstract class Avanzar extends Accion {
 	public final int getIdentificador() {
 		return 0;
 	}
-	
-	@Override
-	public final int getCosto() {
-		return 60;
-	}
-	
+
 	@Override
 	public final boolean aplicable(Estado estado) {
 		// Verifico que el agente tenga energía suficiente para moverse
-		if (estado.getEnergia() + estado.getPromedioVarEnergia(this) > 0)
+		if (!estado.getAmbiente().hayComida() &&
+				estado.getEnergia() + estado.getPromedioVarEnergia(this) > 0)
 			return true;
 		
 		return false;

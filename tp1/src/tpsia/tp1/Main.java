@@ -24,10 +24,19 @@ package tpsia.tp1;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+import tpsia.tp1.acciones.AvanzarAbajo;
+import tpsia.tp1.acciones.AvanzarArriba;
+import tpsia.tp1.acciones.AvanzarDerecha;
+import tpsia.tp1.acciones.AvanzarIzquierda;
+import tpsia.tp1.acciones.Comer;
+import tpsia.tp1.acciones.Pelear;
+
 public class Main {
 
 	private static String busqueda = "aestrella";
 	private static String debugFile = "logger.config";
+	private static String xmlPath;
+	private static ConfLoader confLoader;
 	
 	/**
 	 * @param args
@@ -40,39 +49,45 @@ public class Main {
 		if (parseArguments(args)) {
 			PropertyConfigurator.configure(debugFile);
 			Logger log = Logger.getLogger(Main.class);
+			confLoader = ConfLoader.GetInstance();
+			confLoader.setConfiguration();
 			
-			for (int i=1; i<=1; i++) {
-					log.debug("Iniciando simulación nro : "+ Integer.toString(i));
-				Simulador s = new Simulador(busqueda);
-				s.comenzarSimulacion();
-				s.mostrarPerformance();
-			}
+			log.debug("Iniciando simulación");
+			Simulador s = new Simulador();
+			s.comenzarSimulacion();
+			s.mostrarPerformance();
+
 		}
 	}
 	
     public static boolean parseArguments(String[] args) {
     	int cant = args.length;
         if (cant > 0) {
-            String arg = args[0];
+            //String arg = args[0];
+            debugFile = args[0];
+            xmlPath = args[1];
+            /*
             if (arg.startsWith("?") || arg.equals("-?") || arg.equals("-h") || arg.startsWith("--h")) {
                 mostrarAyuda();
                 return false;
             }
         	if (cant == 3 && args[1].equals("--busqueda")) {
         		if (args[2].equals("aestrella") ||
-        				args[1].equals("avara") ||
-        				args[1].equals("profundida") ||
-        				args[1].equals("amplitud") ||
-        				args[1].equals("costouniforme"))
-            	busqueda = args[1];
+        				args[2].equals("avara") ||
+        				args[2].equals("profundida") ||
+        				args[2].equals("amplitud") ||
+        				args[2].equals("costouniforme"))
+            	busqueda = args[2];
         		debugFile = args[0];
             }
         	return true;
+        	*/
         }
         return true;
     }
 
 	private static void mostrarAyuda() {
+		/*
 		System.out.println("\nUso:");
 		System.out.println("java -jar simulador.jar --help");
 		System.out.println("\t muestra esta ayuda");
@@ -81,6 +96,10 @@ public class Main {
 		System.out.println("\t utilizará el Agente.");
 		System.out.println("\t\t tipo_busqueda: amplitud,avara,aestrella,");
 		System.out.println("\t\t                profundidad,costouniforme");
-		
+		*/
+	}
+
+	public static String getXmlPath() {
+		return xmlPath;
 	}
 }

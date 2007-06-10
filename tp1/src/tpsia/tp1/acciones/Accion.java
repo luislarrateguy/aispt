@@ -29,11 +29,12 @@ import tpsia.tp1.agente.Estado;
 public abstract class Accion {
 	
 	protected static ArrayList<Accion> acciones = new ArrayList<Accion>(7);
+	protected int costo;
 	
 	public abstract void ejecutar(Ambiente amb) throws Exception;
 	public abstract boolean aplicable(Estado estado);
 	public abstract String getTipoAccion();
-	public abstract int getCosto();
+
 	
 	public abstract int getIdentificador();
 	
@@ -42,5 +43,12 @@ public abstract class Accion {
 	}
 	public String toString() {
 		return this.getTipoAccion();
+	}
+	public void setCosto(int c) {
+		this.costo = c;
+	}
+
+	public final int getCosto() {
+		return this.costo;
 	}
 }

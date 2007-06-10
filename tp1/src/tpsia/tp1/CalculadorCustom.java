@@ -27,21 +27,27 @@ import calculador.Calculador;
 import calculador.Pair;
 
 public class CalculadorCustom extends Calculador {
-	private final int[] POSICION_INICIAL = {1,3};
+	private final int[] POSICION_INICIAL = {0,0};
 	private final int[] POSICION_COMIDAS = {
+			0,0,
 			0,1,
-			2,1,
+			0,2,
+			0,3,
+			1,0,
+			1,1,
+			1,2,
+			1,3,
+			2,0,
+			2,2,
+			2,3,
 			3,0,
+			3,1,
 			3,2,
 			3,3
 	};
 	
 	private final int[] POSICION_ENEMIGOS = {
-			1,2,
-			2,0,
-			2,2,
-			2,3,
-			3,1
+			2,1,
 	};
 	
 	/** Energía inicial del pacman. */

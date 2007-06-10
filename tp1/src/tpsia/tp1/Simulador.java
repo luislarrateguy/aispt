@@ -35,20 +35,19 @@ public class Simulador {
 	private Calculador calculador;
 	private AmbienteReal ambiente;
 	private Agente pacman;
-	private String busqueda;
+	private static String busqueda;
 	
 	public Simulador() {
 		this.calculador = new Calculador("Grupo 7");
 		this.ambiente = new AmbienteReal();
-		this.busqueda = "aestrella";
 		
 		/* Inicializando Acciones para acelerar ejecución */
-		Pelear.getInstancia();
-		Comer.getInstancia();
 		AvanzarArriba.getInstancia();
 		AvanzarDerecha.getInstancia();
 		AvanzarAbajo.getInstancia();
 		AvanzarIzquierda.getInstancia();
+		Pelear.getInstancia();
+		Comer.getInstancia();
 	}
 	
 	public Simulador(String tipoBusqueda) {
@@ -141,5 +140,9 @@ public class Simulador {
 		Logger log = Logger.getLogger(Simulador.class);
 		log.info("Desempeño del PACMAN: " +
 				this.calculador.getPerformance());
+	}
+
+	public static void setEstrategia(String estrategia) {
+		busqueda = estrategia;
 	}
 }
