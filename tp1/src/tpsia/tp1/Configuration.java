@@ -21,12 +21,33 @@ public class Configuration {
 	private int costoAvanzarDerecha;
 	private int costoAvanzarArriba;
 	private int costoAvanzarAbajo;
+	private int heuristica1;
+	private int heuristica2;
+	private int heuristica3;
 	
 	public int getCostoAvanzarAbajo() {
 		return costoAvanzarAbajo;
 	}
 	public void setCostoAvanzarAbajo(int costoAvanzarAbajo) {
 		this.costoAvanzarAbajo = costoAvanzarAbajo;
+	}
+	public int getHeuristica1() {
+		return heuristica1;
+	}
+	public void setHeuristica1(int h1) {
+		this.heuristica1 = h1;
+	}
+	public int getHeuristica2() {
+		return heuristica2;
+	}
+	public void setHeuristica2(int h2) {
+		this.heuristica2 = h2;
+	}
+	public int getHeuristica3() {
+		return heuristica3;
+	}
+	public void setHeuristica3(int h3) {
+		this.heuristica3 = h3;
 	}
 	public int getCostoAvanzarArriba() {
 		return costoAvanzarArriba;

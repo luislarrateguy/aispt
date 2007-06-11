@@ -12,4 +12,7 @@
 	<costoAvanzarArriba>700</costoAvanzarArriba>
 	<costoAvanzarIzquierda>700</costoAvanzarIzquierda>
 	
+	<heuristica1>500</heuristica1>
+	<heuristica2>100</heuristica2>
+	<heuristica3>1</heuristica3>
 </Configuration>

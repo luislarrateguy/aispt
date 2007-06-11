@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Configuration>
-	<estrategia>profundidad</estrategia>
+	<estrategia>aestrella</estrategia>
 	
-	<costoComer>1</costoComer>
+	<costoComer>5</costoComer>
 	
-	<costoPelear>1</costoPelear>
+	<costoPelear>10</costoPelear>
 	
-	<costoAvanzarAbajo>1</costoAvanzarAbajo>
-	<costoAvanzarDerecha>1</costoAvanzarDerecha>
+	<costoAvanzarAbajo>16</costoAvanzarAbajo>
+	<costoAvanzarDerecha>84</costoAvanzarDerecha>
 	
-	<costoAvanzarArriba>1</costoAvanzarArriba>
-	<costoAvanzarIzquierda>1</costoAvanzarIzquierda>
+	<costoAvanzarArriba>410</costoAvanzarArriba>
+	<costoAvanzarIzquierda>410</costoAvanzarIzquierda>
 </Configuration>

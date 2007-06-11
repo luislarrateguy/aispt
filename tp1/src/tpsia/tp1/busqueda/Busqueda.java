@@ -41,6 +41,9 @@ public abstract class Busqueda {
 	private static int VECES_EJECUTADA = 0;
 	public static Logger logxml;
 	public static Logger logLatex;
+	protected static int h1;
+	protected static int h3;
+	protected static int h2;
 	
 	/**
 	 * La función de evaluación representa, en:
@@ -243,5 +246,14 @@ public abstract class Busqueda {
 		sf.append("\n");
 		Busqueda.logLatex.debug(sf.toString());		
 		Busqueda.logLatex.debug("\\end{document}");
+	}
+	public static void setHeuristica1(int heuristica) {
+		h1 = heuristica;
+	}
+	public static void setHeuristica2(int heuristica) {
+		h2 = heuristica;
+	}
+	public static void setHeuristica3(int heuristica) {
+		h3 = heuristica;
 	}
 }

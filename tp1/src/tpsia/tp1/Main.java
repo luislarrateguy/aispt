@@ -33,7 +33,6 @@ import tpsia.tp1.acciones.Pelear;
 
 public class Main {
 
-	private static String busqueda = "aestrella";
 	private static String debugFile = "logger.config";
 	private static String xmlPath;
 	private static ConfLoader confLoader;

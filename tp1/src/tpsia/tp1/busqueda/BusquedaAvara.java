@@ -34,10 +34,12 @@ public class BusquedaAvara extends Busqueda {
 	
 	@Override
 	protected float calcularPrioridad(Nodo unNodo) {
-		float heuristica1 = unNodo.getEstado().getAmbiente().cantidadCeldasDesconocidas()*500;
-		float heuristica2 = unNodo.getEstado().getAmbiente().cantidadComidaVisible()*100;
+		float heuristica1 = unNodo.getEstado().getAmbiente().cantidadCeldasDesconocidas();
+		float heuristica2 = unNodo.getEstado().getAmbiente().cantidadComidaVisible();
 		float heuristica3 = unNodo.getEstado().getAmbiente().cantidadEnemigosVisible();
-		float heuristica = heuristica1 + heuristica2 + heuristica3;
+		float heuristica;
+		
+		heuristica = heuristica1*h1 + heuristica2*h2 + heuristica3*h3;
 		
 		return heuristica;
 	}

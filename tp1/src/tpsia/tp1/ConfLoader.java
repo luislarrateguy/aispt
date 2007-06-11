@@ -22,6 +22,7 @@ import tpsia.tp1.acciones.AvanzarDerecha;
 import tpsia.tp1.acciones.AvanzarIzquierda;
 import tpsia.tp1.acciones.Comer;
 import tpsia.tp1.acciones.Pelear;
+import tpsia.tp1.busqueda.Busqueda;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -88,6 +89,18 @@ public class ConfLoader {
 		log.info("Estragegia:");
 		log.info(this.conf.getEstrategia());
 		Simulador.setEstrategia(this.conf.getEstrategia());
+		
+		log.info("Heuristica1:");
+		log.info(this.conf.getHeuristica1());
+		Busqueda.setHeuristica1(this.conf.getHeuristica1());
+		
+		log.info("Heuristica2:");
+		log.info(this.conf.getHeuristica2());
+		Busqueda.setHeuristica2(this.conf.getHeuristica2());
+		
+		log.info("Heuristica3:");
+		log.info(this.conf.getHeuristica3());
+		Busqueda.setHeuristica3(this.conf.getHeuristica3());
 	}
 
 }
