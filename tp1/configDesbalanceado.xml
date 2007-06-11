@@ -1,0 +1,13 @@
+<Configuration>
+	<estrategia>profundidad</estrategia>
+	
+	<costoComer>1</costoComer>
+	
+	<costoPelear>1</costoPelear>
+	
+	<costoAvanzarAbajo>1</costoAvanzarAbajo>
+	<costoAvanzarDerecha>1</costoAvanzarDerecha>
+	
+	<costoAvanzarArriba>1</costoAvanzarArriba>
+	<costoAvanzarIzquierda>1</costoAvanzarIzquierda>
+</Configuration>
