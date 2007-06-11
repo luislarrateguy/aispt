@@ -30,31 +30,27 @@ import tpsia.tp1.agente.VisionAmbiente;
 
 public class BusquedaAEstrella extends Busqueda {
 
-	public BusquedaAEstrella(Estado estado, IObjetivo objetivo, ArrayList<VisionAmbiente> estadosAlcanzadosAgente) {
+	public BusquedaAEstrella(Estado estado, IObjetivo objetivo,
+			ArrayList<VisionAmbiente> estadosAlcanzadosAgente) {
 		super(estado, objetivo, estadosAlcanzadosAgente);
 	}
-	
+
 	@Override
 	protected float calcularPrioridad(Nodo unNodo) {
 		/* Calculo el costo */
-		float costo = unNodo.getPadre().getPrioridadExpansion() + unNodo.getAccionGeneradora().getCosto();
+		float costo = unNodo.getPadre().getPrioridadExpansion()
+				+ unNodo.getAccionGeneradora().getCosto();
+
+		/*
+		 * Calculo la función heurística, que consiste en la cantidad de celdas
+		 * que son desconocidas.
+		 */
+		float heuristica1 = unNodo.getEstado().getAmbiente().cantidadCeldasDesconocidas() * 10;
+		float heuristica2 = unNodo.getEstado().getAmbiente().cantidadComidaVisible() * 2;
+		float heuristica3 = unNodo.getEstado().getAmbiente().cantidadEnemigosVisible();
 		
-		/* Calculo la función heurística, que consiste en la cantidad de celdas que
-		 * son desconocidas. */
-		float heuristica1 = unNodo.getEstado().getAmbiente().cantidadCeldasDesconocidas();
-		
-		/* Otra heurística que se nos ocurrió utilizar pero de la cual teníamos dudas.
-		 * Es consistente.
-		
-		 float heuristica2 = unNodo.getEstado().getAmbiente().cantidadComidaVisible()*3;
-		 float heuristica3 = unNodo.getEstado().getAmbiente().cantidadEnemigosVisible()*2;
-		 float promedioComer = unNodo.getEstado().getPromedioVarEnergia(Comer.getInstancia());
-		 float promedioPelear = unNodo.getEstado().getPromedioVarEnergia(Pelear.getInstancia());
-		 int energiaActual = unNodo.getEstado().getEnergia();
-		 float heuristica = heuristica1 + heuristica2 + heuristica3;
-		 
-		/* */
-		float heuristica = heuristica1;
+		float heuristica = heuristica1 + heuristica2 + heuristica3;
+
 		/* Retorno el valor de la función de evaluación = costo + heuristica */
 		return (costo + heuristica);
 	}

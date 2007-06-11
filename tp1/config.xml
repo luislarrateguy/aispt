@@ -2,14 +2,14 @@
 <Configuration>
 	<estrategia>avara</estrategia>
 	
-	<costoComer>5</costoComer>
+	<costoComer>450</costoComer>
 	
-	<costoPelear>10</costoPelear>
+	<costoPelear>500</costoPelear>
 	
-	<costoAvanzarAbajo>16</costoAvanzarAbajo>
-	<costoAvanzarDerecha>16</costoAvanzarDerecha>
+	<costoAvanzarAbajo>700</costoAvanzarAbajo>
+	<costoAvanzarDerecha>700</costoAvanzarDerecha>
 	
-	<costoAvanzarArriba>16</costoAvanzarArriba>
-	<costoAvanzarIzquierda>16</costoAvanzarIzquierda>
+	<costoAvanzarArriba>700</costoAvanzarArriba>
+	<costoAvanzarIzquierda>700</costoAvanzarIzquierda>
 	
 </Configuration>

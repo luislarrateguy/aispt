@@ -222,7 +222,7 @@ public abstract class Busqueda {
 		
 		for (Nodo unNodo : nodosSeleccionados) {
 			if (cuentaArboles == 0)
-				sf.append("\\begin{figure}[h]\n");
+				sf.append("\\begin{figure}[!h]\n");
 			
 			sf.append("\\Tree " + unNodo.toQtree() + "\n");
 			cuentaArboles++;
