@@ -40,7 +40,6 @@ public class Simulador {
 	public Simulador() {
 		this.calculador = new Calculador("Grupo 7");
 		this.ambiente = new AmbienteReal();
-		this.busqueda = "avara";
 		
 		/* Inicializando Acciones para acelerar ejecución */
 		AvanzarArriba.getInstancia();
