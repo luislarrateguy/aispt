@@ -6,11 +6,17 @@
 	
 	<costoPelear>10</costoPelear>
 	
-	<costoAvanzarAbajo>16</costoAvanzarAbajo>
+	<costoAvanzarAbajo>32</costoAvanzarAbajo>
+	<costoAvanzarDerecha>32</costoAvanzarDerecha>
+	<costoAvanzarArriba>32</costoAvanzarArriba>
+	<costoAvanzarIzquierda>32</costoAvanzarIzquierda>
+	
+	
+	<!-- costoAvanzarAbajo>16</costoAvanzarAbajo>
 	<costoAvanzarDerecha>84</costoAvanzarDerecha>
 	
 	<costoAvanzarArriba>410</costoAvanzarArriba>
-	<costoAvanzarIzquierda>410</costoAvanzarIzquierda>
+	<costoAvanzarIzquierda>410</costoAvanzarIzquierda -->
 	
 	<heuristica1>1</heuristica1>
 	<heuristica2>5</heuristica2>
