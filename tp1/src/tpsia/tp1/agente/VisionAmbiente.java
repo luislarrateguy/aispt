@@ -21,6 +21,8 @@
 
 package tpsia.tp1.agente;
 
+import java.util.ArrayList;
+
 import tpsia.tp1.Ambiente;
 import tpsia.tp1.EstadoCelda;
 import tpsia.tp1.FuncionesUtiles;
@@ -215,5 +217,54 @@ public class VisionAmbiente extends Ambiente {
 		}
 		
 		return cant;
+	}
+	
+	/**
+	 * Método de prueba. No es eficiente, porque es para pruebas nomas.
+	 * @param estadoBuscado
+	 * @return
+	 */
+	public int distanciaObjeto(EstadoCelda estadoBuscado) {
+		if (this.tablero[this.posicionPacman[0]][this.posicionPacman[1]] == estadoBuscado)
+			return 0;
+		
+		ArrayList<int[]> ady1;
+		ArrayList<int[]> ady2 = new ArrayList<int[]>();
+		ArrayList<int[]> ady3 = new ArrayList<int[]>();
+		ArrayList<int[]> ady4 = new ArrayList<int[]>();
+		
+		// Me fijo si hay comida en las celdas adyacentes (un movimiento de distancia)
+		ady1 = this.getPosicionesCeldasAdyacentes(this.posicionPacman);
+		for (int[] celdaAdyacente : ady1) {
+			if (this.tablero[celdaAdyacente[0]][celdaAdyacente[1]] == estadoBuscado)
+				return 1;
+			
+			ady2.addAll(this.getPosicionesCeldasAdyacentes(celdaAdyacente));
+		}
+		
+		// Sigo buscando (dos movimientos de distancia)
+		for (int[] celdaAdyacente : ady2) {
+			if (this.tablero[celdaAdyacente[0]][celdaAdyacente[1]] == estadoBuscado)
+				return 2;
+			
+			ady3.addAll(this.getPosicionesCeldasAdyacentes(celdaAdyacente));
+		}
+		
+		// tres movimientos de distancia
+		for (int[] celdaAdyacente : ady3) {
+			if (this.tablero[celdaAdyacente[0]][celdaAdyacente[1]] == estadoBuscado)
+				return 3;
+			
+			ady4.addAll(this.getPosicionesCeldasAdyacentes(celdaAdyacente));
+		}
+		
+		// cuatro movimientos de distancia
+		for (int[] celdaAdyacente : ady4) {
+			if (this.tablero[celdaAdyacente[0]][celdaAdyacente[1]] == estadoBuscado)
+				return 4;
+		}
+		
+		// No hay celda con comida o enemigo (segun el valor buscado)
+		return 0;
 	}
 }

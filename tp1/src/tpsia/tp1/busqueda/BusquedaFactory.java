@@ -37,6 +37,8 @@ public class BusquedaFactory {
 				b = new BusquedaAEstrella(estado, objetivo, estadosAlcanzados);
 		else if (tipoBusqueda.compareToIgnoreCase("avara") == 0) 
 				b = new BusquedaAvara(estado, objetivo, estadosAlcanzados);
+		else if (tipoBusqueda.compareToIgnoreCase("avara2") == 0) 
+			b = new BusquedaAvara2(estado, objetivo, estadosAlcanzados);
 		else if (tipoBusqueda.compareToIgnoreCase("profundidad") == 0)
 				b = new BusquedaProfundidad(estado, objetivo, estadosAlcanzados);
 		else if (tipoBusqueda.compareToIgnoreCase("costouniforme") == 0)

@@ -21,6 +21,7 @@
 
 package tpsia.tp1;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import org.apache.log4j.Logger;
@@ -68,6 +69,31 @@ public abstract class Ambiente implements Cloneable {
 		// Celda de la izquierda
 		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Izquierda);
 		ady[3] = this.tablero[pos[0]][pos[1]];
+		
+		//return ady.clone();
+		return ady;
+	}
+	
+	public ArrayList<int[]> getPosicionesCeldasAdyacentes(int[] posicion) {
+		ArrayList<int[]> ady = new ArrayList<int[]>();
+		/* arr[0] aba[1] der[2] izq[3] */ 
+		int pos[];
+
+		// Celda de arriba del pacman
+		pos = FuncionesUtiles.sumarPosiciones(posicion, Offset.Arriba);
+		ady.add(pos.clone());
+		
+		// Celda de abajo
+		pos = FuncionesUtiles.sumarPosiciones(posicion, Offset.Abajo);
+		ady.add(pos.clone());
+		
+		// Celda de la derecha
+		pos = FuncionesUtiles.sumarPosiciones(posicion, Offset.Derecha);
+		ady.add(pos.clone());
+		
+		// Celda de la izquierda
+		pos = FuncionesUtiles.sumarPosiciones(posicion, Offset.Izquierda);
+		ady.add(pos.clone());
 		
 		//return ady.clone();
 		return ady;

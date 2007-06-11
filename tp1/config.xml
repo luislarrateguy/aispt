@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Configuration>
-	<estrategia>avara</estrategia>
+	<estrategia>avara2</estrategia>
 	
 	<costoComer>450</costoComer>
 	
@@ -20,6 +20,6 @@
 	<heuristica2>100</heuristica2>
 	
 	<!-- cantidad de enemigos visibles -->
-	<heuristica3>1</heuristica3>
+	<heuristica3>5</heuristica3>
 	
 </Configuration>
