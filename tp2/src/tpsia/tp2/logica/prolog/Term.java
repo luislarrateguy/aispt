@@ -1,11 +1,11 @@
-package tpsia.tp2.logica;
+package tpsia.tp2.logica.prolog;
 
 import java.util.Hashtable;
 import java.util.Stack;
 import java.util.Vector;
 
-import tpsia.tp2.logica.PrologTokenizer;
-import tpsia.tp2.logica.Prologop;
+import tpsia.tp2.logica.prolog.PrologTokenizer;
+import tpsia.tp2.logica.prolog.Prologop;
 
 /*******************************************************************************
  * T E R M

@@ -1,4 +1,4 @@
-package tpsia.tp2.sentencias;
+package tpsia.tp2.logica.sentencias;
 
 import java.util.Hashtable;
 import java.util.Vector;

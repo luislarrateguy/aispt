@@ -4,8 +4,8 @@ import java.util.Hashtable;
 import java.util.Vector;
 
 import tpsia.tp2.acciones.Accion;
-import tpsia.tp2.logica.Prolog;
-import tpsia.tp2.logica.StmtCreator;
+import tpsia.tp2.logica.prolog.Prolog;
+import tpsia.tp2.logica.prolog.StmtCreator;
 
 public class BaseConocimiento {
 

@@ -1,4 +1,4 @@
-package tpsia.tp2.sentencias;
+package tpsia.tp2.logica.sentencias;
 
 @SuppressWarnings("serial")
 public class SentenciaException extends Exception {

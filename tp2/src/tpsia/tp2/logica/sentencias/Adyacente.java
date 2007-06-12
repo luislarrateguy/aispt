@@ -1,6 +1,6 @@
-package tpsia.tp2.sentencias;
+package tpsia.tp2.logica.sentencias;
 
-public class Energia extends Sentencia {
+public class Adyacente extends Sentencia {
 
 	@Override
 	public Object getResultado() throws SentenciaException {

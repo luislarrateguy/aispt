@@ -1,4 +1,4 @@
-package tpsia.tp2.logica;
+package tpsia.tp2.logica.prolog;
 
 /*******************************************************************************
  * R A C K

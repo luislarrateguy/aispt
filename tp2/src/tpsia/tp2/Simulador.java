@@ -27,7 +27,7 @@ import org.apache.log4j.Logger;
 
 import tpsia.tp2.acciones.Accion;
 import tpsia.tp2.agente.Agente;
-import tpsia.tp2.logica.Prolog;
+import tpsia.tp2.logica.prolog.Prolog;
 import calculador.Calculador;
 import calculador.Pair;
 

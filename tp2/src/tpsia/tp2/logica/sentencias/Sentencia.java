@@ -1,9 +1,9 @@
-package tpsia.tp2.sentencias;
+package tpsia.tp2.logica.sentencias;
 
 import java.util.Hashtable;
 import java.util.Vector;
 
-import tpsia.tp2.logica.Prolog;
+import tpsia.tp2.logica.prolog.Prolog;
 
 public abstract class Sentencia {
 	protected int tiempo;

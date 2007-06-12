@@ -1,6 +1,6 @@
-package tpsia.tp2.sentencias;
+package tpsia.tp2.logica.sentencias;
 
-public class PromedioPorAvanzar extends Sentencia {
+public class CeldaVacia extends Sentencia {
 
 	@Override
 	public Object getResultado() throws SentenciaException {

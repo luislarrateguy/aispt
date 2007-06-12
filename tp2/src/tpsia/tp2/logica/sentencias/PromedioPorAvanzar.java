@@ -1,6 +1,6 @@
-package tpsia.tp2.sentencias;
+package tpsia.tp2.logica.sentencias;
 
-public class PromedioPorPelear extends Sentencia {
+public class PromedioPorAvanzar extends Sentencia {
 
 	@Override
 	public Object getResultado() throws SentenciaException {
@@ -13,4 +13,5 @@ public class PromedioPorPelear extends Sentencia {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

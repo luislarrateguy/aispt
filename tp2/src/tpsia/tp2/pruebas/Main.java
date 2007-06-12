@@ -4,7 +4,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
-import tpsia.tp2.logica.Prolog;
+import tpsia.tp2.logica.prolog.Prolog;
 
 public class Main {
 
