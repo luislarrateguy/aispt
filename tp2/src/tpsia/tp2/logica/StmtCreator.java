@@ -1,4 +1,4 @@
-package tpsia.tp2.prolog;
+package tpsia.tp2.logica;
 
 import tpsia.tp2.Percepcion;
 import tpsia.tp2.acciones.Accion;

@@ -1,13 +1,11 @@
 package tpsia.tp2.agente;
 
-import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
-import tpsia.tp2.Percepcion;
 import tpsia.tp2.acciones.Accion;
-import tpsia.tp2.prolog.Prolog;
-import tpsia.tp2.prolog.StmtCreator;
+import tpsia.tp2.logica.Prolog;
+import tpsia.tp2.logica.StmtCreator;
 
 public class BaseConocimiento {
 

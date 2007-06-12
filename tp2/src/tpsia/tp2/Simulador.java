@@ -23,10 +23,11 @@ package tpsia.tp2;
 
 import java.util.Vector;
 
-import org.apache.log4j.*;
-import tpsia.tp2.acciones.*;
+import org.apache.log4j.Logger;
+
+import tpsia.tp2.acciones.Accion;
 import tpsia.tp2.agente.Agente;
-import tpsia.tp2.prolog.Prolog;
+import tpsia.tp2.logica.Prolog;
 import calculador.Calculador;
 import calculador.Pair;
 

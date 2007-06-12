@@ -25,8 +25,7 @@ import org.apache.log4j.Logger;
 
 import tpsia.tp2.Percepcion;
 import tpsia.tp2.acciones.Accion;
-import tpsia.tp2.prolog.Prolog;
-import tpsia.tp2.prolog.StmtCreator;
+import tpsia.tp2.logica.StmtCreator;
 
 public class Agente {
 	private BaseConocimiento baseConocimiento;

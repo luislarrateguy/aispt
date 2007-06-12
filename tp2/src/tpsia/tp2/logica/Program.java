@@ -1,4 +1,4 @@
-package tpsia.tp2.prolog;
+package tpsia.tp2.logica;
 
 import java.util.Enumeration;
 import java.util.Hashtable;

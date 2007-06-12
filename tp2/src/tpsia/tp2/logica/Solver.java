@@ -1,4 +1,4 @@
-package tpsia.tp2.prolog;
+package tpsia.tp2.logica;
 
 import java.util.Hashtable;
 import java.util.Stack;
