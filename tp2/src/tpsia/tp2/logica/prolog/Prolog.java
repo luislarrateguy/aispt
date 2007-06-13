@@ -142,7 +142,7 @@ public class Prolog {
 			try {
 				Prolog p = new Prolog();
 				p.consultFile(args[0]);
-				Vector v = p.solve(args[1]);
+				Vector v = p.solve("conoce(X,Y,S).");
 				for (int i = 0; i < v.size(); i++) {
 					System.out.println("\nNext answer:");
 					Hashtable the_answers = (Hashtable) v.elementAt(i);

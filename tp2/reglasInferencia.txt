@@ -1,7 +1,7 @@
-%ESTADO SUCESOR
+%%ESTADO SUCESOR
 
-% El estado sucesor para la posicion no haría falta
-% ya que viene como percepcion cada vez.
+%% El estado sucesor para la posicion no haría falta
+%% ya que viene como percepcion cada vez.
 
 vacia(X,Y,S1):-S is S1 - 1, vacia(X,Y,S),!.
 vacia(X,Y,S1):-S is S1 - 1, comida(X,Y,S),posicion(X,Y,S),accionEjecutada(comer,S1),!.
@@ -14,7 +14,7 @@ enemigo(X,Y,S1):-S is S1 - 1,enemigo(X,Y,S),posicion(X1,Y1,S),X=\=X1,Y=\=Y1,!.
 enemigo(X,Y,S1):-S is S1 - 1, enemigo(X,Y,S),posicion(X,Y,S),accionEjecutada(mover,S1),!.
 
 
-%valoracion de las acciones
+%%valoracion de las acciones
 excelente(comer,S):-posicion(X,Y,S),comida(X,Y,S).
 
 muy_bueno(pelear,S):-posicion(X,Y,S),enemigo(X,Y,S),convienePelear(si,S).
@@ -24,10 +24,10 @@ bueno(D,S):-posicion(X,Y,S),adyacente(Xa,Ya,D,S),enemigo(Xa,Ya,S),convienePelear
 
 regular(D,S):-posicion(X,Y,S),adyacente(Xa,Ya,D,S),vacia(Xa,Ya,S),convieneMoverse(si,S).
 
-%podria necesitar pasar, quiza es mas corto
+%%podria necesitar pasar, quiza es mas corto
 malo(D,S):-posicion(X,Y,S),adyacente(Xa,Ya,D,S),enemigo(Xa,Ya,S),convienePelear(no,S).
 
-% lo lleva al muere
+%% lo lleva al muere
 muy_malo(pelear,S):-posicion(X,Y,S),adyacente(Xa,Ya,D,S),enemigo(Xa,Ya,S),convienePelear(no,S).
 muy_malo(D,S):-posicion(X,Y,S),adyacente(Xa,Ya,D,S),vacia(Xa,Ya,S),convieneMoverse(no,S).
 

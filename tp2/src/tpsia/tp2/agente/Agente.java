@@ -25,22 +25,17 @@ import org.apache.log4j.Logger;
 
 import tpsia.tp2.Percepcion;
 import tpsia.tp2.acciones.Accion;
-import tpsia.tp2.logica.prolog.StmtCreator;
+import tpsia.tp2.logica.CreadorSentencias;
+import tpsia.tp2.logica.sentencias.MejorAccion;
 
 public class Agente {
 	private BaseConocimiento baseConocimiento;
 	private int tiempo;
 	
 	/**
-	 * Crea un Agente.
-	 * Hace uso de BusquedaFactory para crear la búsqueda
-	 * y aprovecha la implementación del Patrón Strategy
-	 * sobre las Búsquedas para cambiar el comportamiento.
-	 * 
-	 * @param energiaInicial
-	 * @param tipoBusqueda
+	 * TODO: Escribir algo nuevo aca.
 	 */
-	public Agente(int energiaInicial, String tipoBusqueda) {
+	public Agente() {
 		super();
 		this.baseConocimiento = new BaseConocimiento();
 		this.tiempo = 0;
@@ -51,15 +46,19 @@ public class Agente {
 		log.debug("Percepción recibida. Actualizando BC...");
 
 		/**
-		 * Agrega la Percepción a la Base de Conocimiento (KDB)
+		 * Agrega la percepción a la Base de Conocimiento (KDB)
 		 */
-		this.baseConocimiento.decir(StmtCreator.percepcion(p,this.tiempo));
+		this.baseConocimiento.decir(CreadorSentencias.desdePercepcion(p, this.tiempo));
 
 		/**
 		 * TODO: Debe analizar si cumplió el objetivo en la situacion
 		 * actual S, con la percepción recién agregada.
 		 * Si no es así, continua.
 		 */
+		
+		if (this.baseConocimiento.cumplioObjetivo())
+			return null;
+		
 		/**
 		 * TODO: Ver como traducir esto al tp2
 		 * log.info(this.estado.getAmbiente());
@@ -69,7 +68,9 @@ public class Agente {
 		/**
 		 * Pregunta por la mejor accion para realizar
 		 */
-		Accion a = this.baseConocimiento.preguntar(StmtCreator.solveMejorAccion(this.tiempo));
+		MejorAccion ma = null;
+		this.baseConocimiento.preguntar(ma);
+		Accion a = ma.getMejorAccion();
 		
 		/**
 		 * El aumento del tiempo debería ir acá según lo que entiendo
@@ -84,7 +85,7 @@ public class Agente {
 		 * para que la misma calcule y deje grabado el estado sucesor
 		 * a la espera de una nueva percepción.
 		 */
-		this.baseConocimiento.actuar(a,this.tiempo);
+		this.baseConocimiento.decir(CreadorSentencias.desdeAccion(a, this.tiempo));
 
 //		try {
 //			a = this.acciones.get(this.acciones.size() - 1);

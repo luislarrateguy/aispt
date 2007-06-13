@@ -1,31 +1,54 @@
 package tpsia.tp2.agente;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.Set;
 import java.util.Vector;
 
+import sun.reflect.Reflection;
 import tpsia.tp2.acciones.Accion;
+import tpsia.tp2.logica.CreadorSentencias;
 import tpsia.tp2.logica.prolog.Prolog;
-import tpsia.tp2.logica.prolog.StmtCreator;
+import tpsia.tp2.logica.sentencias.*;
 
 public class BaseConocimiento {
 
-	private Prolog prolog;
-
+	private Hashtable<Class,HashSet<Sentencia>> sentencias;
+	
 	public BaseConocimiento() {
-		this.prolog = new Prolog();
+		super();
+		
+		/* Estaría muy bueno utilizar reflection acá. De forma que cuando agregas
+		 * una sentencia nueva, no tenes que tocar absolutamente nada.
+		 * Otra solución menos complicada sería utilizar constructores estáticos
+		 * para las sentencias, pero esto no existe en Java, si en C# ;)
+		 */
+		this.sentencias = new Hashtable<Class,HashSet<Sentencia>>();
+		
+		this.sentencias.put(CeldaVacia.class, new HashSet<Sentencia>());
+		this.sentencias.put(Conoce.class, new HashSet<Sentencia>());
+		this.sentencias.put(Energia.class, new HashSet<Sentencia>());
+		this.sentencias.put(HayComida.class, new HashSet<Sentencia>());
+		this.sentencias.put(HayEnemigo.class, new HashSet<Sentencia>());
+		this.sentencias.put(Posicion.class, new HashSet<Sentencia>());
+		this.sentencias.put(PromedioPorPelear.class, new HashSet<Sentencia>());
+		this.sentencias.put(PromedioPorAvanzar.class, new HashSet<Sentencia>());
 	}
 
-	public void decir(String statement) {
+	public void decir(ArrayList<Sentencia> sentencias) {
 		/* TODO: Se debería llamar a un método 'crearSentencia'
 		 * que reciba la acción y la transforme en... sentencias :D
 		 * Nacho: Hecho, con otra clase para crear todas las sentencias.
 		 * Asi dejamos lugar aca (en la clase) para disparar toda la 
 		 * "inferencia" de los axiomas de estado sucesor y demás.
 		 */
-		this.prolog.addStatement(statement);
+		
+		for (Sentencia s : sentencias)
+			this.sentencias.get(s.getClass()).add(s);
 	}
 
-	public Accion preguntar(String statement) {
+	public void preguntar(Sentencia sentencia) {
 		/**
 		 * Se me ocurre que este preguntar podría hacer:
 		 * String s = "mejorAccion(X,"+Integer.toString(tiempo)+")";
@@ -37,9 +60,8 @@ public class BaseConocimiento {
 		 * mejorAccion(X,s):-muy_buena(X,s).
 		 * mejorAccion(X,s):-buena(X,s).
 		 * mejorAccion(X,s):-mala(X,s).
-		 * 
 		 * */
-		return null;
+		return;
 	}
 
 	public boolean cumplioObjetivo() {
@@ -79,7 +101,7 @@ public class BaseConocimiento {
 		/**
 		 * Le dice a la KDB qué acción ejecutó.
 		 */
-		this.decir(StmtCreator.accionEjecutada(a,tiempo));
+		//this.decir(CreadorSentencias.accionEjecutada(a,tiempo));
 		/**
 		 * Agrega los promedios como statements fijos
 		 * si vemos que la deducción va muy lenta
@@ -100,11 +122,11 @@ public class BaseConocimiento {
 		 * Para cada resultado, agregarlo a la KDB
 		 * (ejemplo)
 		 */
-		Vector<Hashtable> res = (Vector<Hashtable>) this.prolog.solve(StmtCreator.solveAxiomaUno(tiempo));
+		Vector<Hashtable> res = (Vector<Hashtable>) this.prolog.solve(CreadorSentencias.solveAxiomaUno(tiempo));
 		for (Hashtable r : res) {
 			String x = (String) r.get("X");
 			String y = (String) r.get("Y");
-			this.prolog.addStatement(StmtCreator.celdaVacia(x,y,tiempo+1));
+			this.prolog.addStatement(CreadorSentencias.celdaVacia(x,y,tiempo+1));
 		}
 		/**
 		 * Este bucle se debería repetir para cada statement que deba

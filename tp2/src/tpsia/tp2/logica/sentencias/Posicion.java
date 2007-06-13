@@ -1,22 +1,19 @@
 package tpsia.tp2.logica.sentencias;
 
-import java.util.Hashtable;
-import java.util.Vector;
-
 public class Posicion extends Sentencia {
 	
-	private String columna;
-	private String fila;
+	private Integer columna;
+	private Integer fila;
 	
 	/**
-	 * Constructor utilizado para realizar consultas sobre la
-	 * posición actual del agente.
-	 * @param tiempo
-	 */ 
-	public Posicion(int tiempo) {
-		this.columna = "X";
-		this.fila = "Y";
-		this.tiempo = tiempo;
+	 * Constructor utilizado generalmente para hacer consultas a la base
+	 * de conocimiento, aunque no es obligación utilizar éste.
+	 */
+	public Posicion() {
+		super();
+		
+		this.columna = null;
+		this.fila = null;
 	}
 	
 	/**
@@ -27,53 +24,40 @@ public class Posicion extends Sentencia {
 	 * @param tiempo
 	 */
 	public Posicion (int columna, int fila, int tiempo) {
-		this(tiempo);
+		super(tiempo);
 		
-		this.columna = Integer.toString(columna);
-		this.fila = Integer.toString(fila);
+		this.columna = columna;
+		this.fila = fila;
 	}
-	
-	public Posicion (int[] posicion, int tiempo) {
-		this(posicion[0], posicion[1], tiempo);
+
+	public int getColumna() {
+		return columna;
+	}
+
+	public void setColumna(int columna) {
+		this.columna = columna;
+	}
+
+	public int getFila() {
+		return fila;
+	}
+
+	public void setFila(int fila) {
+		this.fila = fila;
 	}
 	
 	@Override
-	public String toString() {
-		return "posicion(" +
-				this.columna + "," +
-				this.fila + "," +
-				this.tiempo + ")";
-	}
-	
-	/**
-	 * Este método esta hecho para retornar un sólo par (x,y) y no varios,
-	 * ya que ésta es la forma más común (la otra es para ingresar datos a la
-	 * BC) de ser utilizada la sentencia 'posicion'.
-	 * @throws SentenciaException 
-	 */
-	public Integer[] getResultado() throws SentenciaException {
-		/* TODO: Podríamos unir el uso de excepciones con log4j, haciendo que
-		 * en ellas se imprima el mensaje de error, aunque es medio al pedo quizá.
-		 * Lo hago así, porque no quiero perder tiempo con log4j, vos lo manejas
-		 * más.
-		 */
-		if (!this.columna.equals("X") && !this.fila.equals("Y"))
-			throw new SentenciaException("Posicion: no se puede obtener un resultado " +
-					"de una sentencia formada para ser ingresada a la BC.");
+	public boolean equals(Object o) {
+		if (!(o instanceof Posicion))
+			return false;
 		
-		// Realizo la consulta con el intérprete Prolog
-		Vector<Hashtable> resultados = this.realizarConsulta();
+		Posicion p = (Posicion)o;
 		
-		if (resultados.size() > 1)
-			throw new SentenciaException("Posicion.getResultado: no se esperaba " +
-					"más que un resultado.");
+		if (!super.equals(p) ||
+				!this.columna.equals(p.columna) ||
+				!this.fila.equals(p.fila))
+			return false;
 		
-		Hashtable resultado = resultados.elementAt(0);
-		
-		Integer[] pos = new Integer[2];
-		pos[0] = (Integer)resultado.get(this.columna);
-		pos[1] = (Integer)resultado.get(this.fila);
-		
-		return pos;
+		return true;
 	}
 }

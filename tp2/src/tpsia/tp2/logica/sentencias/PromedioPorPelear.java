@@ -1,16 +1,38 @@
 package tpsia.tp2.logica.sentencias;
 
 public class PromedioPorPelear extends Sentencia {
-
-	@Override
-	public Object getResultado() throws SentenciaException {
-		// TODO Auto-generated method stub
-		return null;
+	private Float promedio;
+	
+	public PromedioPorPelear() {
+		super();
+		
+		this.promedio = null;
+	}
+	
+	public PromedioPorPelear(float promedio, int tiempo) {
+		super(tiempo);
+		
+		this.promedio = promedio;
 	}
 
+	public Float getPromedio() {
+		return promedio;
+	}
+
+	public void setPromedio(Float promedio) {
+		this.promedio = promedio;
+	}
+	
 	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean equals(Object o) {
+		if (!(o instanceof PromedioPorPelear))
+			return false;
+		
+		PromedioPorPelear p = (PromedioPorPelear)o;
+		
+		if (!super.equals(p) || this.promedio.equals(p.promedio))
+			return false;
+		
+		return true;
 	}
 }

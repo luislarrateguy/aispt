@@ -1,20 +1,30 @@
 package tpsia.tp2.logica.sentencias;
 
-import java.util.Hashtable;
-import java.util.Vector;
-
-import tpsia.tp2.logica.prolog.Prolog;
-
 public abstract class Sentencia {
-	protected int tiempo;
-	protected static Prolog interpreteProlog = new Prolog();
+	protected Integer tiempo;
 	
-	public abstract String toString();
-	public abstract Object getResultado() throws SentenciaException;
+	public Sentencia() {
+		this.tiempo = null;
+	}
 	
-	protected Vector<Hashtable> realizarConsulta() {
-		Vector<Hashtable> resultado = interpreteProlog.solve(this.toString());
+	public Sentencia(int tiempo) {
+		this.tiempo = tiempo;
+	}
+
+	public int getTiempo() {
+		return tiempo;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof Sentencia))
+			return false;
 		
-		return resultado;
+		Sentencia s = (Sentencia)o;
+		
+		if (s.tiempo != this.tiempo)
+			return false;
+		
+		return true;
 	}
 }

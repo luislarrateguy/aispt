@@ -106,18 +106,20 @@ public class Simulador {
 	private void inicializarSimulacion() {
 		Logger log = Logger.getLogger(Simulador.class);
 		
+		// Inicializo el ambiente
 		Vector posicionesEnemigos = calculador.inicializarEnemigo();
 		Pair posicionPacMan 	= calculador.getPosicionInicial();
 		Vector posicionesComida = calculador.inicializarComida();
 		
 		int energiaPacman = calculador.calcularEnergiaPacMan();
 		
-		this.pacman = new Agente(energiaPacman,"logica");
-		
 		this.ambiente.inicializar(energiaPacman,
 				posicionPacMan,
 				posicionesEnemigos,
 				posicionesComida);
+		
+		// Creo el agente
+		this.pacman = new Agente();
 		
 		log.info(this.ambiente);
 	}

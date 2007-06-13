@@ -1,17 +1,11 @@
 package tpsia.tp2.logica.sentencias;
 
-public class CeldaVacia extends Sentencia {
-
+public class CeldaVacia extends Posicion {
 	@Override
-	public Object getResultado() throws SentenciaException {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean equals(Object o) {
+		if (!(o instanceof CeldaVacia))
+			return false;
+		
+		return super.equals(o);
 	}
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
