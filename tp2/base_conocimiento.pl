@@ -16,6 +16,7 @@ cantidad([_|Ls],C):-cantidad(Ls,T),C is T+1.
 
 %%calcula el promedio de una lista
 %% Funcion probada.
+promedio(L,P):-cantidad(L,C),C=:=0,P is 0,!.
 promedio(L,P):-sumatoria(L,S), cantidad(L,C), P is (S/C).
 
 %% Funcion probada.
@@ -65,21 +66,27 @@ adyacente(X,Y1,abajo,S)    :- posicion(X,Y,S),sumarPosicion(Y,1,Y1).
 %% Funcion probada.
 %% Ojo. Se estan afectando unos a otros las variaciones de energia.
 %% Lo mejor seria agregarlos desde Java o no?
-datosEnergia(_,[],1):-!.
-datosEnergia(A,[D|Ds],S1):-S0 is S1-1,!,datosEnergia(A,Ds,S0),energia(E1,S1),energia(E0,S0),D is (E1 - E0).
+datos_energia_pelear([],1):-!.
+datos_energia_pelear([D|Ds],S1):-S0 is S1-1,accionEjecutada(pelear,S0),energia(E0,S0),energia(E1,S1),D is E1-E0,datos_energia_pelear(Ds,S0),!.
+datos_energia_pelear(D,S1):-S0 is S1-1,datos_energia_pelear(D,S0),!.
+
+datos_energia_mover([],1):-!.
+datos_energia_mover([D|Ds],S1):-S0 is S1-1,accionMover(S0),energia(E0,S0),energia(E1,S1),D is E1-E0,datos_energia_mover(Ds,S0),!. %%este CUT aca hace que si tuvo exito la regla completa, no se ejecute la regla de abajo. Si la ccion no fue del tipo mover, entonces los datos de energia seran los mismos, por lo tanto nunca llega a ese cut, y se ejecuta la regla de abajo.
+datos_energia_mover(D,S1):-S0 is S1-1,datos_energia_mover(D,S0),!.
 
 
 %% todo esto se podria hacer en java
 %% el llevar las energias y promedios
-%%y solo cargar
+%% y solo cargar
 %% promedioPorPelear(-2,3).
 %% para indicar que en promedio perdio 2 a la situacion 3
+%% Habia un error: los promedios eran positivos.
 
 promedioPorPelear(0,1):-!.
-promedioPorPelear(P,S):-datosEnergia(pelear,Es,S),promedio(Es,P).
+promedioPorPelear(P,S):-datos_energia_pelear(Es,S),promedio(Es,P).
 
 promedioPorMoverse(0,1):-!.
-promedioPorMoverse(P,S):-datosEnergia(mover,Es,S),promedio(Es,P).
+promedioPorMoverse(P,S):-datos_energia_mover(Es,S),promedio(Es,P).
 
 %% Para cumplir el objetivo, se me ocurre que basta unicamente
 %% con tableroVacio(S)
@@ -132,6 +139,7 @@ vacia(X,Y,S1):- S1 > 1,S is S1-1,accionEjecutada(comer,S),posicion(X,Y,S).
 vacia(X,Y,S1):- S1 > 1,S is S1-1,accionEjecutada(pelear,S),posicion(X,Y,S).
 
 %% Funcion comprobada.
+%% Un razonamiento similar al de datos_energia_mover, se podria aplicar aca. Un cut al final haria que si ya descubrio que en una celda consulta hay comida, no necesita del resto de las reglas. por supuesto que esto hace que consultas como comida(X,Y,1) no funcionen, pero si miramos el tp creo que nunca se hacen consultas de ese estilo, ya que siempre X e Y tienen un valor definido por adyacente o sumarPosicion. Hay que verlo con cuidado. Igualmente anda muy rapido ya todo.
 comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),comida(X,Y,S),Y=\=Y1.
 comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(X1,_,S),comida(X,Y,S),X=\=X1.
 comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),comida(X,Y,S).
