@@ -6,6 +6,7 @@ import tpsia.tp2.Percepcion;
 import tpsia.tp2.acciones.Accion;
 import tpsia.tp2.logica.sentencias.Sentencia;
 
+@Deprecated
 public class CreadorSentencias {
 
 	public static Accion solveMejorAccion(int tiempo) {
@@ -13,7 +14,7 @@ public class CreadorSentencias {
 		return null;
 	}
 
-	public static ArrayList<Sentencia> desdePercepcion(Percepcion p, int tiempo) {
+	public static ArrayList<Sentencia> desdePercepcion(Percepcion p) {
 		/* Aquí se aplican las reglas diagnósticas */
 		return null;
 	}

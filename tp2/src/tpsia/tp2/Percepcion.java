@@ -25,8 +25,9 @@ public class Percepcion {
 
 	private EstadoCelda[] celdasAdyacentes;
 	private int energia;
-	private int posX;
-	private int posY;
+	private int posX = 0;
+	private int posY = 0;
+	private int tiempo;
 	
 	public Percepcion(EstadoCelda[] ady, int e, 
 			int[] posIniPacman) {
@@ -41,6 +42,39 @@ public class Percepcion {
 			this.posX = posIniPacman[0];
 			this.posY = posIniPacman[1];
 		}
+	}
+	
+	/**
+	 * Devuelve la percepción en formato string, como una sentencia Prolog.
+	 */
+	@Override
+	public String toString() {
+		StringBuffer resultado = new StringBuffer("percepcion([");
+		
+		// Celdas adyacentes
+		resultado.append(this.celdasAdyacentes[0].toString());
+		for (int i=1; i<4; i++) {
+			resultado.append(",");
+			resultado.append(this.celdasAdyacentes[i].toString());
+		}
+		resultado.append("],");
+		
+		// Posición del agente
+		resultado.append(this.posX);
+		resultado.append(",");
+		resultado.append(this.posY);
+		resultado.append(",");
+		
+		// Energía del agente
+		resultado.append(this.energia);
+		resultado.append(",");
+		
+		// Tiempo
+		resultado.append(this.tiempo);
+		
+		resultado.append(").");
+		
+		return resultado.toString();
 	}
 
 	public EstadoCelda[] getCeldasAdyacentes() {
@@ -59,8 +93,11 @@ public class Percepcion {
 		return posY;
 	}
 
-	public String toStatement(int i) {
-		// TODO Auto-generated method stub
-		return null;
+	public int getTiempo() {
+		return tiempo;
+	}
+
+	public void setTiempo(int tiempo) {
+		this.tiempo = tiempo;
 	}
 }

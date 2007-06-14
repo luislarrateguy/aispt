@@ -118,7 +118,12 @@ public class Simulador {
 				posicionesComida);
 		
 		// Creo el agente
-		this.pacman = new Agente();
+		try {
+			this.pacman = new Agente();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		log.info(this.ambiente);
 	}

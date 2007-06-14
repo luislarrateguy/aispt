@@ -21,6 +21,10 @@
 
 package tpsia.tp2.agente;
 
+import java.util.Hashtable;
+
+import jpl.Query;
+
 import org.apache.log4j.Logger;
 
 import tpsia.tp2.Percepcion;
@@ -34,10 +38,11 @@ public class Agente {
 	
 	/**
 	 * TODO: Escribir algo nuevo aca.
+	 * @throws Exception 
 	 */
-	public Agente() {
+	public Agente() throws Exception {
 		super();
-		this.baseConocimiento = new BaseConocimiento("/home/nacho/documentos/UTN-2007-1/TPIA/tp2/fija.txt");
+		this.baseConocimiento = new BaseConocimiento();
 		this.tiempo = 0;
 	}
 
@@ -45,11 +50,14 @@ public class Agente {
 		Logger log = Logger.getLogger(Agente.class);
 		log.debug("Percepción recibida. Actualizando BC...");
 
+		// Le agrego a la percepción el parámetros situacional
+		p.setTiempo(this.tiempo);
+		
 		/**
 		 * Agrega la percepción a la Base de Conocimiento (KDB)
 		 */
-		this.baseConocimiento.decir(CreadorSentencias.desdePercepcion(p, this.tiempo));
-
+		this.baseConocimiento.decir(p);
+		
 		/**
 		 * TODO: Debe analizar si cumplió el objetivo en la situacion
 		 * actual S, con la percepción recién agregada.
@@ -68,9 +76,7 @@ public class Agente {
 		/**
 		 * Pregunta por la mejor accion para realizar
 		 */
-		MejorAccion ma = null;
-		this.baseConocimiento.preguntar(ma);
-		Accion a = ma.getMejorAccion();
+		Accion a = this.baseConocimiento.preguntarMejorAccion();
 		
 		/**
 		 * El aumento del tiempo debería ir acá según lo que entiendo
@@ -85,8 +91,8 @@ public class Agente {
 		 * para que la misma calcule y deje grabado el estado sucesor
 		 * a la espera de una nueva percepción.
 		 */
-		this.baseConocimiento.decir(CreadorSentencias.desdeAccion(a, this.tiempo));
-
+		this.baseConocimiento.decir(a);
+		
 //		try {
 //			a = this.acciones.get(this.acciones.size() - 1);
 //			log.info("Se decidió la acción: " + a.getTipoAccion());

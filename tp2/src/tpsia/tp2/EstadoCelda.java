@@ -36,4 +36,16 @@ public enum EstadoCelda {
 	public int valor() {
 		return this.valor;
 	}
+	
+	@Override
+	public String toString() {
+		if (this.equals(Desconocida))
+			return "desconocida";
+		else if (this.equals(Vacia))
+			return "vacia";
+		else if (this.equals(Comida))
+			return "comida";
+		else
+			return "enemigo";
+	}
 }

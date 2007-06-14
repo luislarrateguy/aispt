@@ -53,20 +53,20 @@ public abstract class Ambiente implements Cloneable {
 		/* arr[0] aba[1] der[2] izq[3] */ 
 		int pos[];
 
-		// Celda de arriba del pacman
-		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Arriba);
+		// Celda a la izquierda del pacman
+		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Izquierda);
 		ady[0] = this.tablero[pos[0]][pos[1]];
+		
+		// Celda a la derecha
+		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Derecha);
+		ady[1] = this.tablero[pos[0]][pos[1]];
+		
+		// Celda de arriba
+		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Arriba);
+		ady[2] = this.tablero[pos[0]][pos[1]];
 		
 		// Celda de abajo
 		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Abajo);
-		ady[1] = this.tablero[pos[0]][pos[1]];
-		
-		// Celda de la derecha
-		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Derecha);
-		ady[2] = this.tablero[pos[0]][pos[1]];
-		
-		// Celda de la izquierda
-		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Izquierda);
 		ady[3] = this.tablero[pos[0]][pos[1]];
 		
 		//return ady.clone();

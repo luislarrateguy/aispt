@@ -1,42 +1,61 @@
 package tpsia.tp2.agente;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Hashtable;
-import java.util.Set;
-import java.util.Vector;
 
-import sun.reflect.Reflection;
+import jpl.*;
+import tpsia.tp2.Percepcion;
 import tpsia.tp2.acciones.Accion;
-import tpsia.tp2.logica.CreadorSentencias;
-import tpsia.tp2.logica.prolog.Prolog;
-import tpsia.tp2.logica.sentencias.*;
+import tpsia.tp2.logica.sentencias.Sentencia;
 
 public class BaseConocimiento {
 
-	private Hashtable<Class,HashSet<Sentencia>> sentencias;
+	private static String TEMP_PROLOG_FILE = "temp.pl";
 	
-	public BaseConocimiento() {
+	private Query prologQuery;
+	private Hashtable resultados;
+	private FileWriter tempPrologFile;
+	
+	public BaseConocimiento() throws Exception {
 		super();
+		
+		this.tempPrologFile = new FileWriter(TEMP_PROLOG_FILE);
+		this.tempPrologFile.flush();
+		
+		this.prologQuery = new Query("consult('base_conocimiento.pl')");
+		if (!this.prologQuery.hasSolution())
+			throw new Exception("Agente: Falló la carga de la base de conocimientos.");
+		
+		this.prologQuery.close();
+		
+		this.prologQuery = new Query("consult('" + TEMP_PROLOG_FILE + "')");
+		if (!this.prologQuery.hasSolution())
+			throw new Exception("Agente: Falló la carga del archivo temporal.");
+		
+		this.prologQuery.close();
+		
+		this.resultados = new Hashtable();
 		
 		/* Estaría muy bueno utilizar reflection acá. De forma que cuando agregas
 		 * una sentencia nueva, no tenes que tocar absolutamente nada.
 		 * Otra solución menos complicada sería utilizar constructores estáticos
 		 * para las sentencias, pero esto no existe en Java, si en C# ;)
 		 */
-		this.sentencias = new Hashtable<Class,HashSet<Sentencia>>();
-		
-		this.sentencias.put(CeldaVacia.class, new HashSet<Sentencia>());
-		this.sentencias.put(Conoce.class, new HashSet<Sentencia>());
-		this.sentencias.put(Energia.class, new HashSet<Sentencia>());
-		this.sentencias.put(HayComida.class, new HashSet<Sentencia>());
-		this.sentencias.put(HayEnemigo.class, new HashSet<Sentencia>());
-		this.sentencias.put(Posicion.class, new HashSet<Sentencia>());
-		this.sentencias.put(PromedioPorPelear.class, new HashSet<Sentencia>());
-		this.sentencias.put(PromedioPorAvanzar.class, new HashSet<Sentencia>());
+//		this.sentencias = new Hashtable<Class,HashSet<Sentencia>>();
+//		
+//		this.sentencias.put(CeldaVacia.class, new HashSet<Sentencia>());
+//		this.sentencias.put(Conoce.class, new HashSet<Sentencia>());
+//		this.sentencias.put(Energia.class, new HashSet<Sentencia>());
+//		this.sentencias.put(HayComida.class, new HashSet<Sentencia>());
+//		this.sentencias.put(HayEnemigo.class, new HashSet<Sentencia>());
+//		this.sentencias.put(Posicion.class, new HashSet<Sentencia>());
+//		this.sentencias.put(PromedioPorPelear.class, new HashSet<Sentencia>());
+//		this.sentencias.put(PromedioPorAvanzar.class, new HashSet<Sentencia>());
 	}
 
-	public void decir(ArrayList<Sentencia> sentencias) {
+	public void decir(Percepcion p) {
 		/* TODO: Se debería llamar a un método 'crearSentencia'
 		 * que reciba la acción y la transforme en... sentencias :D
 		 * Nacho: Hecho, con otra clase para crear todas las sentencias.
@@ -44,11 +63,19 @@ public class BaseConocimiento {
 		 * "inferencia" de los axiomas de estado sucesor y demás.
 		 */
 		
-		for (Sentencia s : sentencias)
-			this.sentencias.get(s.getClass()).add(s);
+		try {
+			this.tempPrologFile.write(p.toString() + "\n");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void decir(Accion a) {
+		
 	}
 
-	public void preguntar(Sentencia sentencia) {
+	public Accion preguntarMejorAccion() {
 		/**
 		 * Se me ocurre que este preguntar podría hacer:
 		 * String s = "mejorAccion(X,"+Integer.toString(tiempo)+")";
@@ -61,7 +88,7 @@ public class BaseConocimiento {
 		 * mejorAccion(X,s):-buena(X,s).
 		 * mejorAccion(X,s):-mala(X,s).
 		 * */
-		return;
+		return null;
 	}
 
 	public boolean cumplioObjetivo() {
