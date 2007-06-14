@@ -122,12 +122,12 @@ public class BaseConocimiento {
 		 * Para cada resultado, agregarlo a la KDB
 		 * (ejemplo)
 		 */
-		Vector<Hashtable> res = (Vector<Hashtable>) this.prolog.solve(CreadorSentencias.solveAxiomaUno(tiempo));
-		for (Hashtable r : res) {
-			String x = (String) r.get("X");
-			String y = (String) r.get("Y");
-			this.prolog.addStatement(CreadorSentencias.celdaVacia(x,y,tiempo+1));
-		}
+//		Vector<Hashtable> res = (Vector<Hashtable>) this.prolog.solve(CreadorSentencias.solveAxiomaUno(tiempo));
+//		for (Hashtable r : res) {
+//			String x = (String) r.get("X");
+//			String y = (String) r.get("Y");
+//			this.prolog.addStatement(CreadorSentencias.celdaVacia(x,y,tiempo+1));
+//		}
 		/**
 		 * Este bucle se debería repetir para cada statement que deba
 		 * agregarse debido a un estado sucesor.

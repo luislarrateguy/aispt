@@ -100,49 +100,15 @@ public class Prolog {
 	}
 
 	static public void main(String[] args) {
-		if (args.length == 0) {
-			/**
-			 * Simple example howing how to use embedded Prolog in your Java
-			 * programs:
-			 */
-//			Prolog p = new Prolog();
-//			p.addStatement("father(ken,mark).");
-//			p.addStatement("father(ken,ron).");
-//			p.addStatement("father(ron,anthony).");
-//			p.addStatement("grandfather(X,Z):-father(X,Y),father(Y,Z).");
-//
-//			Vector v = p.solve("grandfather(X,Y).");
-			
-			Prolog p = new Prolog();
-			
-			p.addStatement("mother(kerry,ron).");
-			p.addStatement("father(mark,ron).");
-			p.addStatement("father(john,mark).");
-			p.addStatement("notFather(X):- not father(X,_)."); //:-not father(X,_).");
-			p.addStatement("grandfather(X,Z):-father(X,Y),father(Y,Z).");
-
-			Vector v = p.solve("not father(X,Y).");
-			
-			System.out.println("test results:");
-			// Vector v = p.solve("permutation([1,2,3],X).");
-			for (int i = 0; i < v.size(); i++) {
-				System.out.println();
-				Hashtable the_answers = (Hashtable) v.elementAt(i);
-				Enumeration enumeration = the_answers.keys();
-				while (enumeration.hasMoreElements()) {
-					String var = (String) enumeration.nextElement();
-					String val = (String) the_answers.get(var);
-					System.out.println(" var: " + var + "   val: " + val);
-				}
-			}
-		} else if (args.length > 1) {
+		if (args.length == 1) {
 			/**
 			 * Two arguments: a prolog file and a query
 			 */
 			try {
 				Prolog p = new Prolog();
 				p.consultFile(args[0]);
-				Vector v = p.solve("conoce(X,Y,S).");
+				
+				Vector v = p.solve("vacia(X,Y,2).");
 				for (int i = 0; i < v.size(); i++) {
 					System.out.println("\nNext answer:");
 					Hashtable the_answers = (Hashtable) v.elementAt(i);
@@ -159,5 +125,4 @@ public class Prolog {
 			}
 		}
 	}
-
 }
