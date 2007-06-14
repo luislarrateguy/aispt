@@ -1,16 +1,10 @@
-comida(1,1,6).
-comida(1,2,6).
-comida(1,3,6).
-comida(1,4,6).
-enemigo(3,1,6).
-enemigo(3,2,6).
-enemigo(3,3,6).
-enemigo(3,4,6).
-not conoce(4,1,6).
-not conoce(4,2,6).
-not conoce(4,3,6).
-not conoce(4,4,6).
-not conoceTodo(6).
-not tableroVacio(6).
-not cumplioObjetivo(6).
+enemigo(1,2,1).
+enemigo(3,2,1).
+%% movi a la izquierda
+posicion(1,2,2).
+enemigo(4,2,2).
+%% lo mate
+not(enemigo(1,2,3)).
+enemigo(3,2,4).
+enemigo(4,2,4).
 
