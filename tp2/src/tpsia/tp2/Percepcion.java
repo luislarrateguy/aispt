@@ -72,7 +72,7 @@ public class Percepcion {
 		// Tiempo
 		resultado.append(this.tiempo);
 		
-		resultado.append(").");
+		resultado.append(")");
 		
 		return resultado.toString();
 	}

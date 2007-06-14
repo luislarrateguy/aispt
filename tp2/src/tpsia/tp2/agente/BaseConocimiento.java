@@ -1,101 +1,98 @@
 package tpsia.tp2.agente;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Hashtable;
-
-import jpl.*;
+import jpl.JPL;
+import jpl.Query;
 import tpsia.tp2.Percepcion;
 import tpsia.tp2.acciones.Accion;
-import tpsia.tp2.logica.sentencias.Sentencia;
 
 public class BaseConocimiento {
 
 	private static String TEMP_PROLOG_FILE = "temp.pl";
 	
 	private Query prologQuery;
-	private Hashtable resultados;
-	private FileWriter tempPrologFile;
+	private int tiempo;
+	
+	// Para propositos de debugging
+	VisionAmbiente visionAmbiente;
 	
 	public BaseConocimiento() throws Exception {
 		super();
 		
-		this.tempPrologFile = new FileWriter(TEMP_PROLOG_FILE);
-		this.tempPrologFile.flush();
+		this.tiempo = 0;
+		this.visionAmbiente = new VisionAmbiente();
 		
+		/* Aumento la memoria disponible para el stack local, el global y el de
+		 * restro. */
+		JPL.setDefaultInitArgs(new String[] {
+				"pl",
+				"-G64m",
+				"-L64m",
+				"-T64m"
+		});
+		
+		// Cargo la base de conocimiento
 		this.prologQuery = new Query("consult('base_conocimiento.pl')");
 		if (!this.prologQuery.hasSolution())
 			throw new Exception("Agente: Falló la carga de la base de conocimientos.");
-		
-		this.prologQuery.close();
-		
-		this.prologQuery = new Query("consult('" + TEMP_PROLOG_FILE + "')");
-		if (!this.prologQuery.hasSolution())
-			throw new Exception("Agente: Falló la carga del archivo temporal.");
-		
-		this.prologQuery.close();
-		
-		this.resultados = new Hashtable();
-		
-		/* Estaría muy bueno utilizar reflection acá. De forma que cuando agregas
-		 * una sentencia nueva, no tenes que tocar absolutamente nada.
-		 * Otra solución menos complicada sería utilizar constructores estáticos
-		 * para las sentencias, pero esto no existe en Java, si en C# ;)
-		 */
-//		this.sentencias = new Hashtable<Class,HashSet<Sentencia>>();
-//		
-//		this.sentencias.put(CeldaVacia.class, new HashSet<Sentencia>());
-//		this.sentencias.put(Conoce.class, new HashSet<Sentencia>());
-//		this.sentencias.put(Energia.class, new HashSet<Sentencia>());
-//		this.sentencias.put(HayComida.class, new HashSet<Sentencia>());
-//		this.sentencias.put(HayEnemigo.class, new HashSet<Sentencia>());
-//		this.sentencias.put(Posicion.class, new HashSet<Sentencia>());
-//		this.sentencias.put(PromedioPorPelear.class, new HashSet<Sentencia>());
-//		this.sentencias.put(PromedioPorAvanzar.class, new HashSet<Sentencia>());
 	}
 
 	public void decir(Percepcion p) {
-		/* TODO: Se debería llamar a un método 'crearSentencia'
-		 * que reciba la acción y la transforme en... sentencias :D
-		 * Nacho: Hecho, con otra clase para crear todas las sentencias.
-		 * Asi dejamos lugar aca (en la clase) para disparar toda la 
-		 * "inferencia" de los axiomas de estado sucesor y demás.
-		 */
+		this.tiempo++;
+		
+		// Le agrego a la percepción el parámetros situacional
+		p.setTiempo(this.tiempo);
+		
+		this.prologQuery = new Query("assert(" + p.toString() + ")");
+		this.prologQuery.hasSolution();
+		
+		this.visionAmbiente.actualizar(p);
+	}
+	
+	public void decir(Accion a) {
+		if (a == null)
+			return;
+		
+		this.prologQuery = new Query("assert(accionEjecutada(" + a.getTipoAccion()
+				+ "," + this.tiempo + "))");
+		this.prologQuery.hasSolution();
 		
 		try {
-			this.tempPrologFile.write(p.toString() + "\n");
-		} catch (IOException e) {
+			a.ejecutar(this.visionAmbiente);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	public void decir(Accion a) {
-		
-	}
 
 	public Accion preguntarMejorAccion() {
-		/**
-		 * Se me ocurre que este preguntar podría hacer:
-		 * String s = "mejorAccion(X,"+Integer.toString(tiempo)+")";
-		 * r = p.solve(s);
-		 * donde el primer resultado de r, será la mejor accion posible
-		 * a ejecutar. Es decir, la excelente, la muy buena, la buena, o 
-		 * la que sea.
-		 * mejorAccion(X,s):-excelente(X,s).
-		 * mejorAccion(X,s):-muy_buena(X,s).
-		 * mejorAccion(X,s):-buena(X,s).
-		 * mejorAccion(X,s):-mala(X,s).
-		 * */
-		return null;
+		Accion a = null;
+		
+		this.prologQuery = new Query("mejorAccion(X," + this.tiempo + ")");
+		
+		String solucion = null;
+		if (this.prologQuery.hasSolution())
+			solucion = this.prologQuery.oneSolution().get("X").toString();
+		else
+			return null;
+		
+		for (Accion unaAccion : Accion.getAcciones()) {
+			if (unaAccion.getTipoAccion().equals(solucion)) {
+				a = unaAccion;
+				break;
+			}
+		}
+		
+		return a;
 	}
 
 	public boolean cumplioObjetivo() {
-		// TODO Auto-generated method stub
-		return false;
+		String s = "cumplioObjetivo(" + this.tiempo + ")";
+		this.prologQuery = new Query(s);
+		
+		return this.prologQuery.hasSolution();
 	}
 
+	@Deprecated
 	public boolean agenteVivo() {
 		// TODO Auto-generated method stub
 		return false;
@@ -106,11 +103,13 @@ public class BaseConocimiento {
 	 * de conocimiento.
 	 * @return
 	 */
+	@Deprecated
 	public VisionAmbiente getVisionAmbiente() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Deprecated
 	public int getEnergiaAgente() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -124,6 +123,7 @@ public class BaseConocimiento {
 	 * de inferencia, tal como el caso de los promedios (sólo
 	 * por eficiencia)
 	 */
+	@Deprecated
 	public void actuar(Accion a, int tiempo) {
 		/**
 		 * Le dice a la KDB qué acción ejecutó.
@@ -144,6 +144,7 @@ public class BaseConocimiento {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Deprecated
 	private void calcularEstadoSucesor(Accion a, int tiempo) {
 		/**
 		 * Para cada resultado, agregarlo a la KDB
@@ -161,9 +162,15 @@ public class BaseConocimiento {
 		 */
 	}
 
+	@Deprecated
 	private void agregarPromedios(int tiempo) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public String drawVisionAmbiente() {
+		// TODO Auto-generated method stub
+		return this.visionAmbiente.draw();
 	}
 
 }

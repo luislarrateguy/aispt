@@ -25,7 +25,7 @@ import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
-import tpsia.tp2.acciones.Accion;
+import tpsia.tp2.acciones.*;
 import tpsia.tp2.agente.Agente;
 import tpsia.tp2.logica.prolog.Prolog;
 import calculador.Calculador;
@@ -43,15 +43,12 @@ public class Simulador {
 		this.calculador = new Calculador("Grupo 7");
 		this.ambiente = new AmbienteReal();
 		/* Inicializando Acciones para acelerar ejecución */
-		// TODO: ver si hace falta. Sino eliminar.
-		/*
 		Pelear.getInstancia();
 		Comer.getInstancia();
 		AvanzarArriba.getInstancia();
 		AvanzarDerecha.getInstancia();
 		AvanzarAbajo.getInstancia();
 		AvanzarIzquierda.getInstancia();
-		*/
 	}
 	
 	

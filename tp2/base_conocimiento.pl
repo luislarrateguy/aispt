@@ -1,4 +1,5 @@
 :- dynamic percepcion/5.
+:- dynamic accionEjecutada/2.
 
 %% Funcion probada.
 sumarPosicion(P,O,P1):-O=:=(-1),P=:=1,P1 is 4,!.

@@ -109,20 +109,20 @@ public class VisionAmbiente extends Ambiente {
 		int pos[];
 		EstadoCelda[] celdasAdyacentes = p.getCeldasAdyacentes();
 		
+		// Celda adyacente de la izquierda
+		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Izquierda);
+		this.tablero[pos[0]][pos[1]] = celdasAdyacentes[0];
+		
+		// Celda adyacente de la derecha
+		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Derecha);
+		this.tablero[pos[0]][pos[1]] = celdasAdyacentes[1];
+		
 		// Celda adyacente de arriba
 		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Arriba);
-		this.tablero[pos[0]][pos[1]] = celdasAdyacentes[0];
+		this.tablero[pos[0]][pos[1]] = celdasAdyacentes[2];
 		
 		// Celda adyacente de abajo
 		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Abajo);
-		this.tablero[pos[0]][pos[1]] = celdasAdyacentes[1];
-		
-		// Celda adyacente de derecha
-		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Derecha);
-		this.tablero[pos[0]][pos[1]] = celdasAdyacentes[2];
-		
-		// Celda adyacente de izquierda
-		pos = FuncionesUtiles.sumarPosiciones(this.posicionPacman, Offset.Izquierda);
 		this.tablero[pos[0]][pos[1]] = celdasAdyacentes[3];
 	}
 
