@@ -1,11 +1,12 @@
-percepcion([enemigo,comida,vacia,vacia],2,2,10,1).
+percepcion([comida,comida,comida,vacia],2,2,10,1).
 accionEjecutada(arriba,1).
-percepcion([enemigo,comida,vacia,vacia],0,0,8,2).
+percepcion([comida,vacia,vacia,comida],0,0,9,2).
 accionEjecutada(arriba,2).
-percepcion([enemigo,comida,vacia,vacia],0,0,7,3).
+percepcion([vacia,vacia,vacia,vacia],0,0,8,3).
 accionEjecutada(arriba,3).
-percepcion([enemigo,comida,vacia,vacia],0,0,2,4).
+percepcion([vacia,vacia,vacia,vacia],0,0,7,4).
 accionEjecutada(arriba,4).
+percepcion([vacia,vacia,vacia,vacia],0,0,5,5).
 
 %% Funcion probada.
 sumarPosicion(P,O,P1):-O=:=0-1,P=:=1,P1 is 4.
@@ -64,10 +65,10 @@ conoce(X,Y,S) :- comida(X,Y,S).
 conoce(X,Y,S) :- enemigo(X,Y,S).
 
 
-adyacente(X1,Y,derecha,S)  :- posicion(X,Y,S),sumarPosicion(X,1,X1).
 adyacente(X1,Y,izquierda,S):- posicion(X,Y,S),sumarPosicion(X,-1,X1).
-adyacente(X,Y1,arriba,S)   :- posicion(X,Y,S),sumarPosicion(Y,1,Y1).
-adyacente(X,Y1,abajo,S)    :- posicion(X,Y,S),sumarPosicion(Y,-1,Y1).
+adyacente(X1,Y,derecha,S)  :- posicion(X,Y,S),sumarPosicion(X,1,X1).
+adyacente(X,Y1,arriba,S)   :- posicion(X,Y,S),sumarPosicion(Y,-1,Y1).
+adyacente(X,Y1,abajo,S)    :- posicion(X,Y,S),sumarPosicion(Y,1,Y1).
 
 %% Funcion probada.
 datosEnergia(_,[],1):-!.
@@ -171,9 +172,11 @@ vacia(X,Y,S1):- S1 > 1,S is S1-1,accionEjecutada(comer,S),posicion(X,Y,S).
 vacia(X,Y,S1):- S1 > 1,S is S1-1,accionEjecutada(pelear,S),posicion(X,Y,S).
 
 %% Funcion comprobada.
-comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),comida(X,Y,S),Y=\=Y1.
-comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(X1,_,S),comida(X,Y,S),X=\=X1.
-comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),comida(X,Y,S).
+%% comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),comida(X,Y,S),Y=\=Y1.
+%% comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(X1,_,S),comida(X,Y,S),X=\=X1.
+comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(X1,Y1,S),comida(X,Y,S),(X=\=X1;Y=\=Y1).
+comida(X,Y,S1):-S1 > 1,S is S1-1,accion(comer,S),posicion(X,Y,S),!,fail.
+
 
 %% Funcion comprobada.
 enemigo(X,Y,S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),enemigo(X,Y,S),Y=\=Y1.
