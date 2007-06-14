@@ -37,7 +37,7 @@ public class Agente {
 	 */
 	public Agente() {
 		super();
-		this.baseConocimiento = new BaseConocimiento();
+		this.baseConocimiento = new BaseConocimiento("/home/nacho/documentos/UTN-2007-1/TPIA/tp2/fija.txt");
 		this.tiempo = 0;
 	}
 

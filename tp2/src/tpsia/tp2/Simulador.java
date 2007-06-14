@@ -37,7 +37,6 @@ public class Simulador {
 	private Calculador calculador;
 	private AmbienteReal ambiente;
 	private Agente pacman;
-	private Prolog prolog;
 
 	
 	public Simulador() {

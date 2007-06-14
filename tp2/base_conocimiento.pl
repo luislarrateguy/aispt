@@ -1,18 +1,9 @@
-percepcion([comida,comida,comida,vacia],2,2,10,1).
-accionEjecutada(arriba,1).
-percepcion([comida,vacia,vacia,comida],0,0,9,2).
-accionEjecutada(arriba,2).
-percepcion([vacia,vacia,vacia,vacia],0,0,8,3).
-accionEjecutada(arriba,3).
-percepcion([vacia,vacia,vacia,vacia],0,0,7,4).
-accionEjecutada(arriba,4).
-percepcion([vacia,vacia,vacia,vacia],0,0,5,5).
 
 %% Funcion probada.
-sumarPosicion(P,O,P1):-O=:=0-1,P=:=1,P1 is 4.
-sumarPosicion(P,O,P1):-O=:=0-1,P=\=1,P1 is P-1.
-sumarPosicion(P,O,P1):-O=:=1,P=:=4,P1 is 1.
-sumarPosicion(P,O,P1):-O=:=1,P=\=4,P1 is P+1.
+sumarPosicion(P,O,P1):-O=:=(-1),P=:=1,P1 is 4,!.
+sumarPosicion(P,O,P1):-O=:=(-1),P=\=1,P1 is P-1,!.
+sumarPosicion(P,O,P1):-O=:=1,P=:=4,P1 is 1,!.
+sumarPosicion(P,O,P1):-O=:=1,P=\=4,P1 is P+1,!.
 
 %%hace la sumatoria de una lista
 %% Funcion probada.
@@ -60,9 +51,10 @@ convienePelear(no,S) :- energia(E,S), promedioPorPelear(P,S), (E + P) =< 0.
 
 
 %% Funcion probada.
-conoce(X,Y,S) :- vacia(X,Y,S).
-conoce(X,Y,S) :- comida(X,Y,S).
-conoce(X,Y,S) :- enemigo(X,Y,S).
+%% Los CUTs que puse, hace que no de todas las soluciones, pero anda mas rapido y nos sirve.
+conoce(X,Y,S) :- vacia(X,Y,S),!.
+conoce(X,Y,S) :- comida(X,Y,S),!.
+conoce(X,Y,S) :- enemigo(X,Y,S),!.
 
 
 adyacente(X1,Y,izquierda,S):- posicion(X,Y,S),sumarPosicion(X,-1,X1).
@@ -71,8 +63,11 @@ adyacente(X,Y1,arriba,S)   :- posicion(X,Y,S),sumarPosicion(Y,-1,Y1).
 adyacente(X,Y1,abajo,S)    :- posicion(X,Y,S),sumarPosicion(Y,1,Y1).
 
 %% Funcion probada.
+%% Ojo. Se estan afectando unos a otros las variaciones de energia.
+%% Lo mejor seria agregarlos desde Java o no?
 datosEnergia(_,[],1):-!.
-datosEnergia(A,[D|Ds],S1):-S0 is S1-1,datosEnergia(A,Ds,S0),energia(E1,S1),energia(E0,S0),D is (E0 - E1).
+datosEnergia(A,[D|Ds],S1):-S0 is S1-1,!,datosEnergia(A,Ds,S0),energia(E1,S1),energia(E0,S0),D is (E1 - E0).
+
 
 %% todo esto se podria hacer en java
 %% el llevar las energias y promedios
@@ -98,40 +93,8 @@ tableroVacio(S):-vacia(1,1,S),vacia(1,2,S),vacia(1,3,S),vacia(1,4,S),
                  vacia(3,1,S),vacia(3,2,S),vacia(3,3,S),vacia(3,4,S),
                  vacia(4,1,S),vacia(4,2,S),vacia(4,3,S),vacia(4,4,S).
                  
-%% DEPRECATED
-%%defino por las dudas cosas de las que hablamos
-%% esta seria una clausula positiva para decir
-%% que no hay enemigo en XY si la conozco
-%% aunque dudo que no este de más poner lo de vacia y comida
-%%noHayEnemigo(X,Y,S):-vacia(X,Y,S).
-%%noHayEnemigo(X,Y,S):-comida(X,Y,S).
-%%noHayEnemigo(X,Y,S):-enemigo(X,Y,S),!,fail.
-
-%% DEPRECATED
-%%mismo para comida
-%%noHayComida(X,Y,S):-vacia(X,Y,S).
-%%noHayComida(X,Y,S):-enemigo(X,Y,S).
-%%noHayComida(X,Y,S):-comida(X,Y,S),!,fail.
-%%noHayComida(X,Y,S).
-
-%% Esto sería util debido a lo explicado en la documentacion,
-%% pero insisto:
-%% no estaria mal redefinir el objetivo a tableroVacio(S)
-
 noHayEnemigosVivos(S):-tableroVacio(S).
 noHayComida(S):-tableroVacio(S).
-
-%% usando las reglas de noHayEnemigo(X,Y,S)
-noHayEnemigosVivos(S):-noHayEnemigo(1,1,S),noHayEnemigo(1,2,S),noHayEnemigo(1,3,S),noHayEnemigo(1,4,S),
-                       noHayEnemigo(2,1,S),noHayEnemigo(2,2,S),noHayEnemigo(2,3,S),noHayEnemigo(2,4,S),
-                       noHayEnemigo(3,1,S),noHayEnemigo(3,2,S),noHayEnemigo(3,3,S),noHayEnemigo(3,4,S),
-                       noHayEnemigo(4,1,S),noHayEnemigo(4,2,S),noHayEnemigo(4,3,S),noHayEnemigo(4,4,S).
-
-noHayComida(S):-noHayComida(1,1,S),noHayComida(1,2,S),noHayComida(1,3,S),noHayComida(1,4,S),
-                noHayComida(2,1,S),noHayComida(2,2,S),noHayComida(2,3,S),noHayComida(2,4,S),
-                noHayComida(3,1,S),noHayComida(3,2,S),noHayComida(3,3,S),noHayComida(3,4,S),
-                noHayComida(4,1,S),noHayComida(4,2,S),noHayComida(4,3,S),noHayComida(4,4,S).
-
 
 condicionUnoObjetivo(S):-conoceTodo(S).
 condicionUnoObjetivo(S):-convieneMoverse(no,S).
@@ -143,10 +106,8 @@ condicionTresObejtivo(S):-convienePelear(no,S).
 
 cumplioObjetivo(S):-condicionUnoObjetivo(S),condicionDosObjetivo(S),condicionTresObejtivo(S).
 
-
 %%reglita comoda que nos ayudaría a seguir rastro de todas las acciones
 %% si es que no las vamos borrando a las situaciones
-
 acciones([],0):-!.
 acciones([A|As],S):-accionEjecutada(A,S),S1 is S-1,acciones(As,S1).
 accionMover(S):-accionEjecutada(arriba,S).
@@ -159,7 +120,6 @@ accionMover(S):-accionEjecutada(izquierda,S).
 posicion(X,Y,S1):-S is S1-1,accionEjecutada(comer,S),posicion(X,Y,S).
 posicion(X,Y,S1):-S is S1-1,accionEjecutada(pelear,S),posicion(X,Y,S).
 
-%% Atencion: para estudiar. Esto es un HACK feo para que tome varios tipos de consultas
 %% Funcion comprobada.
 posicion(X,Y1,S1):-S is S1-1,accionEjecutada(arriba,S),posicion(X,Y,S),sumarPosicion(Y,-1,Y1).
 posicion(X,Y1,S1):-S is S1-1,accionEjecutada(abajo,S),posicion(X,Y,S),sumarPosicion(Y,1,Y1).
@@ -172,10 +132,9 @@ vacia(X,Y,S1):- S1 > 1,S is S1-1,accionEjecutada(comer,S),posicion(X,Y,S).
 vacia(X,Y,S1):- S1 > 1,S is S1-1,accionEjecutada(pelear,S),posicion(X,Y,S).
 
 %% Funcion comprobada.
-%% comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),comida(X,Y,S),Y=\=Y1.
-%% comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(X1,_,S),comida(X,Y,S),X=\=X1.
-comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(X1,Y1,S),comida(X,Y,S),(X=\=X1;Y=\=Y1).
-comida(X,Y,S1):-S1 > 1,S is S1-1,accion(comer,S),posicion(X,Y,S),!,fail.
+comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),comida(X,Y,S),Y=\=Y1.
+comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(X1,_,S),comida(X,Y,S),X=\=X1.
+comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),comida(X,Y,S).
 
 
 %% Funcion comprobada.
@@ -185,18 +144,27 @@ enemigo(X,Y,S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),enemigo(X,Y,S).
 
 
 %%valoracion de las acciones
+%% Funcion comprobada.
 excelente(comer,S):-posicion(X,Y,S),comida(X,Y,S).
 
+%% Funcion comprobada.
 muy_bueno(pelear,S):-posicion(X,Y,S),enemigo(X,Y,S),convienePelear(si,S).
 muy_bueno(D,S):-adyacente(Xa,Ya,D,S),comida(Xa,Ya,S),convieneMoverse(si,S).
 
+%% Funcion comprobada.
 bueno(D,S):-adyacente(Xa,Ya,D,S),enemigo(Xa,Ya,S),convienePelear(si,S).
 
+%% Funcion comprobada.
 regular(D,S):-adyacente(Xa,Ya,D,S),vacia(Xa,Ya,S),convieneMoverse(si,S).
 
+%% Funcion comprobada. Pero.. hay una situacion, en la que le conviene descubrir
+%% el mundo que deberia estar sobre esta.
+%% Los conviene estan fallando debido a que si pelea, la diferencia de energia
+%% le afecta. Voy a probar resolverlo en prolog. Sino lo javeamos.
 %%podria necesitar pasar, quiza es mas corto
 malo(D,S):-adyacente(Xa,Ya,D,S),enemigo(Xa,Ya,S),convienePelear(no,S).
 
+%% Funcion comprobada. Anda muy bien.
 %% lo lleva al muere
 muy_malo(pelear,S):-posicion(X,Y,S),enemigo(X,Y,S),convienePelear(no,S).
 muy_malo(D,S):-adyacente(Xa,Ya,D,S),vacia(Xa,Ya,S),convieneMoverse(no,S).

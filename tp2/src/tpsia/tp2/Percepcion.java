@@ -58,4 +58,9 @@ public class Percepcion {
 	public int getPosY() {
 		return posY;
 	}
+
+	public String toStatement(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
