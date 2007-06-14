@@ -29,6 +29,10 @@ public class Main {
 	private static String busqueda = "aestrella";
 	private static String debugFile = "logger.config";
 	
+	/* FIXME: Reveer este archivo. Esta adaptado para una simulación con
+	 * búsqueda.
+	 */
+	
 	/**
 	 * @param args
 	 */

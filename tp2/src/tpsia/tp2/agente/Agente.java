@@ -105,10 +105,6 @@ public class Agente {
 		return this.baseConocimiento.cumplioObjetivo();
 	}
 	
-	public boolean vivo() {
-		return this.baseConocimiento.agenteVivo();
-	}
-	
 	public void mostrarEstadoFinal() {
 		Logger log = Logger.getLogger(Agente.class);
 		log.info("ESTADO FINAL");	

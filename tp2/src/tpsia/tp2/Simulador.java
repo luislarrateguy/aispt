@@ -25,9 +25,14 @@ import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
-import tpsia.tp2.acciones.*;
+import tpsia.tp2.acciones.Accion;
+import tpsia.tp2.acciones.AvanzarAbajo;
+import tpsia.tp2.acciones.AvanzarArriba;
+import tpsia.tp2.acciones.AvanzarDerecha;
+import tpsia.tp2.acciones.AvanzarIzquierda;
+import tpsia.tp2.acciones.Comer;
+import tpsia.tp2.acciones.Pelear;
 import tpsia.tp2.agente.Agente;
-import tpsia.tp2.logica.prolog.Prolog;
 import calculador.Calculador;
 import calculador.Pair;
 
