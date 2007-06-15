@@ -27,8 +27,6 @@ import tpsia.tp2.Percepcion;
 import tpsia.tp2.acciones.Accion;
 
 public class BaseConocimiento {
-
-	private static String TEMP_PROLOG_FILE = "temp.pl";
 	
 	private Query prologQuery;
 	private int tiempo;

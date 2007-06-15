@@ -1,5 +1,5 @@
 :- dynamic percepcion/5,accionEjecutada/2,posicion/3,comida/3,enemigo/3,vacia/3,
-energia/2,convieneMoverse/2,convienePelear/2.
+energia/2.
 
 %% Funcion probada.
 sumarPosicion(P,O,P1):-O=:=(-1),P=:=1,P1 is 4,!.
@@ -26,24 +26,24 @@ posicion(X,Y,1):-percepcion([_,_,_,_],X,Y,_,1),!.
 
 %% PERCEPCIONES
 %% infiriendo de las percepciones
-percibir(S):-percepcion([enemigo,_,_,_],_,_,_,S),adyacente(X,Y,izquierda,S),asserta(enemigo(X,Y,S):-!).
-percibir(S):-percepcion([_,enemigo,_,_],_,_,_,S),adyacente(X,Y,derecha,S),asserta(enemigo(X,Y,S):-!).
-percibir(S):-percepcion([_,_,enemigo,_],_,_,_,S),adyacente(X,Y,arriba,S),asserta(enemigo(X,Y,S):-!).
-percibir(S):-percepcion([_,_,_,enemigo],_,_,_,S),adyacente(X,Y,abajo,S),asserta(enemigo(X,Y,S):-!).
+enemigo(X,Y,S):-percepcion([enemigo,_,_,_],_,_,_,S),adyacente(X,Y,izquierda,S),asserta(enemigo(X,Y,S):-!).
+enemigo(X,Y,S):-percepcion([_,enemigo,_,_],_,_,_,S),adyacente(X,Y,derecha,S),asserta(enemigo(X,Y,S):-!).
+enemigo(X,Y,S):-percepcion([_,_,enemigo,_],_,_,_,S),adyacente(X,Y,arriba,S),asserta(enemigo(X,Y,S):-!).
+enemigo(X,Y,S):-percepcion([_,_,_,enemigo],_,_,_,S),adyacente(X,Y,abajo,S),asserta(enemigo(X,Y,S):-!).
 
-percibir(S):-percepcion([comida,_,_,_],_,_,_,S),adyacente(X,Y,izquierda,S),asserta(comida(X,Y,S):-!).
-percibir(S):-percepcion([_,comida,_,_],_,_,_,S),adyacente(X,Y,derecha,S),asserta(comida(X,Y,S):-!).
-percibir(S):-percepcion([_,_,comida,_],_,_,_,S),adyacente(X,Y,arriba,S),asserta(comida(X,Y,S):-!).
-percibir(S):-percepcion([_,_,_,comida],_,_,_,S),adyacente(X,Y,abajo,S),asserta(comida(X,Y,S):-!).
+comida(X,Y,S):-percepcion([comida,_,_,_],_,_,_,S),adyacente(X,Y,izquierda,S),asserta(comida(X,Y,S):-!).
+comida(X,Y,S):-percepcion([_,comida,_,_],_,_,_,S),adyacente(X,Y,derecha,S),asserta(comida(X,Y,S):-!).
+comida(X,Y,S):-percepcion([_,_,comida,_],_,_,_,S),adyacente(X,Y,arriba,S),asserta(comida(X,Y,S):-!).
+comida(X,Y,S):-percepcion([_,_,_,comida],_,_,_,S),adyacente(X,Y,abajo,S),asserta(comida(X,Y,S):-!).
 
-percibir(S):-percepcion([vacia,_,_,_],_,_,_,S),adyacente(X,Y,izquierda,S),asserta(vacia(X,Y,S):-!).
-percibir(S):-percepcion([_,vacia,_,_],_,_,_,S),adyacente(X,Y,derecha,S),asserta(vacia(X,Y,S):-!).
-percibir(S):-percepcion([_,_,vacia,_],_,_,_,S),adyacente(X,Y,arriba,S),asserta(vacia(X,Y,S):-!).
-percibir(S):-percepcion([_,_,_,vacia],_,_,_,S),adyacente(X,Y,abajo,S),asserta(vacia(X,Y,S):-!).
+vacia(X,Y,S):-percepcion([vacia,_,_,_],_,_,_,S),adyacente(X,Y,izquierda,S),asserta(vacia(X,Y,S):-!).
+vacia(X,Y,S):-percepcion([_,vacia,_,_],_,_,_,S),adyacente(X,Y,derecha,S),asserta(vacia(X,Y,S):-!).
+vacia(X,Y,S):-percepcion([_,_,vacia,_],_,_,_,S),adyacente(X,Y,arriba,S),asserta(vacia(X,Y,S):-!).
+vacia(X,Y,S):-percepcion([_,_,_,vacia],_,_,_,S),adyacente(X,Y,abajo,S),asserta(vacia(X,Y,S):-!).
 
 
 %% Funcion probada.
-percibir(S):-percepcion([_,_,_,_],_,_,E,S),asserta(energia(E,S):-!).
+energia(E,S):-percepcion([_,_,_,_],_,_,E,S),asserta(energia(E,S):-!).
 
 
 %%reglas causales
@@ -130,42 +130,27 @@ accionMover(S):-accionEjecutada(derecha,S).
 accionMover(S):-accionEjecutada(izquierda,S).
 
 %%ESTADO SUCESOR
-%% Funcion comprobada.
-posicion(X,Y,S1):-S is S1-1,accionEjecutada(comer,S),posicion(X,Y,S),asserta(posicion(X,Y,S1):-!).
-posicion(X,Y,S1):-S is S1-1,accionEjecutada(pelear,S),posicion(X,Y,S),asserta(posicion(X,Y,S1):-!).
+posicion(X,Y,S1):- S1 > 1,S is S1-1,accionEjecutada(comer,S),posicion(X,Y,S),asserta(posicion(X,Y,S1):-!).
+posicion(X,Y,S1):- S1 > 1,S is S1-1,accionEjecutada(pelear,S),posicion(X,Y,S),asserta(posicion(X,Y,S1):-!).
 
-%% Funcion comprobada.
-posicion(X,Y1,S1):-S is S1-1,accionEjecutada(arriba,S),posicion(X,Y,S),sumarPosicion(Y,-1,Y1),asserta(posicion(X,Y,S1):-!).
-posicion(X,Y1,S1):-S is S1-1,accionEjecutada(abajo,S),posicion(X,Y,S),sumarPosicion(Y,1,Y1),asserta(posicion(X,Y,S1):-!).
-posicion(X1,Y,S1):-S is S1-1,accionEjecutada(derecha,S),posicion(X,Y,S),sumarPosicion(X,1,X1),asserta(posicion(X,Y,S1):-!).
-posicion(X1,Y,S1):-S is S1-1,accionEjecutada(izquierda,S),posicion(X,Y,S),sumarPosicion(X,-1,X1),asserta(posicion(X,Y,S1):-!).
+posicion(X,Y1,S1):- S1 > 1,S is S1-1,accionEjecutada(arriba,S),posicion(X,Y,S),sumarPosicion(Y,-1,Y1),asserta(posicion(X,Y,S1):-!).
+posicion(X,Y1,S1):- S1 > 1,S is S1-1,accionEjecutada(abajo,S),posicion(X,Y,S),sumarPosicion(Y,1,Y1),asserta(posicion(X,Y,S1):-!).
+posicion(X1,Y,S1):- S1 > 1,S is S1-1,accionEjecutada(derecha,S),posicion(X,Y,S),sumarPosicion(X,1,X1),asserta(posicion(X,Y,S1):-!).
+posicion(X1,Y,S1):- S1 > 1,S is S1-1,accionEjecutada(izquierda,S),posicion(X,Y,S),sumarPosicion(X,-1,X1),asserta(posicion(X,Y,S1):-!).
 
-%% Funcion comprobada.
 vacia(X,Y,S1):- S1 > 1,S is S1-1,vacia(X,Y,S),asserta(vacia(X,Y,S1):-!).
 vacia(X,Y,S1):- S1 > 1,S is S1-1,accionEjecutada(comer,S),posicion(X,Y,S),asserta(vacia(X,Y,S1):-!).
 vacia(X,Y,S1):- S1 > 1,S is S1-1,accionEjecutada(pelear,S),posicion(X,Y,S),asserta(vacia(X,Y,S1):-!).
-
-%% Funcion comprobada.
-%% Un razonamiento similar al de datos_energia_mover, se podria aplicar aca. Un cut al final haria que si ya descubrio que en una celda consulta hay comida, no necesita del resto de las reglas. por supuesto que esto hace que consultas como comida(X,Y,1) no funcionen, pero si miramos el tp creo que nunca se hacen consultas de ese estilo, ya que siempre X e Y tienen un valor definido por adyacente o sumarPosicion. Hay que verlo con cuidado. Igualmente anda muy rapido ya todo.
-%%comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),comida(X,Y,S),Y=\=Y1.
-%%comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(X1,_,S),comida(X,Y,S),X=\=X1.
-%%comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),comida(X,Y,S).
-
-%%estado_sucesor(S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),comida(X,Y,S),Y=\=Y1->assert(comida(X,Y,S1)),fail.
-%%estado_sucesor(S1):-S1 > 1,S is S1-1,posicion(X1,_,S),comida(X,Y,S),X=\=X1->assert(comida(X,Y,S1)),fail.
-%%estado_sucesor(S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),comida(X,Y,S)->assert(comida(X,Y,S1)),fail.
 
 comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),comida(X,Y,S),Y=\=Y1,asserta(comida(X,Y,S1):-!).
 comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(X1,_,S),comida(X,Y,S),X=\=X1,asserta(comida(X,Y,S1):-!).
 comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),comida(X,Y,S),asserta(comida(X,Y,S1):-!).
 
-
-%% Funcion comprobada.
 enemigo(X,Y,S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),enemigo(X,Y,S),Y=\=Y1,asserta(enemigo(X,Y,S1):-!).
 enemigo(X,Y,S1):-S1 > 1,S is S1-1,posicion(X1,_,S),enemigo(X,Y,S),X=\=X1,asserta(enemigo(X,Y,S1):-!).
 enemigo(X,Y,S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),enemigo(X,Y,S),asserta(enemigo(X,Y,S1):-!).
 
-direccionDeDescubrimiento(D,S):-adyacente(Xa,Ya,D,S),adyacenteCelda(Xa,Ya,Xaa,Yaa),not(conoce(Xaa,Yaa,S)).
+direccionDescubrimiento(D,S):-adyacente(Xa,Ya,D,S),adyacenteCelda(Xa,Ya,Xaa,Yaa),not(conoce(Xaa,Yaa,S)).
 
 %% valoracion de las acciones
 %% Funcion comprobada.
@@ -179,7 +164,9 @@ muy_bueno(D,S):-adyacente(Xa,Ya,D,S),enemigo(Xa,Ya,S),convieneMoverse(si,S),
 	convienePelear(si,S).
 
 %% Funcion comprobada.
-bueno(D,S):-convieneMoverse(si,S),direccionDeDescubrimiento(D,S).
+bueno(D,S):-convieneMoverse(si,S),direccionDescubrimiento(D,S).
+bueno(D,S):-convieneMoverse(si,S),direccionComida(D,S).
+bueno(D,S):-convieneMoverse(si,S),direccionEnemigo(D,S).
 
 %% Funcion comprobada.
 regular(D,S):-adyacente(Xa,Ya,D,S),vacia(Xa,Ya,S),convieneMoverse(si,S).
@@ -188,7 +175,7 @@ regular(D,S):-adyacente(Xa,Ya,D,S),vacia(Xa,Ya,S),convieneMoverse(si,S).
 %% el mundo que deberia estar sobre esta.
 %% Los conviene estan fallando debido a que si pelea, la diferencia de energia
 %% le afecta. Voy a probar resolverlo en prolog. Sino lo javeamos.
-%%podria necesitar pasar, quiza es mas corto
+%% podria necesitar pasar, quiza es mas corto
 malo(D,S):-adyacente(Xa,Ya,D,S),enemigo(Xa,Ya,S),convienePelear(no,S).
 
 %% Funcion comprobada. Anda muy bien.
@@ -200,7 +187,7 @@ muy_malo(D,S):-adyacente(Xa,Ya,D,S),vacia(Xa,Ya,S),convieneMoverse(no,S).
 mejorAccion(X,S):-excelente(X,S).
 mejorAccion(X,S):-muy_bueno(X,S).
 mejorAccion(X,S):-bueno(X,S).
-mejorAccion(X,S):-regular(X,S).
+%% mejorAccion(X,S):-regular(X,S).
 mejorAccion(X,S):-malo(X,S).
 mejorAccion(X,S):-muy_malo(X,S),fail.
 
