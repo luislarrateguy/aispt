@@ -33,6 +33,7 @@ public class BaseConocimiento {
 	
 	// Para propositos de debugging
 	VisionAmbiente visionAmbiente;
+	private int energia;
 	
 	public BaseConocimiento() throws Exception {
 		super();
@@ -63,7 +64,7 @@ public class BaseConocimiento {
 		
 		this.prologQuery = new Query("assert(" + p.toString() + ")");
 		this.prologQuery.hasSolution();
-		
+		this.energia = p.getEnergia();
 		this.visionAmbiente.actualizar(p);
 	}
 	
@@ -128,10 +129,8 @@ public class BaseConocimiento {
 		return null;
 	}
 
-	@Deprecated
 	public int getEnergiaAgente() {
-		// TODO Auto-generated method stub
-		return 0;
+		return energia;
 	}
 
 	/**
@@ -189,7 +188,7 @@ public class BaseConocimiento {
 
 	public String drawVisionAmbiente() {
 		// TODO Auto-generated method stub
-		return this.visionAmbiente.draw();
+		return this.visionAmbiente.draw()+ "\nEnergia: "+this.getEnergiaAgente();
 	}
 
 }
