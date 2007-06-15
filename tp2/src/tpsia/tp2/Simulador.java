@@ -45,7 +45,7 @@ public class Simulador {
 
 	
 	public Simulador() {
-		this.calculador = new CalculadorCustom("Grupo 7");
+		this.calculador = new Calculador("Grupo 7");
 		this.ambiente = new AmbienteReal();
 		/* Inicializando Acciones para acelerar ejecución */
 		Pelear.getInstancia();

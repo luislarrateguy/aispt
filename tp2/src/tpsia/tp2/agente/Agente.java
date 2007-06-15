@@ -80,7 +80,8 @@ public class Agente {
 		 * a la espera de una nueva percepción.
 		 */
 		log.debug("Notificando a la BC sobre la acción elegida");
-		this.baseConocimiento.decir(a);
+		if (a != null)
+			this.baseConocimiento.decir(a);
 		
 //		try {
 //			a = this.acciones.get(this.acciones.size() - 1);

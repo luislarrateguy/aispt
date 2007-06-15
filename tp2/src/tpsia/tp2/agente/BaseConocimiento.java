@@ -29,7 +29,7 @@ import tpsia.tp2.acciones.Accion;
 public class BaseConocimiento {
 	
 	private Query prologQuery;
-	private int tiempo;
+	public int tiempo;
 	
 	// Para propositos de debugging
 	VisionAmbiente visionAmbiente;
@@ -64,6 +64,8 @@ public class BaseConocimiento {
 		
 		this.prologQuery = new Query("assert(" + p.toString() + ")");
 		this.prologQuery.hasSolution();
+		this.prologQuery = new Query("findall(X,est("+this.tiempo+"),L)");
+		this.prologQuery.hasSolution();
 		this.energia = p.getEnergia();
 		this.visionAmbiente.actualizar(p);
 	}
@@ -95,14 +97,7 @@ public class BaseConocimiento {
 		else
 			return null;
 		
-		for (Accion unaAccion : Accion.getAcciones()) {
-			if (unaAccion.getTipoAccion().equals(solucion)) {
-				a = unaAccion;
-				break;
-			}
-		}
-		
-		return a;
+		return Accion.getAccion(solucion);
 	}
 
 	public boolean cumplioObjetivo() {

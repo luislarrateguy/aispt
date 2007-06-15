@@ -19,7 +19,7 @@ cantidad([_|Ls],C):-cantidad(Ls,T),C is T+1.
 %%calcula el promedio de una lista
 %% Funcion probada.
 promedio(L,P):-cantidad(L,C),C=:=0,P is 0,!.
-promedio(L,P):-sumatoria(L,S), cantidad(L,C), P is (S/C).
+promedio(L,P):-sumlist(L,S), length(L,C), P is (S/C).
 
 %% Funcion probada.
 posicion(X,Y,1):-percepcion([_,_,_,_],X,Y,_,1),!.
@@ -43,7 +43,7 @@ vacia(X,Y,S):-percepcion([_,_,_,vacia],_,_,_,S),adyacente(X,Y,abajo,S).
 
 
 %% Funcion probada.
-energia(E,S):-percepcion([_,_,_,_],_,_,E,S),asserta(energia(E,S):-!).
+energia(E,S):-percepcion([_,_,_,_],_,_,E,S).
 
 
 %%reglas causales
@@ -95,30 +95,7 @@ promedioPorPelear(P,S):-datos_energia_pelear(Es,S),promedio(Es,P).
 promedioPorMoverse(0,1):-!.
 promedioPorMoverse(P,S):-datos_energia_mover(Es,S),promedio(Es,P).
 
-%% Para cumplir el objetivo, se me ocurre que basta unicamente
-%% con tableroVacio(S)
-conoceTodo(S):-conoce(1,1,S),conoce(1,2,S),conoce(1,3,S),conoce(1,4,S),
-               conoce(2,1,S),conoce(2,2,S),conoce(2,3,S),conoce(2,4,S),
-               conoce(3,1,S),conoce(3,2,S),conoce(3,3,S),conoce(3,4,S),
-               conoce(4,1,S),conoce(4,2,S),conoce(4,3,S),conoce(4,4,S).
-               
-tableroVacio(S):-vacia(1,1,S),vacia(1,2,S),vacia(1,3,S),vacia(1,4,S),
-                 vacia(2,1,S),vacia(2,2,S),vacia(2,3,S),vacia(2,4,S),
-                 vacia(3,1,S),vacia(3,2,S),vacia(3,3,S),vacia(3,4,S),
-                 vacia(4,1,S),vacia(4,2,S),vacia(4,3,S),vacia(4,4,S).
-                 
-noHayEnemigosVivos(S):-tableroVacio(S).
-noHayComida(S):-tableroVacio(S).
 
-condicionUnoObjetivo(S):-conoceTodo(S).
-condicionUnoObjetivo(S):-convieneMoverse(no,S).
-
-condicionDosObjetivo(S):-noHayComida(S).
-
-condicionTresObejtivo(S):-noHayEnemigosVivos(S).
-condicionTresObejtivo(S):-convienePelear(no,S).
-
-cumplioObjetivo(S):-condicionUnoObjetivo(S),condicionDosObjetivo(S),condicionTresObejtivo(S).
 
 %%reglita comoda que nos ayudaría a seguir rastro de todas las acciones
 %% si es que no las vamos borrando a las situaciones
@@ -130,25 +107,26 @@ accionMover(S):-accionEjecutada(derecha,S).
 accionMover(S):-accionEjecutada(izquierda,S).
 
 %%ESTADO SUCESOR
-posicion(X,Y,S1):- S1 > 1,S is S1-1,accionEjecutada(comer,S),posicion(X,Y,S).
-posicion(X,Y,S1):- S1 > 1,S is S1-1,accionEjecutada(pelear,S),posicion(X,Y,S).
 
-posicion(X,Y1,S1):- S1 > 1,S is S1-1,accionEjecutada(arriba,S),posicion(X,Y,S),sumarPosicion(Y,-1,Y1).
-posicion(X,Y1,S1):- S1 > 1,S is S1-1,accionEjecutada(abajo,S),posicion(X,Y,S),sumarPosicion(Y,1,Y1).
-posicion(X1,Y,S1):- S1 > 1,S is S1-1,accionEjecutada(derecha,S),posicion(X,Y,S),sumarPosicion(X,1,X1).
-posicion(X1,Y,S1):- S1 > 1,S is S1-1,accionEjecutada(izquierda,S),posicion(X,Y,S),sumarPosicion(X,-1,X1).
+est(S1):- S1 > 1,S is S1-1,accionEjecutada(comer,S),posicion(X,Y,S),assert(posicion(X,Y,S1)).
+est(S1):- S1 > 1,S is S1-1,accionEjecutada(pelear,S),posicion(X,Y,S),assert(posicion(X,Y,S1)).
 
-vacia(X,Y,S1):- S1 > 1,S is S1-1,vacia(X,Y,S),asserta(vacia(X,Y,S1):-!).
-vacia(X,Y,S1):- S1 > 1,S is S1-1,accionEjecutada(comer,S),posicion(X,Y,S).
-vacia(X,Y,S1):- S1 > 1,S is S1-1,accionEjecutada(pelear,S),posicion(X,Y,S).
+est(S1):- S1 > 1,S is S1-1,accionEjecutada(arriba,S),posicion(X,Y,S),sumarPosicion(Y,-1,Y1),assert(posicion(X,Y1,S1)).
+est(S1):- S1 > 1,S is S1-1,accionEjecutada(abajo,S),posicion(X,Y,S),sumarPosicion(Y,1,Y1),assert(posicion(X,Y1,S1)).
+est(S1):- S1 > 1,S is S1-1,accionEjecutada(derecha,S),posicion(X,Y,S),sumarPosicion(X,1,X1),assert(posicion(X1,Y,S1)).
+est(S1):- S1 > 1,S is S1-1,accionEjecutada(izquierda,S),posicion(X,Y,S),sumarPosicion(X,-1,X1),assert(posicion(X1,Y,S1)).
 
-comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),comida(X,Y,S),Y=\=Y1.
-comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(X1,_,S),comida(X,Y,S),X=\=X1.
-comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),comida(X,Y,S).
+est(S1):- S1 > 1,S is S1-1,vacia(X,Y,S),assert(vacia(X,Y,S1)).
+est(S1):- S1 > 1,S is S1-1,accionEjecutada(comer,S),posicion(X,Y,S),assert(vacia(X,Y,S1)).
+est(S1):- S1 > 1,S is S1-1,accionEjecutada(pelear,S),posicion(X,Y,S),assert(vacia(X,Y,S1)).
 
-enemigo(X,Y,S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),enemigo(X,Y,S),Y=\=Y1.
-enemigo(X,Y,S1):-S1 > 1,S is S1-1,posicion(X1,_,S),enemigo(X,Y,S),X=\=X1.
-enemigo(X,Y,S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),enemigo(X,Y,S).
+est(S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),comida(X,Y,S),Y=\=Y1,assert(comida(X,Y,S1)).
+est(S1):-S1 > 1,S is S1-1,posicion(X1,_,S),comida(X,Y,S),X=\=X1,assert(comida(X,Y,S1)).
+est(S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),comida(X,Y,S),assert(comida(X,Y,S1)).
+
+est(S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),enemigo(X,Y,S),Y=\=Y1,assert(enemigo(X,Y,S1)).
+est(S1):-S1 > 1,S is S1-1,posicion(X1,_,S),enemigo(X,Y,S),X=\=X1,assert(enemigo(X,Y,S1)).
+est(S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),enemigo(X,Y,S),assert(enemigo(X,Y,S1)).
 
 direccionDescubrimiento(D,S):-adyacente(Xa,Ya,D,S),adyacenteCelda(Xa,Ya,Xaa,Yaa),not(conoce(Xaa,Yaa,S)).
 direccionComida(D,S):-adyacente(Xa,Ya,D,S),adyacenteCelda(Xa,Ya,Xaa,Yaa),comida(Xaa,Yaa,S).
@@ -194,4 +172,20 @@ mejorAccion(X,S):-malo(X,S).
 mejorAccion(X,S):-muy_malo(X,S),fail.
 
 
+
+%% Para cumplir el objetivo, se me ocurre que basta unicamente
+%% con tableroVacio(S)
+conoceTodo(S):-conoce(1,1,S),conoce(1,2,S),conoce(1,3,S),conoce(1,4,S),
+               conoce(2,1,S),conoce(2,2,S),conoce(2,3,S),conoce(2,4,S),
+               conoce(3,1,S),conoce(3,2,S),conoce(3,3,S),conoce(3,4,S),
+               conoce(4,1,S),conoce(4,2,S),conoce(4,3,S),conoce(4,4,S).
+               
+tableroVacio(S):-vacia(1,1,S),vacia(1,2,S),vacia(1,3,S),vacia(1,4,S),
+                 vacia(2,1,S),vacia(2,2,S),vacia(2,3,S),vacia(2,4,S),
+                 vacia(3,1,S),vacia(3,2,S),vacia(3,3,S),vacia(3,4,S),
+                 vacia(4,1,S),vacia(4,2,S),vacia(4,3,S),vacia(4,4,S).
+                 
+
+
+cumplioObjetivo(S):-tableroVacio(S).
 

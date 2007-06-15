@@ -43,4 +43,14 @@ public abstract class Accion {
 	public String toString() {
 		return this.getTipoAccion();
 	}
+	public static Accion getAccion(String solucion) {
+		Accion a = null;
+		for (Accion unaAccion : acciones) {
+			if (unaAccion.getTipoAccion().equals(solucion)) {
+				a = unaAccion;
+				break;
+			}
+		}
+		return a;
+	}
 }
