@@ -1,5 +1,5 @@
-:- dynamic percepcion/5.
-:- dynamic accionEjecutada/2.
+:- dynamic percepcion/5,accionEjecutada/2,posicion/3,comida/3,enemigo/3,vacia/3,
+energia/2,convieneMoverse/2,convienePelear/2.
 
 %% Funcion probada.
 sumarPosicion(P,O,P1):-O=:=(-1),P=:=1,P1 is 4,!.
@@ -31,10 +31,10 @@ enemigo(X,Y,S):-percepcion([_,enemigo,_,_],_,_,_,S),adyacente(X,Y,derecha,S).
 enemigo(X,Y,S):-percepcion([_,_,enemigo,_],_,_,_,S),adyacente(X,Y,arriba,S).
 enemigo(X,Y,S):-percepcion([_,_,_,enemigo],_,_,_,S),adyacente(X,Y,abajo,S).
 
-comida(X,Y,S):-percepcion([comida,_,_,_],_,_,_,S),adyacente(X,Y,izquierda,S).
-comida(X,Y,S):-percepcion([_,comida,_,_],_,_,_,S),adyacente(X,Y,derecha,S).
-comida(X,Y,S):-percepcion([_,_,comida,_],_,_,_,S),adyacente(X,Y,arriba,S).
-comida(X,Y,S):-percepcion([_,_,_,comida],_,_,_,S),adyacente(X,Y,abajo,S).
+percibir(S):-percepcion([comida,_,_,_],_,_,_,S),adyacente(X,Y,izquierda,S)->assert(comida(X,Y,S)),fail.
+percibir(S):-percepcion([_,comida,_,_],_,_,_,S),adyacente(X,Y,derecha,S)->assert(comida(X,Y,S)),fail.
+percibir(S):-percepcion([_,_,comida,_],_,_,_,S),adyacente(X,Y,arriba,S)->assert(comida(X,Y,S)),fail.
+percibir(S):-percepcion([_,_,_,comida],_,_,_,S),adyacente(X,Y,abajo,S)->assert(comida(X,Y,S)),fail.
 
 vacia(X,Y,S):-percepcion([vacia,_,_,_],_,_,_,S),adyacente(X,Y,izquierda,S).
 vacia(X,Y,S):-percepcion([_,vacia,_,_],_,_,_,S),adyacente(X,Y,derecha,S).
@@ -59,6 +59,11 @@ conoce(X,Y,S) :- vacia(X,Y,S),!.
 conoce(X,Y,S) :- comida(X,Y,S),!.
 conoce(X,Y,S) :- enemigo(X,Y,S),!.
 
+
+adyacenteCelda(X,Y,X1,Y):-sumarPosicion(X,-1,X1).
+adyacenteCelda(X,Y,X1,Y):-sumarPosicion(X,1,X1).
+adyacenteCelda(X,Y,X,Y1):-sumarPosicion(Y,-1,Y1).
+adyacenteCelda(X,Y,X,Y1):-sumarPosicion(Y,1,Y1).
 
 adyacente(X1,Y,izquierda,S):- posicion(X,Y,S),sumarPosicion(X,-1,X1).
 adyacente(X1,Y,derecha,S)  :- posicion(X,Y,S),sumarPosicion(X,1,X1).
@@ -142,9 +147,17 @@ vacia(X,Y,S1):- S1 > 1,S is S1-1,accionEjecutada(pelear,S),posicion(X,Y,S).
 
 %% Funcion comprobada.
 %% Un razonamiento similar al de datos_energia_mover, se podria aplicar aca. Un cut al final haria que si ya descubrio que en una celda consulta hay comida, no necesita del resto de las reglas. por supuesto que esto hace que consultas como comida(X,Y,1) no funcionen, pero si miramos el tp creo que nunca se hacen consultas de ese estilo, ya que siempre X e Y tienen un valor definido por adyacente o sumarPosicion. Hay que verlo con cuidado. Igualmente anda muy rapido ya todo.
-comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),comida(X,Y,S),Y=\=Y1.
-comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(X1,_,S),comida(X,Y,S),X=\=X1.
-comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),comida(X,Y,S).
+%%comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),comida(X,Y,S),Y=\=Y1.
+%%comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(X1,_,S),comida(X,Y,S),X=\=X1.
+%%comida(X,Y,S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),comida(X,Y,S).
+
+%%estado_sucesor(S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),comida(X,Y,S),Y=\=Y1->assert(comida(X,Y,S1)),fail.
+%%estado_sucesor(S1):-S1 > 1,S is S1-1,posicion(X1,_,S),comida(X,Y,S),X=\=X1->assert(comida(X,Y,S1)),fail.
+%%estado_sucesor(S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),comida(X,Y,S)->assert(comida(X,Y,S1)),fail.
+
+comida(S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),comida(X,Y,S),Y=\=Y1,assert(comida(X,Y,S1)).
+comida(S1):-S1 > 1,S is S1-1,posicion(X1,_,S),comida(X,Y,S),X=\=X1,assert(comida(X,Y,S1)).
+comida(S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),comida(X,Y,S),assert(comida(X,Y,S1)).
 
 
 %% Funcion comprobada.
@@ -152,17 +165,21 @@ enemigo(X,Y,S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),enemigo(X,Y,S),Y=\=Y1.
 enemigo(X,Y,S1):-S1 > 1,S is S1-1,posicion(X1,_,S),enemigo(X,Y,S),X=\=X1.
 enemigo(X,Y,S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),enemigo(X,Y,S).
 
+direccionDeDescubrimiento(D,S):-adyacente(Xa,Ya,D,S),adyacenteCelda(Xa,Ya,Xaa,Yaa),not(conoce(Xaa,Yaa,S)).
 
-%%valoracion de las acciones
+%% valoracion de las acciones
 %% Funcion comprobada.
+%% TODO: Optimizar con el "conviene" primero
 excelente(comer,S):-posicion(X,Y,S),comida(X,Y,S).
+excelente(pelear,S):-posicion(X,Y,S),enemigo(X,Y,S),convienePelear(si,S).
 
 %% Funcion comprobada.
-muy_bueno(pelear,S):-posicion(X,Y,S),enemigo(X,Y,S),convienePelear(si,S).
 muy_bueno(D,S):-adyacente(Xa,Ya,D,S),comida(Xa,Ya,S),convieneMoverse(si,S).
+muy_bueno(D,S):-adyacente(Xa,Ya,D,S),enemigo(Xa,Ya,S),convieneMoverse(si,S),
+	convienePelear(si,S).
 
 %% Funcion comprobada.
-bueno(D,S):-adyacente(Xa,Ya,D,S),enemigo(Xa,Ya,S),convienePelear(si,S).
+bueno(D,S):-convieneMoverse(si,S),direccionDeDescubrimiento(D,S).
 
 %% Funcion comprobada.
 regular(D,S):-adyacente(Xa,Ya,D,S),vacia(Xa,Ya,S),convieneMoverse(si,S).
