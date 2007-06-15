@@ -95,7 +95,7 @@ public abstract class Ambiente implements Cloneable {
 		if (!this.hayComida(x, y)) {
 			Logger log = Logger.getLogger("Ambiente");
 			log.fatal("El pacman intentó comer comida que no existe en (" +
-					x + "," + y + ")");
+					(x+1) + "," + (y+1) + ")");
 			
 			return;
 		}
@@ -134,10 +134,10 @@ public abstract class Ambiente implements Cloneable {
 	}
 	
 	public String draw(boolean p) {
-		String cuadro = new String("\n[ ]  0   1   2   3 ->X\n");
+		String cuadro = new String("\n[ ]  1   2   3   4 ->X\n");
 		
 		for (int j=0;j<4;j++) {
-			cuadro += "  "+Integer.toString(j)+" ";
+			cuadro += "  "+Integer.toString(j+1)+" ";
 			for (int i=0;i<4;i++) {
 				cuadro 	+= "["+aux.get(this.tablero[i][j].valor());
 				if (p && posicionPacman[0]==i && posicionPacman[1] == j) {

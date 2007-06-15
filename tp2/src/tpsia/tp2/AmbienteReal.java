@@ -94,8 +94,8 @@ public class AmbienteReal extends Ambiente {
 		aux += super.draw();
 		
 		aux += "posPacman: [" 
-			+ Integer.toString(posicionPacman[0]) +","
-			+ Integer.toString(posicionPacman[1]) + "]\n";
+			+ Integer.toString(posicionPacman[0]+1) +","
+			+ Integer.toString(posicionPacman[1]+1) + "]\n";
 		
 		aux += "energia:" 
 			+ Integer.toString(this.energiaPacman);
