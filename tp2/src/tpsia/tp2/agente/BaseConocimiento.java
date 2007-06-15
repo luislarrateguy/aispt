@@ -21,6 +21,8 @@
 
 package tpsia.tp2.agente;
 
+import org.apache.log4j.Logger;
+
 import jpl.JPL;
 import jpl.Query;
 import tpsia.tp2.Percepcion;
@@ -30,6 +32,7 @@ public class BaseConocimiento {
 	
 	private Query prologQuery;
 	public int tiempo;
+	private Logger log = Logger.getLogger("BC");
 	
 	// Para propositos de debugging
 	VisionAmbiente visionAmbiente;
@@ -63,8 +66,10 @@ public class BaseConocimiento {
 		p.setTiempo(this.tiempo);
 		
 		this.prologQuery = new Query("assert(" + p.toString() + ")");
+		this.log.info("assert(" + p.toString() + ")");
 		this.prologQuery.hasSolution();
 		this.prologQuery = new Query("findall(X,est("+this.tiempo+"),L)");
+		this.log.info("findall(X,est("+this.tiempo+"),L)");
 		this.prologQuery.hasSolution();
 		this.energia = p.getEnergia();
 		this.visionAmbiente.actualizar(p);
@@ -76,6 +81,7 @@ public class BaseConocimiento {
 		
 		this.prologQuery = new Query("assert(accionEjecutada(" + a.getTipoAccion()
 				+ "," + this.tiempo + "))");
+		
 		this.prologQuery.hasSolution();
 		
 		try {
@@ -90,7 +96,7 @@ public class BaseConocimiento {
 		Accion a = null;
 		
 		this.prologQuery = new Query("mejorAccion(X," + this.tiempo + ")");
-		
+		this.log.info("mejorAccion(X," + this.tiempo + ")"+",assert(accionEjecutada(X," + this.tiempo + "))");
 		String solucion = null;
 		if (this.prologQuery.hasSolution())
 			solucion = this.prologQuery.oneSolution().get("X").toString();

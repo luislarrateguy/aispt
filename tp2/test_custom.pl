@@ -20,7 +20,8 @@ mejorAccion(X,2).
 asserta(accionEjecutada(comer,2)).
 asserta(percepcion([vacia,vacia,vacia,vacia],2,1,8,3)).
 
-est(3).
+
+findall(X,est(3),L).
 
 
 cumplioObjetivo(3).
