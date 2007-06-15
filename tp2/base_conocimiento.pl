@@ -151,6 +151,8 @@ enemigo(X,Y,S1):-S1 > 1,S is S1-1,posicion(X1,_,S),enemigo(X,Y,S),X=\=X1,asserta
 enemigo(X,Y,S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),enemigo(X,Y,S),asserta(enemigo(X,Y,S1):-!).
 
 direccionDescubrimiento(D,S):-adyacente(Xa,Ya,D,S),adyacenteCelda(Xa,Ya,Xaa,Yaa),not(conoce(Xaa,Yaa,S)).
+direccionComida(D,S):-adyacente(Xa,Ya,D,S),adyacenteCelda(Xa,Ya,Xaa,Yaa),comida(Xaa,Yaa,S).
+direccionEnemigo(D,S):-adyacente(Xa,Ya,D,S),adyacenteCelda(Xa,Ya,Xaa,Yaa),enemigo(Xaa,Yaa,S).
 
 %% valoracion de las acciones
 %% Funcion comprobada.
