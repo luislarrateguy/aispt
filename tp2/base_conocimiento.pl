@@ -149,7 +149,7 @@ bueno(D,S):-convieneMoverse(si,S),direccionComida(D,S).
 bueno(D,S):-convieneMoverse(si,S),direccionEnemigo(D,S).
 
 %% Funcion comprobada.
-regular(D,S):-adyacente(Xa,Ya,D,S),not(conoceTodo(S)),vacia(Xa,Ya,S),convieneMoverse(si,S).
+regular(D,S):-convieneMoverse(si,S),convienePelear(si,S),adyacente(Xa,Ya,D,S),vacia(Xa,Ya,S),convieneMoverse(si,S).
 
 %% Funcion comprobada. Pero.. hay una situacion, en la que le conviene descubrir
 %% el mundo que deberia estar sobre esta.
