@@ -48,10 +48,12 @@ public class BaseConocimiento {
 		 * restro. */
 		JPL.setDefaultInitArgs(new String[] {
 				"pl",
-				"-G64m",
-				"-L64m",
-				"-T64m"
+				"-G128m",
+				"-L128m",
+				"-T128m",
+				"-nosignals"
 		});
+		JPL.init();
 		
 		// Cargo la base de conocimiento
 		this.prologQuery = new Query("consult('base_conocimiento.pl')");

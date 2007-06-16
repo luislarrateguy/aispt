@@ -108,25 +108,25 @@ accionMover(S):-accionEjecutada(izquierda,S).
 
 %%ESTADO SUCESOR
 
-est(S1):- S1 > 1,S is S1-1,accionEjecutada(comer,S),posicion(X,Y,S),assert(posicion(X,Y,S1)).
-est(S1):- S1 > 1,S is S1-1,accionEjecutada(pelear,S),posicion(X,Y,S),assert(posicion(X,Y,S1)).
+est(S1):- S1 > 1,S is S1-1,accionEjecutada(comer,S),posicion(X,Y,S),asserta(posicion(X,Y,S1)).
+est(S1):- S1 > 1,S is S1-1,accionEjecutada(pelear,S),posicion(X,Y,S),asserta(posicion(X,Y,S1)).
 
-est(S1):- S1 > 1,S is S1-1,accionEjecutada(arriba,S),posicion(X,Y,S),sumarPosicion(Y,-1,Y1),assert(posicion(X,Y1,S1)).
-est(S1):- S1 > 1,S is S1-1,accionEjecutada(abajo,S),posicion(X,Y,S),sumarPosicion(Y,1,Y1),assert(posicion(X,Y1,S1)).
-est(S1):- S1 > 1,S is S1-1,accionEjecutada(derecha,S),posicion(X,Y,S),sumarPosicion(X,1,X1),assert(posicion(X1,Y,S1)).
-est(S1):- S1 > 1,S is S1-1,accionEjecutada(izquierda,S),posicion(X,Y,S),sumarPosicion(X,-1,X1),assert(posicion(X1,Y,S1)).
+est(S1):- S1 > 1,S is S1-1,accionEjecutada(arriba,S),posicion(X,Y,S),sumarPosicion(Y,-1,Y1),asserta(posicion(X,Y1,S1)).
+est(S1):- S1 > 1,S is S1-1,accionEjecutada(abajo,S),posicion(X,Y,S),sumarPosicion(Y,1,Y1),asserta(posicion(X,Y1,S1)).
+est(S1):- S1 > 1,S is S1-1,accionEjecutada(derecha,S),posicion(X,Y,S),sumarPosicion(X,1,X1),asserta(posicion(X1,Y,S1)).
+est(S1):- S1 > 1,S is S1-1,accionEjecutada(izquierda,S),posicion(X,Y,S),sumarPosicion(X,-1,X1),asserta(posicion(X1,Y,S1)).
 
-est(S1):- S1 > 1,S is S1-1,vacia(X,Y,S),not(vacia(X,Y,S1)),assert(vacia(X,Y,S1)).
-est(S1):- S1 > 1,S is S1-1,posicion(X,Y,S),accionEjecutada(comer,S),assert(vacia(X,Y,S1)).
-est(S1):- S1 > 1,S is S1-1,posicion(X,Y,S),accionEjecutada(pelear,S),assert(vacia(X,Y,S1)).
+est(S1):- S1 > 1,S is S1-1,vacia(X,Y,S),not(vacia(X,Y,S1)),asserta(vacia(X,Y,S1)).
+est(S1):- S1 > 1,S is S1-1,posicion(X,Y,S),accionEjecutada(comer,S),asserta(vacia(X,Y,S1)).
+est(S1):- S1 > 1,S is S1-1,posicion(X,Y,S),accionEjecutada(pelear,S),asserta(vacia(X,Y,S1)).
 
-est(S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),comida(X,Y,S),Y=\=Y1,not(comida(X,Y,S1)),assert(comida(X,Y,S1)).
-est(S1):-S1 > 1,S is S1-1,posicion(X1,_,S),comida(X,Y,S),X=\=X1,not(comida(X,Y,S1)),assert(comida(X,Y,S1)).
-est(S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),comida(X,Y,S),not(comida(X,Y,S1)),assert(comida(X,Y,S1)).
+est(S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),comida(X,Y,S),Y=\=Y1,not(comida(X,Y,S1)),asserta(comida(X,Y,S1)).
+est(S1):-S1 > 1,S is S1-1,posicion(X1,_,S),comida(X,Y,S),X=\=X1,not(comida(X,Y,S1)),asserta(comida(X,Y,S1)).
+est(S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),comida(X,Y,S),not(comida(X,Y,S1)),asserta(comida(X,Y,S1)).
 
-est(S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),enemigo(X,Y,S),Y=\=Y1,not(enemigo(X,Y,S1)),assert(enemigo(X,Y,S1)).
-est(S1):-S1 > 1,S is S1-1,posicion(X1,_,S),enemigo(X,Y,S),X=\=X1,not(enemigo(X,Y,S1)),assert(enemigo(X,Y,S1)).
-est(S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),enemigo(X,Y,S),not(enemigo(X,Y,S1)),assert(enemigo(X,Y,S1)).
+est(S1):-S1 > 1,S is S1-1,posicion(_,Y1,S),enemigo(X,Y,S),Y=\=Y1,not(enemigo(X,Y,S1)),asserta(enemigo(X,Y,S1)).
+est(S1):-S1 > 1,S is S1-1,posicion(X1,_,S),enemigo(X,Y,S),X=\=X1,not(enemigo(X,Y,S1)),asserta(enemigo(X,Y,S1)).
+est(S1):-S1 > 1,S is S1-1,posicion(X,Y,S),accionMover(S),enemigo(X,Y,S),not(enemigo(X,Y,S1)),asserta(enemigo(X,Y,S1)).
 
 direccionDescubrimiento(D,S):-adyacente(Xa,Ya,D,S),adyacenteCelda(Xa,Ya,Xaa,Yaa),not(conoce(Xaa,Yaa,S)).
 direccionComida(D,S):-adyacente(Xa,Ya,D,S),adyacenteCelda(Xa,Ya,Xaa,Yaa),comida(Xaa,Yaa,S).
@@ -149,14 +149,14 @@ bueno(D,S):-convieneMoverse(si,S),direccionComida(D,S).
 bueno(D,S):-convieneMoverse(si,S),direccionEnemigo(D,S).
 
 %% Funcion comprobada.
-regular(D,S):-adyacente(Xa,Ya,D,S),vacia(Xa,Ya,S),convieneMoverse(si,S).
+regular(D,S):-adyacente(Xa,Ya,D,S),not(conoceTodo(S)),vacia(Xa,Ya,S),convieneMoverse(si,S).
 
 %% Funcion comprobada. Pero.. hay una situacion, en la que le conviene descubrir
 %% el mundo que deberia estar sobre esta.
 %% Los conviene estan fallando debido a que si pelea, la diferencia de energia
 %% le afecta. Voy a probar resolverlo en prolog. Sino lo javeamos.
 %% podria necesitar pasar, quiza es mas corto
-malo(D,S):-adyacente(Xa,Ya,D,S),enemigo(Xa,Ya,S),convienePelear(no,S).
+malo(D,S):-adyacente(Xa,Ya,D,S),not(conoceTodo(S)),enemigo(Xa,Ya,S),convienePelear(no,S).
 
 %% Funcion comprobada. Anda muy bien.
 %% lo lleva al muere
@@ -164,12 +164,12 @@ muy_malo(pelear,S):-posicion(X,Y,S),enemigo(X,Y,S),convienePelear(no,S).
 muy_malo(D,S):-adyacente(Xa,Ya,D,S),vacia(Xa,Ya,S),convieneMoverse(no,S).
 
 
-mejorAccion(X,S):-excelente(X,S).
-mejorAccion(X,S):-muy_bueno(X,S).
-mejorAccion(X,S):-bueno(X,S).
-mejorAccion(X,S):-regular(X,S).
-mejorAccion(X,S):-malo(X,S).
-mejorAccion(X,S):-muy_malo(X,S),fail.
+mejorAccion(X,S):-excelente(X,S),!.
+mejorAccion(X,S):-muy_bueno(X,S),!.
+mejorAccion(X,S):-bueno(X,S),!.
+mejorAccion(X,S):-regular(X,S),!.
+mejorAccion(X,S):-malo(X,S),!.
+mejorAccion(X,S):-muy_malo(X,S),!,fail.
 
 
 

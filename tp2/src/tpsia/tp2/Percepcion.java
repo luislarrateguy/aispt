@@ -39,8 +39,8 @@ public class Percepcion {
 		this.energia = e;
 		
 		if (posIniPacman != null) { 
-			this.posX = posIniPacman[0];
-			this.posY = posIniPacman[1];
+			this.posX = posIniPacman[0]+1;
+			this.posY = posIniPacman[1]+1;
 		}
 	}
 	

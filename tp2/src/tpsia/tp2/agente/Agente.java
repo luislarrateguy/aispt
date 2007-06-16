@@ -21,6 +21,8 @@
 
 package tpsia.tp2.agente;
 
+import jpl.JPL;
+
 import org.apache.log4j.Logger;
 
 import tpsia.tp2.Percepcion;
@@ -28,6 +30,7 @@ import tpsia.tp2.acciones.Accion;
 
 public class Agente {
 	private BaseConocimiento baseConocimiento;
+	private boolean noAction;
 	
 	/**
 	 * TODO: Escribir algo nuevo aca.
@@ -35,12 +38,14 @@ public class Agente {
 	 */
 	public Agente() throws Exception {
 		super();
+		this.noAction = false;
 		this.baseConocimiento = new BaseConocimiento();
 	}
 
 	public Accion actuar(Percepcion p) {
 		Logger log = Logger.getLogger(Agente.class);
 		log.debug("Percepción recibida.");
+		Accion a = null;
 		
 		/**
 		 * Agrega la percepción a la Base de Conocimiento (KDB)
@@ -56,54 +61,38 @@ public class Agente {
 		
 		if (this.baseConocimiento.cumplioObjetivo()) {
 			log.debug("De acuerdo a la percepción recibida, ya se llegó al objetivo");
-			return null;
-		}
-		
-		log.debug("Aún no llegamos al objetivo");
-		
-		/**
-		 * TODO: Ver como traducir esto al tp2
-		 * log.info(this.estado.getAmbiente());
-		 * log.info("energia:" + Integer.toString(this.estado.getEnergia()));
-		 */
+			a = null;
+			this.noAction=true;
+		} else {
+			
+			log.debug("Aún no llegamos al objetivo");
+			/**
+			 * Pregunta por la mejor accion para realizar
+			 */
+			log.debug("Preguntando por la mejor acción...");
+			a = this.baseConocimiento.preguntarMejorAccion();
 
-		/**
-		 * Pregunta por la mejor accion para realizar
-		 */
-		log.debug("Preguntando por la mejor acción...");
-		Accion a = this.baseConocimiento.preguntarMejorAccion();
-		log.debug("La mejor acción es: " + a.getTipoAccion());
+			
+			/**
+			 * Avisa a la base de conocimiento la desición de su accion,
+			 * para que la misma calcule y deje grabado el estado sucesor
+			 * a la espera de una nueva percepción.
+			 */
+			log.debug("Notificando a la BC sobre la acción elegida");
+			if (a != null) {
+				log.debug("La mejor acción es: " + a.getTipoAccion());
+				this.baseConocimiento.decir(a);
+			} else {
+				this.noAction=true;
+			}
 		
-		/**
-		 * Avisa a la base de conocimiento la desición de su accion,
-		 * para que la misma calcule y deje grabado el estado sucesor
-		 * a la espera de una nueva percepción.
-		 */
-		log.debug("Notificando a la BC sobre la acción elegida");
-		if (a != null)
-			this.baseConocimiento.decir(a);
-		
-//		try {
-//			a = this.acciones.get(this.acciones.size() - 1);
-//			log.info("Se decidió la acción: " + a.getTipoAccion());
-//			this.estado.ejecutarAccion(a);
-//			this.estadosAlcanzados.add(this.estado.getAmbiente());
-//			this.cumplioObjetivo = this.objetivo.cumpleObjetivo(this.estado);
-//		} catch (Exception e) {
-//			/* Si salto la excepcion debido a que la secuencia de acciones 
-//			 * está vacía, entonces es porque no se encontró solución.
-//			 * No se cumple el objetivo en ningún nodo.
-//			 */
-//			a = null;
-//			this.tieneSolucion = false;
-//			log.fatal("No se encontró solución que satisfaga el objetivo");
-//		}
+		}
 
 		return a;
 	}
 	
 	public boolean cumplioObjetivo() {
-		return this.baseConocimiento.cumplioObjetivo();
+		return  this.noAction || this.baseConocimiento.cumplioObjetivo();
 	}
 	
 	public void mostrarEstadoFinal() {
