@@ -101,8 +101,8 @@ public class VisionAmbiente extends Ambiente {
 	 */
 	public void actualizar(Percepcion p) {	
 		if (VisionAmbiente.first) {
-			this.posicionPacman[0] = p.getPosX();
-			this.posicionPacman[1] = p.getPosY();
+			this.posicionPacman[0] = p.getPosX()-1;
+			this.posicionPacman[1] = p.getPosY()-1;
 			VisionAmbiente.first = false;
 		}
 		
@@ -131,8 +131,8 @@ public class VisionAmbiente extends Ambiente {
 		aux += super.draw(true);
 		
 		aux += "posPacman: [" 
-			+ Integer.toString(posicionPacman[0]+1) +","
-			+ Integer.toString(posicionPacman[1]+1) + "]";
+			+ Integer.toString(posicionPacman[1]+1) +","
+			+ Integer.toString(posicionPacman[0]+1) + "]";
 		
 		return aux;
 	}

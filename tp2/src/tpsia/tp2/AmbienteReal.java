@@ -23,6 +23,9 @@ package tpsia.tp2;
 
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
+import calculador.Calculador;
 import calculador.Pair;
 
 public class AmbienteReal extends Ambiente {
@@ -58,6 +61,7 @@ public class AmbienteReal extends Ambiente {
 	@SuppressWarnings("unchecked")
 	public void inicializar(int energiaPacman, Pair posicionPacMan, 
 			Vector posEnemigos, Vector posComida) {
+		Logger logCALC = Logger.getLogger(Calculador.class);
 		
 		// Inicializando PacMan
 		this.energiaPacman = energiaPacman;
@@ -65,15 +69,27 @@ public class AmbienteReal extends Ambiente {
 		this.posicionPacman[0] = posicionPacMan.y() - 1;
 		this.posicionPacman[1] = posicionPacMan.x() - 1;
 		
+		logCALC.info(posicionPacMan.x() + " " + posicionPacMan.y());
+		logCALC.info(this.energiaPacman);
+		
 		//Inicializando enemigos
 		Vector<Pair> posicionesEnemigos = (Vector<Pair>) posEnemigos;
-		for (Pair unaCelda : posicionesEnemigos)
+		for (Pair unaCelda : posicionesEnemigos) {
 			this.tablero[unaCelda.y() - 1][unaCelda.x() - 1] = EstadoCelda.Enemigo;
+			logCALC.info(unaCelda.x()+" "+unaCelda.y());
+		}
 		
 		//Inicializando comida
 		Vector<Pair> posicionesComida = (Vector<Pair>)posComida;
-		for (Pair unaCelda : posicionesComida)
+		for (Pair unaCelda : posicionesComida) {
 			this.tablero[unaCelda.y() - 1][unaCelda.x() - 1] = EstadoCelda.Comida;
+			logCALC.info(unaCelda.x()+" "+unaCelda.y());
+		}
+		
+
+
+		
+		
 	}
 
 	public int[] getPosicionInicialPacman() {
@@ -94,8 +110,8 @@ public class AmbienteReal extends Ambiente {
 		aux += super.draw();
 		
 		aux += "posPacman: [" 
-			+ Integer.toString(posicionPacman[0]+1) +","
-			+ Integer.toString(posicionPacman[1]+1) + "]\n";
+			+ Integer.toString(posicionPacman[1]+1) +","
+			+ Integer.toString(posicionPacman[0]+1) + "]\n";
 		
 		aux += "energia:" 
 			+ Integer.toString(this.energiaPacman);
