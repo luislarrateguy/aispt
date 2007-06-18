@@ -11,7 +11,9 @@ rm -f main.pdf
 # Borro los archivos temporales
 borrar
 
-cd hechoconsl
+cd notas
+borrar
+cd ../hechoconsl
 borrar
 cd ../titulo
 borrar
