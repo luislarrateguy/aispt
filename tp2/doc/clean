@@ -21,8 +21,6 @@ cd ../licencia
 borrar
 cd ../acciones
 borrar
-cd ../base_conocimiento
-borrar
 cd ../estado
 borrar
 cd ../estado_sucesor
