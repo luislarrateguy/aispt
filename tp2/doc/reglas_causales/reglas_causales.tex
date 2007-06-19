@@ -53,11 +53,7 @@ $\Rightarrow$
 
 \subsection{Reglas de utilidad para evaluar los objetivos}
 
-\TODO{Elegir si definimos esto por extensión o con un cuantificador.
 \newline 
-Nacho says: me da lo mismo. Al momento de la implementacion lo hacemos por 
-extension por facilidad, y aca podriamos hacerlo por cuantificador para 
-expresarlo.}
 \item conoce(1,1,s) $\land$ conoce(1,2,s) $\land$ 
  conoce(1,3,s) $\land$ conoce(1,4,s) $\land$ 
  \newline 
@@ -72,10 +68,6 @@ expresarlo.}
  \newline
  $\Rightarrow$ conoceTodo(s)
  
-\Nota{Esto no deja de ser cierto, que si todas estan vacias luego no hay
-enemigos ni comida. No hace falta discriminar cual ocurre. No va afectar al 
-objetivo, ni va a mejorar como se comporta el agente, ya que es EXCELENTE comer.
-}
 \item $\forall X,Y$ celdaVacia(X,Y,s) 
  $\Rightarrow$ noHayEnemigosVivos(s) $\land$ noHayComida(s)
 
@@ -84,7 +76,6 @@ objetivo, ni va a mejorar como se comporta el agente, ya que es EXCELENTE comer.
 
 \item convieneMoverse(`no',s) $\Rightarrow$ condicionUnoObjetivo(s)
 
-\TODO{Yo propuse otra regla para la condición dos. Ver si va.}
 \item noHayComida(s) $\Rightarrow$ condicionDosObjetivo(s)
 \item noHayEnemigosVivos(s) $\Rightarrow$ condicionTresObejtivo(s)
 \item convienePelear(`no',s) $\Rightarrow$ condicionTresObejtivo(s)
