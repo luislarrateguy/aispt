@@ -3,18 +3,18 @@
 El archivo \emph{base\_conocimiento.pl} contiene las reglas necesarias para el
 proceso de inferencia del Agente. Inicialmente consultando desde Java por \linebreak
 \emph{mejorAccion(X,S)} se obtenía la mejor acción X dada una situación S. Esta
-forma de consultar y con reglas sólamente deductivas, hacía todo el
+forma de consultar y con reglas solamente deductivas, hacía todo el
 procesamiento muy lento (por cada consulta se hacían llamadas recursivas en las
 reglas de estado sucesor).
 
 Para evitar esto se utilizó la familia de predicados \emph{assert}.
 Creamos un predicado \emph{est(S1)} que calcula el estado para una situación
 S1 en base a una anterior. Esto nos trajo aparejado otro problema, que era
-que cada \emph{assert} incluído en cada uno de los predicados \emph{est(S)} 
+que cada \emph{assert} incluido en cada uno de los predicados \emph{est(S)} 
 generaban duplicados en la base de conocimiento (debido a que se podía estar
  percibiendo una celda que además se estaba heredando su estado de la situación
  anterior). 
 
 Todas estas cuestiones (y otras) las resolvimos definiendo como se encuentran
- actualmente los predicados \emph{est(S1)} y llamándolos explicitamente desde
+ actualmente los predicados \emph{est(S1)} y llamándolos explícitamente desde
  Java mediante \emph{findall(\_,est(S1),\_)} con el fin de que todos unifiquen (lo que hace es buscar todas las soluciones posibles, logrando que los axiomas de estado sucesor unifiquen la cantidad de veces necesarias).

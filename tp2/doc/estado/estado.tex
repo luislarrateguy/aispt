@@ -1,4 +1,4 @@
-\section{Representacion del estado}
+\section{Representación del estado}
 
 \begin{itemize}
 
@@ -6,7 +6,7 @@
 la columna $x$ y la fila $y$.
 
 \item \textbf{energía(e,s)}: el pacman tiene una energía igual a $e$ en la
-situacion $s$.
+situación $s$.
 
 \item \textbf{conoce(x,y,s)}: indica que el agente conoce la celda ubicada
 en la columna $x$ y fila $y$.
@@ -36,14 +36,14 @@ contrario.
 entre la energía percibida y la actual cuando la acción fue Pelear, para después
 sacar un promedio.
 
-\item \textbf{datosEnergia(Mover,[],s)}: Idem, pero para la acción Mover.
+\item \textbf{datosEnergia(Mover,[],s)}: Ídem, pero para la acción Mover.
 
 % DEPRECATED: Este dato no haría falta. Sí lo utilizabamos en búsqueda, pero
 % aquí no hace falta.
-\item \textbf{datosEnergia(Comer,[],s)}: Idem, pero para la acción Comer.
+\item \textbf{datosEnergia(Comer,[],s)}: Ídem, pero para la acción Comer.
 
 \item \textbf{adyacentes(xa,ya,dirección,s)}: devuelve en $xa$ y en $ya$ la
-posición de una celda adyancente a la actual ($posicion(x,y,s)$). $direccion$
+posición de una celda adyacente a la actual ($posicion(x,y,s)$). $direccion$
 devuelve los mismos valores que acepta la acción \emph{Mover}.
 
 \item \textbf{AccionEjecutada(acción,s)}: Indica que ``acción'' fue ejecutada
