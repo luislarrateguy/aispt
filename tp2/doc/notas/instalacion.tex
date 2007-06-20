@@ -1,4 +1,4 @@
-\subsection{Cómo compilar el código y ejecutarlo}
+\subsection{Importar el código a Eclipse, compilarlo y ejecutarlo\label{sec:inst}}
 
 Tanto para GNU/Linux como para Windows, hemos creado un paquete personalizado
 de los binarios de SWI-Prolog, quitando los componentes que no son necesarios
@@ -14,7 +14,7 @@ correspondiente para Windows es \linebreak\archivo{pl-5.6.35-bin-win.zip}
 \subsubsection{En GNU/Linux}
 \begin{itemize}
 
-\item Crear un proyecto Java. Debe utilizarse Java 5.0.
+\item En Eclipse, crear un proyecto Java. Debe utilizarse Java 5.0.
 
 \item Importar en el proyecto antes creado el archivo \archivo{tp2-ia.zip}
 (General/Archive file).  Cuando pregunte por sobreescribir los archivos
@@ -40,8 +40,9 @@ y valor ``\$\{SWI\_PROLOG\_INSTALL\_DIR\}''.
 
 \item Clic en el botón \emph{Apply}.
 
-\item Clic en el botón \emph{Run}. La salida muestra un dibujo de la visión del ambiente del pacman,
-las decisiones que va tomando, su posición, energía, etc.
+\item Clic en el botón \emph{Run}. La salida por consola muestra un dibujo de
+la visión del ambiente del pacman, las decisiones que va tomando, su posición,
+energía, etc.
 
 \end{itemize}
 
@@ -58,7 +59,7 @@ arguments}, al configurar cómo correr el trabajo práctico, se debe
 colocar:\newline ``-Djava.library.path=\$\{SWI\_PROLOG\_INSTALL\_DIR\}/bin'',
 ya que es en la carpeta \archivo{bin} donde se encuentran las librerías en la
 distribución para Windows de SWI-Prolog. Aquí se hace más énfasis en colocar la
-ruta entre comillas dobles si tiene espacios en blanco.
+ruta entre comillas dobles si ésta tiene espacios en blanco.
 
 \item En la solapa \emph{Environment} hay que agregar una variable con nombre
 ``PATH'' en lugar de ``SWI\_HOME\_DIR'', ya que esta última no parece ser
