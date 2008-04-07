@@ -1,0 +1,72 @@
+\subsection{Importar el código a Eclipse, compilarlo y ejecutarlo\label{sec:inst}}
+
+Tanto para GNU/Linux como para Windows, hemos creado un paquete personalizado
+de los binarios de SWI-Prolog, quitando los componentes que no son necesarios
+del paquete oficial.
+
+La dirección de descarga es
+\href{http://code.google.com/p/aispt/downloads/list}{http://code.google.com/p/aispt/downloads/list}.
+El archivo con los binarios de SWI-Prolog para
+GNU/Linux se llama \linebreak\archivo{pl-5.6.35-bin-linux.tar.bz2}, y el
+correspondiente para Windows es \linebreak\archivo{pl-5.6.35-bin-win.zip}
+
+% GNU/Linux
+\subsubsection{En GNU/Linux}
+\begin{itemize}
+
+\item En Eclipse, crear un proyecto Java. Debe utilizarse Java 5.0.
+
+\item Importar en el proyecto antes creado el archivo \archivo{tp2-ia.zip}
+(General/Archive file).  Cuando pregunte por sobreescribir los archivos
+\archivo{.project} y \archivo{.classpath} responder afirmativamente.
+
+\item Hacer clic derecho en la carpeta del proyecto, ir al menú \emph{Run As},
+y elegir la opción \emph{Run...}
+
+\item En el panel de la izquierda, hacer doble clic sobre \emph{Java Application}.
+para crear una configuración nueva.
+
+\item En la solapa \emph{Main}, elegir como \emph{Main class} la clase \variable{tpsia.tp2.Main}.
+
+\item En la solapa \emph{Arguments}, en la caja de texto \emph{Program arguments} colocar:
+``logger.config'' (sin las comillas). Es el archivo de configuración de log4j. En la caja de texto \emph{VM arguments}
+colocar:\newline``-Djava.library.path=\$\{SWI\_PROLOG\_INSTALL\_DIR\}/lib/i386-linux''.\newline
+Reemplazar \$\{SWI\_PROLOG\_INSTALL\_DIR\} por el path absoluto donde fue descomprimido SWI-Prolog desde los
+archivos comprimidos que hemos mencionado antes. Vale aclarar que es bueno colocar la ruta entre comillas
+dobles, por si la misma tiene espacios, ya que de otra forma no funcionaría.
+
+\item En la solapa \emph{Environment}, crear una nueva variable de entorno con el nombre ``SWI\_HOME\_DIR'',
+y valor ``\$\{SWI\_PROLOG\_INSTALL\_DIR\}''.
+
+\item Clic en el botón \emph{Apply}.
+
+\item Clic en el botón \emph{Run}. La salida por consola muestra un dibujo de
+la visión del ambiente del pacman, las decisiones que va tomando, su posición,
+energía, etc.
+
+\end{itemize}
+
+
+% Windows
+\subsubsection{En Windows}
+
+Los pasos son muy similares que en GNU/Linux, con la salvedad de que:
+
+\begin{itemize}
+
+\item En la solapa \emph{Arguments}, dentro de la caja de texto \emph{VM
+arguments}, al configurar cómo correr el trabajo práctico, se debe
+colocar:\newline ``-Djava.library.path=\$\{SWI\_PROLOG\_INSTALL\_DIR\}/bin'',
+ya que es en la carpeta \archivo{bin} donde se encuentran las librerías en la
+distribución para Windows de SWI-Prolog. Aquí se hace más énfasis en colocar la
+ruta entre comillas dobles si ésta tiene espacios en blanco.
+
+\item En la solapa \emph{Environment} hay que agregar una variable con nombre
+``PATH'' en lugar de ``SWI\_HOME\_DIR'', ya que esta última no parece ser
+tomada en Windows. El valor de la misma es:\newline
+``-Djava.library.path=\$\{SWI\_PROLOG\_INSTALL\_DIR\}/bin''
+
+\item Finalmente, se aplican los cambios presionando en \emph{Apply}.
+
+\end{itemize}
+

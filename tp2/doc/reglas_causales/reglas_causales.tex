@@ -1,0 +1,87 @@
+\section{Reglas causales}
+
+\begin{itemize}
+
+\subsection{Conveniencia de moverse y pelear}
+\item  energia(energíaActual,s)
+$\land$ promedioPorMoverse(promedio,s) $\land$ (energíaActual + promedio) >~0
+$\Rightarrow$ convieneMoverse(s)
+
+\item hayEnemigo(x,y,s) $\land$ energia(energíaActual,s)
+$\land$ promedioPorPelear(promedio,s) $\land$ (energíaActual + promedio) >~0
+$\Rightarrow$ convienePelear(s)
+
+\subsection{Conocimiento de las celdas}
+\item celdaVacía(x,y,s) $\Rightarrow$
+ conoce(x,y,s)
+ 
+\item hayEnemigo(x,y,s) $\Rightarrow$
+ conoce(x,y,s)
+
+\item hayComida(x,y,s) $\Rightarrow$
+ conoce(x,y,s)
+
+\subsection{Celdas adyacentes}
+\item posicion(x,y,s) $\Rightarrow$ adyacente(SumarPosicion(x,1),y,derecha,s)
+
+\item posicion(x,y,s) $\Rightarrow$ adyacente(SumarPosicion(x,-1),y,izquierda,s)
+
+\item posicion(x,y,s) $\Rightarrow$ adyacente(x,SumarPosicion(y,1),arriba,s)
+
+\item posicion(x,y,s) $\Rightarrow$ adyacente(x,SumarPosicion(y,-1),abajo,s)
+
+\subsection{Cálculo de los promedios}
+\item AccionEjecutada(acción,s) $\land$ energia(e1,s) $\land$ energia(e0,s-1)
+$\Rightarrow$
+     datosEnergia(acción,[(e0 - e1)|energias])
+     
+\item sumatoria(lista,suma)$\land$ cantidad(lista,c)$\land$ prom = (suma/c)
+\newline
+       $\Rightarrow$ promedio(lista,prom)
+
+\item  datosEnergia(Comer,energias) $\land$ 
+ promedio(energias,prom) $\Rightarrow$
+ promedioPorComer(prom,s)
+       
+\item  datosEnergia(Pelear,energias) $\land$ 
+ promedio(energias,prom) $\Rightarrow$
+ promedioPorPelear(prom,s)
+
+\item  datosEnergia(Mover,energias) $\land$ 
+ promedio(energias,prom) $\Rightarrow$
+ promedioPorMoverse(prom,s)
+
+\subsection{Reglas de utilidad para evaluar los objetivos}
+
+\item conoce(1,1,s) $\land$ conoce(1,2,s) $\land$ 
+ conoce(1,3,s) $\land$ conoce(1,4,s) $\land$ 
+ \newline 
+ conoce(2,1,s) $\land$ conoce(2,2,s) $\land$ 
+ conoce(2,3,s) $\land$ conoce(2,4,s) $\land$ 
+ \newline 
+ conoce(3,1,s) $\land$ conoce(3,2,s) $\land$ 
+ conoce(3,3,s) $\land$ conoce(3,4,s) $\land$ 
+ \newline 
+ conoce(4,1,s) $\land$ conoce(4,2,s) $\land$ 
+ conoce(4,3,s) $\land$ conoce(4,4,s) 
+ \newline
+ $\Rightarrow$ conoceTodo(s)
+ 
+\item $\forall X,Y$ celdaVacia(X,Y,s) 
+ $\Rightarrow$ noHayEnemigosVivos(s) $\land$ noHayComida(s)
+
+\subsection{Planteo de los objetivos}
+\item conoceTodo(s) $\Rightarrow$ condicionUnoObjetivo(s)
+
+\item convieneMoverse(`no',s) $\Rightarrow$ condicionUnoObjetivo(s)
+
+\item noHayComida(s) $\Rightarrow$ condicionDosObjetivo(s)
+\item noHayEnemigosVivos(s) $\Rightarrow$ condicionTresObejtivo(s)
+\item convienePelear(`no',s) $\Rightarrow$ condicionTresObejtivo(s)
+
+\item  condicionUnoObjetivo(s) $\land$ condicionDosObjetivo(s)
+$\land$ condicionTresObejtivo(s) $\Rightarrow$ cumplioObjetivo(s)
+
+\end{itemize}
+
+

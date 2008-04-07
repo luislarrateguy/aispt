@@ -1,0 +1,50 @@
+\section{Reglas de diagnóstico}
+
+\begin{itemize}
+
+% Percepción de un enemigo
+\item Percepción([enemigo, -, -, -], x, y, -) $\Rightarrow$
+\newline hayEnemigo(SumarPosición(x,-1),y,s)
+
+\item Percepción([-, enemigo, -, -], x, y, -) $\Rightarrow$
+\newline hayEnemigo(SumarPosición(x,1),y,s)
+
+\item Percepción([-, -, enemigo, -], x, y, -) $\Rightarrow$
+\newline hayEnemigo(x,SumarPosición(y,-1),s)
+
+\item Percepción([-, -, -, enemigo], x, y, -) $\Rightarrow$
+\newline hayEnemigo(x,SumarPosición(y,1),s)
+
+% Percepción de comida
+\item Percepción([comida, -, -, -], x, y, -) $\Rightarrow$
+\newline hayComida(SumarPosición(x,-1),y,s)
+
+\item Percepción([-, comida, -, -], x, y, -) $\Rightarrow$
+\newline hayComida(SumarPosición(x,1),y,s)
+
+\item Percepción([-, -, comida, -], x, y, -) $\Rightarrow$
+\newline hayComida(x,SumarPosición(y,-1),s)
+
+\item Percepción([-, -, -, comida], x, y, -) $\Rightarrow$
+\newline hayComida(x,SumarPosición(y,1),s)
+
+% Percepción de celda vacía
+\item Percepción([vacía, -, -, -], x, y, -) $\Rightarrow$
+\newline celdaVacía(SumarPosición(x,-1),y,s)
+
+\item Percepción([-, vacía, -, -], x, y, -) $\Rightarrow$
+\newline celdaVacía(SumarPosición(x,1),y,s)
+
+\item Percepción([-, -, vacía, -], x, y, -) $\Rightarrow$
+\newline celdaVacía(x,SumarPosición(y,-1),s)
+
+\item Percepción([-, -, -, vacía], x, y, -) $\Rightarrow$
+\newline celdaVacía(x,SumarPosición(y,1),s)
+
+% Posición del pacman
+\item Percepción([-, -, -, -], x, y, -) $\Rightarrow$ posición(x,y,s)
+
+\item Percepción([-, -, -, -], -, -, energía) $\Rightarrow$ energía(energía,s)
+
+\end{itemize}
+
