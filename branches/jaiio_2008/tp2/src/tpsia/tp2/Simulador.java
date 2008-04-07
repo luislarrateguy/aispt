@@ -44,8 +44,8 @@ public class Simulador {
 	private Agente pacman;
 
 	
-	public Simulador() {
-		this.calculador = new Calculador("Grupo 7");
+	public Simulador(Calculador cono) {
+		this.calculador = cono;
 		this.ambiente = new AmbienteReal();
 		/* Inicializando Acciones para acelerar ejecución */
 		Pelear.getInstancia();
@@ -138,17 +138,19 @@ public class Simulador {
 		
 		return !this.ambiente.agenteVivo() || this.pacman.cumplioObjetivo();
 	}
-	
+	/*
 	public static Simulador GetInstancia() {
 		if (instancia == null) {
 			instancia = new Simulador();
 		}
 		return instancia;
 	}
-	
+	*/
 	public void mostrarPerformance() {
 		Logger log = Logger.getLogger(Simulador.class);
-		log.info("Desempeño del PACMAN: " +
-				this.calculador.getPerformance());
+		int a;
+		a = this.calculador.getPerformance();
+		log.info("Desempeño del PACMAN: " +	a);
+		System.out.print(a + ",");
 	}
 }

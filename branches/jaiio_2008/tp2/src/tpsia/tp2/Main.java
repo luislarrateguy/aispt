@@ -24,6 +24,8 @@ package tpsia.tp2;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+import calculador.Calculador;
+
 public class Main {
 
 	private static String busqueda = "aestrella";
@@ -40,16 +42,22 @@ public class Main {
 		/* Agrego un for por si queremos hacer varias
 		 * simulaciones.
 		 */
-
+		
+		System.setProperty("java.library.path", "/home/nacho/programas/pl-5.6.35/lib/i386-linux/");
+		System.load("/home/nacho/programas/pl-5.6.35/lib/i386-linux/libjpl.so");
+		System.loadLibrary("jpl");
+		
 		if (parseArguments(args)) {
 			PropertyConfigurator.configure(debugFile);
 			Logger log = Logger.getLogger(Main.class);
 			
 			for (int i=1; i<=1; i++) {
 					log.debug("Iniciando simulación nro : "+ Integer.toString(i));
-				Simulador s = new Simulador();
+				long time = System.nanoTime();
+				Simulador s = new Simulador(new Calculador());
 				s.comenzarSimulacion();
 				s.mostrarPerformance();
+				System.out.println(System.nanoTime()-time);
 			}
 		}
 	}
