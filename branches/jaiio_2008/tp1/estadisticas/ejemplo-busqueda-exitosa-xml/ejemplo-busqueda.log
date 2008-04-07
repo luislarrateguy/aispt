@@ -1,0 +1,297 @@
+[main] INFO  tpsia.tp1.Simulador  - Iniciando simulación...
+[main] INFO  tpsia.tp1.Simulador  - Ambiente Real:
+
+[ ]  0   1   2   3 ->X
+  0 [E ][E ][  ][  ]
+  1 [C ][C ][  ][  ]
+  2 [E ][  ][  ][  ]
+  3 [E ][  ][  ][C ]
+ Y
+posPacman: [0,2]
+energia:40
+[main] INFO  tpsia.tp1.agente.Agente  - Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [X ][X ][X ][X ]
+  1 [C ][X ][X ][X ]
+  2 [XP][  ][X ][  ]
+  3 [E ][X ][X ][X ]
+ Y
+posPacman: [0,2]
+[main] INFO  tpsia.tp1.agente.Agente  - energia:40
+[main] INFO  Pacman.Busqueda.ejecucion1  - Buscar accion
+[main] DEBUG Pacman.Busqueda.Objetivo  - Conviene pelear: true Conviene moverse: true Conoce todo: true Hay alimentos: false Hay enemigos: false
+[main] INFO  Pacman.Busqueda.ejecucion1  - Llegaré a mi objetivo si ejecuto esta secuencia de acciones
+[main] INFO  Pacman.Busqueda.ejecucion1  - ultima->primera[arriba, izquierda, izquierda, pelear, arriba, arriba, comer, arriba]
+[main] INFO  tpsia.tp1.agente.Agente  - Se decidió la acción: arriba
+[main] INFO  tpsia.tp1.agente.Agente  - Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [E ][X ][X ][X ]
+  1 [CP][C ][X ][  ]
+  2 [E ][  ][X ][  ]
+  3 [E ][X ][X ][X ]
+ Y
+posPacman: [0,1]
+[main] INFO  tpsia.tp1.agente.Agente  - energia:39
+[main] INFO  Pacman.Busqueda.ejecucion2  - Buscar accion
+[main] DEBUG Pacman.Busqueda.Objetivo  - Conviene pelear: true Conviene moverse: true Conoce todo: true Hay alimentos: false Hay enemigos: false
+[main] INFO  Pacman.Busqueda.ejecucion2  - Llegaré a mi objetivo si ejecuto esta secuencia de acciones
+[main] INFO  Pacman.Busqueda.ejecucion2  - ultima->primera[pelear, arriba, pelear, arriba, pelear, izquierda, izquierda, arriba, derecha, comer, derecha, comer]
+[main] INFO  tpsia.tp1.agente.Agente  - Se decidió la acción: comer
+[main] INFO  tpsia.tp1.agente.Agente  - Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [E ][X ][X ][X ]
+  1 [ P][C ][X ][  ]
+  2 [E ][  ][X ][  ]
+  3 [E ][X ][X ][X ]
+ Y
+posPacman: [0,1]
+[main] INFO  tpsia.tp1.agente.Agente  - energia:44
+[main] INFO  Pacman.Busqueda.ejecucion3  - Buscar accion
+[main] FATAL Pacman.Busqueda.ejecucion3  - Estado repetido del agente:17 accion generadora: arriba hijo de: 4
+[main] DEBUG Pacman.Busqueda.Objetivo  - Conviene pelear: true Conviene moverse: true Conoce todo: true Hay alimentos: false Hay enemigos: false
+[main] INFO  Pacman.Busqueda.ejecucion3  - Llegaré a mi objetivo si ejecuto esta secuencia de acciones
+[main] INFO  Pacman.Busqueda.ejecucion3  - ultima->primera[pelear, arriba, pelear, arriba, pelear, izquierda, izquierda, arriba, derecha, comer, derecha]
+[main] INFO  tpsia.tp1.agente.Agente  - Se decidió la acción: derecha
+[main] INFO  tpsia.tp1.agente.Agente  - Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [E ][E ][X ][X ]
+  1 [  ][CP][  ][  ]
+  2 [E ][  ][X ][  ]
+  3 [E ][X ][X ][X ]
+ Y
+posPacman: [1,1]
+[main] INFO  tpsia.tp1.agente.Agente  - energia:43
+[main] INFO  Pacman.Busqueda.ejecucion4  - Buscar accion
+[main] DEBUG Pacman.Busqueda.Objetivo  - Conviene pelear: true Conviene moverse: true Conoce todo: true Hay alimentos: false Hay enemigos: false
+[main] INFO  Pacman.Busqueda.ejecucion4  - Llegaré a mi objetivo si ejecuto esta secuencia de acciones
+[main] INFO  Pacman.Busqueda.ejecucion4  - ultima->primera[pelear, arriba, pelear, arriba, pelear, izquierda, pelear, izquierda, arriba, derecha, comer]
+[main] INFO  tpsia.tp1.agente.Agente  - Se decidió la acción: comer
+[main] INFO  tpsia.tp1.agente.Agente  - Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [E ][E ][X ][X ]
+  1 [  ][ P][  ][  ]
+  2 [E ][  ][X ][  ]
+  3 [E ][X ][X ][X ]
+ Y
+posPacman: [1,1]
+[main] INFO  tpsia.tp1.agente.Agente  - energia:48
+[main] INFO  Pacman.Busqueda.ejecucion5  - Buscar accion
+[main] FATAL Pacman.Busqueda.ejecucion5  - Estado repetido del agente:20 accion generadora: derecha hijo de: 5
+[main] DEBUG Pacman.Busqueda.Objetivo  - Conviene pelear: true Conviene moverse: true Conoce todo: true Hay alimentos: false Hay enemigos: false
+[main] INFO  Pacman.Busqueda.ejecucion5  - Llegaré a mi objetivo si ejecuto esta secuencia de acciones
+[main] INFO  Pacman.Busqueda.ejecucion5  - ultima->primera[pelear, arriba, pelear, arriba, pelear, izquierda, pelear, izquierda, arriba, derecha]
+[main] INFO  tpsia.tp1.agente.Agente  - Se decidió la acción: derecha
+[main] INFO  tpsia.tp1.agente.Agente  - Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [E ][E ][  ][X ]
+  1 [  ][  ][ P][  ]
+  2 [E ][  ][  ][  ]
+  3 [E ][X ][X ][X ]
+ Y
+posPacman: [2,1]
+[main] INFO  tpsia.tp1.agente.Agente  - energia:47
+[main] INFO  Pacman.Busqueda.ejecucion6  - Buscar accion
+[main] FATAL Pacman.Busqueda.ejecucion6  - Estado repetido del agente:19 accion generadora: derecha hijo de: 5
+[main] DEBUG Pacman.Busqueda.Objetivo  - Conviene pelear: true Conviene moverse: true Conoce todo: true Hay alimentos: false Hay enemigos: false
+[main] INFO  Pacman.Busqueda.ejecucion6  - Llegaré a mi objetivo si ejecuto esta secuencia de acciones
+[main] INFO  Pacman.Busqueda.ejecucion6  - ultima->primera[pelear, arriba, pelear, arriba, pelear, izquierda, pelear, izquierda, arriba]
+[main] INFO  tpsia.tp1.agente.Agente  - Se decidió la acción: arriba
+[main] INFO  tpsia.tp1.agente.Agente  - Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [E ][E ][ P][  ]
+  1 [  ][  ][  ][  ]
+  2 [E ][  ][  ][  ]
+  3 [E ][X ][  ][X ]
+ Y
+posPacman: [2,0]
+[main] INFO  tpsia.tp1.agente.Agente  - energia:46
+[main] INFO  Pacman.Busqueda.ejecucion7  - Buscar accion
+[main] FATAL Pacman.Busqueda.ejecucion7  - Estado repetido del agente:19 accion generadora: arriba hijo de: 4
+[main] DEBUG Pacman.Busqueda.Objetivo  - Conviene pelear: true Conviene moverse: true Conoce todo: true Hay alimentos: false Hay enemigos: false
+[main] INFO  Pacman.Busqueda.ejecucion7  - Llegaré a mi objetivo si ejecuto esta secuencia de acciones
+[main] INFO  Pacman.Busqueda.ejecucion7  - ultima->primera[pelear, arriba, pelear, arriba, pelear, izquierda, pelear, izquierda]
+[main] INFO  tpsia.tp1.agente.Agente  - Se decidió la acción: izquierda
+[main] INFO  tpsia.tp1.agente.Agente  - Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [E ][EP][  ][  ]
+  1 [  ][  ][  ][  ]
+  2 [E ][  ][  ][  ]
+  3 [E ][  ][  ][X ]
+ Y
+posPacman: [1,0]
+[main] INFO  tpsia.tp1.agente.Agente  - energia:45
+[main] INFO  Pacman.Busqueda.ejecucion8  - Buscar accion
+[main] FATAL Pacman.Busqueda.ejecucion8  - Estado repetido del agente:13 accion generadora: derecha hijo de: 6
+[main] FATAL Pacman.Busqueda.ejecucion8  - Estado repetido del agente:18 accion generadora: abajo hijo de: 3
+[main] FATAL Pacman.Busqueda.ejecucion8  - Estado repetido del agente:20 accion generadora: arriba hijo de: 5
+[main] FATAL Pacman.Busqueda.ejecucion8  - Estado repetido del agente:27 accion generadora: izquierda hijo de: 4
+[main] DEBUG Pacman.Busqueda.Objetivo  - Conviene pelear: true Conviene moverse: true Conoce todo: true Hay alimentos: false Hay enemigos: false
+[main] INFO  Pacman.Busqueda.ejecucion8  - Llegaré a mi objetivo si ejecuto esta secuencia de acciones
+[main] INFO  Pacman.Busqueda.ejecucion8  - ultima->primera[pelear, arriba, pelear, arriba, pelear, izquierda, pelear]
+[main] INFO  tpsia.tp1.agente.Agente  - Se decidió la acción: pelear
+[main] INFO  tpsia.tp1.agente.Agente  - Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [E ][ P][  ][  ]
+  1 [  ][  ][  ][  ]
+  2 [E ][  ][  ][  ]
+  3 [E ][  ][  ][X ]
+ Y
+posPacman: [1,0]
+[main] INFO  tpsia.tp1.agente.Agente  - energia:35
+[main] INFO  Pacman.Busqueda.ejecucion9  - Buscar accion
+[main] FATAL Pacman.Busqueda.ejecucion9  - Estado repetido del agente:8 accion generadora: abajo hijo de: 2
+[main] FATAL Pacman.Busqueda.ejecucion9  - Estado repetido del agente:12 accion generadora: derecha hijo de: 5
+[main] FATAL Pacman.Busqueda.ejecucion9  - Estado repetido del agente:18 accion generadora: izquierda hijo de: 3
+[main] FATAL Pacman.Busqueda.ejecucion9  - Estado repetido del agente:19 accion generadora: arriba hijo de: 4
+[main] DEBUG Pacman.Busqueda.Objetivo  - Conviene pelear: true Conviene moverse: true Conoce todo: true Hay alimentos: false Hay enemigos: false
+[main] INFO  Pacman.Busqueda.ejecucion9  - Llegaré a mi objetivo si ejecuto esta secuencia de acciones
+[main] INFO  Pacman.Busqueda.ejecucion9  - ultima->primera[pelear, arriba, pelear, arriba, pelear, izquierda]
+[main] INFO  tpsia.tp1.agente.Agente  - Se decidió la acción: izquierda
+[main] INFO  tpsia.tp1.agente.Agente  - Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [EP][  ][  ][  ]
+  1 [  ][  ][  ][  ]
+  2 [E ][  ][  ][  ]
+  3 [E ][  ][  ][X ]
+ Y
+posPacman: [0,0]
+[main] INFO  tpsia.tp1.agente.Agente  - energia:34
+[main] INFO  Pacman.Busqueda.ejecucion10  - Buscar accion
+[main] FATAL Pacman.Busqueda.ejecucion10  - Estado repetido del agente:20 accion generadora: arriba hijo de: 5
+[main] FATAL Pacman.Busqueda.ejecucion10  - Estado repetido del agente:27 accion generadora: izquierda hijo de: 4
+[main] DEBUG Pacman.Busqueda.Objetivo  - Conviene pelear: true Conviene moverse: true Conoce todo: true Hay alimentos: false Hay enemigos: false
+[main] INFO  Pacman.Busqueda.ejecucion10  - Llegaré a mi objetivo si ejecuto esta secuencia de acciones
+[main] INFO  Pacman.Busqueda.ejecucion10  - ultima->primera[pelear, arriba, pelear, arriba, pelear]
+[main] INFO  tpsia.tp1.agente.Agente  - Se decidió la acción: pelear
+[main] INFO  tpsia.tp1.agente.Agente  - Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [ P][  ][  ][  ]
+  1 [  ][  ][  ][  ]
+  2 [E ][  ][  ][  ]
+  3 [E ][  ][  ][X ]
+ Y
+posPacman: [0,0]
+[main] INFO  tpsia.tp1.agente.Agente  - energia:24
+[main] INFO  Pacman.Busqueda.ejecucion11  - Buscar accion
+[main] FATAL Pacman.Busqueda.ejecucion11  - Estado repetido del agente:18 accion generadora: izquierda hijo de: 3
+[main] FATAL Pacman.Busqueda.ejecucion11  - Estado repetido del agente:19 accion generadora: arriba hijo de: 4
+[main] DEBUG Pacman.Busqueda.Objetivo  - Conviene pelear: true Conviene moverse: true Conoce todo: true Hay alimentos: false Hay enemigos: false
+[main] INFO  Pacman.Busqueda.ejecucion11  - Llegaré a mi objetivo si ejecuto esta secuencia de acciones
+[main] INFO  Pacman.Busqueda.ejecucion11  - ultima->primera[pelear, arriba, pelear, arriba]
+[main] INFO  tpsia.tp1.agente.Agente  - Se decidió la acción: arriba
+[main] INFO  tpsia.tp1.agente.Agente  - Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [  ][  ][  ][  ]
+  1 [  ][  ][  ][  ]
+  2 [E ][  ][  ][  ]
+  3 [EP][  ][  ][C ]
+ Y
+posPacman: [0,3]
+[main] INFO  tpsia.tp1.agente.Agente  - energia:23
+[main] INFO  Pacman.Busqueda.ejecucion12  - Buscar accion
+[main] FATAL Pacman.Busqueda.ejecucion12  - Estado repetido del agente:15 accion generadora: abajo hijo de: 3
+[main] FATAL Pacman.Busqueda.ejecucion12  - Estado repetido del agente:17 accion generadora: arriba hijo de: 5
+[main] FATAL Pacman.Busqueda.ejecucion12  - Estado repetido del agente:24 accion generadora: izquierda hijo de: 4
+[main] DEBUG Pacman.Busqueda.Objetivo  - Conviene pelear: true Conviene moverse: true Conoce todo: true Hay alimentos: false Hay enemigos: false
+[main] INFO  Pacman.Busqueda.ejecucion12  - Llegaré a mi objetivo si ejecuto esta secuencia de acciones
+[main] INFO  Pacman.Busqueda.ejecucion12  - ultima->primera[comer, izquierda, abajo, pelear, arriba, pelear]
+[main] INFO  tpsia.tp1.agente.Agente  - Se decidió la acción: pelear
+[main] INFO  tpsia.tp1.agente.Agente  - Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [  ][  ][  ][  ]
+  1 [  ][  ][  ][  ]
+  2 [E ][  ][  ][  ]
+  3 [ P][  ][  ][C ]
+ Y
+posPacman: [0,3]
+[main] INFO  tpsia.tp1.agente.Agente  - energia:13
+[main] INFO  Pacman.Busqueda.ejecucion13  - Buscar accion
+[main] FATAL Pacman.Busqueda.ejecucion13  - Estado repetido del agente:9 accion generadora: abajo hijo de: 2
+[main] FATAL Pacman.Busqueda.ejecucion13  - Estado repetido del agente:15 accion generadora: izquierda hijo de: 3
+[main] FATAL Pacman.Busqueda.ejecucion13  - Estado repetido del agente:16 accion generadora: arriba hijo de: 4
+[main] DEBUG Pacman.Busqueda.Objetivo  - Conviene pelear: true Conviene moverse: true Conoce todo: true Hay alimentos: false Hay enemigos: false
+[main] INFO  Pacman.Busqueda.ejecucion13  - Llegaré a mi objetivo si ejecuto esta secuencia de acciones
+[main] INFO  Pacman.Busqueda.ejecucion13  - ultima->primera[comer, abajo, izquierda, pelear, arriba]
+[main] INFO  tpsia.tp1.agente.Agente  - Se decidió la acción: arriba
+[main] INFO  tpsia.tp1.agente.Agente  - Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [  ][  ][  ][  ]
+  1 [  ][  ][  ][  ]
+  2 [EP][  ][  ][  ]
+  3 [  ][  ][  ][C ]
+ Y
+posPacman: [0,2]
+[main] INFO  tpsia.tp1.agente.Agente  - energia:12
+[main] INFO  Pacman.Busqueda.ejecucion14  - Buscar accion
+[main] FATAL Pacman.Busqueda.ejecucion14  - Estado repetido del agente:12 accion generadora: derecha hijo de: 6
+[main] FATAL Pacman.Busqueda.ejecucion14  - Estado repetido del agente:17 accion generadora: abajo hijo de: 3
+[main] FATAL Pacman.Busqueda.ejecucion14  - Estado repetido del agente:19 accion generadora: arriba hijo de: 5
+[main] FATAL Pacman.Busqueda.ejecucion14  - Estado repetido del agente:26 accion generadora: izquierda hijo de: 4
+[main] DEBUG Pacman.Busqueda.Objetivo  - Conviene pelear: true Conviene moverse: true Conoce todo: true Hay alimentos: false Hay enemigos: false
+[main] INFO  Pacman.Busqueda.ejecucion14  - Llegaré a mi objetivo si ejecuto esta secuencia de acciones
+[main] INFO  Pacman.Busqueda.ejecucion14  - ultima->primera[comer, abajo, izquierda, pelear]
+[main] INFO  tpsia.tp1.agente.Agente  - Se decidió la acción: pelear
+[main] INFO  tpsia.tp1.agente.Agente  - Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [  ][  ][  ][  ]
+  1 [  ][  ][  ][  ]
+  2 [ P][  ][  ][  ]
+  3 [  ][  ][  ][C ]
+ Y
+posPacman: [0,2]
+[main] INFO  tpsia.tp1.agente.Agente  - energia:2
+[main] INFO  Pacman.Busqueda.ejecucion15  - Buscar accion
+[main] FATAL Pacman.Busqueda.ejecucion15  - Estado repetido del agente:8 accion generadora: abajo hijo de: 2
+[main] FATAL Pacman.Busqueda.ejecucion15  - Estado repetido del agente:11 accion generadora: derecha hijo de: 5
+[main] FATAL Pacman.Busqueda.ejecucion15  - Estado repetido del agente:17 accion generadora: izquierda hijo de: 3
+[main] FATAL Pacman.Busqueda.ejecucion15  - Estado repetido del agente:18 accion generadora: arriba hijo de: 4
+[main] DEBUG Pacman.Busqueda.Objetivo  - Conviene pelear: true Conviene moverse: true Conoce todo: true Hay alimentos: false Hay enemigos: false
+[main] INFO  Pacman.Busqueda.ejecucion15  - Llegaré a mi objetivo si ejecuto esta secuencia de acciones
+[main] INFO  Pacman.Busqueda.ejecucion15  - ultima->primera[comer, abajo, izquierda]
+[main] INFO  tpsia.tp1.agente.Agente  - Se decidió la acción: izquierda
+[main] INFO  tpsia.tp1.agente.Agente  - Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [  ][  ][  ][  ]
+  1 [  ][  ][  ][  ]
+  2 [  ][  ][  ][ P]
+  3 [  ][  ][  ][C ]
+ Y
+posPacman: [3,2]
+[main] INFO  tpsia.tp1.agente.Agente  - energia:1
+[main] INFO  Pacman.Busqueda.ejecucion16  - Buscar accion
+[main] FATAL Pacman.Busqueda.ejecucion16  - Estado repetido del agente:8 accion generadora: abajo hijo de: 2
+[main] FATAL Pacman.Busqueda.ejecucion16  - Estado repetido del agente:11 accion generadora: derecha hijo de: 5
+[main] FATAL Pacman.Busqueda.ejecucion16  - Estado repetido del agente:17 accion generadora: izquierda hijo de: 3
+[main] DEBUG Pacman.Busqueda.Objetivo  - Conviene pelear: true Conviene moverse: true Conoce todo: true Hay alimentos: false Hay enemigos: false
+[main] INFO  Pacman.Busqueda.ejecucion16  - Llegaré a mi objetivo si ejecuto esta secuencia de acciones
+[main] INFO  Pacman.Busqueda.ejecucion16  - ultima->primera[comer, abajo]
+[main] INFO  tpsia.tp1.agente.Agente  - Se decidió la acción: abajo
+[main] INFO  tpsia.tp1.Simulador  - ### Fin de la simulación ###
+[main] INFO  tpsia.tp1.agente.Agente  - ESTADO FINAL
+[main] INFO  tpsia.tp1.agente.Agente  - Vision del ambiente:
+
+[ ]  0   1   2   3 ->X
+  0 [  ][  ][  ][  ]
+  1 [  ][  ][  ][  ]
+  2 [  ][  ][  ][  ]
+  3 [  ][  ][  ][CP]
+ Y
+posPacman: [3,3]
+[main] INFO  tpsia.tp1.agente.Agente  - energia:1
+[main] INFO  tpsia.tp1.Simulador  - Desempeño del PACMAN: 0

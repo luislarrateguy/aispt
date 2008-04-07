@@ -1,0 +1,63 @@
+\section{Acciones}
+
+Las acciones posibles son las siguientes:
+
+\begin{itemize}
+
+\item \textbf{Mover(direccion)}: donde \emph{direccion} es ``arriba'',
+``abajo'', ``derecha'' o ``izquierda''. Si la situación actual es \emph{s},
+``posicion(x,y,s)'' y ``convieneMoverse(s)'' entonces la acción se puede llevar
+acabo. Su efecto es que en la situación resultante es verdadero
+``posicion(x,y,s+1)'', dependiendo los valores de $x$ e $y$ según la dirección
+del movimiento del agente. También se hace verdadero el predicado ``AccionEjecutada(Mover(direccion),s)''.
+
+\item \textbf{Comer()}: Debe haber un alimento en la posición actual. Esto se
+traduce a que si la situación actual es \emph{s}, ``posicion(x,y,s)'' y
+``hayAlimento(x,y,s)'' entonces la acción se puede llevar acabo. Su efecto es
+que en la situación resultante ya no es verdadero ``hayAlimento(x,y,s+1)'',
+sino ``celdaVacia(x,y,s+1)''. También se hace verdadero el predicado ``AccionEjecutada(Comer,s)''.
+
+\item \textbf{Pelear()}: Debe haber un enemigo en la posición actual, y además
+se debe contar con la energía suficiente para que el pelear no implique una
+alta probabilidad de morir. Esto se traduce a que si la situación actual es
+\emph{s}, ``posicion(x,y,s)'', ``hayEnemigo(x,y,s)'' y ``convienePelear(s)''
+entonces la acción se puede llevar acabo. Su efecto es que en la situación
+resultante ya no es verdadero ``hayEnemigo(x,y,s+1)'', sino
+``celdaVacia(x,y,s+1)'', salvo que el agente haya muerto, claro. También se hace verdadero el predicado ``AccionEjecutada(Pelear,s)''.
+
+\end{itemize}
+
+\subsection{Valoración de las acciones}
+
+\begin{itemize}
+
+\item posicion(x,y,s) $\land$ hayComida(x,y,s) $\Rightarrow$ excelente(Comer,s)
+
+\item posicion(x,y,s) $\land$ hayEnemigo(x,y,s) $\land$ convienePelear(s)
+$\Rightarrow$ \newline muy\_bueno(Pelear,s)
+
+\item posicion(x,y,s) $\land$ adyacente(xa,ya,dirección,s) $\land$
+hayComida(xa,ya,s) $\land$ \newline convieneMoverse(s) $\Rightarrow$
+muy\_bueno(Mover(dirección),s)
+
+\item posicion(x,y,s) $\land$ adyacente(xa,ya,dirección,s) $\land$
+hayEnemigo(xa,ya,s)  $\land$ convienePelear(s) $\Rightarrow$
+bueno(Mover(dirección),s)
+
+\item posicion(x,y,s) $\land$ adyacente(xa,ya,dirección,s) $\land$
+celdaVacía(xa,ya,s) $\land$ convieneMoverse(s) $\Rightarrow$
+regular(Mover(dirección),s)
+
+\item posicion(x,y,s) $\land$ hayEnemigo(x,y,s) $\land$ $\lnot$~convienePelear(s)
+$\Rightarrow$ malo(Pelear,s)
+
+\item posicion(x,y,s) $\land$ adyacente(xa,ya,dirección,s) $\land$
+hayEnemigo(xa,ya,s) $\land$ $\lnot$~convienePelear(s)
+$\Rightarrow$ malo(Mover(dirección),s)
+
+\item posicion(x,y,s) $\land$ adyacente(xa,ya,dirección,s) $\land$
+celdaVacía(xa,ya,s) $\land$ $\lnot$~convieneMoverse(s)
+$\Rightarrow$ malo(Mover(dirección),s)
+
+\end{itemize}
+

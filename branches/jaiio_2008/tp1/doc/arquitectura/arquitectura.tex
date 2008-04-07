@@ -1,0 +1,67 @@
+\section{Arquitectura}
+
+\begin{figure}[h]
+\incluirimagen{scale=0.50}{arquitectura/arquitectura.png}
+\caption{Arquitectura del agente}
+\label{fig:arquitectura}
+\end{figure}
+
+La figura~\ref{fig:arquitectura} es un dibujo simple de la arquitectura. Es
+similar a la que está de ejemplo en el enunciado. Ésta indica que el simulador
+le entrega al agente una percepción inicial. El agente toma sus decisiones y
+devuelve una acción. Esta acción modifica al ambiente real actual. Luego el
+simulador vuelve a entregarle otra percepción, y el agente retorna nuevamente
+una acción. Éste ciclo continúa.
+
+\begin{figure}
+\incluirimagen{scale=0.50}{arquitectura/agente.pdf}
+\caption{\clase{Agente}}
+\label{fig:clases_agente}
+\end{figure}
+
+\begin{figure}
+\incluirimagen{scale=0.55}{arquitectura/acciones.pdf}
+\caption{Acciones}
+\label{fig:clases_acciones}
+\end{figure}
+
+\begin{figure}
+\incluirimagen{scale=0.60}{arquitectura/ambiente.pdf}
+\caption{Jerarquía de \clase{Ambiente}}
+\label{fig:clases_ambiente}
+\end{figure}
+
+\begin{figure}
+\incluirimagen{scale=0.60}{arquitectura/busqueda.pdf}
+\caption{Algoritmos de búsqueda}
+\label{fig:clases_busqueda}
+\end{figure}
+
+\begin{figure}
+\incluirimagen{scale=0.60}{arquitectura/relaciones_agente.pdf}
+\caption{Relaciones del Agente con otras clases}
+\label{fig:clases_relaciones_agente}
+\end{figure}
+
+\begin{figure}
+\incluirimagen{scale=0.60}{arquitectura/simulador.pdf}
+\caption{Relaciones del Simulador con otras clases}
+\label{fig:clases_relaciones_simulador}
+\end{figure}
+
+En el diagrama de clases, que aparece en varias figuras debido a su tamaño
+(figura~\ref{fig:clases_agente}, \ref{fig:clases_acciones},
+\ref{fig:clases_ambiente}, \ref{fig_clases_busqueda},
+\ref{fig:clases_relaciones_agente} y \ref{fig:clases_relaciones_simulador})
+encontramos más detalles. Podemos observar que el agente almacena un estado
+propio del ambiente. A diferencia del real, éste se irá completando a medida
+que el agente lo recorra. También podemos notar que las acciones poseen un
+método \metodo{ejecutar} que recibe como parámetro a una instancia de alguna
+clase que extienda a \clase{Ambiente} (o sea, una instancia de
+\clase{AmbienteReal} o de \clase{VisionAmbiente}) para poder realizar sus
+modificaciones.
+
+La clase abstracta \clase{Busqueda} es la que se encarga de expandir nodos y
+agregarlos a la cola. Las subclases implementan lo específico de cada
+estrategia: el cálculo del valor de la función de evaluación.
+

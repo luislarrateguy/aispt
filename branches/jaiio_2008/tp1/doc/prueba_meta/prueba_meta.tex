@@ -1,0 +1,27 @@
+\section{Prueba de meta}
+
+El pseudocódigo de la prueba de meta es el siguiente:
+
+\begin{verbatim}
+Si energiaActual <= 0 entonces
+   cumplio = falso
+Sino
+   convienePelear = (energiaActual - promedioPerdidaAlPelear) > 0
+   convieneMoverse = (energiaActual - promedioPerdidaAlMoverse) > 0
+
+   cumplio = (conoceTodoElTablero OR No convieneMoverse)
+      && (No hayAlimentos AND (No hayEnemigos OR No convienePelear))
+Fin Si
+
+retornar cumplio
+\end{verbatim}
+
+Las variables \variable{convienePelear} y \variable{convieneMoverse} podrían
+traducirse como ``tiene energía suficiente para pelear'' y ``tiene energía
+suficiente para moverse''.
+
+Notar el orden de evaluación de las operaciones booleanas. Las variables
+\variable{hayAlimento} y \variable{hayEnemigo} sólo tienen sentido si se conoce
+todo el ambiente. O sea que sólo serán evaluados si el agente conoce todo el
+ambiente (o bien si no le conviene moverse).
+

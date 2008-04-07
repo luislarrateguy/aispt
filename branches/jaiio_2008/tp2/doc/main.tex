@@ -1,0 +1,46 @@
+\documentclass[a4paper,singleside,10pt]{article}
+\pagestyle{headings}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{estilo}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{hyperref}
+%\usepackage{colortbl}
+%\usepackage{color}
+%\usepackage[lineno1]{lgrind}
+
+\hypersetup{bookmarks,
+	    colorlinks=true,
+	    pdfauthor={Milton Pividori, Luis I. Larrateguy},
+	    pdftitle={Trabajo práctico 2 - Etapa 2 (entrega final) - IA 2007},
+	    pdftex}
+
+\begin{document}
+\selectlanguage{spanish}
+% Título
+\include{titulo/titulo}
+% Licencia
+\include{licencia/licencia}
+% Hecho con Software Libre
+\include{hechoconsl/hechoconsl}
+
+% Tabla de contenidos
+\tableofcontents
+
+% Notas y aclaraciones
+\include{notas/notas}
+% Estado
+\include{estado/estado}
+% Acciones
+\include{acciones/acciones}
+% Reglas causales
+\include{reglas_causales/reglas_causales}
+% Reglas de diagnóstico
+\include{reglas_de_diagnostico/reglas_de_diagnostico}
+% Axiomas de estado sucesor
+\include{estado_sucesor/estado_sucesor}
+
+\end{document}
+

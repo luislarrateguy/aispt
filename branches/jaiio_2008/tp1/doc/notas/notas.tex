@@ -1,0 +1,26 @@
+\section{Notas y aclaraciones}
+
+El directorio \emph{bin} posee los archivos necesarios para probar el
+simulador.  Simplemente hay que ubicarse en el mismo y ejecutar el siguiente
+comando: \makebox{\texttt{java -jar simulador.jar}.}
+
+Todo el código fuente se encuentra en el archivo mencionado
+\linebreak\emph{bin/simulador.jar}, así como las librerías utilizadas
+(\emph{calculador.jar} y \linebreak\emph{log4j-1.2.13.jar}) y los archivos
+\emph{.project} y \emph{.classpath}. Por lo tanto sería posible importar el
+proyecto desde Eclipse a partir de éste archivo.
+
+El directorio \emph{ejecuciones} tiene un archivo XML y un PDF. Ambos se
+refieren al árbol búsqueda del agente antes de tomar la primera decisión. El
+archivo PDF tiene un dibujo del árbol generado, dividido en subárboles por
+cuestiones de espacio. En el mismo hay algunas indicaciones para su lectura.
+
+El archivo \emph{bin/logger.config} puede ser editado para que el simulador
+genere nuevamente el archivo XML o el archivo \LaTeX~para luego generar el PDF
+(es necesario contar con algunos paquetes extra).
+
+Además de la estrategia A*, la cual hemos escogido para nuestro trabajo
+práctico, nosotros hemos implementado, aunque sin demasiado debugging, las
+demás: amplitud, profundidad, costo uniforme y avara. Ver el código fuente, en
+el paquete \emph{tp1.busqueda}.
+

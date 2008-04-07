@@ -1,0 +1,27 @@
+\section{Estrategia}
+
+Hemos escogido A* como estrategia primaria para nuestro agente.  Si bien además
+están implementadas las estrategias de \emph{Profundidad}, \emph{Amplitud},
+\emph{Costo Uniforme} y \emph{Avara}, escogimos A* porque es la que mejor
+parecía resolver los problemas en la mayoría de los casos.
+
+Cada acción tiene un costo. El avanzar a cualquier dirección supone un aumento
+de 60. Pelear tiene un costo de 40, y Comer 20.
+
+La función de evaluación $f(n)$ de la estrategia A* es igual a $g(n) + h(n)$.
+En nuestra implementación:
+
+\begin{itemize}
+\item $g(n) = costoDelNodoPadre + costoAccionGeneradora$
+\item $h(n) = cantidad de celdas desconocidas$.
+\end{itemize}
+
+Para que una heurística sea consistente, se debe cumplir que $h(n) <= c(n,a,n')
++ h(n')$, siendo \emph{n'} un nodo que se alcanza desde el nodo \emph{n} al
+aplicar la acción \emph{a}.
+
+Moviendo $h(n')$ al término de la izquierda, queda $c(n,a,n') >= h(n) - h(n')$.
+La máxima diferencia posible del segundo término es 4, pero el menor costo de
+cualquier acción es 20. Por lo tanto la heurística es consistente, y por lo
+tanto también admisible.
+

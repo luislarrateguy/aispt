@@ -1,0 +1,38 @@
+\section{Axiomas de estado sucesor}
+
+\begin{itemize}
+
+% posicion
+\item $\forall x,y$: posición(x,y,s+1) $\Leftrightarrow$
+\newline (AccionEjecutada(Mover(arriba),s) $\land$ posicion(x, SumarPosicion(y,-1),s))
+\newline $\lor$
+\newline (AccionEjecutada(Mover(abajo),s) $\land$ posicion(x, SumarPosicion(y,1),s))
+\newline $\lor$
+\newline (AccionEjecutada(Mover(derecha),s) $\land$ posicion(SumarPosicion(x,-1),y,s))
+\newline $\lor$
+\newline (AccionEjecutada(Mover(izquierda),s) $\land$ posicion(SumarPosicion(x,1),y,s))
+\newline $\lor$
+\newline ($\lnot$AccionEjecutada(Mover(dirección),s) $\land$ posición(x,y,s))
+
+% celdaVacía
+\item $\forall x,y$: celdaVacia(x,y,s+1) $\Leftrightarrow$
+\newline (celdaVacia(x,y,s))
+\newline $\lor$
+\newline (posicion(x,y,s) $\land$ hayComida(x,y,s) $\land$ AccionEjecutada(Comer,s))
+\newline $\lor$
+\newline (posicion(x,y,s) $\land$ hayEnemigo(x,y,s) $\land$ AccionEjecutada(Pelear,s))
+
+% hayComida
+\item $\forall x,y$: hayComida(x,y,s+1) $\Leftrightarrow$
+\newline (posicion(x,y,s) $\land$ hayComida(x,y,s) $\land$ $\lnot$AccionEjecutada(Comer,s))
+\newline $\lor$
+\newline (posicion(x1,y1,s) $\land$ (x $\ne$ x1 $\lor$ y $\ne$ y1) $\land$ hayComida(x,y,s))
+
+% hayEnemigo
+\item $\forall x,y$: hayEnemigo(x,y,s+1) $\Leftrightarrow$
+\newline (posicion(x,y,s) $\land$ hayEnemigo(x,y,s) $\land$ $\lnot$AccionEjecutada(Pelear,s))
+\newline $\lor$
+\newline (posicion(x1,y1,s) $\land$ (x $\ne$ x1 $\lor$ y $\ne$ y1) $\land$ hayEnemigo(x,y,s))
+
+\end{itemize}
+

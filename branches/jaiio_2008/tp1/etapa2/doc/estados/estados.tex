@@ -1,0 +1,68 @@
+\section{Estado del agente}
+
+\subsection{Representación del estado}
+\incluirimagen{scale=0.8}{estados/representacion_estado.pdf}
+
+El \clase{Agente} posee un \clase{Estado}. Éste mantiene una vision del
+ambiente, incompleta al principio y que se irá extendiendo con las percepciones
+futuras.  \clase{EstadoCelda} es una enumeración. Su \variable{valor} puede ser
+\emph{Desconocido}, \emph{Vacío}, \emph{Comida} o \emph{Enemigo}, según lo que
+haya en la celda. Un \clase{Ambiente} posee 16 instancias de \clase{EstadoCelda}
+que le indican, justamente, el estado de cada celda.
+
+El método \metodo{hayEnemigo(int, int)} de \clase{Ambiente} permite saber la
+existencia de un enemigo en una posición dada, y el método
+\metodo{hayEnemigo()} es similar, pero al no recibir argumentos supone que se
+pregunta para la posición actual del \clase{Agente}. Lo mismo sucede con
+\metodo{hayComida(int, int)} y \metodo{hayComida()}. Por supuesto que si se
+utiliza el primero para una posición que el Pacman aún no conoce, el resultado
+será que ésta es \emph{Desconocida}.
+
+\clase{Estado} posee un método \metodo{actualizar}, el cual recibe una
+\clase{Percepción} que utiliza para extender su visión actual. Lo mismo pasa
+con \clase{VisionAmbiente}. \clase{Estado} va manteniendo un promedio de la
+energía perdida al pelear y moverse, y de la energía ganada al comer un
+alimento. Estos valores son utilizados para decidir algunas acciones y también
+son utilizados por la prueba de meta.
+
+\subsection{Estado inicial}
+
+\begin{itemize}
+\item Cada celda del tablero (VisionAmbiente) inicializado en
+\emph{Desconocida}.
+\item Ubicado en una celda aleatoria del tablero mediante posición $X$ e $Y$.
+Corresponde a la esquina superior izquierda, análogo con el sistema de
+coordenadas de pantalla. La $X$ indica la columna (desplazamiento horizontal) y
+la $Y$ la fila (desplazamiento vertical). Esta posición se almacena en la
+variable \variable{posicionPacman} de la clase \clase{Ambiente}.
+\item Agente.estado.energiaActual es menor o igual a 50.
+\item Percepción de la celda superior, inferior, derecha e izquierda de su
+posición actual. La Percepción le indica si esas celdas están en estado:
+Vacía,Enemigo,Comida.
+\item No percibe qué hay en la celda en la que inicialmente está parado.
+\end{itemize}
+
+\subsection{Estados intermedios (descripción general)}
+
+\begin{itemize}
+\item Agente.estado.getAmbiente().posicionPacman representa una posición
+aleatoria.
+\item Agente.estado.energiaActual tendrá coom valor cualquier entero mayor a 0.
+Incluso puede que sea mayor que la inicial y mayor que 50.
+\item Conocimiento parcial del tablero.
+\item Percepción de algunos enemigos y alimentos.
+\end{itemize}
+
+\subsection{Estado final}
+
+\begin{itemize}
+\item Ubicado en alguna celda del tablero, debido a la consecuencia de sus acciones..
+\item Agente.estado.energiaActual es mayor a 0.
+\item Todo el tablero es conocido.
+\item Si tiene energía suficiente para pelear (según el promedio de pérdida en
+luchas), no hay enemigos en el tablero. En caso contrario (al priorizar su
+supervivencia) podrían quedar algunos de ellos en el mismo.
+\item Si tiene energía suficiente para moverse (según el promedio de pérdida
+por movimiento), no hay alimentos en el tablero. En caso contrario (al
+priorizar su supervivencia) podrían quedar alimentos presentes.
+\end{itemize}
