@@ -1,0 +1,57 @@
+#!/bin/sh
+
+# Procesa los archivos con lgrind
+texs()
+{
+	for file in $ARCHIVOS; do
+		# No procesamos los archivos que tienen un original, ya
+		# esos deben pasarse a la función "diffs_texs"
+		if [ ! -f ${file}.orig ]; then
+			echo texs - archivo ${file};
+			lgrind -t 8 -i -ljava ${file} > ${file}.tex;
+
+			comunes ${file}.tex
+		fi
+	done
+}
+
+# Realiza algunas tareas necesarias, como convertir el archivo a UTF-8
+comunes()
+{
+	# Convertimos el fichero .tex a la codificación latin1
+	iconv -f utf8 -t latin1 ${1} -o ${1}.latin1;
+	mv ${1}.latin1 ${1};
+
+	# Este fix se debe a un problema con lgrind.
+	# Reemplazamos las lineas mal generadas.
+	sed 's/*=====================================================*/\*========================================/g' ${1} > ${1}.mo;
+
+	# Convertimos los archivos latin1 a utf8
+	if file ${1}.mo | grep -q "ISO-8859"; then
+		iconv -f latin1 -t utf8 ${1}.mo > ${1}
+		rm ${1}.mo
+		echo "   Convertido de ISO-8859 a UTF-8"
+	else
+		mv ${1}.mo ${1}
+	fi
+}
+
+# Antes de empezar, borramos todos los archivos ya generados antes
+ARCHIVOS=$(find . -name *.java.tex | grep -v ".svn")
+for archivo in $ARCHIVOS; do
+	echo "Borrando archivo $archivo"
+	rm $archivo;
+done
+
+# Si se pasó el parámetro "clean" no generamos los archivos
+if [ "$1" = "clean" ]; then
+	exit 0
+fi
+
+# testing
+#ARCHIVOS=$(find testing -name *.java | grep -v ".svn")
+#texs
+
+# visitor
+#ARCHIVOS=$(find visitor -name *.java | grep -v ".svn")
+#texs

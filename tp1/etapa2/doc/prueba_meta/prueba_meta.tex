@@ -1,0 +1,31 @@
+\section{Prueba de meta}
+
+El pseudocódigo de la prueba de meta es el siguiente:
+
+\begin{verbatim}
+
+Si ConoceTodoElAmbiente entonces
+  /* Las dos variables siguientes son booleanas */
+  ConvienePelear  = energiaActualAgente > energiaPromedioPelea
+  ConvieneMoverse = energiaActualAgente > energiaPromedioMover
+
+  Si (ConvieneMoverse AND (HayAlimentosSinComer OR 
+                          (HayEnemigos AND ConvienePelear) )
+     )  
+     retornar FRACASO
+  Sino
+     retornar EXITO
+Sino
+  Si ConvieneMoverse entonces
+     retornar FRACASO  
+  Sino
+     /* Se da por vencido. Asume exito en su objetivo,
+        porque quiere sobrevivir! */
+     retornar EXITO
+
+\end{verbatim}
+
+Las variables \variable{ConvienePelear} y \variable{ConvieneMoverse} podrían
+traducirse como ``tiene energía suficiente para pelear'' y ``tiene energía
+suficiente para moverse''.
+
