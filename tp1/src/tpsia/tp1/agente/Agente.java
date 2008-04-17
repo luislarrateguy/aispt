@@ -85,7 +85,7 @@ public class Agente {
 			 */
 			a = null;
 			this.tieneSolucion = false;
-			log.fatal("No se encontró solución que satisfaga el objetivo");
+			log.warn("No se encontró solución que satisfaga el objetivo");
 		}
 
 		return a;
