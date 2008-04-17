@@ -62,6 +62,7 @@ public abstract class Busqueda {
 		this.estado = estado;
 		this.objetivo = objetivo;
 		this.estadosAlcanzadosAgente = estados;
+		VECES_EJECUTADA = 0;
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -102,7 +102,10 @@ public class Nodo implements Comparable<Nodo> {
 		LAST_ID++;
 		return LAST_ID;
 	}
-	
+	public static void reset() {
+		LAST_ID=0;
+		
+	}
 	private void addHijo(Nodo nodo) {
 		this.hijos.add(nodo);		
 	}
