@@ -50,10 +50,10 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
  */
 public class ConfLoader {
 
-	private static ConfLoader lc = new ConfLoader();
+
 	private Configuration conf;
 	
-	private ConfLoader() {
+	public ConfLoader() {
 		XStream xstream = new XStream(new DomDriver());
 		String xml = "";
 		String line = "";
@@ -72,11 +72,9 @@ public class ConfLoader {
 		xstream.alias("Configuration", Configuration.class);
 		this.conf = (Configuration) xstream.fromXML(xml);
 	}
-	public static ConfLoader GetInstance() {
-		return lc;
-	}
+
 	public void setConfiguration() {
-		Logger log = Logger.getLogger(Simulador.class);	
+		Logger log = Logger.getLogger(SimuladorBusqueda.class);	
 		log.info("CostoAvanzarAarriba:");
 		log.info(this.conf.getCostoAvanzarArriba());
 		AvanzarArriba.getInstancia().setCosto(this.conf.getCostoAvanzarArriba());
@@ -103,7 +101,7 @@ public class ConfLoader {
 	
 		log.info("Estragegia:");
 		log.info(this.conf.getEstrategia());
-		Simulador.setEstrategia(this.conf.getEstrategia());
+		SimuladorBusqueda.setEstrategia(this.conf.getEstrategia());
 		
 		log.info("Heuristica1:");
 		log.info(this.conf.getHeuristica1());

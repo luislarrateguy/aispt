@@ -23,18 +23,13 @@ package tpsia.tp1;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-
-import tpsia.tp1.acciones.AvanzarAbajo;
-import tpsia.tp1.acciones.AvanzarArriba;
-import tpsia.tp1.acciones.AvanzarDerecha;
-import tpsia.tp1.acciones.AvanzarIzquierda;
-import tpsia.tp1.acciones.Comer;
-import tpsia.tp1.acciones.Pelear;
+import calculador.Calculador; 
+import tpsia.tp2.Simulador;
 
 public class Main {
 
 	private static String debugFile = "logger.config";
-	private static String xmlPath;
+	private static String xmlPath = "config.xml";
 	private static ConfLoader confLoader;
 	
 	/**
@@ -48,14 +43,41 @@ public class Main {
 		if (parseArguments(args)) {
 			PropertyConfigurator.configure(debugFile);
 			Logger log = Logger.getLogger(Main.class);
-			confLoader = ConfLoader.GetInstance();
-			confLoader.setConfiguration();
-			
+			long time;
 			log.debug("Iniciando simulación");
-			Simulador s = new Simulador();
-			s.comenzarSimulacion();
-			s.mostrarPerformance();
 
+			SimuladorBusqueda s;
+			Calculador calc,c;
+			for(int i=1;i<=100;i++) {
+				 calc = new Calculador();
+
+				String[] xmls = {"configAvara.xml","configAvara2.xml",
+						"configDesbalanceado.xml","configProfundo.xml"};
+				
+				for (int a=0; a<=3;a++) {	
+					xmlPath = xmls[a];
+					confLoader = new ConfLoader();
+					confLoader.setConfiguration();
+					time = System.nanoTime();
+					c = calc.clone();
+					
+					s = new SimuladorBusqueda(c);
+					s.comenzarSimulacion();
+					s.mostrarPerformance();
+					System.out.print(System.nanoTime()-time + ",,");
+				}
+				System.out.println();
+				/*
+				 * Ejecuta el de Prolog. Tendriamos que ver algunas cosas.
+				 * Habria que revisar el tema de las coordenadas también.
+				 * Y ver si la performance esta siendo bien calculada.
+				time = System.nanoTime();
+				Simulador sc = new Simulador(cCono);
+				sc.comenzarSimulacion();
+				sc.mostrarPerformance();
+				System.out.println(System.nanoTime()-time + ",,");
+				*/
+			}
 		}
 	}
 	
