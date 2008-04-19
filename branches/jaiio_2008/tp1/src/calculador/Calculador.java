@@ -52,7 +52,7 @@ public class Calculador implements Cloneable{
 		  this.grupo = grupo;
 		  yaObtuvoPerformance = false;
 		
-	      energiaPacman = new Double(Math.random()* 30 + 20).intValue();
+	      energiaPacman = new Double(Math.random()* 45 + 5).intValue();
 	      energiaPacmanOriginal = energiaPacman;
 	      energiaEnemigo = new Double(Math.random()* 45 + 5).intValue();
 	      energiaAlimentos = new Double(Math.random()* 20 + 5).intValue();
@@ -289,29 +289,36 @@ public class Calculador implements Cloneable{
 	
 	public Calculador clone() {
 		Calculador c = null;
-		try {
-			c = (Calculador) super.clone();
+//		try {
+			c = new Calculador();
+//			c = (Calculador) super.clone();
 			c.comida = (Vector) this.comida.clone();
 			c.enemigos = (Vector) this.enemigos.clone();
 			c.acciones = (Vector) this.acciones.clone();
-			c.posicionesInicial =  this.posicionesInicial.clone();
-			c.posiciones = this.posiciones.clone();
+
+			for (int i=0;i<4;i++)
+				for (int j=0;j<4;j++) {
+					c.posiciones[i][j] = this.posiciones[i][j];
+					c.posicionesInicial[i][j] = this.posicionesInicial[i][j];
+				}
 			
 			c.energiaAlimentos = this.energiaAlimentos;
 			c.energiaEnemigo = this.energiaEnemigo;
 			c.energiaPacman = this.energiaPacman;
 			c.energiaPacmanOriginal = this.energiaPacmanOriginal;
 			c.performance = this.performance;
+			c.yaObtuvoPerformance = this.yaObtuvoPerformance;
+			c.contEnemigosMuertos = this.contEnemigosMuertos;
 			c.x = this.x;
 			c.y = this.y;
 			c.xIni = this.xIni;
 			c.yIni = this.yIni;
 			
 
-		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		} catch (CloneNotSupportedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		return c;
 	}
 }

@@ -102,4 +102,8 @@ public class Agente {
 		log.info("energia:" 
 			+ Integer.toString(this.baseConocimiento.getEnergiaAgente()));
 	}
+
+	public void reiniciarBC() {
+		JPL.halt();
+	}
 }
