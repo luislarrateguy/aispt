@@ -1,6 +1,14 @@
 :- dynamic percepcion/5,accionEjecutada/2,posicion/3,comida/3,enemigo/3,vacia/3,
 energia/2.
 
+retractall(percepcion(A,B,C,D,E)).
+retractall(accionEjecutada(X,B)).
+retractall(posicion(A,B,C)).
+retractall(comida(A,B,C)).
+retractall(enemigo(A,B,C)).
+retractall(vacia(A,B,C)).
+retractall(energia(A,B)).
+
 %% Funcion probada.
 sumarPosicion(P,O,P1):-O=:=(-1),P=:=1,P1 is 4,!.
 sumarPosicion(P,O,P1):-O=:=(-1),P=\=1,P1 is P-1,!.

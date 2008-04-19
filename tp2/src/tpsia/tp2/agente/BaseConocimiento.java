@@ -46,6 +46,7 @@ public class BaseConocimiento {
 		
 		/* Aumento la memoria disponible para el stack local, el global y el de
 		 * restro. */
+		
 		JPL.setDefaultInitArgs(new String[] {
 				"pl",
 				"-G128m",
@@ -55,10 +56,29 @@ public class BaseConocimiento {
 		});
 		JPL.init();
 		
-		// Cargo la base de conocimiento
+		this.prologQuery = new Query("retractall(percepcion(A,B,C,D,E)). ");
+		this.prologQuery.hasSolution();
+		this.prologQuery = new Query("retractall(accionEjecutada(X,B)).");
+		this.prologQuery.hasSolution();
+		this.prologQuery = new Query("retractall(posicion(A,B,C)).");
+		this.prologQuery.hasSolution();
+		this.prologQuery = new Query("retractall(comida(A,B,C)).");
+		this.prologQuery.hasSolution();
+		this.prologQuery = new Query("retractall(enemigo(A,B,C)).");
+		this.prologQuery.hasSolution();
+		this.prologQuery = new Query("retractall(vacia(A,B,C)).");
+		this.prologQuery.hasSolution();
+		this.prologQuery = new Query("retractall(energia(A,B)).");
+		this.prologQuery.hasSolution();
+	
 		this.prologQuery = new Query("consult('base_conocimiento.pl')");
 		if (!this.prologQuery.hasSolution())
 			throw new Exception("Agente: Falló la carga de la base de conocimientos.");
+		
+		
+		
+				
+		
 	}
 
 	public void decir(Percepcion p) {
@@ -69,6 +89,7 @@ public class BaseConocimiento {
 		
 		this.prologQuery = new Query("assert(" + p.toString() + ")");
 		this.log.info("assert(" + p.toString() + ")");
+  
 		this.prologQuery.hasSolution();
 		this.prologQuery = new Query("findall(X,est("+this.tiempo+"),L)");
 		this.log.info("findall(X,est("+this.tiempo+"),L)");

@@ -95,10 +95,17 @@ public class Simulador {
 			}
 		}
 		
+		
 		log.info("### Fin de la simulación ###");
 		this.pacman.mostrarEstadoFinal();
+		
 	}
 	
+	private void reiniciarBC() {
+		this.pacman.reiniciarBC();
+	}
+
+
 	/**
 	 * Crea el agente e enicializa la posición de los enemigos, la del
 	 * pacman y la de la comida. Calcula la energía inicial de agente.

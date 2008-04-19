@@ -70,13 +70,15 @@ public class Main {
 				/*
 				 * Ejecuta el de Prolog. Tendriamos que ver algunas cosas.
 				 * Habria que revisar el tema de las coordenadas también.
-				 * Y ver si la performance esta siendo bien calculada.
+				 * Y ver si la performance esta siendo bien calculada. */
+				
 				time = System.nanoTime();
-				Simulador sc = new Simulador(cCono);
+				Simulador sc = new Simulador(calc.clone());
 				sc.comenzarSimulacion();
 				sc.mostrarPerformance();
 				System.out.println(System.nanoTime()-time + ",,");
-				*/
+				
+				
 			}
 		}
 	}
