@@ -145,6 +145,7 @@ public class SimuladorBusqueda {
 		a = this.calculador.getPerformance();
 		log.info("Desempeño del PACMAN: " +	a);
 		System.out.print(a + ",");
+		Main.p.print(a + ",");
 	}
 
 	public static void setEstrategia(String estrategia) {
