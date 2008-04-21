@@ -6,7 +6,7 @@ import java.util.Vector;
 public class Calculador implements Cloneable{
 
 	protected int energiaPacman, energiaEnemigo, energiaAlimentos = 0;
-	protected int x, y, contEnemigosMuertos;
+	protected int x, y;
 	protected int xIni, yIni;
 	protected int performance;
 	//private Vector posiciones;
@@ -20,6 +20,11 @@ public class Calculador implements Cloneable{
 
 	protected int posiciones[][];
 	protected int posicionesInicial[][];
+	protected int contComidaComida;
+	protected int contMovimientos;
+	protected int contEnemigosMuertos;
+	
+	protected int cantComida,cantMovimientos,cantEnemigos;
 
 	/** Permite indicar que una celda está desocupada */
 	final private static int EMPTY = 0; 
@@ -59,6 +64,9 @@ public class Calculador implements Cloneable{
 
 	      performance = 0;
 	      contEnemigosMuertos = 0;
+	      contComidaComida = 0;
+	      contMovimientos = 0;
+	      
 	      posiciones = new int[4][4];
 	      posicionesInicial = new int[4][4];
 	      for (int i=0;i<posiciones.length;i++)
@@ -80,6 +88,9 @@ public class Calculador implements Cloneable{
 		  y = new Double(Math.random()* 4+1).intValue();
 		  xIni = x;
 		  yIni = y;
+		  
+		  //supongo que si pacman es un capo debería hacer todo en 16 movimientos, ni más ni menos.
+		  cantMovimientos = 16;
 		  
 		  Pair pos = new Pair(x,y);
 		  //posiciones[x-1][y-1]=Calculador.PACMAN;
@@ -109,7 +120,8 @@ public class Calculador implements Cloneable{
 		Vector salida = new Vector(tamanioVector);	
 		Pair pos;
 		int x,y;
-
+		cantEnemigos = tamanioVector;
+		
 		for (int i=0; i< tamanioVector; i++){
 			do{
 			 x = new Double(Math.random()* 4+1).intValue();
@@ -150,7 +162,8 @@ public class Calculador implements Cloneable{
 		Vector salida = new Vector(tamanioVector);	
 		Pair pos;
 		int x,y;
-
+		cantComida = tamanioVector;
+		
 		for (int i=0; i< tamanioVector; i++){
 			do{
 			 x = new Double(Math.random()* 4+1).intValue();
@@ -203,6 +216,7 @@ public class Calculador implements Cloneable{
 					energiaPacman = energiaPacman - (int)(energiaPacman * 0.1);
 				
 				performance--;
+				contMovimientos++;
 				
 				actualizarPosicionPacman(a.toLowerCase());
 				
@@ -225,7 +239,7 @@ public class Calculador implements Cloneable{
 
 						energiaPacman = energiaPacman + (int)(energiaAlimentos * .80);
 						performance = performance + 5 + (int)(energiaAlimentos * .2);
-
+						contComidaComida ++;
 						acciones.add(a.toLowerCase());
 					}
 				}
@@ -309,6 +323,11 @@ public class Calculador implements Cloneable{
 			c.performance = this.performance;
 			c.yaObtuvoPerformance = this.yaObtuvoPerformance;
 			c.contEnemigosMuertos = this.contEnemigosMuertos;
+			c.cantEnemigos = this.cantEnemigos;
+			c.cantComida = this.cantComida;
+			c.contComidaComida = this.contComidaComida;
+			c.cantMovimientos =this.cantMovimientos;
+			c.contMovimientos = this.contMovimientos;
 			c.x = this.x;
 			c.y = this.y;
 			c.xIni = this.xIni;
