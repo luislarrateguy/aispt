@@ -21,6 +21,15 @@
 
 package tpsia.tp1;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintStream;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import calculador.Calculador; 
@@ -31,20 +40,36 @@ public class Main {
 	private static String debugFile = "logger.config";
 	private static String xmlPath = "config.xml";
 	private static ConfLoader confLoader;
+	private static FileOutputStream out;
+	static PrintStream p;
 	
 	/**
 	 * @param args
+	 * @throws FileNotFoundException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		/* Agrego un for por si queremos hacer varias
 		 * simulaciones.
 		 */
-
+		Main.out = new FileOutputStream("./datos.csv");
+		Main.p = new PrintStream( out );
+		
 		if (parseArguments(args)) {
 			PropertyConfigurator.configure(debugFile);
 			Logger log = Logger.getLogger(Main.class);
 			long time;
 			log.debug("Iniciando simulación");
+
+			System.out.println("AvaraPerformance,AvaraTiempo[ms]," +
+					"Avara2Performance,Avara2Tiempo[ms]," +
+					"CostoUniformePerformance,CostoUniformeTiempo[ms]," +
+					"ProfundidadPerformance,ProfundidadTiempo[ms]," +
+					"ConocimientoPerformance,ConocimientoTiempo[ms]");
+			Main.p.println("AvaraPerformance,AvaraTiempo[ms]," +
+					"Avara2Performance,Avara2Tiempo[ms]," +
+					"CostoUniformePerformance,CostoUniformeTiempo[ms]," +
+					"ProfundidadPerformance,ProfundidadTiempo[ms]," +
+					"ConocimientoPerformance,ConocimientoTiempo[ms]");
 
 			SimuladorBusqueda s;
 			Calculador calc,c;
@@ -64,7 +89,8 @@ public class Main {
 					s = new SimuladorBusqueda(c);
 					s.comenzarSimulacion();
 					s.mostrarPerformance();
-					System.out.print(System.nanoTime()-time + ",,");
+					System.out.print((System.nanoTime()-time)/1000000 + ",");
+					Main.p.print((System.nanoTime()-time)/1000000 + ",");
 				}
 				System.out.println();
 				/*
@@ -76,8 +102,8 @@ public class Main {
 				Simulador sc = new Simulador(calc.clone());
 				sc.comenzarSimulacion();
 				sc.mostrarPerformance();
-				System.out.println(System.nanoTime()-time + ",,");
-				
+				System.out.println((System.nanoTime()-time)/1000000 + "");
+				Main.p.println((System.nanoTime()-time)/1000000 + "");
 				
 			}
 		}
