@@ -125,7 +125,7 @@ public class CalculadorCustom extends Calculador {
 	}
 	
 	@Override
-	public Vector inicializarEnemigo() {
+	public Vector<Pair> inicializarEnemigo() {
 		return this.posicionEnemigos;
 	}
 }

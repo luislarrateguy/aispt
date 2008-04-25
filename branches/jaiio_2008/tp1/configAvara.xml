@@ -14,7 +14,7 @@
 	
 	<!-- Estos son los coeficientes de las heuristicas -->
 	<!-- cantidad de celdas desconocidas -->
-	<heuristica1>500</heuristica1>
+	<heuristica1>50</heuristica1>
 	
 	<!-- cantidad de comida visible -->
 	<heuristica2>100</heuristica2>

@@ -5,6 +5,7 @@ import java.util.Vector;
 
 public class CalculadorMiPerformance extends Calculador {
 
+	@Override
 	public int getPerformance(){
 		double p = -1;
 		if ( contComidaComida == 0) 
@@ -22,10 +23,11 @@ public class CalculadorMiPerformance extends Calculador {
 //				    (contEnemigosMuertos + contComidaComida) / (cantEnemigos + cantComida) * 40 +
 //                    ((cantMovimientos - contMovimientos) / cantMovimientos) * 30 +
 //                    (energiaPacman / energiaPacmanOriginal) * 70;
-				p = (contEnemigosMuertos / cantEnemigos * 1.0) * 45.0 +
-			    (contComidaComida / cantComida* 1.0) * 30.0 +
-                (energiaPacman / energiaPacmanOriginal* 1.0) * 25.0 + 
-                ((cantMovimientos - contMovimientos) / cantMovimientos* 1.0) * 20.0;
+				p = contEnemigosMuertos *1.0 / (cantEnemigos * 1.0) * 50.0 +
+			    	contComidaComida *1.0/ (cantComida * 1.0) * 50.0;
+//			    	energiaPacman / (energiaPacmanOriginal * 1.0) * 25.0 +
+				p = p / (contMovimientos *1.0 / cantMovimientos * 1.0);
+			    	//cantMovimientos / (contMovimientos  * 1.0);
 //			System.out.print(contEnemigosMuertos+" ");
 //			System.out.print(cantEnemigos+", ");
 //			

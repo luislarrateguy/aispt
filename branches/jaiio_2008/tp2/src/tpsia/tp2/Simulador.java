@@ -21,6 +21,7 @@
 
 package tpsia.tp2;
 
+import java.io.PrintStream;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
@@ -153,11 +154,12 @@ public class Simulador {
 		return instancia;
 	}
 	*/
-	public void mostrarPerformance() {
+	public void mostrarPerformance(PrintStream p) {
 		Logger log = Logger.getLogger(Simulador.class);
 		int a;
 		a = this.calculador.getPerformance();
 		log.info("Desempeño del PACMAN: " +	a);
 		System.out.print(a + ",");
+		p.print(a + ",");
 	}
 }
