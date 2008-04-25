@@ -33,6 +33,7 @@ import java.io.PrintStream;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import calculador.Calculador; 
+import calculador.CalculadorMiPerformance;
 import tpsia.tp2.Simulador;
 
 public class Main {
@@ -41,7 +42,7 @@ public class Main {
 	private static String xmlPath = "config.xml";
 	private static ConfLoader confLoader;
 	private static FileOutputStream out;
-	static PrintStream p;
+	public static PrintStream p;
 	
 	/**
 	 * @param args
@@ -74,8 +75,8 @@ public class Main {
 			SimuladorBusqueda s;
 			Calculador calc,c;
 			for(int i=1;i<=100;i++) {
-				 calc = new Calculador();
-
+				calc = new Calculador();
+				 
 				String[] xmls = {"configAvara.xml","configAvara2.xml",
 						"configDesbalanceado.xml","configProfundo.xml"};
 				
@@ -101,7 +102,7 @@ public class Main {
 				time = System.nanoTime();
 				Simulador sc = new Simulador(calc.clone());
 				sc.comenzarSimulacion();
-				sc.mostrarPerformance();
+				sc.mostrarPerformance(Main.p);
 				System.out.println((System.nanoTime()-time)/1000000 + "");
 				Main.p.println((System.nanoTime()-time)/1000000 + "");
 				

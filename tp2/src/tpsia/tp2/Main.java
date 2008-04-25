@@ -56,7 +56,7 @@ public class Main {
 				long time = System.nanoTime();
 				Simulador s = new Simulador(new Calculador());
 				s.comenzarSimulacion();
-				s.mostrarPerformance();
+				s.mostrarPerformance(null);
 				System.out.println(System.nanoTime()-time);
 			}
 		}

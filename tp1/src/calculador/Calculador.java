@@ -10,9 +10,9 @@ public class Calculador implements Cloneable{
 	protected int xIni, yIni;
 	protected int performance;
 	//private Vector posiciones;
-	protected Vector comida;
-	protected Vector enemigos;
-	protected Vector acciones;	//Lista que almacena las acciones ejecutadas por el agente.-
+	protected Vector<Pair> comida;
+	protected Vector<Pair> enemigos;
+	protected Vector<String> acciones;	//Lista que almacena las acciones ejecutadas por el agente.-
 	protected String grupo;	// Almacena el nombre del grupo que se va a mostrar en el simulador.-
 	protected int energiaPacmanOriginal;	//Almacena la energía que tuvo Pacman en el inicio.-
 
@@ -76,9 +76,9 @@ public class Calculador implements Cloneable{
 	        	  posicionesInicial[i][j]=Calculador.EMPTY;
 	          }
 	      
-	      acciones = new Vector();
-	      comida = new Vector();
-	      enemigos = new Vector();
+	      acciones = new Vector<String>();
+	      comida = new Vector<Pair>();
+	      enemigos = new Vector<Pair>();
 	      
 	      /* x = new Double(Math.random()* 4+1).intValue();
 	      y = new Double(Math.random()* 4+1).intValue();
@@ -90,7 +90,7 @@ public class Calculador implements Cloneable{
 		  yIni = y;
 		  
 		  //supongo que si pacman es un capo debería hacer todo en 16 movimientos, ni más ni menos.
-		  cantMovimientos = 16;
+		  cantMovimientos = 10;
 		  
 		  Pair pos = new Pair(x,y);
 		  //posiciones[x-1][y-1]=Calculador.PACMAN;
@@ -107,7 +107,7 @@ public class Calculador implements Cloneable{
 	 * Devuelve las posiciones de los enemigos. 
 	 * @return Retorna un vector de Pairs que contiene las coordenadas x,y de los enemigos. 
 	 */
-	public Vector inicializarEnemigo(){
+	public Vector<Pair> inicializarEnemigo(){
 		return enemigos;
 	}
 
@@ -117,7 +117,7 @@ public class Calculador implements Cloneable{
 	 */
 	private void generarPosicionesEnemigo(){
 		int tamanioVector = new Double(Math.random()*4 + 2).intValue();
-		Vector salida = new Vector(tamanioVector);	
+		Vector<Pair> salida = new Vector<Pair>(tamanioVector);	
 		Pair pos;
 		int x,y;
 		cantEnemigos = tamanioVector;
@@ -149,7 +149,7 @@ public class Calculador implements Cloneable{
 	 * Devuelve las posiciones de la comida. 
 	 * @return Retorna un vector de Pairs que contiene las coordenadas x,y de la comida. 
 	 */
-	public Vector inicializarComida(){
+	public Vector<Pair> inicializarComida(){
 		return comida;
 	}
 
@@ -159,7 +159,7 @@ public class Calculador implements Cloneable{
 	 */
 	private void generarPosicionesComida(){
 		int tamanioVector = new Double(Math.random()*6 + 2).intValue();
-		Vector salida = new Vector(tamanioVector);	
+		Vector<Pair> salida = new Vector<Pair>(tamanioVector);	
 		Pair pos;
 		int x,y;
 		cantComida = tamanioVector;
@@ -179,11 +179,11 @@ public class Calculador implements Cloneable{
 	}
 
 
-	protected Vector getComida(){
+	protected Vector<Pair> getComida(){
 		return comida;
 	}
 
-	protected Vector getEnemigos(){
+	protected Vector<Pair> getEnemigos(){
 		return enemigos;
 	}
 
@@ -272,7 +272,7 @@ public class Calculador implements Cloneable{
 		return grupo;
 	}
 
-	protected Vector getAcciones(){
+	protected Vector<String> getAcciones(){
 		return acciones;
 	}
 
@@ -304,11 +304,26 @@ public class Calculador implements Cloneable{
 	public Calculador clone() {
 		Calculador c = null;
 //		try {
-			c = new Calculador();
+
+			c = new CalculadorMiPerformance();
 //			c = (Calculador) super.clone();
-			c.comida = (Vector) this.comida.clone();
-			c.enemigos = (Vector) this.enemigos.clone();
-			c.acciones = (Vector) this.acciones.clone();
+//			c.acciones = new Vector<String>();
+//			c.comida = new Vector<Pair>();
+//			c.enemigos = new Vector<Pair>();
+//			
+//			for ( Pair cua :  this.comida ) {
+//				c.comida.add(cua.clone());
+//			}
+//			for ( Pair cua :  this.enemigos ) {
+//				c.enemigos.add(cua.clone());
+//			}
+//			for ( String cua :  this.acciones ) {
+//				c.acciones.add(cua);
+//			}
+			
+			c.comida = (Vector<Pair>) this.comida.clone();
+			c.enemigos =  (Vector<Pair>) this.enemigos.clone();
+			c.acciones =  (Vector<String>) this.acciones.clone();
 
 			for (int i=0;i<4;i++)
 				for (int j=0;j<4;j++) {
