@@ -12,13 +12,5 @@
 	<costoAvanzarArriba>410</costoAvanzarArriba>
 	<costoAvanzarIzquierda>410</costoAvanzarIzquierda>
 	
-	<!-- Estos son los coeficientes de las heuristicas -->
-	<!-- cantidad de celdas desconocidas -->
-	<heuristica1>1</heuristica1>
-	
-	<!-- cantidad de comida visible -->
-	<heuristica2>5</heuristica2>
-	
-	<!-- cantidad de enemigos visibles -->
-	<heuristica3>1</heuristica3>
+
 </Configuration>
