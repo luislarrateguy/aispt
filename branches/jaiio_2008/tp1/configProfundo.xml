@@ -2,13 +2,13 @@
 <Configuration>
 	<estrategia>profundidad</estrategia>
 	
-	<costoComer>1</costoComer>
+	<costoComer>10</costoComer>
 	
-	<costoPelear>1</costoPelear>
+	<costoPelear>10</costoPelear>
 	
-	<costoAvanzarAbajo>1</costoAvanzarAbajo>
-	<costoAvanzarDerecha>1</costoAvanzarDerecha>
+	<costoAvanzarAbajo>10</costoAvanzarAbajo>
+	<costoAvanzarDerecha>10</costoAvanzarDerecha>
 	
-	<costoAvanzarArriba>1</costoAvanzarArriba>
-	<costoAvanzarIzquierda>1</costoAvanzarIzquierda>
+	<costoAvanzarArriba>10</costoAvanzarArriba>
+	<costoAvanzarIzquierda>10</costoAvanzarIzquierda>
 </Configuration>
