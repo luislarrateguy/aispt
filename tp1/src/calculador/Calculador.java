@@ -20,9 +20,9 @@ public class Calculador implements Cloneable{
 
 	protected int posiciones[][];
 	protected int posicionesInicial[][];
-	protected int contComidaComida;
+	protected int contComida;
 	protected int contMovimientos;
-	protected int contEnemigosMuertos;
+	protected int contEnemigos;
 	
 	protected int cantComida,cantMovimientos,cantEnemigos;
 
@@ -57,14 +57,14 @@ public class Calculador implements Cloneable{
 		  this.grupo = grupo;
 		  yaObtuvoPerformance = false;
 		
-	      energiaPacman = new Double(Math.random()* 45 + 5).intValue();
+	      energiaPacman = new Double(Math.random()* 40 + 10).intValue();
 	      energiaPacmanOriginal = energiaPacman;
-	      energiaEnemigo = new Double(Math.random()* 45 + 5).intValue();
+	      energiaEnemigo = new Double(Math.random()* energiaPacman + 3).intValue();
 	      energiaAlimentos = new Double(Math.random()* 20 + 5).intValue();
 
 	      performance = 0;
-	      contEnemigosMuertos = 0;
-	      contComidaComida = 0;
+	      contEnemigos = 0;
+	      contComida = 0;
 	      contMovimientos = 0;
 	      
 	      posiciones = new int[4][4];
@@ -228,9 +228,9 @@ public class Calculador implements Cloneable{
 				{
 					posiciones[x-1][y-1] = Calculador.EMPTY;
 					                
-					energiaPacman = energiaPacman - new Double(energiaPacman * .2 + energiaEnemigo * .2).intValue();
-					contEnemigosMuertos ++;
-					performance += 5 * contEnemigosMuertos;
+					energiaPacman = energiaPacman - new Double(energiaPacman * .15 + energiaEnemigo * .15).intValue();
+					contEnemigos ++;
+					performance += 5 * contEnemigos;
 
 					acciones.add(a.toLowerCase());
 				}else{
@@ -239,7 +239,7 @@ public class Calculador implements Cloneable{
 
 						energiaPacman = energiaPacman + (int)(energiaAlimentos * .80);
 						performance = performance + 5 + (int)(energiaAlimentos * .2);
-						contComidaComida ++;
+						contComida ++;
 						acciones.add(a.toLowerCase());
 					}
 				}
@@ -337,10 +337,10 @@ public class Calculador implements Cloneable{
 			c.energiaPacmanOriginal = this.energiaPacmanOriginal;
 			c.performance = this.performance;
 			c.yaObtuvoPerformance = this.yaObtuvoPerformance;
-			c.contEnemigosMuertos = this.contEnemigosMuertos;
+			c.contEnemigos = this.contEnemigos;
 			c.cantEnemigos = this.cantEnemigos;
 			c.cantComida = this.cantComida;
-			c.contComidaComida = this.contComidaComida;
+			c.contComida = this.contComida;
 			c.cantMovimientos =this.cantMovimientos;
 			c.contMovimientos = this.contMovimientos;
 			c.x = this.x;
