@@ -67,8 +67,8 @@ public class Estado implements Cloneable {
 		this.ultimaAccionEjecutada = null;
 		
 		this.promedios = new float[Accion.getAcciones().size()];
-		this.promedios[Comer.getInstancia().getIdentificador()] = 5;
-		this.promedios[Pelear.getInstancia().getIdentificador()] = -5;
+		this.promedios[Comer.getInstancia().getIdentificador()] = energiaInicial / 2;
+		this.promedios[Pelear.getInstancia().getIdentificador()] = - energiaInicial;
 
 		this.vecesEjecutada = new int[Accion.getAcciones().size()];
 		
