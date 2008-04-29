@@ -22,6 +22,7 @@
 package tpsia.tp1.acciones;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import tpsia.tp1.Ambiente;
 import tpsia.tp1.agente.Estado;
@@ -39,6 +40,7 @@ public abstract class Accion {
 	public abstract int getIdentificador();
 	
 	public static ArrayList<Accion> getAcciones() {
+		Collections.shuffle(acciones);
 		return acciones;
 	}
 	public String toString() {
